@@ -1,0 +1,34 @@
+{
+    "name": "InputActions",
+    "maps": [
+        {
+            "name": "CameraControl",
+            "id": "5524d075-7a7f-4906-bda6-f6f7246e82ab",
+            "actions": [
+                {
+                    "name": "EnableCameraControl",
+                    "type": "Button",
+                    "id": "8b512320-95be-4086-bba6-3d35a859229e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3da2923d-f73f-48ce-8cb6-494b7c4b24b5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableCameraControl",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

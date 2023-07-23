@@ -11,7 +11,7 @@ namespace TheLastTour
     {
         private static T _instance;
 
-        public T Instance
+        public static T Instance
         {
             get
             {
@@ -28,12 +28,12 @@ namespace TheLastTour
 
     public interface IArchitecture
     {
-        void RegisterSystem<T>(T system) where T : ISystem;
+        void RegisterManager<T>(T system) where T : IManager;
         void RegisterModel<T>(T model) where T : IModel;
         void RegisterUtility<T>(T utility) where T : IUtility;
 
         // 约束 T 是不为空的引用类型
-        T GetSystem<T>() where T : class, ISystem;
+        T GetManager<T>() where T : class, IManager;
         T GetModel<T>() where T : class, IModel;
         T GetUtility<T>() where T : class, IUtility;
 
@@ -78,10 +78,10 @@ namespace TheLastTour
             }
         }
 
-        public void RegisterSystem<TSystem>(TSystem system) where TSystem : ISystem
+        public void RegisterManager<TManager>(TManager system) where TManager : IManager
         {
             system.Init(this);
-            _architectureContainer.Register<TSystem>(system);
+            _architectureContainer.Register<TManager>(system);
         }
 
         public void RegisterModel<TModel>(TModel model) where TModel : IModel
@@ -96,9 +96,9 @@ namespace TheLastTour
             _architectureContainer.Register<TUtility>(utility);
         }
 
-        public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
+        public TManager GetManager<TManager>() where TManager : class, IManager
         {
-            return _architectureContainer.Get<TSystem>();
+            return _architectureContainer.Get<TManager>();
         }
 
         public TModel GetModel<TModel>() where TModel : class, IModel
@@ -297,11 +297,11 @@ namespace TheLastTour
     }
 
 
-    public interface IViewController
+    public interface IController
     {
     }
 
-    public interface ISystem
+    public interface IManager
     {
         public void Init(IArchitecture architecture);
     }
