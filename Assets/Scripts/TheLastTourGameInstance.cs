@@ -20,8 +20,24 @@ namespace TheLastTour
     }
 
 
-    public class TheLastTourGameInstance : MonoBehaviour, ISingleton<TheLastTourGameInstance>
+    public class TheLastTourGameInstance : MonoBehaviour
     {
+        private static TheLastTourGameInstance _instance;
+
+        public static TheLastTourGameInstance Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<TheLastTourGameInstance>();
+                }
+
+                return _instance;
+            }
+        }
+
+
         private void Awake()
         {
             DontDestroyOnLoad(this);

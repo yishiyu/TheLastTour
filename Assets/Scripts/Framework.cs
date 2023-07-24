@@ -7,25 +7,6 @@ namespace TheLastTour
 {
     #region Architecture
 
-    public interface ISingleton<T> where T : class, ISingleton<T>, new()
-    {
-        private static T _instance;
-
-        public static T Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new T();
-                }
-
-                return _instance;
-            }
-        }
-    }
-
-
     public interface IArchitecture
     {
         void RegisterManager<T>(T system) where T : IManager;
@@ -296,10 +277,6 @@ namespace TheLastTour
         }
     }
 
-
-    public interface IController
-    {
-    }
 
     public interface IManager
     {

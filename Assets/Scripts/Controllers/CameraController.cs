@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace TheLastTour.Controller
 {
-    public class CameraController : MonoBehaviour, IController
+    public class CameraController : MonoBehaviour
     {
         // 类似 Cinemachine 中的 Follow Target
         // 偏移值为真实焦点位置相对目标在世界坐标系中的偏移
