@@ -1,4 +1,5 @@
 using System;
+using TheLastTour.Event;
 using TheLastTour.Manager;
 using TheLastTour.Utility;
 using UnityEngine;
@@ -20,10 +21,11 @@ namespace TheLastTour.Controller
         public float focusDistanceTarget = 10f;
         public float focusDistanceCurrent = 10f;
         private float _focusDistanceSmoothSpeed;
-        private const float FocusDistanceMax = 30f;
-        private const float FocusDistanceMin = 0.5f;
+        private const float FocusDistanceMax = 50f;
+        private const float FocusDistanceMin = 3f;
 
         private float _focusOffsetMoveSensitive = 0.02f;
+        private float _focusZoomSensitive = 0.01f;
 
         // 防止 Gimbal Lock, 限制 X 轴旋转角度
         public float focusAngleXTarget = 0f;
@@ -32,11 +34,13 @@ namespace TheLastTour.Controller
         private float _focusAngleXSmoothSpeed = 0;
         private const float FocusAngleXMax = 89f;
         private const float FocusAngleXMin = -89f;
+        public float focusAngleXSensitive = 0.3f;
 
         public float focusAngleYTarget = 0f;
         public float focusAngleYSmoothTime = 0.1f;
         private float _focusAngleYCurrent = 0f;
         private float _focusAngleYSmoothSpeed = 0;
+        public float focusAngleYSensitive = 0.3f;
 
         // 相机自身姿态(由上面的变量计算得到,相机 roll 恒定为0)
         Quaternion _cameraRotation = Quaternion.identity;
@@ -50,6 +54,23 @@ namespace TheLastTour.Controller
         {
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _inputActions = TheLastTourArchitecture.Instance.GetUtility<IInputUtility>().GetInputActions();
+        }
+
+        private void OnEnable()
+        {
+            EventBus.AddListener<FocusOnTargetEvent>(OnFocusOnTargetEvent);
+        }
+
+        private void OnDestroy()
+        {
+            EventBus.RemoveListener<FocusOnTargetEvent>(OnFocusOnTargetEvent);
+        }
+
+        private void OnFocusOnTargetEvent(FocusOnTargetEvent evt)
+        {
+            focusTarget = evt.Target;
+            focusOffset = Vector3.zero;
+            focusDistanceTarget = 10f;
         }
 
 
@@ -72,22 +93,25 @@ namespace TheLastTour.Controller
 
         private void UpdateEditCamera()
         {
-            if (focusTarget == null ||
-                _inputActions == null ||
-                !_inputActions.CameraControl.EnableCameraControl.IsPressed())
+            float scrollDelta = Mouse.current.scroll.ReadValue().y * _focusZoomSensitive;
+
+            // 受控输入
+            float mouseXDelta = 0;
+            float mouseYDelta = 0;
+            float keyboardXDelta = 0;
+            float keyboardYDelta = 0;
+            float keyboardZDelta = 0;
+            if (_inputActions.CameraControl.EnableCameraControl.IsPressed())
             {
-                return;
+                // 鼠标输入
+                mouseXDelta = Mouse.current.delta.x.ReadValue() * focusAngleXSensitive;
+                mouseYDelta = Mouse.current.delta.y.ReadValue() * focusAngleYSensitive;
+
+                // 获取键盘输入
+                keyboardXDelta = Keyboard.current[Key.A].ReadValue() - Keyboard.current[Key.D].ReadValue();
+                keyboardYDelta = Keyboard.current[Key.S].ReadValue() - Keyboard.current[Key.W].ReadValue();
+                keyboardZDelta = Keyboard.current[Key.Q].ReadValue() - Keyboard.current[Key.E].ReadValue();
             }
-
-            // 获取鼠标输入
-            float scrollDelta = Mouse.current.scroll.ReadValue().y;
-            float mouseXDelta = Mouse.current.delta.x.ReadValue();
-            float mouseYDelta = Mouse.current.delta.y.ReadValue();
-
-            // 获取键盘输入
-            float keyboardXDelta = Keyboard.current[Key.A].ReadValue() - Keyboard.current[Key.D].ReadValue();
-            float keyboardYDelta = Keyboard.current[Key.S].ReadValue() - Keyboard.current[Key.W].ReadValue();
-            float keyboardZDelta = Keyboard.current[Key.Q].ReadValue() - Keyboard.current[Key.E].ReadValue();
 
 
             // 更新目标值
@@ -97,9 +121,17 @@ namespace TheLastTour.Controller
             focusOffset -= keyboardYDelta * _focusOffsetMoveSensitive * forward +
                            keyboardXDelta * _focusOffsetMoveSensitive * right +
                            keyboardZDelta * _focusOffsetMoveSensitive * up;
+
+            // 偏移过大时失去焦点
+            if (focusOffset.magnitude > 3)
+            {
+                focusTarget = null;
+            }
+
             focusAngleXTarget = Mathf.Clamp(focusAngleXTarget - mouseYDelta, FocusAngleXMin, FocusAngleXMax);
             focusAngleYTarget = (focusAngleYTarget + mouseXDelta) % 360;
-            focusDistanceTarget = Mathf.Clamp(focusDistanceTarget - scrollDelta, FocusDistanceMin, FocusDistanceMax);
+            focusDistanceTarget =
+                Mathf.Clamp(focusDistanceTarget - scrollDelta, FocusDistanceMin, FocusDistanceMax);
 
 
             // 平滑变换
@@ -112,9 +144,21 @@ namespace TheLastTour.Controller
 
 
             // 计算相机姿态
-            _cameraRotation = Quaternion.Euler(_focusAngleXCurrent, _focusAngleYCurrent, 0);
-            _cameraPosition = focusTarget.position - _cameraRotation * Vector3.forward * focusDistanceCurrent +
-                              focusOffset;
+            if (focusTarget)
+            {
+                _cameraRotation = Quaternion.Euler(_focusAngleXCurrent, _focusAngleYCurrent, 0);
+                _cameraPosition = focusTarget.position - _cameraRotation * Vector3.forward * focusDistanceCurrent +
+                                  focusOffset;
+            }
+            else
+            {
+                _cameraRotation = Quaternion.Euler(_focusAngleXCurrent, _focusAngleYCurrent, 0);
+                _cameraPosition = transform.position -
+                                  (keyboardYDelta * _focusOffsetMoveSensitive * forward +
+                                   keyboardXDelta * _focusOffsetMoveSensitive * right +
+                                   keyboardZDelta * _focusOffsetMoveSensitive * up);
+            }
+
 
             // 更新相机姿态
             transform.rotation = _cameraRotation;

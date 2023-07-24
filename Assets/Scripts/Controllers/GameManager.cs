@@ -266,6 +266,16 @@ namespace TheLastTour.Controller
                         }
                     }
 
+                    if (Keyboard.current.fKey.wasPressedThisFrame)
+                    {
+                        if (_selectedParts.Count > 0)
+                        {
+                            GameEvents.FocusOnTargetEvent.Target = _selectedParts[0].transform;
+                            EventBus.Invoke(GameEvents.FocusOnTargetEvent);
+                            Debug.Log("Focus On Target");
+                        }
+                    }
+
                     if (Keyboard.current.deleteKey.wasPressedThisFrame)
                     {
                         foreach (var part in _selectedParts)

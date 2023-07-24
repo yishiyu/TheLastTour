@@ -1,5 +1,6 @@
 using TheLastTour.Controller.Machine;
 using TheLastTour.Manager;
+using UnityEngine;
 
 namespace TheLastTour.Event
 {
@@ -10,6 +11,8 @@ namespace TheLastTour.Event
 
         public static SelectedPartPrefabChangedEvent SelectedPartPrefabChangedEvent =
             new SelectedPartPrefabChangedEvent();
+        
+        public static FocusOnTargetEvent FocusOnTargetEvent = new FocusOnTargetEvent();
     }
 
 
@@ -29,5 +32,10 @@ namespace TheLastTour.Event
     {
         public int CurrentSelectedPartIndex;
         public PartController CurrentSelectedPart;
+    }
+
+    public class FocusOnTargetEvent : GameEvent
+    {
+        public Transform Target;
     }
 }
