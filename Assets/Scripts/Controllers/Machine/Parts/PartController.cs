@@ -14,11 +14,16 @@ namespace TheLastTour.Controller.Machine
 
         // 不同组件连接相关属性
         // 与更接近核心组件连接的接口,决定该组件的位置和旋转
-        private List<PartJointController> _joints = new List<PartJointController>();
+        public List<PartJointController> joints = new List<PartJointController>();
 
         public PartJointController rootJoint = null;
 
         public int RootJointId { get; private set; } = -1;
+
+        public MachineController GetOwnedMachine()
+        {
+            return GetComponentInParent<MachineController>();
+        }
 
 
         public PartJointController ConnectedJoint
@@ -36,9 +41,9 @@ namespace TheLastTour.Controller.Machine
 
         public int GetJointId(PartJointController joint)
         {
-            for (int i = 0; i < _joints.Count; i++)
+            for (int i = 0; i < joints.Count; i++)
             {
-                if (_joints[i] == joint)
+                if (joints[i] == joint)
                 {
                     return i;
                 }
@@ -49,9 +54,9 @@ namespace TheLastTour.Controller.Machine
 
         public PartJointController GetJointById(int id)
         {
-            if (id > 0 && id < _joints.Count)
+            if (id > 0 && id < joints.Count)
             {
-                return _joints[id];
+                return joints[id];
             }
 
             return null;
@@ -59,10 +64,10 @@ namespace TheLastTour.Controller.Machine
 
         public void SetRootJoint(int id)
         {
-            if (id > 0 && id < _joints.Count)
+            if (id > 0 && id < joints.Count)
             {
                 RootJointId = id;
-                rootJoint = _joints[id];
+                rootJoint = joints[id];
             }
         }
 
@@ -70,33 +75,33 @@ namespace TheLastTour.Controller.Machine
         {
             foreach (var joint in GetComponentsInChildren<PartJointController>())
             {
-                _joints.Add(joint);
+                joints.Add(joint);
             }
 
             if (rootJoint != null)
             {
                 RootJointId = GetJointId(rootJoint);
-                if (RootJointId < 0 || RootJointId > _joints.Count)
+                if (RootJointId < 0 || RootJointId > joints.Count)
                 {
                     rootJoint = null;
                 }
             }
-            else if (!isCorePart && _joints.Count > 0)
+            else if (!isCorePart && joints.Count > 0)
             {
                 RootJointId = 0;
-                rootJoint = _joints[0];
+                rootJoint = joints[0];
             }
         }
 
 
-        public void AttachTo(PartJointController joint)
+        public void Attach(PartJointController joint, bool ignoreOthers = true)
         {
             if (joint == null || joint.IsAttached || rootJoint == null)
             {
                 return;
             }
 
-            rootJoint.Attach(joint);
+            rootJoint.Attach(joint, ignoreOthers);
             Vector3 VOffset = rootJoint.transform.localPosition;
             Quaternion QOffset = rootJoint.transform.localRotation;
             transform.rotation = rootJoint.Rotation * Quaternion.Inverse(QOffset);
@@ -105,9 +110,17 @@ namespace TheLastTour.Controller.Machine
 
         public void Detach()
         {
-            if (rootJoint != null)
+            if (rootJoint != null && rootJoint.IsAttached)
             {
                 rootJoint.Detach();
+            }
+        }
+
+        public void TurnOnJointCollision(bool isOn)
+        {
+            foreach (var joint in joints)
+            {
+                joint.TurnOnJointCollision(isOn);
             }
         }
     }

@@ -37,15 +37,7 @@ namespace TheLastTour.Controller
 
         private PartController _partPreviewInstance;
 
-        public MachineController machineController;
-
-        private void Awake()
-        {
-            if (machineController == null)
-            {
-                machineController = FindObjectOfType<MachineController>();
-            }
-        }
+        private List<PartController> _selectedParts = new List<PartController>();
 
 
         public void Start()
@@ -70,7 +62,7 @@ namespace TheLastTour.Controller
             {
                 case EGameState.Play:
                     // TODO 保存模型
-                    machineController.TurnOnSimulation(true);
+                    TheLastTourArchitecture.Instance.GetManager<IMachineManager>().TurnOnSimulation(true);
                     break;
                 case EGameState.Edit:
                     // TODO 读取模型
@@ -85,6 +77,7 @@ namespace TheLastTour.Controller
         public void Update()
         {
             UpdateDebugAction();
+            UpdateDebugInformation();
 
             switch (_gameStateManager.GameState)
             {
@@ -103,34 +96,44 @@ namespace TheLastTour.Controller
 
         private void UpdateDebugAction()
         {
-            // Test Action
+            // 选择零件 1
             if (Keyboard.current.numpad1Key.isPressed)
             {
                 CurrentSelectedPartIndex = 0;
             }
 
+            // 切换到选择模式
+            if (Keyboard.current.numpad2Key.isPressed)
+            {
+                _gameStateManager.EditState = EEditState.Selecting;
+            }
+
+            // 开始游戏
             if (Keyboard.current.pKey.isPressed)
             {
                 _gameStateManager.GameState = EGameState.Play;
             }
         }
 
+        private void UpdateDebugInformation()
+        {
+        }
+
         private void UpdateEdit()
         {
-            if (machineController == null)
-            {
-                return;
-            }
-
-            // 操作 UI 时停止编辑
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                if (_partPreviewInstance != null)
-                {
-                    _partPreviewInstance.Detach();
-                    _partPreviewInstance.gameObject.SetActive(false);
-                }
-            }
+            // // 操作 UI 时停止编辑
+            // // 这个判断有问题
+            // if (!EventSystem.current.IsPointerOverGameObject())
+            // {
+            //     if (_partPreviewInstance != null)
+            //     {
+            //         _partPreviewInstance.Detach();
+            //         _partPreviewInstance.gameObject.SetActive(false);
+            //     }
+            //
+            //     Debug.Log("Mouse On UI");
+            //     return;
+            // }
 
             switch (_gameStateManager.EditState)
             {
@@ -153,28 +156,47 @@ namespace TheLastTour.Controller
                     {
                         _partPreviewInstance = Instantiate(partPrefabs[CurrentSelectedPartIndex]);
                         _partPreviewInstance.gameObject.SetActive(false);
+                        _partPreviewInstance.TurnOnJointCollision(false);
+                        _partPreviewInstance.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                     }
 
 
                     if (_partPreviewInstance != null)
                     {
                         // 预览零件跟随鼠标
-                        if (PerformMouseTrace(out var position))
+                        if (PerformMouseTrace(out var hit))
                         {
-                            PartJointController joint = GetNearestJoint(position);
+                            PartJointController joint = GetNearestJoint(hit.point);
 
-                            // 鼠标选中了其他零件, 预览零件未与其连接, 该零件也未连接到其他零件
-                            if (joint != null && _partPreviewInstance.ConnectedJoint != joint &&
-                                joint.IsAttached == false)
+                            // 未连接
+                            if (_partPreviewInstance.ConnectedJoint == null)
                             {
-                                _partPreviewInstance.AttachTo(joint);
-                                _partPreviewInstance.gameObject.SetActive(true);
+                                // 鼠标选中了其他零件, 预览零件未与其连接, 该零件也未连接到其他零件
+                                if (joint != null && joint.IsAttached == false)
+                                {
+                                    _partPreviewInstance.Attach(joint, false);
+                                    _partPreviewInstance.gameObject.SetActive(true);
+                                }
                             }
-                            // 选中的零件非法
-                            else if (_partPreviewInstance != null)
+                            // 已连接
+                            else
                             {
-                                _partPreviewInstance.Detach();
-                                _partPreviewInstance.gameObject.SetActive(false);
+                                if (joint != null)
+                                {
+                                    // 鼠标选中了其他零件, 预览零件未与其连接, 该零件也未连接到其他零件
+                                    if (_partPreviewInstance.ConnectedJoint != joint)
+                                    {
+                                        _partPreviewInstance.Detach();
+                                        _partPreviewInstance.Attach(joint, false);
+                                        _partPreviewInstance.gameObject.SetActive(true);
+                                    }
+                                }
+                                // 未选中
+                                else
+                                {
+                                    _partPreviewInstance.Detach();
+                                    _partPreviewInstance.gameObject.SetActive(false);
+                                }
                             }
                         }
                         // 鼠标没有选中其他零件, 暂时移除预览零件
@@ -188,8 +210,10 @@ namespace TheLastTour.Controller
                         if (Mouse.current.leftButton.wasPressedThisFrame &&
                             _partPreviewInstance.gameObject.activeInHierarchy)
                         {
+                            MachineController machine = _partPreviewInstance.ConnectedJoint.Owner.GetOwnedMachine();
+
                             PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject,
-                                machineController.transform).GetComponent<PartController>();
+                                machine.transform).GetComponent<PartController>();
 
                             // 与预览零件连接的 joint
                             PartJointController joint = _partPreviewInstance.ConnectedJoint;
@@ -199,36 +223,85 @@ namespace TheLastTour.Controller
                             _partPreviewInstance.gameObject.SetActive(false);
 
                             // 将零件连接到 joint
-                            part.AttachTo(joint);
+                            part.Attach(joint);
                             part.partName = partPrefabs[CurrentSelectedPartIndex].partName;
 
                             // 添加到机器中(计算质量,质心等)
-                            machineController.AddPart(part);
+                            machine.AddPart(part);
                         }
                     }
 
 
                     break;
 
+                case EEditState.Selecting:
+                    if (_partPreviewInstance != null)
+                    {
+                        _partPreviewInstance.Detach();
+                        _partPreviewInstance.gameObject.SetActive(false);
+                    }
+
+                    if (Mouse.current.leftButton.wasPressedThisFrame)
+                    {
+                        // 非多选模式,清空已选内容
+                        if (!Keyboard.current.leftCtrlKey.isPressed)
+                        {
+                            _selectedParts.Clear();
+                        }
+
+                        if (PerformMouseTrace(out var hit))
+                        {
+                            PartController part = hit.collider.gameObject.GetComponent<PartController>();
+                            if (part != null)
+                            {
+                                if (!_selectedParts.Contains(part))
+                                {
+                                    _selectedParts.Add(part);
+                                }
+                                else
+                                {
+                                    _selectedParts.Remove(part);
+                                }
+                            }
+                        }
+                    }
+
+                    if (Keyboard.current.deleteKey.wasPressedThisFrame)
+                    {
+                        foreach (var part in _selectedParts)
+                        {
+                            MachineController machine = part.GetOwnedMachine();
+                            machine.RemovePart(part);
+                            // part.Detach();
+                            // Destroy(part.gameObject);
+                        }
+
+                        _selectedParts.Clear();
+                    }
+
+                    break;
+                case EEditState.Deleting:
+                    break;
+                case EEditState.Setting:
+                    break;
                 default:
                     break;
             }
         }
 
 
-        private bool PerformMouseTrace(out Vector3 position)
+        private bool PerformMouseTrace(out RaycastHit hit)
         {
             if (Camera.main)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-                if (Physics.Raycast(ray, out var hit, 1000f, -1, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(ray, out hit, 1000f, 1 << 6, QueryTriggerInteraction.Ignore))
                 {
-                    position = hit.point;
                     return true;
                 }
             }
 
-            position = Vector3.zero;
+            hit = new RaycastHit();
             return false;
         }
 
@@ -244,7 +317,7 @@ namespace TheLastTour.Controller
         private PartJointController GetNearestJoint(Vector3 position)
         {
             PartJointController joint = null;
-            foreach (PartJointController partJoint in GetAllJointInRadius(position, 5f))
+            foreach (PartJointController partJoint in GetAllJointInRadius(position, 2f))
             {
                 if (joint == null || Vector3.Distance(position, partJoint.transform.position) <
                     Vector3.Distance(position, joint.transform.position))

@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 3100459802288136615}
   - component: {fileID: 5702781162694522992}
   - component: {fileID: 2221129474760082381}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,6 +193,7 @@ MonoBehaviour:
   partName: Part
   mass: 10
   isCorePart: 0
+  joints: []
   rootJoint: {fileID: 6397965225325282184}
 --- !u!1 &3490381983395215856
 GameObject:

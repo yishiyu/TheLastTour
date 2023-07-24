@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TheLastTour.Controller.Machine;
 using TheLastTour.Manager;
 using TheLastTour.Utility;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace TheLastTour
             RegisterUtility<IInputUtility>(new InputUtility());
 
             RegisterManager<IGameStateManager>(new GameStateManager());
+            RegisterManager<IMachineManager>(new MachineManager());
         }
     }
 
@@ -23,6 +25,8 @@ namespace TheLastTour
     public class TheLastTourGameInstance : MonoBehaviour
     {
         private static TheLastTourGameInstance _instance;
+
+        public MachineController DefaultMachinePrefab;
 
         public static TheLastTourGameInstance Instance
         {
@@ -45,6 +49,9 @@ namespace TheLastTour
             Debug.Log("TheLastTourGameInstance Start");
 
             TheLastTourArchitecture.CreateArchitecture();
+
+            TheLastTourArchitecture.Instance.GetManager<IMachineManager>()
+                .SetDefaultMachinePrefab(DefaultMachinePrefab);
         }
     }
 }

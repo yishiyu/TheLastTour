@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace TheLastTour.Controller.Machine
@@ -37,6 +39,10 @@ namespace TheLastTour.Controller.Machine
 
         public Quaternion Rotation { get; private set; } = Quaternion.identity;
 
+        public void TurnOnJointCollision(bool isOn)
+        {
+            _collider.enabled = isOn;
+        }
 
         public int JoointId
         {
@@ -51,6 +57,43 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
+        public List<PartController> GetConnectedPartsRecursively()
+        {
+            HashSet<PartController> connectedParts = new HashSet<PartController>();
+
+            HashSet<PartController> temp = new HashSet<PartController>();
+
+            // 防止向自身传播
+            connectedParts.Add(Owner);
+            // 添加自身所连接的部件
+            if (ConnectedJoint != null)
+            {
+                connectedParts.Add(ConnectedJoint.Owner);
+                temp.Add(ConnectedJoint.Owner);
+            }
+
+            while (temp.Count > 0)
+            {
+                PartController part = temp.First();
+                temp.Remove(part);
+
+                foreach (PartJointController joint in part.joints)
+                {
+                    if (joint.ConnectedJoint != null && !connectedParts.Contains(joint.ConnectedJoint.Owner))
+                    {
+                        connectedParts.Add(joint.ConnectedJoint.Owner);
+                        temp.Add(joint.ConnectedJoint.Owner);
+                    }
+                }
+            }
+            
+            // 移除自身
+            connectedParts.Remove(Owner);
+
+
+            return connectedParts.ToList();
+        }
+
 
         private void Awake()
         {
@@ -59,7 +102,7 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        public void Attach(PartJointController joint)
+        public void Attach(PartJointController joint, bool ignoreOthers = true)
         {
             if (IsAttached || joint == null || joint.IsAttached)
             {
@@ -68,6 +111,12 @@ namespace TheLastTour.Controller.Machine
 
             ConnectedJoint = joint;
             joint.ConnectedJoint = this;
+
+            if (!ignoreOthers)
+            {
+                joint.TurnOnJointCollision(true);
+            }
+
 
             Position = ConnectedJoint.transform.position;
             Rotation = ConnectedJoint.transform.rotation * Quaternion.Euler(0.0f, 180.0f, 0.0f);
