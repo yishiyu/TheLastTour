@@ -43,19 +43,19 @@ namespace TheLastTour.Controller
         Vector3 _cameraPosition = Vector3.zero;
 
 
-        private IGameManager _gameManager;
+        private IGameStateManager _gameStateManager;
         private InputActions _inputActions;
 
         public void Start()
         {
-            _gameManager = TheLastTourArchitecture.Instance.GetManager<IGameManager>();
+            _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _inputActions = TheLastTourArchitecture.Instance.GetUtility<IInputUtility>().GetInputActions();
         }
 
 
         public void Update()
         {
-            switch (_gameManager.GameState)
+            switch (_gameStateManager.GameState)
             {
                 case EGameState.Edit:
                     UpdateEditCamera();

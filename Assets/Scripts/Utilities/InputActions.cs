@@ -43,7 +43,7 @@ namespace TheLastTour.Utility
                 {
                     ""name"": """",
                     ""id"": ""3da2923d-f73f-48ce-8cb6-494b7c4b24b5"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -15,7 +15,7 @@ namespace TheLastTour
 
             RegisterUtility<IInputUtility>(new InputUtility());
 
-            RegisterManager<IGameManager>(new GameManager());
+            RegisterManager<IGameStateManager>(new GameStateManager());
         }
     }
 

@@ -16,7 +16,7 @@ namespace TheLastTour.Controller.Machine
         // 与更接近核心组件连接的接口,决定该组件的位置和旋转
         private List<PartJointController> _joints = new List<PartJointController>();
 
-        private PartJointController _rootJoint = null;
+        public PartJointController rootJoint = null;
 
         public int RootJointId { get; private set; } = -1;
 
@@ -25,9 +25,9 @@ namespace TheLastTour.Controller.Machine
         {
             get
             {
-                if (_rootJoint)
+                if (rootJoint)
                 {
-                    return _rootJoint.ConnectedJoint;
+                    return rootJoint.ConnectedJoint;
                 }
 
                 return null;
@@ -62,7 +62,7 @@ namespace TheLastTour.Controller.Machine
             if (id > 0 && id < _joints.Count)
             {
                 RootJointId = id;
-                _rootJoint = _joints[id];
+                rootJoint = _joints[id];
             }
         }
 
@@ -73,40 +73,42 @@ namespace TheLastTour.Controller.Machine
                 _joints.Add(joint);
             }
 
-            if (!isCorePart && _joints.Count > 0)
+            if (rootJoint != null)
+            {
+                RootJointId = GetJointId(rootJoint);
+                if (RootJointId < 0 || RootJointId > _joints.Count)
+                {
+                    rootJoint = null;
+                }
+            }
+            else if (!isCorePart && _joints.Count > 0)
             {
                 RootJointId = 0;
-                _rootJoint = _joints[0];
+                rootJoint = _joints[0];
             }
         }
 
 
         public void AttachTo(PartJointController joint)
         {
-            if (joint == null || joint.IsAttached || _rootJoint == null)
+            if (joint == null || joint.IsAttached || rootJoint == null)
             {
                 return;
             }
 
-            _rootJoint.Attach(joint);
-            Vector3 VOffset = _rootJoint.transform.localPosition;
-            Quaternion QOffset = _rootJoint.transform.localRotation;
-            transform.rotation = _rootJoint.Rotation * Quaternion.Inverse(QOffset);
-            transform.position = _rootJoint.Position - transform.rotation * VOffset;
-
-
-            GetComponentInParent<MachineController>().UpdateMachineMass();
+            rootJoint.Attach(joint);
+            Vector3 VOffset = rootJoint.transform.localPosition;
+            Quaternion QOffset = rootJoint.transform.localRotation;
+            transform.rotation = rootJoint.Rotation * Quaternion.Inverse(QOffset);
+            transform.position = rootJoint.Position - transform.rotation * VOffset;
         }
 
         public void Detach()
         {
-            if (_rootJoint != null)
+            if (rootJoint != null)
             {
-                _rootJoint.Detach();
-                _rootJoint = null;
+                rootJoint.Detach();
             }
-
-            GetComponentInParent<MachineController>().UpdateMachineMass();
         }
     }
 }

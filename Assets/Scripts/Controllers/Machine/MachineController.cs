@@ -13,42 +13,45 @@ namespace TheLastTour.Controller.Machine
 
         private List<PartController> _parts = new List<PartController>();
 
-        private void OnEnable()
-        {
-            EventBus.AddListener<GameStateChangedEvent>(OnGameStateChanged);
-        }
-
-
-        private void OnDisable()
-        {
-            EventBus.RemoveListener<GameStateChangedEvent>(OnGameStateChanged);
-        }
 
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
         }
 
-        private void OnGameStateChanged(GameStateChangedEvent evt)
+        public void AddPart(PartController part)
         {
-            switch (evt.CurrentState)
+            _parts.Add(part);
+            UpdateMachineMass();
+        }
+
+        public void RemovePart(PartController part)
+        {
+            _parts.Remove(part);
+            UpdateMachineMass();
+        }
+
+        public void TurnOnSimulation(bool isOn)
+        {
+            if (isOn)
             {
-                case EGameState.Play:
-                    // TODO 保存模型
-                    // TODO 开启模型物理模拟
-                    break;
-                case EGameState.Edit:
-                    // TODO 读取模型
-                    // TODO 暂停模型物理模拟
-                    break;
-                default:
-                    break;
+                _rigidbody.useGravity = true;
+                _rigidbody.isKinematic = false;
+            }
+            else
+            {
+                _rigidbody.useGravity = false;
+                _rigidbody.isKinematic = true;
             }
         }
 
-
-        public void UpdateMachineMass()
+        private void UpdateMachineMass()
         {
+            if (_parts.Count == 0)
+            {
+                return;
+            }
+
             float mass = 0;
             Vector3 centerOfMass = Vector3.zero;
             foreach (var part in _parts)
