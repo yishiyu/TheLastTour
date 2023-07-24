@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TheLastTour.Controller.Machine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,6 +22,10 @@ namespace TheLastTour.Manager
         public MachineController CreateEmptyMachine();
 
         public void SetDefaultMachinePrefab(MachineController machine);
+
+        public PartJointController GetNearestJoint(Vector3 position);
+
+        public List<PartJointController> GetAllJointInRadius(Vector3 center, float radius);
     }
 
     public class MachineManager : IMachineManager
@@ -63,6 +68,29 @@ namespace TheLastTour.Manager
             {
                 machine.TurnOnSimulation(isOn);
             }
+        }
+
+        public List<PartJointController> GetAllJointInRadius(Vector3 center, float radius)
+        {
+            Collider[] colliders = Physics.OverlapSphere(center, radius, LayerMask.GetMask("PartJoint"),
+                QueryTriggerInteraction.Ignore);
+
+            return colliders.Select(collider => collider.GetComponent<PartJointController>()).ToList();
+        }
+        
+        public PartJointController GetNearestJoint(Vector3 position)
+        {
+            PartJointController joint = null;
+            foreach (PartJointController partJoint in GetAllJointInRadius(position, 2f))
+            {
+                if (joint == null || Vector3.Distance(position, partJoint.transform.position) <
+                    Vector3.Distance(position, joint.transform.position))
+                {
+                    joint = partJoint;
+                }
+            }
+
+            return joint;
         }
     }
 }

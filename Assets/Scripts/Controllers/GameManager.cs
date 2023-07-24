@@ -15,6 +15,7 @@ namespace TheLastTour.Controller
     {
         private IGameStateManager _gameStateManager;
         private InputActions _inputActions;
+        private IMachineManager _machineManager;
 
         // 机器零件预览预设
         public List<PartController> partPrefabs = new List<PartController>();
@@ -25,11 +26,15 @@ namespace TheLastTour.Controller
             get { return _currentSelectedPartIndex; }
             set
             {
-                if (_currentSelectedPartIndex != value && value >= 0 && value < partPrefabs.Count)
+                if (_currentSelectedPartIndex != value)
                 {
                     _currentSelectedPartIndex = value;
                     GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPartIndex = value;
-                    GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPart = partPrefabs[value];
+                    if (value >= 0 && value < partPrefabs.Count)
+                    {
+                        GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPart = partPrefabs[value];
+                    }
+
                     EventBus.Invoke(GameEvents.SelectedPartPrefabChangedEvent);
                 }
             }
@@ -37,13 +42,14 @@ namespace TheLastTour.Controller
 
         private PartController _partPreviewInstance;
 
-        private List<PartController> _selectedParts = new List<PartController>();
+        public List<PartController> selectedParts = new List<PartController>();
 
 
         public void Start()
         {
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _inputActions = TheLastTourArchitecture.Instance.GetUtility<IInputUtility>().GetInputActions();
+            _machineManager = TheLastTourArchitecture.Instance.GetManager<IMachineManager>();
         }
 
         private void OnEnable()
@@ -77,7 +83,6 @@ namespace TheLastTour.Controller
         public void Update()
         {
             UpdateDebugAction();
-            UpdateDebugInformation();
 
             switch (_gameStateManager.GameState)
             {
@@ -96,16 +101,28 @@ namespace TheLastTour.Controller
 
         private void UpdateDebugAction()
         {
-            // 选择零件 1
+            // 切换到放置模式
             if (Keyboard.current.numpad1Key.isPressed)
             {
-                CurrentSelectedPartIndex = 0;
+                _gameStateManager.EditState = EEditState.Placing;
             }
 
             // 切换到选择模式
             if (Keyboard.current.numpad2Key.isPressed)
             {
                 _gameStateManager.EditState = EEditState.Selecting;
+            }
+
+            // 选择零件 空
+            if (Keyboard.current.numpad4Key.isPressed)
+            {
+                CurrentSelectedPartIndex = -1;
+            }
+
+            // 选择零件 1
+            if (Keyboard.current.numpad5Key.isPressed)
+            {
+                CurrentSelectedPartIndex = 0;
             }
 
             // 开始游戏
@@ -115,9 +132,6 @@ namespace TheLastTour.Controller
             }
         }
 
-        private void UpdateDebugInformation()
-        {
-        }
 
         private void UpdateEdit()
         {
@@ -166,7 +180,7 @@ namespace TheLastTour.Controller
                         // 预览零件跟随鼠标
                         if (PerformMouseTrace(out var hit))
                         {
-                            PartJointController joint = GetNearestJoint(hit.point);
+                            PartJointController joint = _machineManager.GetNearestJoint(hit.point);
 
                             // 未连接
                             if (_partPreviewInstance.ConnectedJoint == null)
@@ -246,7 +260,7 @@ namespace TheLastTour.Controller
                         // 非多选模式,清空已选内容
                         if (!Keyboard.current.leftCtrlKey.isPressed)
                         {
-                            _selectedParts.Clear();
+                            selectedParts.Clear();
                         }
 
                         if (PerformMouseTrace(out var hit))
@@ -254,13 +268,13 @@ namespace TheLastTour.Controller
                             PartController part = hit.collider.gameObject.GetComponent<PartController>();
                             if (part != null)
                             {
-                                if (!_selectedParts.Contains(part))
+                                if (!selectedParts.Contains(part))
                                 {
-                                    _selectedParts.Add(part);
+                                    selectedParts.Add(part);
                                 }
                                 else
                                 {
-                                    _selectedParts.Remove(part);
+                                    selectedParts.Remove(part);
                                 }
                             }
                         }
@@ -268,9 +282,9 @@ namespace TheLastTour.Controller
 
                     if (Keyboard.current.fKey.wasPressedThisFrame)
                     {
-                        if (_selectedParts.Count > 0)
+                        if (selectedParts.Count > 0)
                         {
-                            GameEvents.FocusOnTargetEvent.Target = _selectedParts[0].transform;
+                            GameEvents.FocusOnTargetEvent.Target = selectedParts[0].transform;
                             EventBus.Invoke(GameEvents.FocusOnTargetEvent);
                             Debug.Log("Focus On Target");
                         }
@@ -278,7 +292,7 @@ namespace TheLastTour.Controller
 
                     if (Keyboard.current.deleteKey.wasPressedThisFrame)
                     {
-                        foreach (var part in _selectedParts)
+                        foreach (var part in selectedParts)
                         {
                             MachineController machine = part.GetOwnedMachine();
                             machine.RemovePart(part);
@@ -286,7 +300,7 @@ namespace TheLastTour.Controller
                             // Destroy(part.gameObject);
                         }
 
-                        _selectedParts.Clear();
+                        selectedParts.Clear();
                     }
 
                     break;
@@ -313,30 +327,6 @@ namespace TheLastTour.Controller
 
             hit = new RaycastHit();
             return false;
-        }
-
-        private List<PartJointController> GetAllJointInRadius(Vector3 center, float radius)
-        {
-            Collider[] colliders = Physics.OverlapSphere(center, radius, LayerMask.GetMask("PartJoint"),
-                QueryTriggerInteraction.Ignore);
-
-            return colliders.Select(collider => collider.GetComponent<PartJointController>()).ToList();
-        }
-
-
-        private PartJointController GetNearestJoint(Vector3 position)
-        {
-            PartJointController joint = null;
-            foreach (PartJointController partJoint in GetAllJointInRadius(position, 2f))
-            {
-                if (joint == null || Vector3.Distance(position, partJoint.transform.position) <
-                    Vector3.Distance(position, joint.transform.position))
-                {
-                    joint = partJoint;
-                }
-            }
-
-            return joint;
         }
     }
 }

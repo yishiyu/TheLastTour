@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 341754304}
   - component: {fileID: 341754303}
   m_Layer: 5
-  m_Name: ControlKey
+  m_Name: DebugText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,7 +236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180, y: 0}
+  m_AnchoredPosition: {x: 180, y: -100}
   m_SizeDelta: {x: 300, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &341754303
@@ -272,16 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'mouseleft ==> place the part
-
-    mouseright ==> move the view
-
-    Num1 
-    ==> select basic part
-
-    P ==> start simulation
-
-'
+  m_Text: 
 --- !u!222 &341754304
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -321,6 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partPrefabs:
   - {fileID: 2221129474760082381, guid: 66bdd63ceb54f9b4c923f0d583f20ef9, type: 3}
+  selectedParts: []
 --- !u!4 &660271786
 Transform:
   m_ObjectHideFlags: 0
@@ -1376,6 +1368,7 @@ GameObject:
   - component: {fileID: 881558194}
   - component: {fileID: 881558193}
   - component: {fileID: 881558192}
+  - component: {fileID: 881558196}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1467,6 +1460,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &881558196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881558191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1aca7553147ece4a9aa66d743fcb934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugInfoText: {fileID: 341754303}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,8 +1584,10 @@ MonoBehaviour:
   focusDistanceCurrent: 10
   focusAngleXTarget: 0
   focusAngleXSmoothTime: 0.2
+  focusAngleXSensitive: 0.3
   focusAngleYTarget: 0
   focusAngleYSmoothTime: 0.2
+  focusAngleYSensitive: 0.3
 --- !u!1 &1153472582
 GameObject:
   m_ObjectHideFlags: 0
