@@ -93,9 +93,8 @@ namespace TheLastTour.Controller
 
         private void UpdateEditCamera()
         {
-            float scrollDelta = Mouse.current.scroll.ReadValue().y * _focusZoomSensitive;
-
             // 受控输入
+            float scrollDelta = 0;
             float mouseXDelta = 0;
             float mouseYDelta = 0;
             float keyboardXDelta = 0;
@@ -104,6 +103,7 @@ namespace TheLastTour.Controller
             if (_inputActions.CameraControl.EnableCameraControl.IsPressed())
             {
                 // 鼠标输入
+                scrollDelta = Mouse.current.scroll.ReadValue().y * _focusZoomSensitive;
                 mouseXDelta = Mouse.current.delta.x.ReadValue() * focusAngleXSensitive;
                 mouseYDelta = Mouse.current.delta.y.ReadValue() * focusAngleYSensitive;
 

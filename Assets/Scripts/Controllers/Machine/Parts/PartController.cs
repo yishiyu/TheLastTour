@@ -77,9 +77,7 @@ namespace TheLastTour.Controller.Machine
 
         private void Awake()
         {
-            // Properties.Add(new MachineProperty("test float", new PropertyValue<float>(1)));
-            // Properties.Add(new MachineProperty("test key", new PropertyValue<Key>(Key.None)));
-            // Properties.Add(new MachineProperty("test bool", new PropertyValue<bool>(true)));
+            InitProperties();
 
             foreach (var joint in GetComponentsInChildren<PartJointController>())
             {
@@ -99,6 +97,17 @@ namespace TheLastTour.Controller.Machine
                 RootJointId = 0;
                 rootJoint = joints[0];
             }
+        }
+
+        protected virtual void InitProperties()
+        {
+            var pMass = new PropertyValue<float>(mass);
+            pMass.OnValueChanged += f =>
+            {
+                mass = f;
+                GetOwnedMachine().UpdateMachineMass();
+            };
+            Properties.Add(new MachineProperty("test float", pMass));
         }
 
 

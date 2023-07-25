@@ -107,7 +107,7 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-        private void UpdateMachineMass()
+        public void UpdateMachineMass()
         {
             if (_parts.Count == 0)
             {

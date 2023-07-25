@@ -18,7 +18,7 @@ namespace TheLastTour.Controller.Machine
                 inputField.text = (Property.reference as PropertyValue<float>).Value.ToString();
                 inputField.contentType = InputField.ContentType.DecimalNumber;
 
-                inputField.onValueChanged.AddListener((value) =>
+                inputField.onSubmit.AddListener((value) =>
                 {
                     float result = 0;
                     if (float.TryParse(value, out result))
