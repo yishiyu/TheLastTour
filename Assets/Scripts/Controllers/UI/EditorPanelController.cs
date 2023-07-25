@@ -26,7 +26,7 @@ namespace TheLastTour.Controller.UI
             PlayButton.onClick.AddListener(
                 (() => { _gameStateManager.GameState = EGameState.Play; })
             );
-
+            
 
             for (int i = 0; i < _gameManager.partPrefabs.Count; i++)
             {

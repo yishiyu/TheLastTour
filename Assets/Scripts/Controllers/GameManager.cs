@@ -91,6 +91,22 @@ namespace TheLastTour.Controller
 
         public PartController selectedPart = null;
 
+        public PartController SelectedPart
+        {
+            get { return selectedPart; }
+            set
+            {
+                if (selectedPart != value)
+                {
+                    GameEvents.SelectedPartChangedEvent.PreviousSelectedPart = selectedPart;
+                    GameEvents.SelectedPartChangedEvent.CurrentSelectedPart = value;
+                    EventBus.Invoke(GameEvents.SelectedPartChangedEvent);
+
+                    selectedPart = value;
+                }
+            }
+        }
+
 
         public void Start()
         {
@@ -162,19 +178,17 @@ namespace TheLastTour.Controller
 
         private void UpdateEdit()
         {
-            // // 操作 UI 时停止编辑
-            // // 这个判断有问题
-            // if (!EventSystem.current.IsPointerOverGameObject())
-            // {
-            //     if (_partPreviewInstance != null)
-            //     {
-            //         _partPreviewInstance.Detach();
-            //         _partPreviewInstance.gameObject.SetActive(false);
-            //     }
-            //
-            //     Debug.Log("Mouse On UI");
-            //     return;
-            // }
+            // 操作 UI 时停止编辑
+            if (Mouse.current.leftButton.isPressed)
+            {
+                // Check if the mouse was clicked over a UI element
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
+            }
+
+            bool isMouseHit = PerformMouseTrace(out var hit, -1);
 
             switch (_gameStateManager.EditState)
             {
@@ -201,11 +215,10 @@ namespace TheLastTour.Controller
                         _partPreviewInstance.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                     }
 
-
                     if (_partPreviewInstance != null)
                     {
                         // 预览零件跟随鼠标
-                        if (PerformMouseTrace(out var hit))
+                        if (isMouseHit)
                         {
                             PartJointController joint = _machineManager.GetNearestJoint(hit.point);
 
@@ -284,14 +297,14 @@ namespace TheLastTour.Controller
 
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
-                        if (PerformMouseTrace(out var hit))
+                        if (isMouseHit)
                         {
                             PartController part = hit.collider.gameObject.GetComponent<PartController>();
-                            selectedPart = part;
+                            SelectedPart = part;
                         }
                         else
                         {
-                            selectedPart = null;
+                            SelectedPart = null;
                         }
                     }
 
@@ -321,12 +334,12 @@ namespace TheLastTour.Controller
         }
 
 
-        private bool PerformMouseTrace(out RaycastHit hit)
+        private bool PerformMouseTrace(out RaycastHit hit, int layerMask = 1 << 6)
         {
             if (Camera.main)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-                if (Physics.Raycast(ray, out hit, 1000f, 1 << 6, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(ray, out hit, 1000f, layerMask, QueryTriggerInteraction.Ignore))
                 {
                     return true;
                 }

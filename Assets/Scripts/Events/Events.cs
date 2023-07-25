@@ -13,6 +13,8 @@ namespace TheLastTour.Event
             new SelectedPartPrefabChangedEvent();
         
         public static FocusOnTargetEvent FocusOnTargetEvent = new FocusOnTargetEvent();
+        
+        public static SelectedPartChangedEvent SelectedPartChangedEvent = new SelectedPartChangedEvent();
     }
 
 
@@ -38,4 +40,11 @@ namespace TheLastTour.Event
     {
         public Transform Target;
     }
+    
+    public class SelectedPartChangedEvent : GameEvent
+    {
+        public PartController PreviousSelectedPart;
+        public PartController CurrentSelectedPart;
+    }
+    
 }

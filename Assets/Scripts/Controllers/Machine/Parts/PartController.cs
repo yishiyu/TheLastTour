@@ -6,6 +6,9 @@ namespace TheLastTour.Controller.Machine
 {
     public class PartController : MonoBehaviour
     {
+        // 可以设置的属性
+        public List<MachineProperty> Properties = new List<MachineProperty>();
+
         // 可设置属性
         public string partName = "Part";
         public float mass = 10;
@@ -73,6 +76,8 @@ namespace TheLastTour.Controller.Machine
 
         private void Awake()
         {
+            Properties.Add(new MachineProperty("Mass", new PropertyValue<float>(1)));
+
             foreach (var joint in GetComponentsInChildren<PartJointController>())
             {
                 joints.Add(joint);
