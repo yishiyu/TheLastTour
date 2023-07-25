@@ -299,7 +299,7 @@ namespace TheLastTour.Controller
                     {
                         if (isMouseHit)
                         {
-                            PartController part = hit.collider.gameObject.GetComponent<PartController>();
+                            PartController part = hit.collider.gameObject.GetComponentInParent<PartController>();
                             SelectedPart = part;
                         }
                         else

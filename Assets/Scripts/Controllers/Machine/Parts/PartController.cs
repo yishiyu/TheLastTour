@@ -101,13 +101,13 @@ namespace TheLastTour.Controller.Machine
 
         protected virtual void InitProperties()
         {
-            var pMass = new PropertyValue<float>(mass);
-            pMass.OnValueChanged += f =>
-            {
-                mass = f;
-                GetOwnedMachine().UpdateMachineMass();
-            };
-            Properties.Add(new MachineProperty("test float", pMass));
+            // var pMass = new PropertyValue<float>(mass);
+            // pMass.OnValueChanged += f =>
+            // {
+            //     mass = f;
+            //     GetOwnedMachine().UpdateMachineMass();
+            // };
+            // Properties.Add(new MachineProperty("test float", pMass));
         }
 
 
@@ -119,7 +119,9 @@ namespace TheLastTour.Controller.Machine
             }
 
             rootJoint.Attach(joint, ignoreOthers);
-            Vector3 VOffset = rootJoint.transform.localPosition;
+            Vector3 VOffset = rootJoint.transform.position - transform.position;
+            // Quaternion QOffset = rootJoint.transform.rotation * Quaternion.Inverse(transform.rotation);
+            // Vector3 VOffset = rootJoint.transform.localPosition;
             Quaternion QOffset = rootJoint.transform.localRotation;
             transform.rotation = rootJoint.Rotation * Quaternion.Inverse(QOffset);
             transform.position = rootJoint.Position - transform.rotation * VOffset;

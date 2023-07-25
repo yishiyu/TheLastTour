@@ -76,7 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3804758342858752998}
   - component: {fileID: 4280982935770607144}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CubePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ Transform:
   m_Children:
   - {fileID: 3028304692737846564}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4280982935770607144
 MonoBehaviour:

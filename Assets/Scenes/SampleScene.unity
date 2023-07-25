@@ -750,6 +750,7 @@ MonoBehaviour:
   partPrefabs:
   - {fileID: 4280982935770607144, guid: 66bdd63ceb54f9b4c923f0d583f20ef9, type: 3}
   - {fileID: 1010085875736164343, guid: 29f96c0f659d98a44a21ea18c0fe4d40, type: 3}
+  - {fileID: 6999000673217102812, guid: fe9e93669c3c39d42bb1c9d2ec910f5b, type: 3}
   selectedPart: {fileID: 0}
 --- !u!4 &660271786
 Transform:
