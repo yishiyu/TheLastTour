@@ -28,6 +28,8 @@ namespace TheLastTour.Manager
         public PartJointController GetNearestJoint(Vector3 position);
 
         public List<PartJointController> GetAllJointInRadius(Vector3 center, float radius);
+
+        public PartController GetCorePart();
     }
 
     public class MachineManager : IMachineManager
@@ -63,7 +65,7 @@ namespace TheLastTour.Manager
 
             return null;
         }
-        
+
         public void DestroyMachine(MachineController machine)
         {
             MachineList.Remove(machine);
@@ -85,7 +87,23 @@ namespace TheLastTour.Manager
 
             return colliders.Select(collider => collider.GetComponent<PartJointController>()).ToList();
         }
-        
+
+        public PartController GetCorePart()
+        {
+            foreach (var machine in MachineList)
+            {
+                foreach (var part in machine.machineParts)
+                {
+                    if (part.isCorePart)
+                    {
+                        return part;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         public PartJointController GetNearestJoint(Vector3 position)
         {
             PartJointController joint = null;

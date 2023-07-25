@@ -12,7 +12,7 @@ namespace TheLastTour.Controller.Machine
     {
         private Rigidbody _rigidbody;
 
-        private List<PartController> _parts = new List<PartController>();
+        public List<PartController> machineParts = new List<PartController>();
 
         private bool _isInited = false;
 
@@ -22,7 +22,7 @@ namespace TheLastTour.Controller.Machine
             {
                 _isInited = true;
                 _rigidbody = GetComponent<Rigidbody>();
-                _parts.AddRange(GetComponentsInChildren<PartController>());
+                machineParts.AddRange(GetComponentsInChildren<PartController>());
             }
         }
 
@@ -33,14 +33,14 @@ namespace TheLastTour.Controller.Machine
 
         public void AddPart(PartController part)
         {
-            _parts.Add(part);
+            machineParts.Add(part);
             part.transform.SetParent(transform);
             UpdateMachineMass();
         }
 
         public void RemovePart(PartController part)
         {
-            if (!_parts.Contains(part) || part.isCorePart)
+            if (!machineParts.Contains(part) || part.isCorePart)
             {
                 return;
             }
@@ -68,8 +68,8 @@ namespace TheLastTour.Controller.Machine
 
                 foreach (var part in parts)
                 {
-                    _parts.Remove(part);
-                    machine._parts.Add(part);
+                    machineParts.Remove(part);
+                    machine.machineParts.Add(part);
 
                     part.transform.parent = machine.transform;
                 }
@@ -91,7 +91,7 @@ namespace TheLastTour.Controller.Machine
             {
                 _rigidbody.useGravity = true;
                 _rigidbody.isKinematic = false;
-                foreach (var part in _parts)
+                foreach (var part in machineParts)
                 {
                     part.TurnOnJointCollision(false);
                 }
@@ -100,7 +100,7 @@ namespace TheLastTour.Controller.Machine
             {
                 _rigidbody.useGravity = false;
                 _rigidbody.isKinematic = true;
-                foreach (var part in _parts)
+                foreach (var part in machineParts)
                 {
                     part.TurnOnJointCollision(true);
                 }
@@ -109,14 +109,14 @@ namespace TheLastTour.Controller.Machine
 
         public void UpdateMachineMass()
         {
-            if (_parts.Count == 0)
+            if (machineParts.Count == 0)
             {
                 return;
             }
 
             float mass = 0;
             Vector3 centerOfMass = Vector3.zero;
-            foreach (var part in _parts)
+            foreach (var part in machineParts)
             {
                 mass += part.mass;
                 centerOfMass += part.mass * part.transform.position;

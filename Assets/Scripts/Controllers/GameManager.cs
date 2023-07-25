@@ -136,6 +136,16 @@ namespace TheLastTour.Controller
                 case EGameState.Play:
                     // TODO 保存模型
                     TheLastTourArchitecture.Instance.GetManager<IMachineManager>().TurnOnSimulation(true);
+
+                    var corePart = _machineManager.GetCorePart();
+                    if (corePart)
+                    {
+                        GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
+                        EventBus.Invoke(GameEvents.FocusOnTargetEvent);
+                    }
+
+                    Cursor.lockState = CursorLockMode.Locked;
+
                     break;
                 case EGameState.Edit:
                     // TODO 读取模型

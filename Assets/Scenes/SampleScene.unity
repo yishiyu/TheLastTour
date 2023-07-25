@@ -3168,6 +3168,10 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6457956011925131519, guid: 1dedc941b4bdddd4b887e0e00ace57bf, type: 3}
+      propertyPath: isCorePart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8923829755956015854, guid: 1dedc941b4bdddd4b887e0e00ace57bf, type: 3}
       propertyPath: m_Name
       value: MachineMachine

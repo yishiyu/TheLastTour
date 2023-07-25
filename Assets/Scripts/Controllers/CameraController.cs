@@ -167,6 +167,41 @@ namespace TheLastTour.Controller
 
         private void UpdatePlayCamera()
         {
+            if (!focusTarget)
+            {
+                return;
+            }
+
+            // 鼠标输入
+            float scrollDelta = Mouse.current.scroll.ReadValue().y * _focusZoomSensitive * 0.3f;
+            float mouseXDelta = Mouse.current.delta.x.ReadValue() * focusAngleXSensitive * 0.3f;
+            float mouseYDelta = Mouse.current.delta.y.ReadValue() * focusAngleYSensitive * 0.3f;
+
+            focusOffset = Vector3.zero;
+
+            focusAngleXTarget = Mathf.Clamp(focusAngleXTarget - mouseYDelta, FocusAngleXMin, FocusAngleXMax);
+            focusAngleYTarget = (focusAngleYTarget + mouseXDelta) % 360;
+            focusDistanceTarget =
+                Mathf.Clamp(focusDistanceTarget - scrollDelta, FocusDistanceMin, FocusDistanceMax);
+
+
+            // 平滑变换
+            _focusAngleXCurrent = Mathf.SmoothDampAngle(_focusAngleXCurrent, focusAngleXTarget,
+                ref _focusAngleXSmoothSpeed, focusAngleXSmoothTime);
+            _focusAngleYCurrent = Mathf.SmoothDampAngle(_focusAngleYCurrent, focusAngleYTarget,
+                ref _focusAngleYSmoothSpeed, focusAngleYSmoothTime);
+            focusDistanceCurrent = Mathf.SmoothDamp(focusDistanceCurrent, focusDistanceTarget,
+                ref _focusDistanceSmoothSpeed, 0.1f);
+
+
+            // 计算相机姿态
+            _cameraRotation = Quaternion.Euler(_focusAngleXCurrent, _focusAngleYCurrent, 0);
+            _cameraPosition = focusTarget.position - _cameraRotation * Vector3.forward * focusDistanceCurrent;
+
+
+            // 更新相机姿态
+            transform.rotation = _cameraRotation;
+            transform.position = _cameraPosition;
         }
     }
 }
