@@ -56,8 +56,8 @@ namespace TheLastTour.Controller.UI
         {
             if (debugInfoText)
             {
-                debugInfoText.text = "7: select empty part prefab\n" +
-                                     "8: select cube part prefab\n" +
+                debugInfoText.text = "~: clear prefab part select\n" +
+                                     "tab: delete the select part\n" +
                                      "GameMode: " + _gameStateManager.GameState + "\n" +
                                      "EditMode: " + _gameStateManager.EditState + "\n" +
                                      "SelectedPartIndex: " + _gameManager.CurrentSelectedPartIndex + "\n" +

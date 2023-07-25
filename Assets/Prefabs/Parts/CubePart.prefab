@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 5702781162694522992}
   - component: {fileID: 2221129474760082381}
   m_Layer: 6
-  m_Name: Part
+  m_Name: CubePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4715231087f6e1f4082073dab26902ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partName: Part
+  partName: CubePart
   mass: 10
   isCorePart: 0
   joints: []

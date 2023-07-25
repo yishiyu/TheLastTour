@@ -48,6 +48,12 @@ namespace TheLastTour.Controller
                             GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPartIndex = -1;
                             EventBus.Invoke(GameEvents.SelectedPartPrefabChangedEvent);
                         }
+
+                        if (_partPreviewInstance != null)
+                        {
+                            _partPreviewInstance.Detach();
+                            Destroy(_partPreviewInstance.gameObject);
+                        }
                     }
                     else
                     {
@@ -311,7 +317,7 @@ namespace TheLastTour.Controller
                         }
                     }
 
-                    if (Keyboard.current.deleteKey.wasPressedThisFrame)
+                    if (Keyboard.current.tabKey.wasPressedThisFrame)
                     {
                         foreach (var part in selectedParts)
                         {

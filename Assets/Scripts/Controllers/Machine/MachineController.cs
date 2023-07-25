@@ -40,7 +40,7 @@ namespace TheLastTour.Controller.Machine
 
         public void RemovePart(PartController part)
         {
-            if (!_parts.Contains(part))
+            if (!_parts.Contains(part) || part.isCorePart)
             {
                 return;
             }
