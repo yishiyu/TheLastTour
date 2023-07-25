@@ -101,7 +101,7 @@ namespace TheLastTour.Controller.Machine
         private void Awake()
         {
             _collider = GetComponent<SphereCollider>();
-            Owner = transform.parent.GetComponent<PartController>();
+            Owner = transform.parent.parent.GetComponent<PartController>();
         }
 
 
