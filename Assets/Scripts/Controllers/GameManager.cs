@@ -28,6 +28,47 @@ namespace TheLastTour.Controller
             {
                 if (_currentSelectedPartIndex != value)
                 {
+                    if (_currentSelectedPartIndex >= 0 && _currentSelectedPartIndex < partPrefabs.Count)
+                    {
+                        if (value >= 0 && value < partPrefabs.Count)
+                        {
+                            // 从合法下标到另一个合法下标
+                            _currentSelectedPartIndex = value;
+
+                            GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPartIndex = value;
+                            GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPart = partPrefabs[value];
+                            EventBus.Invoke(GameEvents.SelectedPartPrefabChangedEvent);
+                        }
+                        else
+                        {
+                            // 从合法下标到非法下标
+                            _currentSelectedPartIndex = -1;
+                            _gameStateManager.EditState = EEditState.Selecting;
+
+                            GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPartIndex = -1;
+                            EventBus.Invoke(GameEvents.SelectedPartPrefabChangedEvent);
+                        }
+                    }
+                    else
+                    {
+                        if (value >= 0 && value < partPrefabs.Count)
+                        {
+                            // 从非法下标到合法下标
+                            _currentSelectedPartIndex = value;
+                            _gameStateManager.EditState = EEditState.Placing;
+
+                            GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPartIndex = value;
+                            GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPart = partPrefabs[value];
+                            EventBus.Invoke(GameEvents.SelectedPartPrefabChangedEvent);
+                        }
+                        else
+                        {
+                            // 从非法下标到非法下标
+                            // pass
+                        }
+                    }
+
+
                     _currentSelectedPartIndex = value;
                     GameEvents.SelectedPartPrefabChangedEvent.CurrentSelectedPartIndex = value;
                     if (value >= 0 && value < partPrefabs.Count)
@@ -50,6 +91,10 @@ namespace TheLastTour.Controller
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _inputActions = TheLastTourArchitecture.Instance.GetUtility<IInputUtility>().GetInputActions();
             _machineManager = TheLastTourArchitecture.Instance.GetManager<IMachineManager>();
+
+            CurrentSelectedPartIndex = -1;
+            _gameStateManager.GameState = EGameState.Edit;
+            _gameStateManager.EditState = EEditState.Selecting;
         }
 
         private void OnEnable()
@@ -101,34 +146,10 @@ namespace TheLastTour.Controller
 
         private void UpdateDebugAction()
         {
-            // 切换到放置模式
-            if (Keyboard.current.numpad1Key.isPressed)
-            {
-                _gameStateManager.EditState = EEditState.Placing;
-            }
-
-            // 切换到选择模式
-            if (Keyboard.current.numpad2Key.isPressed)
-            {
-                _gameStateManager.EditState = EEditState.Selecting;
-            }
-
             // 选择零件 空
-            if (Keyboard.current.numpad4Key.isPressed)
+            if (Keyboard.current.backquoteKey.isPressed)
             {
                 CurrentSelectedPartIndex = -1;
-            }
-
-            // 选择零件 1
-            if (Keyboard.current.numpad5Key.isPressed)
-            {
-                CurrentSelectedPartIndex = 0;
-            }
-
-            // 开始游戏
-            if (Keyboard.current.pKey.isPressed)
-            {
-                _gameStateManager.GameState = EGameState.Play;
             }
         }
 
@@ -303,10 +324,6 @@ namespace TheLastTour.Controller
                         selectedParts.Clear();
                     }
 
-                    break;
-                case EEditState.Deleting:
-                    break;
-                case EEditState.Setting:
                     break;
                 default:
                     break;

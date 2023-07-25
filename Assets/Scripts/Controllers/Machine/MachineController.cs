@@ -34,6 +34,7 @@ namespace TheLastTour.Controller.Machine
         public void AddPart(PartController part)
         {
             _parts.Add(part);
+            part.transform.SetParent(transform);
             UpdateMachineMass();
         }
 
@@ -53,12 +54,7 @@ namespace TheLastTour.Controller.Machine
             Destroy(part.gameObject);
 
             // 该 Machine 已无任何 Part,销毁该 Machine
-            if (_parts.Count == 0)
-            {
-                Destroy(gameObject);
-            }
-
-            UpdateMachineMass();
+            TheLastTourArchitecture.Instance.GetManager<IMachineManager>().DestroyMachine(this);
         }
 
         public MachineController DetachJoint(PartJointController joint)
@@ -95,11 +91,19 @@ namespace TheLastTour.Controller.Machine
             {
                 _rigidbody.useGravity = true;
                 _rigidbody.isKinematic = false;
+                foreach (var part in _parts)
+                {
+                    part.TurnOnJointCollision(false);
+                }
             }
             else
             {
                 _rigidbody.useGravity = false;
                 _rigidbody.isKinematic = true;
+                foreach (var part in _parts)
+                {
+                    part.TurnOnJointCollision(true);
+                }
             }
         }
 

@@ -18,9 +18,7 @@ namespace TheLastTour.Manager
     public enum EEditState
     {
         Placing,
-        Selecting,
-        Deleting,
-        Setting
+        Selecting
     }
 
     public interface IGameStateManager : IManager

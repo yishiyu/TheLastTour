@@ -41,7 +41,10 @@ namespace TheLastTour.Controller.Machine
 
         public void TurnOnJointCollision(bool isOn)
         {
-            _collider.enabled = isOn;
+            if (_collider != null)
+            {
+                _collider.enabled = isOn;
+            }
         }
 
         public int JoointId
@@ -86,7 +89,7 @@ namespace TheLastTour.Controller.Machine
                     }
                 }
             }
-            
+
             // 移除自身
             connectedParts.Remove(Owner);
 

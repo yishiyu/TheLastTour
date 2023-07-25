@@ -21,6 +21,8 @@ namespace TheLastTour.Manager
 
         public MachineController CreateEmptyMachine();
 
+        public void DestroyMachine(MachineController machine);
+
         public void SetDefaultMachinePrefab(MachineController machine);
 
         public PartJointController GetNearestJoint(Vector3 position);
@@ -60,6 +62,12 @@ namespace TheLastTour.Manager
             }
 
             return null;
+        }
+        
+        public void DestroyMachine(MachineController machine)
+        {
+            MachineList.Remove(machine);
+            GameObject.Destroy(machine.gameObject);
         }
 
         public void TurnOnSimulation(bool isOn)
