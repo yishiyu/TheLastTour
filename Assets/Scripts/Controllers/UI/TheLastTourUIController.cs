@@ -60,12 +60,15 @@ namespace TheLastTour.Controller.UI
                                      "tab: delete the select part\n" +
                                      "GameMode: " + _gameStateManager.GameState + "\n" +
                                      "EditMode: " + _gameStateManager.EditState + "\n" +
-                                     "SelectedPartIndex: " + _gameManager.CurrentSelectedPartIndex + "\n" +
-                                     "SelectedParts: " + _gameManager.selectedParts.Count + "\n";
+                                     "SelectedPartIndex: " + _gameManager.CurrentSelectedPartIndex + "\n";
 
-                foreach (var part in _gameManager.selectedParts)
+                if (_gameManager.selectedPart != null)
                 {
-                    debugInfoText.text += part.name + "\n";
+                    debugInfoText.text += "SelectedPart: " + _gameManager.selectedPart + "\n";
+                }
+                else
+                {
+                    debugInfoText.text += "SelectedPart: " + "\n";
                 }
             }
         }

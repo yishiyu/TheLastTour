@@ -89,7 +89,7 @@ namespace TheLastTour.Controller
 
         private PartController _partPreviewInstance;
 
-        public List<PartController> selectedParts = new List<PartController>();
+        public PartController selectedPart = null;
 
 
         public void Start()
@@ -284,34 +284,22 @@ namespace TheLastTour.Controller
 
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
-                        // 非多选模式,清空已选内容
-                        if (!Keyboard.current.leftCtrlKey.isPressed)
-                        {
-                            selectedParts.Clear();
-                        }
-
                         if (PerformMouseTrace(out var hit))
                         {
                             PartController part = hit.collider.gameObject.GetComponent<PartController>();
-                            if (part != null)
-                            {
-                                if (!selectedParts.Contains(part))
-                                {
-                                    selectedParts.Add(part);
-                                }
-                                else
-                                {
-                                    selectedParts.Remove(part);
-                                }
-                            }
+                            selectedPart = part;
+                        }
+                        else
+                        {
+                            selectedPart = null;
                         }
                     }
 
                     if (Keyboard.current.fKey.wasPressedThisFrame)
                     {
-                        if (selectedParts.Count > 0)
+                        if (selectedPart != null)
                         {
-                            GameEvents.FocusOnTargetEvent.Target = selectedParts[0].transform;
+                            GameEvents.FocusOnTargetEvent.Target = selectedPart.transform;
                             EventBus.Invoke(GameEvents.FocusOnTargetEvent);
                             Debug.Log("Focus On Target");
                         }
@@ -319,15 +307,11 @@ namespace TheLastTour.Controller
 
                     if (Keyboard.current.tabKey.wasPressedThisFrame)
                     {
-                        foreach (var part in selectedParts)
+                        if (selectedPart != null)
                         {
-                            MachineController machine = part.GetOwnedMachine();
-                            machine.RemovePart(part);
-                            // part.Detach();
-                            // Destroy(part.gameObject);
+                            MachineController machine = selectedPart.GetOwnedMachine();
+                            machine.RemovePart(selectedPart);
                         }
-
-                        selectedParts.Clear();
                     }
 
                     break;
