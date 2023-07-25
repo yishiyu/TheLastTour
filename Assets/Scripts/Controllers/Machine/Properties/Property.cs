@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -6,22 +7,25 @@ namespace TheLastTour.Controller.Machine
 {
     public class PropertyValue<T>
     {
-        private T Value;
+        private T _value;
 
         public PropertyValue(T value)
         {
-            Value = value;
+            _value = value;
         }
 
-        public T AsValue
+        public T Value
         {
-            get { return Value; }
+            get { return _value; }
+            set
+            {
+                _value = value;
+                OnValueChanged(value);
+            }
         }
 
-        public ref T AsRef
-        {
-            get { return ref Value; }
-        }
+
+        public Action<T> OnValueChanged = ((T t) => { });
     }
 
     public class MachineProperty

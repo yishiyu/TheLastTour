@@ -15,7 +15,7 @@ namespace TheLastTour.Controller.Machine
                 Property.reference != null &&
                 Property.type == MachineProperty.PropertyType.Float)
             {
-                inputField.text = (Property.reference as PropertyValue<float>).AsValue.ToString();
+                inputField.text = (Property.reference as PropertyValue<float>).Value.ToString();
                 inputField.contentType = InputField.ContentType.DecimalNumber;
 
                 inputField.onValueChanged.AddListener((value) =>
@@ -23,7 +23,7 @@ namespace TheLastTour.Controller.Machine
                     float result = 0;
                     if (float.TryParse(value, out result))
                     {
-                        (Property.reference as PropertyValue<float>).AsRef = result;
+                        (Property.reference as PropertyValue<float>).Value = result;
                     }
                 });
             }

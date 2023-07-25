@@ -16,11 +16,11 @@ namespace TheLastTour.Controller.Machine
                 Property.reference != null &&
                 Property.type == MachineProperty.PropertyType.Bool)
             {
-                toggle.isOn = (Property.reference as PropertyValue<bool>).AsValue;
+                toggle.isOn = (Property.reference as PropertyValue<bool>).Value;
 
                 toggle.onValueChanged.AddListener((value) =>
                 {
-                    (Property.reference as PropertyValue<bool>).AsRef = value;
+                    (Property.reference as PropertyValue<bool>).Value = value;
                 });
             }
         }

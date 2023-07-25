@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace TheLastTour.Controller.Machine
 {
@@ -76,7 +77,9 @@ namespace TheLastTour.Controller.Machine
 
         private void Awake()
         {
-            Properties.Add(new MachineProperty("Mass", new PropertyValue<float>(1)));
+            // Properties.Add(new MachineProperty("test float", new PropertyValue<float>(1)));
+            // Properties.Add(new MachineProperty("test key", new PropertyValue<Key>(Key.None)));
+            // Properties.Add(new MachineProperty("test bool", new PropertyValue<bool>(true)));
 
             foreach (var joint in GetComponentsInChildren<PartJointController>())
             {

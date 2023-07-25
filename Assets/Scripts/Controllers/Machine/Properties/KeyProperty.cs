@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UI;
 
 namespace TheLastTour.Controller.Machine
@@ -8,7 +9,7 @@ namespace TheLastTour.Controller.Machine
     public class KeyProperty : MachinePropertyUI
     {
         public Button button;
-        bool inputKeyBinding = false;
+        private bool inputBinding = false;
 
         protected override void Start()
         {
@@ -19,13 +20,12 @@ namespace TheLastTour.Controller.Machine
                 Property.type == MachineProperty.PropertyType.Key)
             {
                 button.GetComponentInChildren<Text>().text =
-                    (Property.reference as PropertyValue<Key>).AsValue.ToString();
-
+                    (Property.reference as PropertyValue<Key>).Value.ToString();
 
                 button.onClick.AddListener(() =>
                 {
-                    button.GetComponentInChildren<Text>().text = "按下任意键";
-                    inputKeyBinding = true;
+                    button.GetComponentInChildren<Text>().text = "Press any key";
+                    inputBinding = true;
                 });
             }
         }
@@ -33,30 +33,40 @@ namespace TheLastTour.Controller.Machine
 
         private void Update()
         {
-            if (inputKeyBinding && Property != null && Property.reference != null &&
+            if (inputBinding && Property != null && Property.reference != null &&
                 Property.type == MachineProperty.PropertyType.Key)
             {
                 if (Keyboard.current.backspaceKey.isPressed || Keyboard.current.escapeKey.isPressed)
                 {
-                    (Property.reference as PropertyValue<Key>).AsRef = Key.None;
-                    inputKeyBinding = false;
+                    (Property.reference as PropertyValue<Key>).Value = Key.None;
+                    inputBinding = false;
                     button.GetComponentInChildren<Text>().text =
-                        (Property.reference as PropertyValue<Key>).AsValue.ToString();
+                        (Property.reference as PropertyValue<Key>).Value.ToString();
                 }
+
 
                 if (Keyboard.current.anyKey.isPressed)
                 {
-                    foreach (Key keyCode in Enum.GetValues(typeof(Key)))
+                    (Property.reference as PropertyValue<Key>).Value = Key.None;
+
+                    foreach (Key key in Enum.GetValues(typeof(Key)))
                     {
-                        if (Keyboard.current[keyCode].isPressed)
+                        if (key == Key.None)
                         {
-                            (Property.reference as PropertyValue<Key>).AsRef = keyCode;
-                            inputKeyBinding = false;
-                            button.GetComponentInChildren<Text>().text =
-                                (Property.reference as PropertyValue<Key>).AsValue.ToString();
+                            continue;
+                        }
+
+                        if (Keyboard.current[key].isPressed)
+                        {
+                            (Property.reference as PropertyValue<Key>).Value = key;
+
                             break;
                         }
                     }
+
+                    button.GetComponentInChildren<Text>().text =
+                        (Property.reference as PropertyValue<Key>).Value.ToString();
+                    inputBinding = false;
                 }
             }
         }
