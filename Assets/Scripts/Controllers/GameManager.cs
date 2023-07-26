@@ -213,9 +213,28 @@ namespace TheLastTour.Controller
         private void UpdateDebugAction()
         {
             // 选择零件 空
-            if (Keyboard.current.backquoteKey.isPressed)
+            if (Keyboard.current.backquoteKey.wasPressedThisFrame)
             {
                 CurrentSelectedPartIndex = -1;
+            }
+
+            // 修改零件根 joint
+            if (Keyboard.current.fKey.wasPressedThisFrame)
+            {
+                if (_partPreviewInstance)
+                {
+                    _partPreviewInstance.IterRootJoint();
+                    _partPreviewInstance.TurnOnJointCollision(false);
+                }
+            }
+
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                if (_partPreviewInstance)
+                {
+                    _partPreviewInstance.IterRotateAngleZ();
+                    _partPreviewInstance.TurnOnJointCollision(false);
+                }
             }
         }
 
@@ -310,6 +329,8 @@ namespace TheLastTour.Controller
 
                             // 与预览零件连接的 joint
                             PartJointController joint = _partPreviewInstance.ConnectedJoint;
+                            part.SetRootJoint(_partPreviewInstance.RootJointId);
+                            part.RotateAngleZ = _partPreviewInstance.RotateAngleZ;
 
                             // 暂时移除预览零件
                             _partPreviewInstance.Detach();

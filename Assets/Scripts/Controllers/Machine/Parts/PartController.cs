@@ -31,17 +31,43 @@ namespace TheLastTour.Controller.Machine
         // 可以设置的属性
         public readonly List<MachineProperty> Properties = new List<MachineProperty>();
 
+        // 组件 Attach 时绕 Z 轴的旋转角度
+        public float RotateAngleZ { get; set; } = 0f;
+
         public int RootJointId { get; private set; } = -1;
 
         public void SetRootJoint(int id)
         {
-            if (id > 0 && id < joints.Count)
+            if (id >= 0 && id < joints.Count)
             {
                 RootJointId = id;
                 rootJoint = joints[id];
             }
         }
 
+        public void IterRootJoint()
+        {
+            if (rootJoint != null && rootJoint.IsAttached)
+            {
+                rootJoint.Detach();
+            }
+
+            if (joints.Count > 0)
+            {
+                SetRootJoint((RootJointId + 1) % joints.Count);
+                Debug.Log("Root Joint: " + (RootJointId + 1) % joints.Count);
+            }
+        }
+
+        public void IterRotateAngleZ()
+        {
+            if (rootJoint != null && rootJoint.IsAttached)
+            {
+                rootJoint.Detach();
+            }
+
+            RotateAngleZ = (RotateAngleZ + 90) % 360;
+        }
 
         public int GetJointId(PartJointController joint)
         {
@@ -120,10 +146,12 @@ namespace TheLastTour.Controller.Machine
             var rootModelTransform = rootJointTransform.parent;
             Vector3 rootJointRelativePosition = rootModelTransform.localRotation * rootJointTransform.localPosition +
                                                 rootModelTransform.localPosition;
-            Quaternion rootJointRelativeRotation = rootJointTransform.localRotation * rootModelTransform.localRotation;
+            Quaternion rootJointRelativeRotation = rootModelTransform.localRotation * rootJointTransform.localRotation;
 
             // 根据 rootJoint 的位置反推当前组件的位置
-            transform.rotation = rootJoint.InferredRotation * Quaternion.Inverse(rootJointRelativeRotation);
+            transform.rotation = rootJoint.InferredRotation *
+                                 Quaternion.Euler(0f, 0f, RotateAngleZ) *
+                                 Quaternion.Inverse(rootJointRelativeRotation);
             transform.position = rootJoint.InferredPosition - transform.rotation * rootJointRelativePosition;
 
             // 将当前组件添加到对应 joint 所在的 machine 中
