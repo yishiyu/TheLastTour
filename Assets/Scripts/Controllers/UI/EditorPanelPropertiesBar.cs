@@ -13,13 +13,7 @@ namespace TheLastTour.Controller.UI
         public MachinePropertyUI keyPrefab;
 
 
-        public void Clear()
-        {
-            for (int i = 1; i < container.childCount; i++)
-            {
-                Destroy(container.GetChild(i).gameObject);
-            }
-        }
+        #region Event Handlers
 
         private void OnEnable()
         {
@@ -43,7 +37,17 @@ namespace TheLastTour.Controller.UI
             }
         }
 
-        public void SetProperties(PartController part)
+        #endregion
+
+        private void Clear()
+        {
+            for (int i = 1; i < container.childCount; i++)
+            {
+                Destroy(container.GetChild(i).gameObject);
+            }
+        }
+
+        private void SetProperties(PartController part)
         {
             Clear();
 
@@ -56,15 +60,15 @@ namespace TheLastTour.Controller.UI
             {
                 MachineProperty property = part.Properties[i];
                 MachinePropertyUI ui = null;
-                switch (property.type)
+                switch (property.PropertyType)
                 {
-                    case MachineProperty.PropertyType.Bool:
+                    case MachineProperty.EPropertyType.Bool:
                         ui = Instantiate(boolPrefab, container);
                         break;
-                    case MachineProperty.PropertyType.Float:
+                    case MachineProperty.EPropertyType.Float:
                         ui = Instantiate(floatPrefab, container);
                         break;
-                    case MachineProperty.PropertyType.Key:
+                    case MachineProperty.EPropertyType.Key:
                         ui = Instantiate(keyPrefab, container);
                         break;
                 }
@@ -72,7 +76,7 @@ namespace TheLastTour.Controller.UI
                 if (ui != null)
                 {
                     ui.Property = property;
-                    ui.name = property.name;
+                    ui.name = property.PropertyName;
                 }
             }
         }

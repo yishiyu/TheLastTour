@@ -12,7 +12,7 @@ namespace TheLastTour.Controller.UI
     public class TheLastTourUIController : MonoBehaviour
     {
         public Text debugInfoText;
-        public GameObject EditorPanel;
+        public GameObject editorPanel;
 
         private GameManager _gameManager;
         private IGameStateManager _gameStateManager;
@@ -23,9 +23,16 @@ namespace TheLastTour.Controller.UI
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
         }
 
+        #region Event Handlers
+
         private void OnEnable()
         {
             EventBus.AddListener<GameStateChangedEvent>(OnGameStateChanged);
+        }
+
+        private void OnDisable()
+        {
+            EventBus.RemoveListener<GameStateChangedEvent>(OnGameStateChanged);
         }
 
         private void OnGameStateChanged(GameStateChangedEvent evt)
@@ -33,19 +40,21 @@ namespace TheLastTour.Controller.UI
             switch (evt.CurrentState)
             {
                 case EGameState.Edit:
-                    EditorPanel.SetActive(true);
+                    editorPanel.SetActive(true);
                     break;
                 case EGameState.Play:
-                    EditorPanel.SetActive(false);
+                    editorPanel.SetActive(false);
                     break;
                 case EGameState.Pause:
-                    EditorPanel.SetActive(false);
+                    editorPanel.SetActive(false);
                     break;
                 case EGameState.GameOver:
-                    EditorPanel.SetActive(false);
+                    editorPanel.SetActive(false);
                     break;
             }
         }
+
+        #endregion
 
         private void Update()
         {

@@ -10,17 +10,18 @@ namespace TheLastTour.Controller.Machine
     [RequireComponent(typeof(Rigidbody))]
     public class MachineController : MonoBehaviour
     {
-        private Rigidbody _rigidbody;
-
         public List<PartController> machineParts = new List<PartController>();
 
-        private bool _isInited = false;
+        private Rigidbody _rigidbody;
+        private bool _initialized = false;
 
         public void Init()
         {
-            if (!_isInited)
+            // 新创建的 Machine,可能在 Start 前就进行了操作,需要立即初始化
+            // 同时防止重复初始化
+            if (!_initialized)
             {
-                _isInited = true;
+                _initialized = true;
                 _rigidbody = GetComponent<Rigidbody>();
                 machineParts.AddRange(GetComponentsInChildren<PartController>());
             }
@@ -30,6 +31,7 @@ namespace TheLastTour.Controller.Machine
         {
             Init();
         }
+
 
         public void AddPart(PartController part)
         {
@@ -83,7 +85,6 @@ namespace TheLastTour.Controller.Machine
 
             return null;
         }
-
 
         public void TurnOnSimulation(bool isOn)
         {

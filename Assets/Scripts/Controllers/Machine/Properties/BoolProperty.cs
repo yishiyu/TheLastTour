@@ -7,21 +7,18 @@ namespace TheLastTour.Controller.Machine
     public class BoolProperty : MachinePropertyUI
     {
         public Toggle toggle;
+        private PropertyValue<bool> _property;
 
         protected override void Start()
         {
             base.Start();
+            _property = Property.Reference as PropertyValue<bool>;
 
-            if (toggle != null && Property != null &&
-                Property.reference != null &&
-                Property.type == MachineProperty.PropertyType.Bool)
+            if (toggle != null && _property != null)
             {
-                toggle.isOn = (Property.reference as PropertyValue<bool>).Value;
+                toggle.isOn = _property.Value;
 
-                toggle.onValueChanged.AddListener((value) =>
-                {
-                    (Property.reference as PropertyValue<bool>).Value = value;
-                });
+                toggle.onValueChanged.AddListener((value) => { _property.Value = value; });
             }
         }
     }

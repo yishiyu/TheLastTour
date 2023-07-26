@@ -6,24 +6,23 @@ namespace TheLastTour.Controller.Machine
     public class FloatProperty : MachinePropertyUI
     {
         public InputField inputField;
+        private PropertyValue<float> _property;
 
         protected override void Start()
         {
             base.Start();
+            _property = Property.Reference as PropertyValue<float>;
 
-            if (inputField != null && Property != null &&
-                Property.reference != null &&
-                Property.type == MachineProperty.PropertyType.Float)
+            if (inputField != null && _property != null)
             {
-                inputField.text = (Property.reference as PropertyValue<float>).Value.ToString();
+                inputField.text = _property.Value.ToString();
                 inputField.contentType = InputField.ContentType.DecimalNumber;
 
                 inputField.onSubmit.AddListener((value) =>
                 {
-                    float result = 0;
-                    if (float.TryParse(value, out result))
+                    if (float.TryParse(value, out var result))
                     {
-                        (Property.reference as PropertyValue<float>).Value = result;
+                        _property.Value = result;
                     }
                 });
             }

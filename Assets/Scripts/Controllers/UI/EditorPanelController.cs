@@ -9,10 +9,10 @@ namespace TheLastTour.Controller.UI
 {
     public class EditorPanelController : MonoBehaviour
     {
-        public Button PlayButton;
+        public Button playButton;
 
-        public Button PrefabSelectButton;
-        public GameObject PrefabButtonGroup;
+        public Button prefabSelectButton;
+        public GameObject prefabButtonGroup;
 
         private IGameStateManager _gameStateManager;
         private GameManager _gameManager;
@@ -23,14 +23,14 @@ namespace TheLastTour.Controller.UI
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _gameManager = GameManager.Instance;
 
-            PlayButton.onClick.AddListener(
+            playButton.onClick.AddListener(
                 (() => { _gameStateManager.GameState = EGameState.Play; })
             );
 
 
             for (int i = 0; i < _gameManager.partPrefabs.Count; i++)
             {
-                var button = Instantiate(PrefabSelectButton, PrefabButtonGroup.transform);
+                var button = Instantiate(prefabSelectButton, prefabButtonGroup.transform);
                 button.GetComponentInChildren<Text>().text = _gameManager.partPrefabs[i].name;
 
                 int index = i;

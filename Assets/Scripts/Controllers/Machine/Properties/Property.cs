@@ -24,13 +24,12 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-
         public Action<T> OnValueChanged = ((T t) => { });
     }
 
     public class MachineProperty
     {
-        public enum PropertyType
+        public enum EPropertyType
         {
             None,
             Float,
@@ -38,48 +37,46 @@ namespace TheLastTour.Controller.Machine
             Key
         }
 
-        public PropertyType type = PropertyType.None;
-
-        public object reference = null;
-
-        public string name = null;
+        public readonly EPropertyType PropertyType;
+        public readonly object Reference = null;
+        public readonly string PropertyName = null;
 
         public MachineProperty(string name, PropertyValue<bool> reference)
         {
-            this.name = name;
-            this.reference = reference;
-            type = PropertyType.Bool;
+            PropertyName = name;
+            Reference = reference;
+            PropertyType = EPropertyType.Bool;
         }
 
         public MachineProperty(string name, PropertyValue<float> reference)
         {
-            this.name = name;
-            this.reference = reference;
-            type = PropertyType.Float;
+            PropertyName = name;
+            Reference = reference;
+            PropertyType = EPropertyType.Float;
         }
 
         public MachineProperty(string name, PropertyValue<Key> reference)
         {
-            this.name = name;
-            this.reference = reference;
-            type = PropertyType.Key;
+            PropertyName = name;
+            Reference = reference;
+            PropertyType = EPropertyType.Key;
         }
     }
 
     public class MachinePropertyUI : MonoBehaviour
     {
-        public Text PropertyNameText = null;
+        public Text propertyNameText = null;
         public MachineProperty Property = null;
 
         protected virtual void Start()
         {
-            if (Property != null && PropertyNameText != null)
+            if (Property != null && propertyNameText != null)
             {
-                PropertyNameText.text = Property.name;
+                propertyNameText.text = Property.PropertyName;
             }
             else
             {
-                PropertyNameText.text = "error name";
+                propertyNameText.text = "invalid property";
             }
         }
     }

@@ -33986,7 +33986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugInfoText: {fileID: 341754303}
-  EditorPanel: {fileID: 1514431521}
+  editorPanel: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -34096,12 +34096,17 @@ MonoBehaviour:
   focusTarget: {fileID: 7810062411544159649}
   focusOffset: {x: 0, y: 0, z: 0}
   focusDistanceTarget: 10
-  focusDistanceCurrent: 10
+  focusDistanceMax: 50
+  focusDistanceMin: 3
   focusAngleXTarget: 0
-  focusAngleXSmoothTime: 0.2
-  focusAngleXSensitive: 0.3
   focusAngleYTarget: 0
+  focusAngleXSmoothTime: 0.2
   focusAngleYSmoothTime: 0.2
+  focusAngleXMax: 89
+  focusAngleXMin: -89
+  focusZoomSensitive: 0.01
+  focusOffsetMoveSensitive: 0.02
+  focusAngleXSensitive: 0.3
   focusAngleYSensitive: 0.3
 --- !u!114 &963194230
 MonoBehaviour:
@@ -34418,9 +34423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcef75ce739d004449a97b13963691ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayButton: {fileID: 1626245124}
-  PrefabSelectButton: {fileID: 9191637255748015500, guid: b5563525fe887334caf7383da33cb441, type: 3}
-  PrefabButtonGroup: {fileID: 37377003}
+  playButton: {fileID: 0}
+  prefabSelectButton: {fileID: 0}
+  prefabButtonGroup: {fileID: 0}
 --- !u!43 &1541915973
 Mesh:
   m_ObjectHideFlags: 0
@@ -34692,17 +34697,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3658537668603764657, guid: b5563525fe887334caf7383da33cb441, type: 3}
   m_PrefabInstance: {fileID: 1626245122}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1626245124 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9191637255748015500, guid: b5563525fe887334caf7383da33cb441, type: 3}
-  m_PrefabInstance: {fileID: 1626245122}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1722812128
 Mesh:
   m_ObjectHideFlags: 0
