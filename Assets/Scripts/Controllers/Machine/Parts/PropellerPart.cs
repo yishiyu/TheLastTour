@@ -36,14 +36,13 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        PropertyValue<Key> _propertyPowerUp = new PropertyValue<Key>(Key.None);
-        PropertyValue<Key> _propertyPowerDown = new PropertyValue<Key>(Key.None);
-        PropertyValue<float> _propertyMaxPower = new PropertyValue<float>(10);
+        readonly PropertyValue<Key> _propertyPowerUp = new PropertyValue<Key>(Key.None);
+        readonly PropertyValue<Key> _propertyPowerDown = new PropertyValue<Key>(Key.None);
+        readonly PropertyValue<float> _propertyMaxPower = new PropertyValue<float>(10);
 
         public GameObject propellerMesh;
 
         private IGameStateManager _gameStateManager;
-
 
         protected override void InitProperties()
         {
@@ -67,7 +66,6 @@ namespace TheLastTour.Controller.Machine
             {
                 if (Keyboard.current[_propertyPowerUp.Value].wasPressedThisFrame)
                 {
-                    Debug.Log("Power Up");
                     Power += 0.1f;
                 }
             }
@@ -76,22 +74,15 @@ namespace TheLastTour.Controller.Machine
             {
                 if (Keyboard.current[_propertyPowerDown.Value].wasPressedThisFrame)
                 {
-                    Debug.Log("Power Down");
                     Power -= 0.1f;
                 }
             }
 
-            // propellerMesh.transform.Rotate(
-            //     transform.forward,
-            //     10 * Power * _propertyMaxPower.Value * Time.deltaTime);
             propellerMesh.transform.Rotate(
                 0,
                 0,
                 100 * Power * _propertyMaxPower.Value * Time.deltaTime,
                 Space.Self);
-            Debug.Log("Power: " + Power +
-                      " MaxPower: " + _propertyMaxPower.Value +
-                      " Force: " + Power * _propertyMaxPower.Value);
         }
 
         private void FixedUpdate()
@@ -102,7 +93,6 @@ namespace TheLastTour.Controller.Machine
                     transform.up * (Power * _propertyMaxPower.Value),
                     transform.position,
                     ForceMode.Impulse);
-                Debug.Log("AddForceAtPosition");
             }
         }
     }

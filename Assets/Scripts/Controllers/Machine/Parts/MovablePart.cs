@@ -6,6 +6,5 @@ namespace TheLastTour.Controller.Machine
 {
     public class MovablePart : PartController
     {
-
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,9 +8,38 @@ namespace TheLastTour.Controller.Machine
     public class PartJointController : MonoBehaviour
     {
         private SphereCollider _collider;
-        private bool _isAttached = false;
-        private PartJointController _connectedJoint = null;
 
+        private SphereCollider Collider
+        {
+            get
+            {
+                if (_collider == null)
+                {
+                    _collider = GetComponent<SphereCollider>();
+                }
+
+                return _collider;
+            }
+        }
+
+
+        private PartController _owner;
+
+        public PartController Owner
+        {
+            get
+            {
+                if (_owner == null)
+                {
+                    _owner = transform.parent.parent.GetComponent<PartController>();
+                }
+
+                return _owner;
+            }
+        }
+
+
+        private bool _isAttached;
 
         public bool IsAttached
         {
@@ -23,6 +51,8 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
+        private PartJointController _connectedJoint;
+
         public PartJointController ConnectedJoint
         {
             get { return _connectedJoint; }
@@ -33,21 +63,23 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-        public PartController Owner { get; private set; } = null;
 
-        public Vector3 Position { get; private set; } = Vector3.zero;
-
-        public Quaternion Rotation { get; private set; } = Quaternion.identity;
+        // 根据连接到的 Joint 位置推算得到的自己应处的位置
+        public Vector3 InferredPosition { get; private set; } = Vector3.zero;
+        public Quaternion InferredRotation { get; private set; } = Quaternion.identity;
 
         public void TurnOnJointCollision(bool isOn)
         {
-            if (_collider != null)
+            if (Collider != null)
             {
-                _collider.enabled = isOn;
+                Collider.enabled = isOn;
             }
         }
 
-        public int JoointId
+        /// <summary>
+        /// 自身在父级 Part 中的 JointId
+        /// </summary>
+        public int JointIdInPart
         {
             get
             {
@@ -98,13 +130,11 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        private void Awake()
-        {
-            _collider = GetComponent<SphereCollider>();
-            Owner = transform.parent.parent.GetComponent<PartController>();
-        }
-
-
+        /// <summary>
+        /// 附着到另一个 Joint 上,包括设置双方状态,根据对方位置推算自己位置.
+        /// </summary>
+        /// <param name="joint">另一个 joint</param>
+        /// <param name="ignoreOthers">是否允许对方再被检测到</param>
         public void Attach(PartJointController joint, bool ignoreOthers = true)
         {
             if (IsAttached || joint == null || joint.IsAttached)
@@ -117,12 +147,13 @@ namespace TheLastTour.Controller.Machine
 
             if (!ignoreOthers)
             {
+                // 关闭 joint 的碰撞,就不会在被检测到了
                 joint.TurnOnJointCollision(true);
             }
 
-
-            Position = ConnectedJoint.transform.position;
-            Rotation = ConnectedJoint.transform.rotation * Quaternion.Euler(0.0f, 180.0f, 0.0f);
+            var connectedTransform = ConnectedJoint.transform;
+            InferredPosition = connectedTransform.position;
+            InferredRotation = connectedTransform.rotation * Quaternion.Euler(0.0f, 180.0f, 0.0f);
         }
 
         public void Detach()

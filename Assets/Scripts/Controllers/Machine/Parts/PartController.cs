@@ -7,28 +7,13 @@ namespace TheLastTour.Controller.Machine
 {
     public class PartController : MonoBehaviour
     {
-        // 可以设置的属性
-        public List<MachineProperty> Properties = new List<MachineProperty>();
-
         // 可设置属性
         public string partName = "Part";
         public float mass = 10;
-
         public bool isCorePart = false;
 
-        // 不同组件连接相关属性
-        // 与更接近核心组件连接的接口,决定该组件的位置和旋转
         public List<PartJointController> joints = new List<PartJointController>();
-
         public PartJointController rootJoint = null;
-
-        public int RootJointId { get; private set; } = -1;
-
-        public MachineController GetOwnedMachine()
-        {
-            return GetComponentInParent<MachineController>();
-        }
-
 
         public PartJointController ConnectedJoint
         {
@@ -42,6 +27,21 @@ namespace TheLastTour.Controller.Machine
                 return null;
             }
         }
+
+        // 可以设置的属性
+        public readonly List<MachineProperty> Properties = new List<MachineProperty>();
+
+        public int RootJointId { get; private set; } = -1;
+
+        public void SetRootJoint(int id)
+        {
+            if (id > 0 && id < joints.Count)
+            {
+                RootJointId = id;
+                rootJoint = joints[id];
+            }
+        }
+
 
         public int GetJointId(PartJointController joint)
         {
@@ -66,13 +66,9 @@ namespace TheLastTour.Controller.Machine
             return null;
         }
 
-        public void SetRootJoint(int id)
+        public MachineController GetOwnedMachine()
         {
-            if (id > 0 && id < joints.Count)
-            {
-                RootJointId = id;
-                rootJoint = joints[id];
-            }
+            return GetComponentInParent<MachineController>();
         }
 
         private void Awake()
@@ -101,13 +97,6 @@ namespace TheLastTour.Controller.Machine
 
         protected virtual void InitProperties()
         {
-            // var pMass = new PropertyValue<float>(mass);
-            // pMass.OnValueChanged += f =>
-            // {
-            //     mass = f;
-            //     GetOwnedMachine().UpdateMachineMass();
-            // };
-            // Properties.Add(new MachineProperty("test float", pMass));
         }
 
 
@@ -118,17 +107,19 @@ namespace TheLastTour.Controller.Machine
                 return;
             }
 
+            // 通过根组件与其连接
             rootJoint.Attach(joint, ignoreOthers);
-            // Vector3 VOffset = rootJoint.transform.position - transform.position;
-            // Quaternion QOffset = rootJoint.transform.rotation * Quaternion.Inverse(transform.rotation);
-            // Vector3 VOffset = rootJoint.transform.localPosition;
-            // Quaternion QOffset = rootJoint.transform.localRotation;
-            // Joint 的相对偏移, 旋转
-            Vector3 VOffset = rootJoint.transform.parent.localRotation * rootJoint.transform.localPosition +
-                              rootJoint.transform.parent.localPosition;
-            Quaternion QOffset = rootJoint.transform.localRotation * rootJoint.transform.parent.localRotation;
-            transform.rotation = rootJoint.Rotation * Quaternion.Inverse(QOffset);
-            transform.position = rootJoint.Position - transform.rotation * VOffset;
+
+            // 计算当前根组件与 rootJoint 的相对位置
+            var rootJointTransform = rootJoint.transform;
+            var rootModelTransform = rootJointTransform.parent;
+            Vector3 rootJointRelativePosition = rootModelTransform.localRotation * rootJointTransform.localPosition +
+                                                rootModelTransform.localPosition;
+            Quaternion rootJointRelativeRotation = rootJointTransform.localRotation * rootModelTransform.localRotation;
+
+            // 根据 rootJoint 的位置反推当前组件的位置
+            transform.rotation = rootJoint.InferredRotation * Quaternion.Inverse(rootJointRelativeRotation);
+            transform.position = rootJoint.InferredPosition - transform.rotation * rootJointRelativePosition;
         }
 
         public void Detach()
