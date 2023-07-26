@@ -33986,7 +33986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugInfoText: {fileID: 341754303}
-  editorPanel: {fileID: 0}
+  editorPanel: {fileID: 1514431521}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -34423,9 +34423,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcef75ce739d004449a97b13963691ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playButton: {fileID: 0}
-  prefabSelectButton: {fileID: 0}
-  prefabButtonGroup: {fileID: 0}
+  playButton: {fileID: 1626245124}
+  prefabSelectButton: {fileID: 9191637255748015500, guid: b5563525fe887334caf7383da33cb441, type: 3}
+  prefabButtonGroup: {fileID: 37377003}
 --- !u!43 &1541915973
 Mesh:
   m_ObjectHideFlags: 0
@@ -34697,6 +34697,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3658537668603764657, guid: b5563525fe887334caf7383da33cb441, type: 3}
   m_PrefabInstance: {fileID: 1626245122}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1626245124 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9191637255748015500, guid: b5563525fe887334caf7383da33cb441, type: 3}
+  m_PrefabInstance: {fileID: 1626245122}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1722812128
 Mesh:
   m_ObjectHideFlags: 0

@@ -315,12 +315,9 @@ namespace TheLastTour.Controller
                             _partPreviewInstance.Detach();
                             _partPreviewInstance.gameObject.SetActive(false);
 
-                            // 将零件连接到 joint
-                            part.Attach(joint);
+                            // 将零件连接到 joint, 禁止多重连接, 连接到 joint 所在机器
+                            part.Attach(joint, true, true);
                             part.partName = partPrefabs[CurrentSelectedPartIndex].partName;
-
-                            // 添加到机器中(计算质量,质心等)
-                            machine.AddPart(part);
                         }
                     }
 

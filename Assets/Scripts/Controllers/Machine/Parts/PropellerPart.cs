@@ -81,7 +81,7 @@ namespace TheLastTour.Controller.Machine
             propellerMesh.transform.Rotate(
                 0,
                 0,
-                100 * Power * _propertyMaxPower.Value * Time.deltaTime,
+                300 * Power * _propertyMaxPower.Value * Time.deltaTime,
                 Space.Self);
         }
 

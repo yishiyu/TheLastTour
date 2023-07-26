@@ -47,7 +47,7 @@ namespace TheLastTour.Controller.Machine
             private set
             {
                 _isAttached = value;
-                _collider.enabled = !value;
+                Collider.enabled = !value;
             }
         }
 

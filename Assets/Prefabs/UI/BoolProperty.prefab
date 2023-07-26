@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4cc96e98e020d45a1091aceb3b56b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PropertyNameText: {fileID: 3970248028124038469}
+  propertyNameText: {fileID: 3970248028124038469}
   toggle: {fileID: 7789009782222365736}
 --- !u!1 &3742818213881277174
 GameObject:

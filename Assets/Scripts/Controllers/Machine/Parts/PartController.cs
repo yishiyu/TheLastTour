@@ -99,8 +99,13 @@ namespace TheLastTour.Controller.Machine
         {
         }
 
-
-        public void Attach(PartJointController joint, bool ignoreOthers = true)
+        /// <summary>
+        /// 附着到另一个 Joint 上,包括设置双方状态,根据对方位置推算自己位置.
+        /// </summary>
+        /// <param name="joint">另一个 joint</param>
+        /// <param name="ignoreOthers">是否允许对方再被检测到</param>
+        /// <param name="addToMachine">是否将自己添加到对方所在 machine</param>
+        public void Attach(PartJointController joint, bool ignoreOthers = true, bool addToMachine = false)
         {
             if (joint == null || joint.IsAttached || rootJoint == null)
             {
@@ -120,6 +125,16 @@ namespace TheLastTour.Controller.Machine
             // 根据 rootJoint 的位置反推当前组件的位置
             transform.rotation = rootJoint.InferredRotation * Quaternion.Inverse(rootJointRelativeRotation);
             transform.position = rootJoint.InferredPosition - transform.rotation * rootJointRelativePosition;
+
+            // 将当前组件添加到对应 joint 所在的 machine 中
+            if (addToMachine)
+            {
+                var machine = joint.Owner.GetOwnedMachine();
+                if (machine)
+                {
+                    machine.AddPart(this);
+                }
+            }
         }
 
         public void Detach()

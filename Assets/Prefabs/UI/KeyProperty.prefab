@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1872dc07f91447b4c8941e24783e59bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PropertyNameText: {fileID: 958321893798304539}
+  propertyNameText: {fileID: 958321893798304539}
   button: {fileID: 8505300023392941338}
 --- !u!1 &7599831932471111594
 GameObject:

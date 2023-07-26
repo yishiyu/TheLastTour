@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c361d8441708b9e45aa9f7e96e338fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PropertyNameText: {fileID: 5112710931142752715}
+  propertyNameText: {fileID: 5112710931142752715}
   inputField: {fileID: 5294278190730677318}
 --- !u!1 &7031406106787984385
 GameObject:
