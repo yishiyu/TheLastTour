@@ -19,7 +19,7 @@ namespace TheLastTour.Controller.UI
 
         private void Start()
         {
-            _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+            _gameManager = GameManager.Instance;
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
         }
 

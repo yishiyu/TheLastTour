@@ -13,11 +13,27 @@ namespace TheLastTour.Controller
 {
     public class GameManager : MonoBehaviour
     {
-        private IGameStateManager _gameStateManager;
-        private InputActions _inputActions;
-        private IMachineManager _machineManager;
+        #region Instance
 
-        // 机器零件预览预设
+        private static GameManager _instance;
+
+        public static GameManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<GameManager>();
+                }
+
+                return _instance;
+            }
+        }
+
+        #endregion
+
+        #region Part Prefabs
+
         public List<PartController> partPrefabs = new List<PartController>();
         private int _currentSelectedPartIndex = -1;
 
@@ -87,7 +103,12 @@ namespace TheLastTour.Controller
             }
         }
 
+
         private PartController _partPreviewInstance;
+
+        #endregion
+
+        #region Part Selection
 
         public PartController selectedPart = null;
 
@@ -107,6 +128,13 @@ namespace TheLastTour.Controller
             }
         }
 
+        #endregion
+
+        private IGameStateManager _gameStateManager;
+        private InputActions _inputActions;
+        private IMachineManager _machineManager;
+
+        #region Initialization
 
         public void Start()
         {
@@ -118,6 +146,10 @@ namespace TheLastTour.Controller
             _gameStateManager.GameState = EGameState.Edit;
             _gameStateManager.EditState = EEditState.Selecting;
         }
+
+        #endregion
+
+        #region Event Handlers
 
         private void OnEnable()
         {
@@ -156,6 +188,8 @@ namespace TheLastTour.Controller
             }
         }
 
+        #endregion
+
 
         public void Update()
         {
@@ -167,7 +201,7 @@ namespace TheLastTour.Controller
                     UpdateEdit();
                     break;
                 case EGameState.Play:
-
+                    UpdatePlay();
                     break;
                 case EGameState.Pause:
                     break;
@@ -185,17 +219,12 @@ namespace TheLastTour.Controller
             }
         }
 
-
         private void UpdateEdit()
         {
             // 操作 UI 时停止编辑
-            if (Mouse.current.leftButton.isPressed)
+            if (Mouse.current.leftButton.isPressed && EventSystem.current.IsPointerOverGameObject())
             {
-                // Check if the mouse was clicked over a UI element
-                if (EventSystem.current.IsPointerOverGameObject())
-                {
-                    return;
-                }
+                return;
             }
 
             bool isMouseHit = PerformMouseTrace(out var hit);
@@ -276,7 +305,8 @@ namespace TheLastTour.Controller
                         {
                             MachineController machine = _partPreviewInstance.ConnectedJoint.Owner.GetOwnedMachine();
 
-                            PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject).GetComponent<PartController>();
+                            PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject)
+                                .GetComponent<PartController>();
 
                             // 与预览零件连接的 joint
                             PartJointController joint = _partPreviewInstance.ConnectedJoint;
@@ -342,6 +372,11 @@ namespace TheLastTour.Controller
             }
         }
 
+        private void UpdatePlay()
+        {
+        }
+
+        #region Utils
 
         private bool PerformMouseTrace(out RaycastHit hit, int layerMask = 1 << 6)
         {
@@ -357,5 +392,7 @@ namespace TheLastTour.Controller
             hit = new RaycastHit();
             return false;
         }
+
+        #endregion
     }
 }

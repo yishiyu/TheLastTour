@@ -21,12 +21,12 @@ namespace TheLastTour.Controller.UI
         private void Start()
         {
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
-            _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+            _gameManager = GameManager.Instance;
 
             PlayButton.onClick.AddListener(
                 (() => { _gameStateManager.GameState = EGameState.Play; })
             );
-            
+
 
             for (int i = 0; i < _gameManager.partPrefabs.Count; i++)
             {

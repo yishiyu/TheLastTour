@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TheLastTour.Controller.Machine;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TheLastTour.Manager
@@ -13,6 +12,9 @@ namespace TheLastTour.Manager
     // 当一个 Machine 中所有的 Part 都被摧毁时,该 Machine 就会被销毁
     // 当一个 Machine 中的某个 Part 被摧毁, 导致该 Machine 分离成两个独立体,则再创建一个新的 Machine 来管理分离出去的部分
     // 所有 Machine 中,只有一个核心组件无法摧毁,其所在的 Machine 为主 Machine
+    // 在 Machine 之间添加 Joint 有两种方式:
+    // 1. 主动通过选择两个 Machine 上的 Block 进行连接,如弹力绳
+    // 2. 创建 Joint 性质的 Part,如合页,弹簧等,创建后,该 Part 会属于一个新的 Machine,同时其与原本的 Machine 之间会自动创建 Joint
 
 
     public interface IMachineManager : IManager
@@ -34,17 +36,16 @@ namespace TheLastTour.Manager
 
     public class MachineManager : IMachineManager
     {
+        // 管理 Machine 的列表
+        public List<MachineController> MachineList = new List<MachineController>();
+        private MachineController _defaultMachinePrefab;
+
         public void Init(IArchitecture architecture)
         {
             Debug.Log("MachineManager Init");
 
             MachineList.AddRange(Object.FindObjectsOfType<MachineController>());
         }
-
-
-        // 管理 Machine 的列表
-        public List<MachineController> MachineList = new List<MachineController>();
-        private MachineController _defaultMachinePrefab;
 
 
         public void SetDefaultMachinePrefab(MachineController machine)
