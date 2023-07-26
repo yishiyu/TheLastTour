@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using TheLastTour.Manager;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,10 +42,14 @@ namespace TheLastTour.Controller.Machine
 
         public GameObject propellerMesh;
 
+        private IGameStateManager _gameStateManager;
+
 
         protected override void InitProperties()
         {
             base.InitProperties();
+
+            _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
 
             Properties.Add(new MachineProperty("Power Up", _propertyPowerUp));
             Properties.Add(new MachineProperty("Power Down", _propertyPowerDown));
@@ -53,6 +58,11 @@ namespace TheLastTour.Controller.Machine
 
         private void Update()
         {
+            if (_gameStateManager == null || _gameStateManager.GameState != EGameState.Play)
+            {
+                return;
+            }
+
             if (_propertyPowerUp.Value != Key.None)
             {
                 if (Keyboard.current[_propertyPowerUp.Value].wasPressedThisFrame)

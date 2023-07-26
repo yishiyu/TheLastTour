@@ -119,10 +119,14 @@ namespace TheLastTour.Controller.Machine
             }
 
             rootJoint.Attach(joint, ignoreOthers);
-            Vector3 VOffset = rootJoint.transform.position - transform.position;
+            // Vector3 VOffset = rootJoint.transform.position - transform.position;
             // Quaternion QOffset = rootJoint.transform.rotation * Quaternion.Inverse(transform.rotation);
             // Vector3 VOffset = rootJoint.transform.localPosition;
-            Quaternion QOffset = rootJoint.transform.localRotation;
+            // Quaternion QOffset = rootJoint.transform.localRotation;
+            // Joint 的相对偏移, 旋转
+            Vector3 VOffset = rootJoint.transform.parent.localRotation * rootJoint.transform.localPosition +
+                              rootJoint.transform.parent.localPosition;
+            Quaternion QOffset = rootJoint.transform.localRotation * rootJoint.transform.parent.localRotation;
             transform.rotation = rootJoint.Rotation * Quaternion.Inverse(QOffset);
             transform.position = rootJoint.Position - transform.rotation * VOffset;
         }

@@ -198,7 +198,7 @@ namespace TheLastTour.Controller
                 }
             }
 
-            bool isMouseHit = PerformMouseTrace(out var hit, -1);
+            bool isMouseHit = PerformMouseTrace(out var hit);
 
             switch (_gameStateManager.EditState)
             {
@@ -276,8 +276,7 @@ namespace TheLastTour.Controller
                         {
                             MachineController machine = _partPreviewInstance.ConnectedJoint.Owner.GetOwnedMachine();
 
-                            PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject,
-                                machine.transform).GetComponent<PartController>();
+                            PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject).GetComponent<PartController>();
 
                             // 与预览零件连接的 joint
                             PartJointController joint = _partPreviewInstance.ConnectedJoint;
