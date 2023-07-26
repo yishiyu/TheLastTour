@@ -34105,7 +34105,7 @@ MonoBehaviour:
   focusAngleYSmoothTime: 0.2
   focusAngleXMax: 89
   focusAngleXMin: -89
-  focusZoomSensitive: 0.01
+  focusZoomSensitive: 0.02
   focusOffsetMoveSensitive: 0.02
   focusAngleXSensitive: 0.3
   focusAngleYSensitive: 0.3
