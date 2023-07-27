@@ -322,7 +322,7 @@ namespace TheLastTour.Controller
                         if (Mouse.current.leftButton.wasPressedThisFrame &&
                             _partPreviewInstance.gameObject.activeInHierarchy)
                         {
-                            MachineController machine = _partPreviewInstance.ConnectedJoint.Owner.GetOwnedMachine();
+                            MachineController machine = _partPreviewInstance.ConnectedJoint.Owner.GetOwnerMachine();
 
                             PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject)
                                 .GetComponent<PartController>();
@@ -379,7 +379,7 @@ namespace TheLastTour.Controller
                     {
                         if (selectedPart != null)
                         {
-                            MachineController machine = selectedPart.GetOwnedMachine();
+                            MachineController machine = selectedPart.GetOwnerMachine();
                             machine.RemovePart(selectedPart);
                         }
                     }

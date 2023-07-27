@@ -7,29 +7,79 @@ using UnityEngine;
 
 namespace TheLastTour.Controller.Machine
 {
+    public interface ISimulator
+    {
+        /// <summary>
+        /// 获取控制该物体的 Rigidbody
+        /// 对于 MovablePart,返回自身的 Rigidbody
+        /// 对于 FixedPart,返回父级的 Rigidbody
+        /// 对于 Machine,返回自身的 Rigidbody
+        /// </summary>
+        /// <returns></returns>
+        Rigidbody GetSimulatorRigidbody();
+
+        /// <summary>
+        /// 获取控制该物体的 MachineController
+        /// </summary>
+        /// <returns></returns>
+        MachineController GetOwnerMachine();
+
+        /// <summary>
+        /// 将一个新的 Part 添加到自身,包括挂载 Transform 和更新质量
+        /// 对于 Machine,将 Part 添加到 machineParts 列表中,将 Part 挂载到自身,更新自身质量
+        /// 对于 Fixed Part,将事件转发到上层 Simulator
+        /// 对于 Movable Part,将 Part 挂载到自身并添加到 attachedParts 列表中,更新自身质量,同时触发所在上层 Simulator 更新质量
+        /// </summary>
+        /// <param name="part"></param>
+        public void AddPart(PartController part);
+
+        /// <summary>
+        /// 将一个已有的 Part 从自身移除,包括解除挂载 Transform 和更新质量
+        /// 该函数会在 Part 被销毁时,由自己调用自己
+        /// 
+        /// 对于 Machine,将 Part 从 machineParts 列表中移除,将 Part 从自身解除挂载,更新自身质量
+        /// 对于 Fixed Part,将事件转发到上层 Simulator,保持参数不变(通常是自己)
+        /// 对于 Movable Part,将 Part 从 attachedParts 列表中移除,将 Part 从自身解除挂载,更新自身质量,同时触发所在上层 Simulator 更新质量
+        ///
+        /// 如果 Part 是 Fixed Part,尝试将连接到该物体的所有 Part 分离出去,成为独立的 Machine
+        /// 如果 Part 是 Movable Part,尝试将连接到该物体的所有 Part 分离出去,成为独立的 Machine
+        /// </summary>
+        /// <param name="part"></param>
+        public void RemovePart(PartController part);
+
+        /// <summary>
+        /// 更新 Simulator 的质量
+        /// 对于 Machine,更新自身质量
+        /// 对于 Fixed Part,将事件转发到上层 Simulator
+        /// 对于 Movable Part,更新自身质量,同时触发所在上层 Simulator 更新质量
+        /// </summary>
+        public void UpdateMachineMass();
+    }
+
+
     [RequireComponent(typeof(Rigidbody))]
-    public class MachineController : MonoBehaviour
+    public class MachineController : MonoBehaviour, ISimulator
     {
         public List<PartController> machineParts = new List<PartController>();
 
         private Rigidbody _rigidbody;
-        private bool _initialized = false;
 
-        public void Init()
+        public Rigidbody MachineRigidBody
         {
-            // 新创建的 Machine,可能在 Start 前就进行了操作,需要立即初始化
-            // 同时防止重复初始化
-            if (!_initialized)
+            get
             {
-                _initialized = true;
-                _rigidbody = GetComponent<Rigidbody>();
-                machineParts.AddRange(GetComponentsInChildren<PartController>());
+                if (_rigidbody == null)
+                {
+                    _rigidbody = GetComponent<Rigidbody>();
+                }
+
+                return _rigidbody;
             }
         }
 
         private void Start()
         {
-            Init();
+            machineParts.AddRange(GetComponentsInChildren<PartController>());
         }
 
 
@@ -123,8 +173,18 @@ namespace TheLastTour.Controller.Machine
                 centerOfMass += part.mass * part.transform.position;
             }
 
-            _rigidbody.mass = mass;
-            _rigidbody.centerOfMass = centerOfMass / mass;
+            MachineRigidBody.mass = mass;
+            MachineRigidBody.centerOfMass = centerOfMass / mass;
+        }
+
+        public Rigidbody GetSimulatorRigidbody()
+        {
+            return MachineRigidBody;
+        }
+
+        public MachineController GetOwnerMachine()
+        {
+            return this;
         }
     }
 }

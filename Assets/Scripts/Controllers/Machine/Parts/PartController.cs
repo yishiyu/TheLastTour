@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace TheLastTour.Controller.Machine
 {
-    public class PartController : MonoBehaviour
+    public abstract class PartController : MonoBehaviour, ISimulator
     {
         // 可设置属性
         public string partName = "Part";
@@ -92,11 +92,6 @@ namespace TheLastTour.Controller.Machine
             return null;
         }
 
-        public MachineController GetOwnedMachine()
-        {
-            return GetComponentInParent<MachineController>();
-        }
-
         private void Awake()
         {
             InitProperties();
@@ -157,7 +152,7 @@ namespace TheLastTour.Controller.Machine
             // 将当前组件添加到对应 joint 所在的 machine 中
             if (addToMachine)
             {
-                var machine = joint.Owner.GetOwnedMachine();
+                var machine = joint.Owner.GetOwnerMachine();
                 if (machine)
                 {
                     machine.AddPart(this);
@@ -180,5 +175,19 @@ namespace TheLastTour.Controller.Machine
                 joint.TurnOnJointCollision(isOn);
             }
         }
+
+        public abstract Rigidbody GetSimulatorRigidbody();
+
+        public MachineController GetOwnerMachine()
+        {
+            // 递归向上级查询,直到查询到 MachineController
+            // GetComponentInParent 会查询自身,所以需要跳过自身
+            // return GetComponentInParent<ISimulator>().GetOwnerMachine();
+            return transform.parent.GetComponent<ISimulator>().GetOwnerMachine();
+        }
+
+        public abstract void AddPart(PartController part);
+        public abstract void RemovePart(PartController part);
+        public abstract void UpdateMachineMass();
     }
 }
