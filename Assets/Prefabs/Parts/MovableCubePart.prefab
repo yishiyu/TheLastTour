@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 6470547568989969767}
   - component: {fileID: 8015061699965554791}
   m_Layer: 6
-  m_Name: MovableCibePart
+  m_Name: MovableCubePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -163,6 +163,12 @@ namespace TheLastTour.Controller.Machine
 
             MovablePartRigidbody.useGravity = false;
             MovablePartRigidbody.isKinematic = !isOn;
+
+
+            foreach (var part in attachedParts)
+            {
+                part.TurnOnSimulation(isOn);
+            }
         }
     }
 }
