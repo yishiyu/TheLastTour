@@ -104,7 +104,7 @@ namespace TheLastTour.Controller.Machine
             return null;
         }
 
-        private void Awake()
+        public virtual void Awake()
         {
             InitProperties();
 
@@ -180,6 +180,14 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
+        public virtual void TurnOnSimulation(bool isOn)
+        {
+            foreach (var joint in joints)
+            {
+                joint.TurnOnJointCollision(!isOn);
+            }
+        }
+        
         public void TurnOnJointCollision(bool isOn)
         {
             foreach (var joint in joints)

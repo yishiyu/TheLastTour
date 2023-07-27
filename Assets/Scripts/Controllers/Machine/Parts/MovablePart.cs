@@ -71,6 +71,7 @@ namespace TheLastTour.Controller.Machine
         {
             attachedParts.Add(part);
             part.transform.parent = transform;
+            part.OnAttached(this);
             UpdateSimulatorMass();
         }
 
@@ -154,6 +155,14 @@ namespace TheLastTour.Controller.Machine
         {
             Gizmos.color = new Color(0, 1, 0, 0.5f);
             Gizmos.DrawSphere(MovablePartRigidbody.worldCenterOfMass, MovablePartRigidbody.mass / 10f);
+        }
+
+        public override void TurnOnSimulation(bool isOn)
+        {
+            base.TurnOnSimulation(isOn);
+
+            MovablePartRigidbody.useGravity = false;
+            MovablePartRigidbody.isKinematic = !isOn;
         }
     }
 }

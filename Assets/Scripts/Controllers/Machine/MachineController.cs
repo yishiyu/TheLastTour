@@ -158,7 +158,7 @@ namespace TheLastTour.Controller.Machine
                 _rigidbody.isKinematic = false;
                 foreach (var part in machineParts)
                 {
-                    part.TurnOnJointCollision(false);
+                    part.TurnOnSimulation(true);
                 }
             }
             else
@@ -167,7 +167,7 @@ namespace TheLastTour.Controller.Machine
                 _rigidbody.isKinematic = true;
                 foreach (var part in machineParts)
                 {
-                    part.TurnOnJointCollision(true);
+                    part.TurnOnSimulation(false);
                 }
             }
         }
