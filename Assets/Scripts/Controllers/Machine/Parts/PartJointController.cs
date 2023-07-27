@@ -112,12 +112,15 @@ namespace TheLastTour.Controller.Machine
                 PartController part = temp.First();
                 temp.Remove(part);
 
-                foreach (PartJointController joint in part.joints)
+                if (!part.IsLeafNode())
                 {
-                    if (joint.ConnectedJoint != null && !connectedParts.Contains(joint.ConnectedJoint.Owner))
+                    foreach (PartJointController joint in part.joints)
                     {
-                        connectedParts.Add(joint.ConnectedJoint.Owner);
-                        temp.Add(joint.ConnectedJoint.Owner);
+                        if (joint.ConnectedJoint != null && !connectedParts.Contains(joint.ConnectedJoint.Owner))
+                        {
+                            connectedParts.Add(joint.ConnectedJoint.Owner);
+                            temp.Add(joint.ConnectedJoint.Owner);
+                        }
                     }
                 }
             }

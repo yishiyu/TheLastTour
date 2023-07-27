@@ -322,7 +322,7 @@ namespace TheLastTour.Controller
                         if (Mouse.current.leftButton.wasPressedThisFrame &&
                             _partPreviewInstance.gameObject.activeInHierarchy)
                         {
-                            MachineController machine = _partPreviewInstance.ConnectedJoint.Owner.GetOwnerMachine();
+                            // ISimulator simulator = _partPreviewInstance.ConnectedJoint.Owner;
 
                             PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject)
                                 .GetComponent<PartController>();

@@ -18,19 +18,24 @@ namespace TheLastTour.Controller.Machine
             return GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
         }
 
+        public override void OnAttached(ISimulator simulator)
+        {
+            Debug.Log("FixedPart OnAttached");
+        }
+
         public override void AddPart(PartController part)
         {
-            throw new NotImplementedException();
+            transform.parent.GetComponentInParent<ISimulator>().AddPart(part);
         }
 
         public override void RemovePart(PartController part)
         {
-            throw new NotImplementedException();
+            transform.parent.GetComponentInParent<ISimulator>().RemovePart(part);
         }
 
-        public override void UpdateMachineMass()
+        public override void UpdateSimulatorMass()
         {
-            throw new NotImplementedException();
+            transform.parent.GetComponentInParent<ISimulator>().UpdateSimulatorMass();
         }
     }
 }

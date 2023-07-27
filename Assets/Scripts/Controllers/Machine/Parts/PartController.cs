@@ -152,10 +152,10 @@ namespace TheLastTour.Controller.Machine
             // 将当前组件添加到对应 joint 所在的 machine 中
             if (addToMachine)
             {
-                var machine = joint.Owner.GetOwnerMachine();
-                if (machine)
+                ISimulator simualtor = joint.Owner;
+                if (simualtor != null)
                 {
-                    machine.AddPart(this);
+                    simualtor.AddPart(this);
                 }
             }
         }
@@ -186,8 +186,21 @@ namespace TheLastTour.Controller.Machine
             return transform.parent.GetComponent<ISimulator>().GetOwnerMachine();
         }
 
+        public abstract void OnAttached(ISimulator simulator);
         public abstract void AddPart(PartController part);
         public abstract void RemovePart(PartController part);
-        public abstract void UpdateMachineMass();
+        public abstract void UpdateSimulatorMass();
+        
+        /// <summary>
+        /// 用于判断是否为叶子节点, 一些操作需要将某个组件及其附属组件视为一个整体
+        /// 例如 MovablePart 需要将该函数重载(始终为true)
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool IsLeafNode()
+        {
+            // 仅有一个 joint 时为叶子节点
+            return joints.Count == 1;
+        }
+        
     }
 }
