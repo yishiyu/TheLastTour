@@ -379,8 +379,7 @@ namespace TheLastTour.Controller
                     {
                         if (selectedPart != null)
                         {
-                            MachineController machine = selectedPart.GetOwnerMachine();
-                            machine.RemovePart(selectedPart);
+                            selectedPart.RemovePart(selectedPart);
                         }
                     }
 

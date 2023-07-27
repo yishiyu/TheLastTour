@@ -118,7 +118,7 @@ namespace TheLastTour.Controller.Machine
 
             machineParts.Remove(part);
 
-            // 该 Machine 已无任何 Part,销毁该 Machine
+            // 除了该被删除的传入 Part,该 Machine 已无任何 Part,销毁该 Machine
             TheLastTourArchitecture.Instance.GetManager<IMachineManager>().DestroyMachine(this);
         }
 
