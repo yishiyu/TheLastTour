@@ -10,7 +10,19 @@ namespace TheLastTour.Controller.Machine
         // 可设置属性
         public string partName = "Part";
         public float mass = 10;
+        public Vector3 centerOfMass = Vector3.zero;
         public bool isCorePart = false;
+
+
+        public virtual float Mass
+        {
+            get { return mass; }
+        }
+
+        public virtual Vector3 CenterOfMass
+        {
+            get { return centerOfMass; }
+        }
 
         public List<PartJointController> joints = new List<PartJointController>();
         public PartJointController rootJoint = null;
@@ -190,7 +202,7 @@ namespace TheLastTour.Controller.Machine
         public abstract void AddPart(PartController part);
         public abstract void RemovePart(PartController part);
         public abstract void UpdateSimulatorMass();
-        
+
         /// <summary>
         /// 用于判断是否为叶子节点, 一些操作需要将某个组件及其附属组件视为一个整体
         /// 例如 MovablePart 需要将该函数重载(始终为true)
@@ -201,6 +213,5 @@ namespace TheLastTour.Controller.Machine
             // 仅有一个 joint 时为叶子节点
             return joints.Count == 1;
         }
-        
     }
 }

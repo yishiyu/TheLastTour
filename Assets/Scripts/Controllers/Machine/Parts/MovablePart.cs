@@ -30,6 +30,32 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
+        public override float Mass
+        {
+            get
+            {
+                if (MovablePartRigidbody != null)
+                {
+                    return MovablePartRigidbody.mass;
+                }
+
+                return 0;
+            }
+        }
+
+        public override Vector3 CenterOfMass
+        {
+            get
+            {
+                if (MovablePartRigidbody != null)
+                {
+                    return MovablePartRigidbody.centerOfMass;
+                }
+
+                return Vector3.zero;
+            }
+        }
+
 
         public override Rigidbody GetSimulatorRigidbody()
         {
@@ -106,13 +132,29 @@ namespace TheLastTour.Controller.Machine
 
         public override void UpdateSimulatorMass()
         {
-            Debug.Log("MovablePart UpdateSimulatorMass");
+            float totalMass = mass;
+            Vector3 massCenter = centerOfMass;
+            foreach (var part in attachedParts)
+            {
+                totalMass += part.Mass;
+                massCenter += part.Mass * (part.transform.localPosition + part.CenterOfMass);
+            }
+
+            MovablePartRigidbody.mass = totalMass;
+            MovablePartRigidbody.centerOfMass = massCenter / totalMass;
+
             transform.parent.GetComponent<ISimulator>().UpdateSimulatorMass();
         }
 
         public override bool IsLeafNode()
         {
             return true;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = new Color(0, 1, 0, 0.5f);
+            Gizmos.DrawSphere(MovablePartRigidbody.worldCenterOfMass, MovablePartRigidbody.mass / 10f);
         }
     }
 }

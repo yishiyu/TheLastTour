@@ -180,15 +180,15 @@ namespace TheLastTour.Controller.Machine
             }
 
             float mass = 0;
-            Vector3 centerOfMass = Vector3.zero;
+            Vector3 massCenter = Vector3.zero;
             foreach (var part in machineParts)
             {
-                mass += part.mass;
-                centerOfMass += part.mass * part.transform.position;
+                mass += part.Mass;
+                massCenter += part.Mass * (part.transform.localPosition + part.CenterOfMass);
             }
 
             MachineRigidBody.mass = mass;
-            MachineRigidBody.centerOfMass = centerOfMass / mass;
+            MachineRigidBody.centerOfMass = massCenter / mass;
         }
 
         public Rigidbody GetSimulatorRigidbody()
@@ -199,6 +199,12 @@ namespace TheLastTour.Controller.Machine
         public MachineController GetOwnerMachine()
         {
             return this;
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = new Color(0, 1, 0, 0.5f);
+            Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, MachineRigidBody.mass / 10f);
         }
     }
 }
