@@ -52,9 +52,11 @@ Material:
     m_Floats:
     - _IsMouseOver: 0
     - _IsSelected: 0
+    - _MouseOverHighlight: 0.3
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SelectAlpha: 100
+    - _SelectHighlight: 0.55
     m_Colors:
-    - _Color: {r: 0.5377358, g: 0.5056069, b: 0.5056069, a: 0}
+    - _Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 0}
   m_BuildTextureStacks: []

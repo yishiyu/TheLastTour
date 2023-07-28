@@ -754,6 +754,7 @@ MonoBehaviour:
   - {fileID: 3388522538754211421, guid: 1ab43179143b8e249a303453d28b872b, type: 3}
   - {fileID: 8015061699965554791, guid: 35f3ae7974eb6cd4199301f7f7a69fce, type: 3}
   - {fileID: 120078987571985454, guid: 1b0d5281221512e418a4540a14570f01, type: 3}
+  - {fileID: 787666506526866625, guid: 648983eb7fcb08b488802f44ba4d03d9, type: 3}
   selectedPart: {fileID: 0}
   mouseOverPart: {fileID: 0}
 --- !u!4 &660271786
