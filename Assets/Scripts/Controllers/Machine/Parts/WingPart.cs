@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -5,6 +6,7 @@ using TheLastTour.Manager;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Quaternion = System.Numerics.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 namespace TheLastTour.Controller.Machine
@@ -45,6 +47,7 @@ namespace TheLastTour.Controller.Machine
             {
                 // 局部速度(局部坐标)
                 Vector3 velocity = transform.rotation * RigidBody.GetPointVelocity(transform.position);
+                
 
                 RigidBody.AddForceAtPosition(
                     velocity.z * _propertyLiftRatio.Value * transform.up,
@@ -54,7 +57,15 @@ namespace TheLastTour.Controller.Machine
                 Debug.Log("velocity.z: " + velocity.z +
                           " _propertyLiftRatio.Value: " + _propertyLiftRatio.Value +
                           " lift force: " + (velocity.z * _propertyLiftRatio.Value) +
-                          "velocity " + RigidBody.GetPointVelocity(transform.position));
+                          "velocity " + velocity);
+
+                // draw debug line
+                Debug.DrawLine(transform.position,
+                    transform.position + transform.up * 10,
+                    Color.red);
+                Debug.DrawLine(transform.position,
+                    transform.position + velocity.z * transform.forward,
+                    Color.blue);
             }
         }
     }
