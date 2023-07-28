@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: PropellerPart
   mass: 1
+  centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
   joints: []
   rootJoint: {fileID: 3184974920616417111}
@@ -265,6 +266,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b87e501d7eabb824483279da336f5fb3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 79714df0a27b87e488c584b0acb8f786, type: 2}
     - target: {fileID: 919132149155446097, guid: b87e501d7eabb824483279da336f5fb3, type: 3}
       propertyPath: m_Name
       value: Propeller

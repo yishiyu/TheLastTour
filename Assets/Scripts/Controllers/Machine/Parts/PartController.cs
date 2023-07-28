@@ -22,6 +22,22 @@ namespace TheLastTour.Controller.Machine
         public Vector3 centerOfMass = Vector3.zero;
         public bool isCorePart = false;
 
+        
+        private Renderer _partRenderer;
+
+        public Renderer PartRenderer
+        {
+            get
+            {
+                if (_partRenderer == null)
+                {
+                    _partRenderer = GetComponentInChildren<Renderer>();
+                }
+
+                return _partRenderer;
+            }
+        }
+        
 
         private EEditType editType = EEditType.Default;
 
@@ -36,15 +52,19 @@ namespace TheLastTour.Controller.Machine
                     switch (value)
                     {
                         case EEditType.Default:
-                            TurnOnSimulation(true);
+
+                            PartRenderer.material.SetInt("_IsMouseOver", 0);
+                            PartRenderer.material.SetInt("_IsSelected", 0);
                             break;
 
                         case EEditType.MouseOver:
-                            TurnOnSimulation(true);
+                            PartRenderer.material.SetInt("_IsMouseOver", 1);
+                            PartRenderer.material.SetInt("_IsSelected", 0);
                             break;
 
                         case EEditType.Selected:
-                            TurnOnSimulation(true);
+                            PartRenderer.material.SetInt("_IsMouseOver", 0);
+                            PartRenderer.material.SetInt("_IsSelected", 1);
                             break;
 
                         // 特殊的编辑状态
@@ -75,8 +95,6 @@ namespace TheLastTour.Controller.Machine
                     }
 
                     editType = value;
-                    // TODO 修改自身材质
-                    // TODO 修改物体碰撞
                 }
             }
         }

@@ -128,6 +128,8 @@ namespace TheLastTour.Controller
             }
         }
 
+        public PartController mouseOverPart = null;
+
         #endregion
 
         private IGameStateManager _gameStateManager;
@@ -349,16 +351,69 @@ namespace TheLastTour.Controller
                         _partPreviewInstance.EditType = EEditType.PreviewDisable;
                     }
 
+
+                    // 鼠标悬浮在物体上
+                    if (isMouseHit)
+                    {
+                        // 上一帧鼠标悬浮物体不为空
+                        if (mouseOverPart != null)
+                        {
+                            // 悬浮在新物体上
+                            if (mouseOverPart.gameObject != hit.collider.transform.parent.gameObject)
+                            {
+                                // 清空上一个鼠标悬浮零件状态
+                                mouseOverPart.EditType = EEditType.Default;
+                                mouseOverPart = null;
+
+
+                                if (selectedPart == null ||
+                                    hit.collider.transform.parent.gameObject != selectedPart.gameObject)
+                                {
+                                    mouseOverPart = hit.collider.gameObject.GetComponentInParent<PartController>();
+                                    mouseOverPart.EditType = EEditType.MouseOver;
+                                }
+                            }
+                        }
+                        // 上一帧鼠标悬浮物体为空
+                        else
+                        {
+                            if (selectedPart == null ||
+                                hit.collider.transform.parent.gameObject != selectedPart.gameObject)
+                            {
+                                mouseOverPart = hit.collider.gameObject.GetComponentInParent<PartController>();
+                                mouseOverPart.EditType = EEditType.MouseOver;
+                            }
+                        }
+                    }
+                    // 鼠标没有悬浮在零件上
+                    else if (mouseOverPart != null)
+                    {
+                        mouseOverPart.EditType = EEditType.Default;
+                        mouseOverPart = null;
+                    }
+
+
                     if (Mouse.current.leftButton.wasPressedThisFrame)
                     {
-                        if (isMouseHit)
+                        if (isMouseHit && mouseOverPart != null)
                         {
-                            PartController part = hit.collider.gameObject.GetComponentInParent<PartController>();
-                            SelectedPart = part;
+                            if (selectedPart != null)
+                            {
+                                SelectedPart.EditType = EEditType.Default;
+                                SelectedPart = null;
+                            }
+
+                            SelectedPart = mouseOverPart;
+                            mouseOverPart = null;
+                            SelectedPart.EditType = EEditType.Selected;
                         }
                         else
                         {
-                            SelectedPart = null;
+                            if (selectedPart != null)
+                            {
+                                SelectedPart.EditType = EEditType.Default;
+                                SelectedPart = null;
+                            }
                         }
                     }
 
