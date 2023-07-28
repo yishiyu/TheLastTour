@@ -5,6 +5,15 @@ using UnityEngine.InputSystem;
 
 namespace TheLastTour.Controller.Machine
 {
+    public enum EEditType
+    {
+        Default,
+        MouseOver,
+        Selected,
+        PreviewEnable,
+        PreviewDisable,
+    }
+
     public abstract class PartController : MonoBehaviour, ISimulator
     {
         // 可设置属性
@@ -12,6 +21,65 @@ namespace TheLastTour.Controller.Machine
         public float mass = 10;
         public Vector3 centerOfMass = Vector3.zero;
         public bool isCorePart = false;
+
+
+        private EEditType editType = EEditType.Default;
+
+        public EEditType EditType
+        {
+            get { return editType; }
+            set
+            {
+                if (editType != value)
+                {
+                    // 状态转移控制
+                    switch (value)
+                    {
+                        case EEditType.Default:
+                            TurnOnSimulation(true);
+                            break;
+
+                        case EEditType.MouseOver:
+                            TurnOnSimulation(true);
+                            break;
+
+                        case EEditType.Selected:
+                            TurnOnSimulation(true);
+                            break;
+
+                        // 特殊的编辑状态
+                        case EEditType.PreviewEnable:
+                            if (editType != EEditType.PreviewDisable)
+                            {
+                                // 首次进入 Preview 状态
+                                TurnOnSimulation(false);
+                                TurnOnJointCollision(false);
+                                gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                            }
+
+                            gameObject.SetActive(true);
+
+                            break;
+                        case EEditType.PreviewDisable:
+                            if (editType != EEditType.PreviewEnable)
+                            {
+                                // 首次进入 Preview 状态
+                                TurnOnSimulation(false);
+                                TurnOnJointCollision(false);
+                                gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                            }
+
+                            gameObject.SetActive(false);
+
+                            break;
+                    }
+
+                    editType = value;
+                    // TODO 修改自身材质
+                    // TODO 修改物体碰撞
+                }
+            }
+        }
 
 
         public virtual float Mass
@@ -187,7 +255,7 @@ namespace TheLastTour.Controller.Machine
                 joint.TurnOnJointCollision(!isOn);
             }
         }
-        
+
         public void TurnOnJointCollision(bool isOn)
         {
             foreach (var joint in joints)

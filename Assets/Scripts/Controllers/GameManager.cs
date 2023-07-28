@@ -268,9 +268,7 @@ namespace TheLastTour.Controller
                     if (_partPreviewInstance == null)
                     {
                         _partPreviewInstance = Instantiate(partPrefabs[CurrentSelectedPartIndex]);
-                        _partPreviewInstance.gameObject.SetActive(false);
-                        _partPreviewInstance.TurnOnJointCollision(false);
-                        _partPreviewInstance.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                        _partPreviewInstance.EditType = EEditType.PreviewDisable;
                     }
 
                     if (_partPreviewInstance != null)
@@ -287,7 +285,7 @@ namespace TheLastTour.Controller
                                 if (joint != null && joint.IsAttached == false)
                                 {
                                     _partPreviewInstance.Attach(joint, false);
-                                    _partPreviewInstance.gameObject.SetActive(true);
+                                    _partPreviewInstance.EditType = EEditType.PreviewEnable;
                                 }
                             }
                             // 已连接
@@ -300,14 +298,13 @@ namespace TheLastTour.Controller
                                     {
                                         _partPreviewInstance.Detach();
                                         _partPreviewInstance.Attach(joint, false);
-                                        _partPreviewInstance.gameObject.SetActive(true);
                                     }
                                 }
                                 // 未选中
                                 else
                                 {
                                     _partPreviewInstance.Detach();
-                                    _partPreviewInstance.gameObject.SetActive(false);
+                                    _partPreviewInstance.EditType = EEditType.PreviewDisable;
                                 }
                             }
                         }
@@ -315,7 +312,7 @@ namespace TheLastTour.Controller
                         else
                         {
                             _partPreviewInstance.Detach();
-                            _partPreviewInstance.gameObject.SetActive(false);
+                            _partPreviewInstance.EditType = EEditType.PreviewDisable;
                         }
 
                         // 点击左键, 将预览零件放置到场景中
@@ -334,7 +331,7 @@ namespace TheLastTour.Controller
 
                             // 暂时移除预览零件
                             _partPreviewInstance.Detach();
-                            _partPreviewInstance.gameObject.SetActive(false);
+                            _partPreviewInstance.EditType = EEditType.PreviewDisable;
 
                             // 将零件连接到 joint, 禁止多重连接, 连接到 joint 所在机器
                             part.Attach(joint, true, true);
@@ -349,7 +346,7 @@ namespace TheLastTour.Controller
                     if (_partPreviewInstance != null)
                     {
                         _partPreviewInstance.Detach();
-                        _partPreviewInstance.gameObject.SetActive(false);
+                        _partPreviewInstance.EditType = EEditType.PreviewDisable;
                     }
 
                     if (Mouse.current.leftButton.wasPressedThisFrame)
