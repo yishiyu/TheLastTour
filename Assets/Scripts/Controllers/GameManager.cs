@@ -381,7 +381,10 @@ namespace TheLastTour.Controller
                                 hit.collider.transform.parent.gameObject != selectedPart.gameObject)
                             {
                                 mouseOverPart = hit.collider.gameObject.GetComponentInParent<PartController>();
-                                mouseOverPart.EditType = EEditType.MouseOver;
+                                if (mouseOverPart != null)
+                                {
+                                    mouseOverPart.EditType = EEditType.MouseOver;
+                                }
                             }
                         }
                     }

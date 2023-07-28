@@ -71,11 +71,11 @@ namespace TheLastTour.Controller.Machine
             float torque = _motorPower.Value * Power;
 
             MovablePartRigidbody.AddRelativeTorque(torque * Vector3.forward);
-            Debug.Log("Motor Power: " + _motorPower.Value * Power +
-                      "  Power: " + Power +
-                      "  _motorPower.Value: " + _motorPower.Value +
-                      "  _motorDamping.Value: " + _motorDamping.Value +
-                      "  torque: " + torque);
+            // Debug.Log("Motor Power: " + _motorPower.Value * Power +
+            //           "  Power: " + Power +
+            //           "  _motorPower.Value: " + _motorPower.Value +
+            //           "  _motorDamping.Value: " + _motorDamping.Value +
+            //           "  torque: " + torque);
         }
     }
 }

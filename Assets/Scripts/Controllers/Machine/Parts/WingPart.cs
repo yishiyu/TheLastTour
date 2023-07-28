@@ -46,26 +46,18 @@ namespace TheLastTour.Controller.Machine
             if (RigidBody)
             {
                 // 局部速度(局部坐标)
-                Vector3 velocity = transform.rotation * RigidBody.GetPointVelocity(transform.position);
-                
+                float speed = Vector3.Dot(transform.forward,
+                    RigidBody.GetPointVelocity(transform.position));
+                float lightForce = speed * speed * _propertyLiftRatio.Value;
 
                 RigidBody.AddForceAtPosition(
-                    velocity.z * _propertyLiftRatio.Value * transform.up,
+                    lightForce * transform.up,
                     transform.position,
                     ForceMode.Impulse);
 
-                Debug.Log("velocity.z: " + velocity.z +
-                          " _propertyLiftRatio.Value: " + _propertyLiftRatio.Value +
-                          " lift force: " + (velocity.z * _propertyLiftRatio.Value) +
-                          "velocity " + velocity);
 
-                // draw debug line
-                Debug.DrawLine(transform.position,
-                    transform.position + transform.up * 10,
-                    Color.red);
-                Debug.DrawLine(transform.position,
-                    transform.position + velocity.z * transform.forward,
-                    Color.blue);
+                Debug.DrawLine(transform.position, transform.position * speed, Color.red);
+                Debug.DrawLine(transform.position, transform.position + transform.up * lightForce, Color.blue);
             }
         }
     }
