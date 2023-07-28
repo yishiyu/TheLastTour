@@ -110,16 +110,21 @@ namespace TheLastTour.Controller.Machine
                 return;
             }
 
+            // 先切断该 Part 与自身起始方块的连接
+            part.Detach();
+            machineParts.Remove(part);
+
             // 拆分该 Part 的所有连接,分别形成多个 Machine
             foreach (var joint in part.joints)
             {
                 DetachJoint(joint);
             }
 
-            machineParts.Remove(part);
 
             // 除了该被删除的传入 Part,该 Machine 已无任何 Part,销毁该 Machine
-            TheLastTourArchitecture.Instance.GetManager<IMachineManager>().DestroyMachine(this);
+            // TheLastTourArchitecture.Instance.GetManager<IMachineManager>().DestroyMachine(this);
+            // 因为已经将该 Part 与自身起始方块断开了,所以不需要销毁自身,销毁该方块即可
+            GameObject.Destroy(part.gameObject);
         }
 
         public MachineController DetachJoint(PartJointController joint)
