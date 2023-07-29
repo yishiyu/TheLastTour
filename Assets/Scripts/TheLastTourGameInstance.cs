@@ -15,6 +15,7 @@ namespace TheLastTour
             Debug.Log("TheLastTourArchitecture Init");
 
             RegisterUtility<IInputUtility>(new InputUtility());
+            RegisterUtility<IArchiveUtility>(new ArchiveUtility());
 
             RegisterManager<IGameStateManager>(new GameStateManager());
             RegisterManager<IMachineManager>(new MachineManager());
