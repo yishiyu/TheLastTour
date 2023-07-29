@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Quaternion = UnityEngine.Quaternion;
@@ -71,14 +72,18 @@ namespace TheLastTour.Controller.Machine
             if (RigidBody)
             {
                 // 局部速度(局部坐标)
-                float velocity = Vector3.Dot(controlRotation * transform.right,
-                    RigidBody.GetPointVelocity(transform.position));
+                float velocity = -Vector3.Dot(controlRotation * transform.forward,
+                                     RigidBody.GetPointVelocity(transform.position)) *
+                                 Vector3.Dot(controlRotation * transform.right,
+                                     RigidBody.GetPointVelocity(transform.position));
                 // float velocity = transform.right * RigidBody.GetPointVelocity(transform.position);
+
+                float stabilityForce = velocity * _propertyStability.Value / 100;
 
                 // 允许绕 x 轴自由旋转
                 // 绕 y,z 轴旋转 会受到较大回正力矩
                 RigidBody.AddForceAtPosition(
-                    controlRotation * transform.right * (-velocity * _propertyStability.Value),
+                    controlRotation * transform.right * stabilityForce,
                     transform.position,
                     ForceMode.Impulse);
 
@@ -86,7 +91,7 @@ namespace TheLastTour.Controller.Machine
                     transform.position + controlRotation * transform.right * 10,
                     Color.red);
                 Debug.DrawLine(transform.position,
-                    transform.position - velocity * (controlRotation * transform.right),
+                    transform.position + stabilityForce * (controlRotation * transform.right),
                     Color.blue);
 
                 Debug.Log("velocity: " + velocity +

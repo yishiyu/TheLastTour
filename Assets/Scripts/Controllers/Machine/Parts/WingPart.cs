@@ -54,9 +54,14 @@ namespace TheLastTour.Controller.Machine
                     lightForce * transform.up,
                     transform.position,
                     ForceMode.Impulse);
+                // RigidBody.AddRelativeForce(
+                //     lightForce * transform.up,
+                //     transform.localPosition,
+                //     ForceMode.Impulse
+                // );
 
 
-                Debug.DrawLine(transform.position, transform.position * speed, Color.red);
+                Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.red);
                 Debug.DrawLine(transform.position, transform.position + transform.up * lightForce, Color.blue);
             }
         }

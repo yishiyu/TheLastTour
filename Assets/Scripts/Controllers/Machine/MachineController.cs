@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TheLastTour.Event;
 using TheLastTour.Manager;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace TheLastTour.Controller.Machine
@@ -67,6 +68,9 @@ namespace TheLastTour.Controller.Machine
     public class MachineController : MonoBehaviour, ISimulator
     {
         public List<PartController> machineParts = new List<PartController>();
+
+        public float airResistanceCoefficient = 0.15f;
+
 
         private Rigidbody _rigidbody;
 
@@ -177,6 +181,22 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
+        private void FixedUpdate()
+        {
+            // 空气阻力
+            float speed = MachineRigidBody.velocity.magnitude;
+            float resistanceForce = speed * speed * airResistanceCoefficient;
+            MachineRigidBody.AddRelativeForce(
+                -MachineRigidBody.velocity.normalized * resistanceForce,
+                ForceMode.Impulse);
+
+            Debug.DrawLine(
+                transform.position + MachineRigidBody.centerOfMass,
+                transform.position + MachineRigidBody.centerOfMass -
+                MachineRigidBody.velocity.normalized * (resistanceForce),
+                Color.yellow);
+        }
+
         public void UpdateSimulatorMass()
         {
             if (machineParts.Count == 0)
@@ -220,7 +240,7 @@ namespace TheLastTour.Controller.Machine
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0, 1, 0, 0.5f);
-            Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, MachineRigidBody.mass / 10f);
+            Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, math.sqrt(MachineRigidBody.mass) / 10f);
         }
 
         public JsonMachine Serialize()

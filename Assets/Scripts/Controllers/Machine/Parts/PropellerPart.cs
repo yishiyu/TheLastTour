@@ -5,6 +5,7 @@ using TheLastTour.Manager;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.UI;
 using Vector3 = UnityEngine.Vector3;
 
 namespace TheLastTour.Controller.Machine
@@ -93,6 +94,8 @@ namespace TheLastTour.Controller.Machine
                     transform.up * (Power * _propertyMaxPower.Value),
                     transform.position,
                     ForceMode.Impulse);
+                
+                Debug.DrawLine(transform.position, transform.position + transform.up * (Power * _propertyMaxPower.Value), Color.black);
             }
         }
     }
