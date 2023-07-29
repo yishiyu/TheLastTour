@@ -48,7 +48,7 @@ namespace TheLastTour.Controller.Machine
                 // 局部速度(局部坐标)
                 float speed = Vector3.Dot(transform.forward,
                     RigidBody.GetPointVelocity(transform.position));
-                float lightForce = speed * speed * _propertyLiftRatio.Value;
+                float lightForce = speed * speed * _propertyLiftRatio.Value / 100;
 
                 RigidBody.AddForceAtPosition(
                     lightForce * transform.up,

@@ -186,14 +186,25 @@ namespace TheLastTour.Controller.Machine
 
             float mass = 0;
             Vector3 massCenter = Vector3.zero;
+            float intertiaX = 0;
+            float intertiaY = 0;
+            float intertiaZ = 0;
             foreach (var part in machineParts)
             {
+                Vector3 partMassPosition = part.transform.localPosition + part.CenterOfMass;
                 mass += part.Mass;
-                massCenter += part.Mass * (part.transform.localPosition + part.CenterOfMass);
+                massCenter += part.Mass * partMassPosition;
+                intertiaX += part.Mass * (partMassPosition.y * partMassPosition.y +
+                                          partMassPosition.z * partMassPosition.z);
+                intertiaY += part.Mass * (partMassPosition.x * partMassPosition.x +
+                                          partMassPosition.z * partMassPosition.z);
+                intertiaZ += part.Mass * (partMassPosition.x * partMassPosition.x +
+                                          partMassPosition.y * partMassPosition.y);
             }
 
             MachineRigidBody.mass = mass;
             MachineRigidBody.centerOfMass = massCenter / mass;
+            MachineRigidBody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ);
         }
 
         public Rigidbody GetSimulatorRigidbody()

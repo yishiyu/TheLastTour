@@ -134,14 +134,26 @@ namespace TheLastTour.Controller.Machine
         {
             float totalMass = mass;
             Vector3 massCenter = centerOfMass;
+            float intertiaX = mass * (centerOfMass.y * centerOfMass.y + centerOfMass.z * centerOfMass.z);
+            float intertiaY = mass * (centerOfMass.x * centerOfMass.x + centerOfMass.z * centerOfMass.z);
+            float intertiaZ = mass * (centerOfMass.x * centerOfMass.x + centerOfMass.y * centerOfMass.y);
             foreach (var part in attachedParts)
             {
+                // part 的质心相对于自身的偏移
+                Vector3 partMassPosition = part.transform.localPosition + part.CenterOfMass;
                 totalMass += part.Mass;
-                massCenter += part.Mass * (part.transform.localPosition + part.CenterOfMass);
+                massCenter += part.Mass * partMassPosition;
+                intertiaX += part.Mass * (partMassPosition.y * partMassPosition.y +
+                                          partMassPosition.z * partMassPosition.z);
+                intertiaY += part.Mass * (partMassPosition.x * partMassPosition.x +
+                                          partMassPosition.z * partMassPosition.z);
+                intertiaZ += part.Mass * (partMassPosition.x * partMassPosition.x +
+                                          partMassPosition.y * partMassPosition.y);
             }
 
             MovablePartRigidbody.mass = totalMass;
             MovablePartRigidbody.centerOfMass = massCenter / totalMass;
+            MovablePartRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ);
 
             transform.parent.GetComponent<ISimulator>().UpdateSimulatorMass();
         }
