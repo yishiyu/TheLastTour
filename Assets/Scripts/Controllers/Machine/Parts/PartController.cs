@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TheLastTour.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,7 +23,6 @@ namespace TheLastTour.Controller.Machine
         public Vector3 centerOfMass = Vector3.zero;
         public bool isCorePart = false;
 
-        
         private Renderer _partRenderer;
 
         public Renderer PartRenderer
@@ -37,7 +37,7 @@ namespace TheLastTour.Controller.Machine
                 return _partRenderer;
             }
         }
-        
+
 
         private EEditType editType = EEditType.Default;
 
@@ -307,5 +307,51 @@ namespace TheLastTour.Controller.Machine
             // 仅有一个 joint 时为叶子节点
             return joints.Count == 1;
         }
+
+        public int PartId = 0;
+
+        public JsonPart Serialize()
+        {
+            JsonPart jsonPart = new JsonPart();
+            jsonPart.PartName = partName;
+            jsonPart.RotateAngleZ = RotateAngleZ;
+            jsonPart.RootJointId = RootJointId;
+
+            jsonPart.AttachedJointId = rootJoint == null ? -1 : rootJoint.ConnectedJoint.Owner.PartId;
+            jsonPart.AttachedPartId = rootJoint == null ? -1 : rootJoint.ConnectedJoint.JointIdInPart;
+
+            jsonPart.PartProperties = new List<JsonMachineProperty>();
+            foreach (var property in Properties)
+            {
+                jsonPart.PartProperties.Add(property.Serialize());
+            }
+
+            return jsonPart;
+        }
+
+        public void Deserialize(JsonPart jsonPart)
+        {
+            partName = jsonPart.PartName;
+            RotateAngleZ = jsonPart.RotateAngleZ;
+            RootJointId = jsonPart.RootJointId;
+            rootJoint = GetJointById(RootJointId);
+            for (int i = 0; i < jsonPart.PartProperties.Count; i++)
+            {
+                Properties[i].Deserialize(jsonPart.PartProperties[i]);
+            }
+        }
+    }
+
+    public struct JsonPart
+    {
+        public string PartName;
+        public float RotateAngleZ;
+        public int RootJointId;
+
+        // 用于确定附着关系
+        public int AttachedJointId;
+        public int AttachedPartId;
+
+        public List<JsonMachineProperty> PartProperties;
     }
 }

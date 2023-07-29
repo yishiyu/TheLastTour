@@ -222,5 +222,40 @@ namespace TheLastTour.Controller.Machine
             Gizmos.color = new Color(0, 1, 0, 0.5f);
             Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, MachineRigidBody.mass / 10f);
         }
+
+        public JsonMachine Serialize()
+        {
+            JsonMachine jsonMachine = new JsonMachine();
+            jsonMachine.MachineName = gameObject.name;
+            jsonMachine.MachineParts = new List<JsonPart>();
+            foreach (var part in machineParts)
+            {
+                jsonMachine.MachineParts.Add(part.Serialize());
+            }
+
+            return jsonMachine;
+        }
+
+        public void Deserialize(JsonMachine jsonMachine)
+        {
+            IPartManager partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
+
+            gameObject.name = jsonMachine.MachineName;
+            foreach (var jsonPart in jsonMachine.MachineParts)
+            {
+                PartController part = partManager.CreatePart(jsonPart.PartName);
+                if (part)
+                {
+                    part.Deserialize(jsonPart);
+                    part.Attach(partManager.GetPartById(jsonPart.AttachedPartId).GetJointById(jsonPart.AttachedJointId));
+                }
+            }
+        }
+    }
+
+    public struct JsonMachine
+    {
+        public string MachineName;
+        public List<JsonPart> MachineParts;
     }
 }

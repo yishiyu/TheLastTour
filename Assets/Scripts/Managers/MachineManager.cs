@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TheLastTour.Controller.Machine;
+using TheLastTour.Utility;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TheLastTour.Manager
@@ -29,6 +32,10 @@ namespace TheLastTour.Manager
         public List<PartJointController> GetAllJointInRadius(Vector3 center, float radius);
 
         public PartController GetCorePart();
+
+        public void SaveMachines(string fileName);
+
+        public void LoadMachines(string fileName);
     }
 
     public class MachineManager : IMachineManager
@@ -115,5 +122,46 @@ namespace TheLastTour.Manager
 
             return joint;
         }
+
+        private void ClearAllMachines()
+        {
+            foreach (var machine in MachineList)
+            {
+                GameObject.Destroy(machine.gameObject);
+            }
+
+            MachineList.Clear();
+        }
+
+        public void SaveMachines(string fileName)
+        {
+            // string path = Path.Combine(Directory)
+
+
+            JsonMachines jsonMachines = new JsonMachines();
+            jsonMachines.ArchiveName = fileName;
+            jsonMachines.ArchiveVersion = "0.0.1";
+            jsonMachines.Machines = new List<JsonMachine>();
+
+            foreach (var machine in MachineList)
+            {
+                jsonMachines.Machines.Add(machine.Serialize());
+            }
+
+            TheLastTourArchitecture.Instance.GetUtility<IArchiveUtility>()
+                .SaveToArchive("Machines", fileName, JsonUtility.ToJson(jsonMachines));
+        }
+
+        public void LoadMachines(string fileName)
+        {
+            ClearAllMachines();
+        }
+    }
+
+    public struct JsonMachines
+    {
+        public string ArchiveName;
+        public string ArchiveVersion;
+        public List<JsonMachine> Machines;
     }
 }

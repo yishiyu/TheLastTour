@@ -61,6 +61,48 @@ namespace TheLastTour.Controller.Machine
             Reference = reference;
             PropertyType = EPropertyType.Key;
         }
+
+        public JsonMachineProperty Serialize()
+        {
+            JsonMachineProperty jsonMachineProperty = new JsonMachineProperty();
+            jsonMachineProperty.PropertyName = PropertyName;
+            switch (PropertyType)
+            {
+                case EPropertyType.Float:
+                    jsonMachineProperty.Value = ((PropertyValue<float>)Reference).Value;
+                    break;
+                case EPropertyType.Bool:
+                    jsonMachineProperty.Value = ((PropertyValue<bool>)Reference).Value ? 1 : 0;
+                    break;
+                case EPropertyType.Key:
+                    jsonMachineProperty.Value = (int)((PropertyValue<Key>)Reference).Value;
+                    break;
+                default:
+                    Debug.LogError("invalid property type");
+                    break;
+            }
+
+            return jsonMachineProperty;
+        }
+
+        public void Deserialize(JsonMachineProperty jsonMachineProperty)
+        {
+            switch (PropertyType)
+            {
+                case EPropertyType.Float:
+                    ((PropertyValue<float>)Reference).Value = jsonMachineProperty.Value;
+                    break;
+                case EPropertyType.Bool:
+                    ((PropertyValue<bool>)Reference).Value = jsonMachineProperty.Value > 0;
+                    break;
+                case EPropertyType.Key:
+                    ((PropertyValue<Key>)Reference).Value = (Key)jsonMachineProperty.Value;
+                    break;
+                default:
+                    Debug.LogError("invalid property type");
+                    break;
+            }
+        }
     }
 
     public class MachinePropertyUI : MonoBehaviour
@@ -79,5 +121,11 @@ namespace TheLastTour.Controller.Machine
                 propertyNameText.text = "invalid property";
             }
         }
+    }
+
+    public struct JsonMachineProperty
+    {
+        public string PropertyName;
+        public float Value;
     }
 }

@@ -29,6 +29,8 @@ namespace TheLastTour
 
         public MachineController DefaultMachinePrefab;
 
+        public List<PartController> partPrefabs = new List<PartController>();
+
         public static TheLastTourGameInstance Instance
         {
             get
@@ -53,6 +55,12 @@ namespace TheLastTour
 
             TheLastTourArchitecture.Instance.GetManager<IMachineManager>()
                 .SetDefaultMachinePrefab(DefaultMachinePrefab);
+
+            IPartManager partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
+            foreach (PartController part in partPrefabs)
+            {
+                partManager.RegisterPart(part);
+            }
         }
     }
 }
