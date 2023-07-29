@@ -64,18 +64,20 @@ namespace TheLastTour.Controller.Machine
 
         public JsonMachineProperty Serialize()
         {
-            JsonMachineProperty jsonMachineProperty = new JsonMachineProperty();
-            jsonMachineProperty.PropertyName = PropertyName;
+            JsonMachineProperty jsonMachineProperty = new JsonMachineProperty
+            {
+                propertyName = PropertyName
+            };
             switch (PropertyType)
             {
                 case EPropertyType.Float:
-                    jsonMachineProperty.Value = ((PropertyValue<float>)Reference).Value;
+                    jsonMachineProperty.value = ((PropertyValue<float>)Reference).Value;
                     break;
                 case EPropertyType.Bool:
-                    jsonMachineProperty.Value = ((PropertyValue<bool>)Reference).Value ? 1 : 0;
+                    jsonMachineProperty.value = ((PropertyValue<bool>)Reference).Value ? 1 : 0;
                     break;
                 case EPropertyType.Key:
-                    jsonMachineProperty.Value = (int)((PropertyValue<Key>)Reference).Value;
+                    jsonMachineProperty.value = (int)((PropertyValue<Key>)Reference).Value;
                     break;
                 default:
                     Debug.LogError("invalid property type");
@@ -90,13 +92,13 @@ namespace TheLastTour.Controller.Machine
             switch (PropertyType)
             {
                 case EPropertyType.Float:
-                    ((PropertyValue<float>)Reference).Value = jsonMachineProperty.Value;
+                    ((PropertyValue<float>)Reference).Value = jsonMachineProperty.value;
                     break;
                 case EPropertyType.Bool:
-                    ((PropertyValue<bool>)Reference).Value = jsonMachineProperty.Value > 0;
+                    ((PropertyValue<bool>)Reference).Value = jsonMachineProperty.value > 0;
                     break;
                 case EPropertyType.Key:
-                    ((PropertyValue<Key>)Reference).Value = (Key)jsonMachineProperty.Value;
+                    ((PropertyValue<Key>)Reference).Value = (Key)jsonMachineProperty.value;
                     break;
                 default:
                     Debug.LogError("invalid property type");
@@ -123,9 +125,10 @@ namespace TheLastTour.Controller.Machine
         }
     }
 
+    [Serializable]
     public struct JsonMachineProperty
     {
-        public string PropertyName;
-        public float Value;
+        public string propertyName;
+        public float value;
     }
 }

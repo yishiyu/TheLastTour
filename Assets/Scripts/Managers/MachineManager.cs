@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using TheLastTour.Controller.Machine;
 using TheLastTour.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TheLastTour.Manager
 {
@@ -138,14 +140,16 @@ namespace TheLastTour.Manager
             // string path = Path.Combine(Directory)
 
 
-            JsonMachines jsonMachines = new JsonMachines();
-            jsonMachines.ArchiveName = fileName;
-            jsonMachines.ArchiveVersion = "0.0.1";
-            jsonMachines.Machines = new List<JsonMachine>();
+            JsonMachines jsonMachines = new JsonMachines
+            {
+                archiveName = fileName,
+                archiveVersion = "0.0.1",
+                machines = new List<JsonMachine>()
+            };
 
             foreach (var machine in MachineList)
             {
-                jsonMachines.Machines.Add(machine.Serialize());
+                jsonMachines.machines.Add(machine.Serialize());
             }
 
             TheLastTourArchitecture.Instance.GetUtility<IArchiveUtility>()
@@ -155,13 +159,25 @@ namespace TheLastTour.Manager
         public void LoadMachines(string fileName)
         {
             ClearAllMachines();
+
+            if (TheLastTourArchitecture.Instance.GetUtility<IArchiveUtility>()
+                .LoadFromArchive("Machines", fileName, out var jsonData))
+            {
+                var jsonMachines = JsonUtility.FromJson<JsonMachines>(jsonData);
+                foreach (var jsonMachine in jsonMachines.machines)
+                {
+                    MachineController machine = CreateEmptyMachine();
+                    machine.Deserialize(jsonMachine);
+                }
+            }
         }
     }
 
+    [Serializable]
     public struct JsonMachines
     {
-        public string ArchiveName;
-        public string ArchiveVersion;
-        public List<JsonMachine> Machines;
+        public string archiveName;
+        public string archiveVersion;
+        public List<JsonMachine> machines;
     }
 }

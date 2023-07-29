@@ -19,6 +19,7 @@ namespace TheLastTour
 
             RegisterManager<IGameStateManager>(new GameStateManager());
             RegisterManager<IMachineManager>(new MachineManager());
+            RegisterManager<IPartManager>(new PartManager());
         }
     }
 

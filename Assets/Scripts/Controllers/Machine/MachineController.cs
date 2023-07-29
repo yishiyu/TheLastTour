@@ -225,12 +225,14 @@ namespace TheLastTour.Controller.Machine
 
         public JsonMachine Serialize()
         {
-            JsonMachine jsonMachine = new JsonMachine();
-            jsonMachine.MachineName = gameObject.name;
-            jsonMachine.MachineParts = new List<JsonPart>();
+            JsonMachine jsonMachine = new JsonMachine
+            {
+                machineName = gameObject.name,
+                machineParts = new List<JsonPart>()
+            };
             foreach (var part in machineParts)
             {
-                jsonMachine.MachineParts.Add(part.Serialize());
+                jsonMachine.machineParts.Add(part.Serialize());
             }
 
             return jsonMachine;
@@ -240,22 +242,31 @@ namespace TheLastTour.Controller.Machine
         {
             IPartManager partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
 
-            gameObject.name = jsonMachine.MachineName;
-            foreach (var jsonPart in jsonMachine.MachineParts)
+            gameObject.name = jsonMachine.machineName;
+            foreach (var jsonPart in jsonMachine.machineParts)
             {
-                PartController part = partManager.CreatePart(jsonPart.PartName);
+                PartController part = partManager.CreatePart(jsonPart.partName, jsonPart.partId);
                 if (part)
                 {
                     part.Deserialize(jsonPart);
-                    part.Attach(partManager.GetPartById(jsonPart.AttachedPartId).GetJointById(jsonPart.AttachedJointId));
+                    PartController target = partManager.GetPartById(jsonPart.attachedPartId);
+                    if (target != null)
+                    {
+                        part.Attach(target.GetJointById(jsonPart.attachedJointId), true, true);
+                    }
+                    else
+                    {
+                        AddPart(part);
+                    }
                 }
             }
         }
     }
 
+    [Serializable]
     public struct JsonMachine
     {
-        public string MachineName;
-        public List<JsonPart> MachineParts;
+        public string machineName;
+        public List<JsonPart> machineParts;
     }
 }

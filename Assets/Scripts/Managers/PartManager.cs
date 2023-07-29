@@ -12,15 +12,30 @@ namespace TheLastTour.Manager
 
         public PartController GetPartPrefabByName(string partName);
 
-        public PartController CreatePart(string partName);
-        
-        public PartController GetPartById(int id);
+        public PartController GetPartById(long id);
+
+        public PartController CreatePart(string partName, long partId = -1);
+
+        public void DestroyPart(PartController part);
     }
 
 
     public class PartManager : IPartManager
     {
-        Dictionary<string, PartController> partDict = new Dictionary<string, PartController>();
+        Dictionary<string, PartController> partPrefabDict = new Dictionary<string, PartController>();
+        Dictionary<long, PartController> partInstanceDict = new Dictionary<long, PartController>();
+
+        private int _uniqueSuffix = 0;
+
+        private long GenerateUniqueId()
+        {
+            // 使用时间生成唯一ID,防止同一秒生成多个ID
+            var date = System.DateTime.Now;
+            var id = long.Parse(date.ToString("yyyyMMddHHmmss")) * 100 + _uniqueSuffix;
+            _uniqueSuffix++;
+
+            return id;
+        }
 
         public void Init(IArchitecture architecture)
         {
@@ -29,32 +44,59 @@ namespace TheLastTour.Manager
 
         public void RegisterPart(PartController part)
         {
-            partDict.Add(part.partName, part);
+            partPrefabDict.Add(part.partName, part);
         }
 
         public PartController GetPartPrefabByName(string partName)
         {
-            if (partDict.ContainsKey(partName))
+            if (partPrefabDict.ContainsKey(partName))
             {
-                return partDict[partName];
+                return partPrefabDict[partName];
             }
 
             return null;
         }
 
-        public PartController CreatePart(string partName)
+        public PartController GetPartById(long id)
         {
-            if (partDict.ContainsKey(partName))
+            if (partInstanceDict.ContainsKey(id))
             {
-                return GameObject.Instantiate(partDict[partName]);
+                return partInstanceDict[id];
             }
 
             return null;
         }
 
-        public PartController GetPartById(int id)
+        public PartController CreatePart(string partName, long partId = -1)
         {
+            if (partPrefabDict.ContainsKey(partName))
+            {
+                PartController part = GameObject.Instantiate(partPrefabDict[partName]);
+                if (partId < 0)
+                {
+                    part.PartId = GenerateUniqueId();
+                }
+                else
+                {
+                    part.PartId = partId;
+                }
+
+                partInstanceDict.Add(part.PartId, part);
+
+                return part;
+            }
+
             return null;
+        }
+
+        public void DestroyPart(PartController part)
+        {
+            if (partInstanceDict.ContainsKey(part.PartId))
+            {
+                partInstanceDict.Remove(part.PartId);
+            }
+
+            GameObject.Destroy(part.gameObject);
         }
     }
 }

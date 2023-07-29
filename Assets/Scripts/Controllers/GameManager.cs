@@ -68,7 +68,8 @@ namespace TheLastTour.Controller
                         if (_partPreviewInstance != null)
                         {
                             _partPreviewInstance.Detach();
-                            Destroy(_partPreviewInstance.gameObject);
+                            _partManager.DestroyPart(_partPreviewInstance);
+                            _partPreviewInstance = null;
                         }
                     }
                     else
@@ -135,6 +136,7 @@ namespace TheLastTour.Controller
         private IGameStateManager _gameStateManager;
         private InputActions _inputActions;
         private IMachineManager _machineManager;
+        private IPartManager _partManager;
 
         #region Initialization
 
@@ -143,6 +145,7 @@ namespace TheLastTour.Controller
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _inputActions = TheLastTourArchitecture.Instance.GetUtility<IInputUtility>().GetInputActions();
             _machineManager = TheLastTourArchitecture.Instance.GetManager<IMachineManager>();
+            _partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
 
             CurrentSelectedPartIndex = -1;
             _gameStateManager.GameState = EGameState.Edit;
@@ -238,6 +241,18 @@ namespace TheLastTour.Controller
                     _partPreviewInstance.TurnOnJointCollision(false);
                 }
             }
+
+
+            // 测试保存和读取
+            if (Keyboard.current.kKey.wasPressedThisFrame)
+            {
+                _machineManager.SaveMachines("test");
+            }
+
+            if (Keyboard.current.lKey.wasPressedThisFrame)
+            {
+                _machineManager.LoadMachines("test");
+            }
         }
 
         private void UpdateEdit()
@@ -260,7 +275,9 @@ namespace TheLastTour.Controller
                         if (_partPreviewInstance != null)
                         {
                             _partPreviewInstance.Detach();
-                            Destroy(_partPreviewInstance.gameObject);
+                            _partManager.DestroyPart(_partPreviewInstance);
+                            _partPreviewInstance = null;
+                            // Destroy(_partPreviewInstance.gameObject);
                         }
 
                         return;
@@ -269,7 +286,8 @@ namespace TheLastTour.Controller
                     // 创建预览零件
                     if (_partPreviewInstance == null)
                     {
-                        _partPreviewInstance = Instantiate(partPrefabs[CurrentSelectedPartIndex]);
+                        // _partPreviewInstance = Instantiate(partPrefabs[CurrentSelectedPartIndex]);
+                        _partPreviewInstance = _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].name);
                         _partPreviewInstance.EditType = EEditType.PreviewDisable;
                     }
 
@@ -323,8 +341,9 @@ namespace TheLastTour.Controller
                         {
                             // ISimulator simulator = _partPreviewInstance.ConnectedJoint.Owner;
 
-                            PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject)
-                                .GetComponent<PartController>();
+                            // PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject)
+                            //     .GetComponent<PartController>();
+                            PartController part = _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].name);
 
                             // 与预览零件连接的 joint
                             PartJointController joint = _partPreviewInstance.ConnectedJoint;

@@ -47,10 +47,15 @@ namespace TheLastTour.Utility
         {
             // 创建文件读写流
             string path = Path.Combine(_directoryManager.GetDirectory(archiveType).FullName, archiveName + ".json");
-            FileStream fileStream = new FileStream(path, File.Exists(path) ? FileMode.Create : FileMode.Truncate);
-            StreamWriter fileWriter = new StreamWriter(fileStream);
 
-            fileWriter.Write(archiveContent);
+            {
+                FileStream fileStream = new FileStream(path, File.Exists(path) ? FileMode.Truncate : FileMode.Create);
+                StreamWriter fileWriter = new StreamWriter(fileStream);
+
+                fileWriter.Write(archiveContent);
+                fileWriter.Close();
+                fileStream.Close();
+            }
 
             return true;
         }
@@ -65,10 +70,16 @@ namespace TheLastTour.Utility
                 return false;
             }
 
-            FileStream fileStream = new FileStream(path, FileMode.Open);
-            StreamReader fileReader = new StreamReader(fileStream);
 
-            archiveContent = fileReader.ReadToEnd();
+            {
+                FileStream fileStream = new FileStream(path, FileMode.Open);
+                StreamReader fileReader = new StreamReader(fileStream);
+                archiveContent = fileReader.ReadToEnd();
+
+                fileReader.Close();
+                fileStream.Close();
+            }
+
             return true;
         }
     }

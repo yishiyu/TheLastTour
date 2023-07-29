@@ -22,6 +22,7 @@ namespace TheLastTour.Controller.Machine
         public float mass = 10;
         public Vector3 centerOfMass = Vector3.zero;
         public bool isCorePart = false;
+        public long PartId = 0;
 
         private Renderer _partRenderer;
 
@@ -182,7 +183,7 @@ namespace TheLastTour.Controller.Machine
 
         public PartJointController GetJointById(int id)
         {
-            if (id > 0 && id < joints.Count)
+            if (id >= 0 && id < joints.Count)
             {
                 return joints[id];
             }
@@ -308,22 +309,27 @@ namespace TheLastTour.Controller.Machine
             return joints.Count == 1;
         }
 
-        public int PartId = 0;
-
         public JsonPart Serialize()
         {
-            JsonPart jsonPart = new JsonPart();
-            jsonPart.PartName = partName;
-            jsonPart.RotateAngleZ = RotateAngleZ;
-            jsonPart.RootJointId = RootJointId;
+            JsonPart jsonPart = new JsonPart
+            {
+                partName = partName,
+                rotateAngleZ = RotateAngleZ,
+                rootJointId = RootJointId,
+                isCorePart = isCorePart,
+                partId = PartId,
+                attachedJointId = (rootJoint == null || rootJoint.ConnectedJoint == null)
+                    ? -1
+                    : rootJoint.ConnectedJoint.JointIdInPart,
+                attachedPartId = (rootJoint == null || rootJoint.ConnectedJoint == null)
+                    ? -1
+                    : rootJoint.ConnectedJoint.Owner.PartId,
+                partProperties = new List<JsonMachineProperty>()
+            };
 
-            jsonPart.AttachedJointId = rootJoint == null ? -1 : rootJoint.ConnectedJoint.Owner.PartId;
-            jsonPart.AttachedPartId = rootJoint == null ? -1 : rootJoint.ConnectedJoint.JointIdInPart;
-
-            jsonPart.PartProperties = new List<JsonMachineProperty>();
             foreach (var property in Properties)
             {
-                jsonPart.PartProperties.Add(property.Serialize());
+                jsonPart.partProperties.Add(property.Serialize());
             }
 
             return jsonPart;
@@ -331,27 +337,34 @@ namespace TheLastTour.Controller.Machine
 
         public void Deserialize(JsonPart jsonPart)
         {
-            partName = jsonPart.PartName;
-            RotateAngleZ = jsonPart.RotateAngleZ;
-            RootJointId = jsonPart.RootJointId;
+            partName = jsonPart.partName;
+            RotateAngleZ = jsonPart.rotateAngleZ;
+            RootJointId = jsonPart.rootJointId;
+            isCorePart = jsonPart.isCorePart;
             rootJoint = GetJointById(RootJointId);
-            for (int i = 0; i < jsonPart.PartProperties.Count; i++)
+            for (int i = 0; i < jsonPart.partProperties.Count; i++)
             {
-                Properties[i].Deserialize(jsonPart.PartProperties[i]);
+                Properties[i].Deserialize(jsonPart.partProperties[i]);
             }
         }
     }
 
+    [Serializable]
     public struct JsonPart
     {
-        public string PartName;
-        public float RotateAngleZ;
-        public int RootJointId;
+        public string partName;
+        public float rotateAngleZ;
+        public int rootJointId;
+        public bool isCorePart;
+
+        // 重建该 Part 时需要提供为 PartManager 的 ID
+        // 用于重建不同 Part 的联系
+        public long partId;
 
         // 用于确定附着关系
-        public int AttachedJointId;
-        public int AttachedPartId;
+        public int attachedJointId;
+        public long attachedPartId;
 
-        public List<JsonMachineProperty> PartProperties;
+        public List<JsonMachineProperty> partProperties;
     }
 }
