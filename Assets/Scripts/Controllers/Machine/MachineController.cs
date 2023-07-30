@@ -188,7 +188,7 @@ namespace TheLastTour.Controller.Machine
 
         private void FixedUpdate()
         {
-            // 空气阻力
+            // 空气产生的阻力
             float speed = MachineRigidBody.velocity.magnitude;
             float resistanceForce = speed * speed * airResistanceCoefficient;
             Vector3 resistanceForceDirection = -MachineRigidBody.velocity.normalized;
@@ -209,6 +209,25 @@ namespace TheLastTour.Controller.Machine
                 resistanceForcePosition +
                 resistanceForce * resistanceForceDirection,
                 Color.yellow);
+
+            // 空气产生的阻力力矩
+            // 使用力矩模拟空气阻力可能在旋转速度过快时震,改为直接控制旋转速度
+            Vector3 angularVelocity = MachineRigidBody.angularVelocity * airResistanceCoefficient / 15;
+            // Vector3 angularVelocity = MachineRigidBody.angularVelocity;
+            // Vector3 resistanceTorque = -angularVelocity * (angularVelocity.magnitude * airResistanceCoefficient * 1000);
+            //
+            // MachineRigidBody.AddRelativeTorque(
+            //     resistanceTorque,
+            //     ForceMode.Impulse
+            // );
+            //
+            // Debug.DrawLine(
+            //     resistanceForcePosition,
+            //     resistanceForcePosition +
+            //     resistanceTorque,
+            //     Color.green);
+            //
+            // Debug.Log("resistanceTorque: " + resistanceTorque);
         }
 
         public void UpdateSimulatorMass()
@@ -238,7 +257,7 @@ namespace TheLastTour.Controller.Machine
 
             MachineRigidBody.mass = mass;
             MachineRigidBody.centerOfMass = massCenter / mass;
-            MachineRigidBody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ);
+            MachineRigidBody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ) * 10;
         }
 
         public Rigidbody GetSimulatorRigidbody()

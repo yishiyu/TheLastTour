@@ -403,9 +403,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partName: WheelPart
-  mass: 10
+  mass: 1
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
+  PartId: 0
   joints: []
   rootJoint: {fileID: 4041644731599037103}
   attachedParts: []

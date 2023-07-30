@@ -73,24 +73,39 @@ namespace TheLastTour.Controller.Machine
 
             if (RigidBody)
             {
-                controlRotation = transform.localRotation * controlRotation *
-                                  Quaternion.Inverse(transform.localRotation);
+                // controlRotation = transform.localRotation * controlRotation *
+                //                   Quaternion.Inverse(transform.localRotation);
+                Vector3 forceDirection = transform.rotation * controlRotation * Vector3.right;
+                // Vector3 forwardDirection = transform.rotation * controlRotation * Vector3.forward;
+                // 局部速度(局部坐标)
+                Vector3 velocity = RigidBody.GetPointVelocity(transform.position);
+                float forwardSpeed = Vector3.Dot(transform.forward, velocity);
+                float normSpeed = Vector3.Dot(forceDirection, velocity);
+
+                float stabilityForce = -forwardSpeed * normSpeed * _propertyStability.Value / 100;
+
+                // 允许绕 x 轴自由旋转
+
+                RigidBody.AddForceAtPosition(
+                    transform.right * stabilityForce,
+                    transform.position,
+                    ForceMode.Impulse);
 
                 // 局部速度(局部坐标)
-                float velocity = -Vector3.Dot(controlRotation * transform.forward,
-                                     RigidBody.GetPointVelocity(transform.position)) *
-                                 Vector3.Dot(controlRotation * transform.right,
-                                     RigidBody.GetPointVelocity(transform.position));
+                // float velocity = -Vector3.Dot(forwardDirection,
+                //                      RigidBody.GetPointVelocity(transform.position)) *
+                //                  Vector3.Dot(forceDirection,
+                //                      RigidBody.GetPointVelocity(transform.position));
                 // float velocity = transform.right * RigidBody.GetPointVelocity(transform.position);
 
-                float stabilityForce = velocity * _propertyStability.Value / 100;
+                // float stabilityForce = velocity * _propertyStability.Value / 100;
 
                 // 允许绕 x 轴自由旋转
                 // 绕 y,z 轴旋转 会受到较大回正力矩
-                RigidBody.AddForceAtPosition(
-                    controlRotation * transform.right * stabilityForce,
-                    transform.position,
-                    ForceMode.Impulse);
+                // RigidBody.AddForceAtPosition(
+                //     forceDirection * stabilityForce,
+                //     transform.position,
+                //     ForceMode.Impulse);
 
                 // Debug.DrawLine(
                 //     transform.position,
@@ -107,10 +122,10 @@ namespace TheLastTour.Controller.Machine
                 // );
 
                 Debug.DrawLine(transform.position,
-                    transform.position + controlRotation * transform.right * 10,
+                    transform.position + transform.right * 10,
                     Color.red);
                 Debug.DrawLine(transform.position,
-                    transform.position + stabilityForce * (controlRotation * transform.right),
+                    transform.position + stabilityForce * transform.right,
                     Color.blue);
             }
         }

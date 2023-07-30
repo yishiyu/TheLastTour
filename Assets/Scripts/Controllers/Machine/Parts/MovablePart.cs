@@ -153,7 +153,7 @@ namespace TheLastTour.Controller.Machine
 
             MovablePartRigidbody.mass = totalMass;
             MovablePartRigidbody.centerOfMass = massCenter / totalMass;
-            MovablePartRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ);
+            MovablePartRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ) * 10;
 
             transform.parent.GetComponent<ISimulator>().UpdateSimulatorMass();
         }

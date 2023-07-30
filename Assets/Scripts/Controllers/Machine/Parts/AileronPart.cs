@@ -83,17 +83,17 @@ namespace TheLastTour.Controller.Machine
                 // 允许绕 x 轴自由旋转
 
                 RigidBody.AddForceAtPosition(
-                    controlRotation * transform.up * aileronForce,
+                    transform.up * aileronForce,
                     transform.position,
                     ForceMode.Impulse);
 
 
                 Debug.DrawLine(transform.position,
-                    transform.position + controlRotation * transform.up * 10,
+                    transform.position +  transform.up * 10,
                     Color.red);
 
                 Debug.DrawLine(transform.position,
-                    transform.position + aileronForce * (controlRotation * transform.up),
+                    transform.position + aileronForce  * transform.up,
                     Color.blue);
             }
         }

@@ -245,6 +245,7 @@ MonoBehaviour:
   mass: 1
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
+  PartId: 0
   joints: []
   rootJoint: {fileID: 4416145709767855698}
   attachedParts: []
