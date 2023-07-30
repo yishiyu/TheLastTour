@@ -38,6 +38,8 @@ namespace TheLastTour.Manager
         public void SaveMachines(string fileName);
 
         public void LoadMachines(string fileName);
+
+        public void ClearAllMachines();
     }
 
     public class MachineManager : IMachineManager
@@ -125,7 +127,7 @@ namespace TheLastTour.Manager
             return joint;
         }
 
-        private void ClearAllMachines()
+        private void InternalClearAllMachines()
         {
             foreach (var machine in MachineList)
             {
@@ -133,7 +135,18 @@ namespace TheLastTour.Manager
             }
 
             MachineList.Clear();
+            TheLastTourArchitecture.Instance.GetManager<IPartManager>().ClearAllParts();
         }
+
+        public void ClearAllMachines()
+        {
+            // 防止 PartManager 和 MachineManager 互相调用,导致死循环
+            if (MachineList.Count > 0)
+            {
+                InternalClearAllMachines();
+            }
+        }
+
 
         public void SaveMachines(string fileName)
         {

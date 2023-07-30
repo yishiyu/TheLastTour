@@ -87,10 +87,15 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
+        private bool _isRestoreFromArchive = false;
+
         private void Start()
         {
-            machineParts.AddRange(GetComponentsInChildren<PartController>());
-            UpdateSimulatorMass();
+            if (!_isRestoreFromArchive)
+            {
+                machineParts.AddRange(GetComponentsInChildren<PartController>());
+                UpdateSimulatorMass();
+            }
         }
 
 
@@ -289,6 +294,8 @@ namespace TheLastTour.Controller.Machine
                     }
                 }
             }
+
+            _isRestoreFromArchive = true;
         }
     }
 

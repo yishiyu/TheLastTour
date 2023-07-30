@@ -17,6 +17,8 @@ namespace TheLastTour.Manager
         public PartController CreatePart(string partName, long partId = -1);
 
         public void DestroyPart(PartController part);
+
+        public void ClearAllParts();
     }
 
 
@@ -80,6 +82,7 @@ namespace TheLastTour.Manager
                 {
                     part.PartId = partId;
                 }
+
                 partInstanceDict.Add(part.PartId, part);
 
                 return part;
@@ -96,6 +99,27 @@ namespace TheLastTour.Manager
             }
 
             GameObject.Destroy(part.gameObject);
+        }
+
+        private void InternalClearAllParts()
+        {
+            foreach (var part in partInstanceDict.Values)
+            {
+                GameObject.Destroy(part.gameObject);
+            }
+
+            partInstanceDict.Clear();
+
+            TheLastTourArchitecture.Instance.GetManager<IMachineManager>().ClearAllMachines();
+        }
+
+        public void ClearAllParts()
+        {
+            // 防止 PartManager 和 MachineManager 互相调用,导致死循环
+            if (partInstanceDict.Count > 0)
+            {
+                InternalClearAllParts();
+            }
         }
     }
 }
