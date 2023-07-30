@@ -72,7 +72,7 @@ namespace TheLastTour.Manager
             if (partPrefabDict.ContainsKey(partName))
             {
                 PartController part = GameObject.Instantiate(partPrefabDict[partName]);
-                if (partId < 0)
+                if (partId < 0 || partInstanceDict.ContainsKey(partId))
                 {
                     part.PartId = GenerateUniqueId();
                 }
@@ -80,7 +80,6 @@ namespace TheLastTour.Manager
                 {
                     part.PartId = partId;
                 }
-
                 partInstanceDict.Add(part.PartId, part);
 
                 return part;

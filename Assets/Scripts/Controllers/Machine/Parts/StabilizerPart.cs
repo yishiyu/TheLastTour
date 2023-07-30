@@ -28,7 +28,10 @@ namespace TheLastTour.Controller.Machine
 
         readonly PropertyValue<Key> _propertyStabilityUp = new PropertyValue<Key>(Key.None);
         readonly PropertyValue<Key> _propertyStabilityDown = new PropertyValue<Key>(Key.None);
+        readonly PropertyValue<Key> _propertyStabilityLeft = new PropertyValue<Key>(Key.None);
+        readonly PropertyValue<Key> _propertyStabilityRight = new PropertyValue<Key>(Key.None);
         readonly PropertyValue<float> _propertyStability = new PropertyValue<float>(5);
+        readonly PropertyValue<float> _propertyStabilityRotateStep = new PropertyValue<float>(30);
 
         protected override void InitProperties()
         {
@@ -36,7 +39,10 @@ namespace TheLastTour.Controller.Machine
 
             Properties.Add(new MachineProperty("Stability Up", _propertyStabilityUp));
             Properties.Add(new MachineProperty("Stability Down", _propertyStabilityDown));
+            Properties.Add(new MachineProperty("Stability Left", _propertyStabilityLeft));
+            Properties.Add(new MachineProperty("Stability Right", _propertyStabilityRight));
             Properties.Add(new MachineProperty("Stability", _propertyStability));
+            Properties.Add(new MachineProperty("Stability Rotate Step", _propertyStabilityRotateStep));
 
             _stabilizerMeshRotation = stabilizerMesh.transform.localRotation;
         }
@@ -44,12 +50,13 @@ namespace TheLastTour.Controller.Machine
         private void FixedUpdate()
         {
             float yaw = 0;
+            float roll = 0;
 
             if (_propertyStabilityUp.Value != Key.None)
             {
                 if (Keyboard.current[_propertyStabilityUp.Value].isPressed)
                 {
-                    yaw += 10f;
+                    yaw += _propertyStabilityRotateStep.Value;
                 }
             }
 
@@ -57,11 +64,27 @@ namespace TheLastTour.Controller.Machine
             {
                 if (Keyboard.current[_propertyStabilityDown.Value].isPressed)
                 {
-                    yaw -= 10f;
+                    yaw -= _propertyStabilityRotateStep.Value;
                 }
             }
 
-            Quaternion controlRotation = Quaternion.Euler(0, yaw, 0);
+            if (_propertyStabilityLeft.Value != Key.None)
+            {
+                if (Keyboard.current[_propertyStabilityLeft.Value].isPressed)
+                {
+                    roll += _propertyStabilityRotateStep.Value;
+                }
+            }
+
+            if (_propertyStabilityRight.Value != Key.None)
+            {
+                if (Keyboard.current[_propertyStabilityRight.Value].isPressed)
+                {
+                    roll -= _propertyStabilityRotateStep.Value;
+                }
+            }
+
+            Quaternion controlRotation = Quaternion.Euler(0, yaw, roll);
 
             if (stabilizerMesh)
             {
@@ -71,6 +94,9 @@ namespace TheLastTour.Controller.Machine
 
             if (RigidBody)
             {
+                controlRotation = transform.localRotation * controlRotation *
+                                  Quaternion.Inverse(transform.localRotation);
+
                 // 局部速度(局部坐标)
                 float velocity = -Vector3.Dot(controlRotation * transform.forward,
                                      RigidBody.GetPointVelocity(transform.position)) *
@@ -86,6 +112,20 @@ namespace TheLastTour.Controller.Machine
                     controlRotation * transform.right * stabilityForce,
                     transform.position,
                     ForceMode.Impulse);
+
+                Debug.DrawLine(
+                    transform.position,
+                    transform.position + (Vector3.Dot(controlRotation * transform.forward,
+                        RigidBody.GetPointVelocity(transform.position))) * (controlRotation * transform.right),
+                    Color.cyan
+                );
+
+                Debug.DrawLine(
+                    transform.position,
+                    transform.position + (Vector3.Dot(controlRotation * transform.right,
+                        RigidBody.GetPointVelocity(transform.position))) * (controlRotation * transform.right),
+                    Color.cyan
+                );
 
                 Debug.DrawLine(transform.position,
                     transform.position + controlRotation * transform.right * 10,

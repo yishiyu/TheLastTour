@@ -111,6 +111,8 @@ namespace TheLastTour.Controller.Machine
             get { return centerOfMass; }
         }
 
+        private PropertyValue<float> _massProperty = new PropertyValue<float>(1);
+
         public List<PartJointController> joints = new List<PartJointController>();
         public PartJointController rootJoint = null;
 
@@ -217,6 +219,14 @@ namespace TheLastTour.Controller.Machine
 
         protected virtual void InitProperties()
         {
+            _massProperty.Value = mass;
+            _massProperty.OnValueChanged += (newMass) =>
+            {
+                mass = newMass;
+                // UpdateSimulatorMass();
+            };
+
+            Properties.Add(new MachineProperty("Mass", _massProperty));
         }
 
         /// <summary>
