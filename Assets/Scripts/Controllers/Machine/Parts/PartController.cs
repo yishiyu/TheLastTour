@@ -195,8 +195,6 @@ namespace TheLastTour.Controller.Machine
 
         public virtual void Awake()
         {
-            InitProperties();
-
             foreach (var joint in GetComponentsInChildren<PartJointController>())
             {
                 joints.Add(joint);
@@ -215,6 +213,8 @@ namespace TheLastTour.Controller.Machine
                 RootJointId = 0;
                 rootJoint = joints[0];
             }
+
+            InitProperties();
         }
 
         protected virtual void InitProperties()

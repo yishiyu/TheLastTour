@@ -28,8 +28,6 @@ namespace TheLastTour.Controller.Machine
 
         readonly PropertyValue<Key> _propertyStabilityUp = new PropertyValue<Key>(Key.None);
         readonly PropertyValue<Key> _propertyStabilityDown = new PropertyValue<Key>(Key.None);
-        readonly PropertyValue<Key> _propertyStabilityLeft = new PropertyValue<Key>(Key.None);
-        readonly PropertyValue<Key> _propertyStabilityRight = new PropertyValue<Key>(Key.None);
         readonly PropertyValue<float> _propertyStability = new PropertyValue<float>(5);
         readonly PropertyValue<float> _propertyStabilityRotateStep = new PropertyValue<float>(30);
 
@@ -39,8 +37,6 @@ namespace TheLastTour.Controller.Machine
 
             Properties.Add(new MachineProperty("Stability Up", _propertyStabilityUp));
             Properties.Add(new MachineProperty("Stability Down", _propertyStabilityDown));
-            Properties.Add(new MachineProperty("Stability Left", _propertyStabilityLeft));
-            Properties.Add(new MachineProperty("Stability Right", _propertyStabilityRight));
             Properties.Add(new MachineProperty("Stability", _propertyStability));
             Properties.Add(new MachineProperty("Stability Rotate Step", _propertyStabilityRotateStep));
 
@@ -50,7 +46,6 @@ namespace TheLastTour.Controller.Machine
         private void FixedUpdate()
         {
             float yaw = 0;
-            float roll = 0;
 
             if (_propertyStabilityUp.Value != Key.None)
             {
@@ -68,23 +63,7 @@ namespace TheLastTour.Controller.Machine
                 }
             }
 
-            if (_propertyStabilityLeft.Value != Key.None)
-            {
-                if (Keyboard.current[_propertyStabilityLeft.Value].isPressed)
-                {
-                    roll += _propertyStabilityRotateStep.Value;
-                }
-            }
-
-            if (_propertyStabilityRight.Value != Key.None)
-            {
-                if (Keyboard.current[_propertyStabilityRight.Value].isPressed)
-                {
-                    roll -= _propertyStabilityRotateStep.Value;
-                }
-            }
-
-            Quaternion controlRotation = Quaternion.Euler(0, yaw, roll);
+            Quaternion controlRotation = Quaternion.Euler(0, yaw, 0);
 
             if (stabilizerMesh)
             {
@@ -113,19 +92,19 @@ namespace TheLastTour.Controller.Machine
                     transform.position,
                     ForceMode.Impulse);
 
-                Debug.DrawLine(
-                    transform.position,
-                    transform.position + (Vector3.Dot(controlRotation * transform.forward,
-                        RigidBody.GetPointVelocity(transform.position))) * (controlRotation * transform.right),
-                    Color.cyan
-                );
-
-                Debug.DrawLine(
-                    transform.position,
-                    transform.position + (Vector3.Dot(controlRotation * transform.right,
-                        RigidBody.GetPointVelocity(transform.position))) * (controlRotation * transform.right),
-                    Color.cyan
-                );
+                // Debug.DrawLine(
+                //     transform.position,
+                //     transform.position + (Vector3.Dot(controlRotation * transform.forward,
+                //         RigidBody.GetPointVelocity(transform.position))) * (controlRotation * transform.right),
+                //     Color.cyan
+                // );
+                //
+                // Debug.DrawLine(
+                //     transform.position,
+                //     transform.position + (Vector3.Dot(controlRotation * transform.right,
+                //         RigidBody.GetPointVelocity(transform.position))) * (controlRotation * transform.right),
+                //     Color.cyan
+                // );
 
                 Debug.DrawLine(transform.position,
                     transform.position + controlRotation * transform.right * 10,
@@ -133,10 +112,6 @@ namespace TheLastTour.Controller.Machine
                 Debug.DrawLine(transform.position,
                     transform.position + stabilityForce * (controlRotation * transform.right),
                     Color.blue);
-
-                Debug.Log("velocity: " + velocity +
-                          " _propertyStability.Value: " + _propertyStability.Value +
-                          " stability force: " + (velocity * _propertyStability.Value));
             }
         }
     }
