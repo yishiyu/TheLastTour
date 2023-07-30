@@ -94,8 +94,8 @@ namespace TheLastTour.Controller.Machine
                     transform.up * (Power * _propertyMaxPower.Value),
                     transform.position,
                     ForceMode.Impulse);
-                
-                Debug.DrawLine(transform.position, transform.position + transform.up * (Power * _propertyMaxPower.Value), Color.black);
+                Debug.DrawLine(transform.position,
+                    transform.position + transform.up * (Power * _propertyMaxPower.Value), Color.black);
             }
         }
     }

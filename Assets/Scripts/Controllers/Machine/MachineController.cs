@@ -186,14 +186,23 @@ namespace TheLastTour.Controller.Machine
             // 空气阻力
             float speed = MachineRigidBody.velocity.magnitude;
             float resistanceForce = speed * speed * airResistanceCoefficient;
-            MachineRigidBody.AddRelativeForce(
-                -MachineRigidBody.velocity.normalized * resistanceForce,
-                ForceMode.Impulse);
+            Vector3 resistanceForceDirection = -MachineRigidBody.velocity.normalized;
+
+            Vector3 resistanceForcePosition = transform.position + (transform.rotation * MachineRigidBody.centerOfMass);
+
+            MachineRigidBody.AddForceAtPosition(
+                resistanceForce * resistanceForceDirection,
+                resistanceForcePosition,
+                ForceMode.Impulse
+            );
+            // MachineRigidBody.AddRelativeForce(
+            //     -MachineRigidBody.velocity.normalized * resistanceForce,
+            //     ForceMode.Impulse);
 
             Debug.DrawLine(
-                transform.position + MachineRigidBody.centerOfMass,
-                transform.position + MachineRigidBody.centerOfMass -
-                MachineRigidBody.velocity.normalized * (resistanceForce),
+                resistanceForcePosition,
+                resistanceForcePosition +
+                resistanceForce * resistanceForceDirection,
                 Color.yellow);
         }
 
