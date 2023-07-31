@@ -67,7 +67,7 @@ namespace TheLastTour.Controller.Water
             foreach (var center in waveCenters)
             {
                 float distance = Vector2.Distance(new Vector2(x, z), new Vector2(center.x, center.z));
-                float distanceGama = center.y / (distance + 1);
+                float distanceGama = center.y / (Mathf.Sqrt(distance) + 1);
                 pointWaveHeight += Mathf.Sin(distance / waveLength - offset) * this.waveHeight * distanceGama;
             }
 
