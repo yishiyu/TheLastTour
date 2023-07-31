@@ -13,7 +13,7 @@ namespace TheLastTour.Controller.Water
         public Vector3[] waveCenters = new[]
         {
             new Vector3(3.5f, 1, 3.5f),
-            new Vector3(9.5f, 2, 9.5f),
+            new Vector3(9.5f, 1, 9.5f),
         };
 
         public float waveSpeed = 2f;
