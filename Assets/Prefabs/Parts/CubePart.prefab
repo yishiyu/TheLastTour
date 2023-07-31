@@ -118,6 +118,10 @@ MonoBehaviour:
   PartId: 0
   joints: []
   rootJoint: {fileID: 3052477179370406850}
+  floatingCollider: {fileID: 5950360528266142938}
+  floatingMesh: {fileID: 5405293619593178454}
+  normalizedVoxelSize: 0.5
+  voxelSize: {x: 1, y: 1, z: 1}
 --- !u!1 &1938013986050937649
 GameObject:
   m_ObjectHideFlags: 0
