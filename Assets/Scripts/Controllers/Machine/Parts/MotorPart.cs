@@ -66,15 +66,19 @@ namespace TheLastTour.Controller.Machine
 
         public override void FixedUpdate()
         {
-            
             base.FixedUpdate();
-            float torque = _motorPower.Value * Power - _motorDamping.Value * MovablePartRigidbody.angularVelocity.x;
+
+            // 将世界坐标下的旋转转为局部坐标的旋转
+            Vector3 relativeAngularVelocity = Quaternion.Inverse(transform.rotation) * MovablePartRigidbody.angularVelocity;
+            float torque = _motorPower.Value * Power -
+                           _motorDamping.Value * relativeAngularVelocity.x;
 
             MovablePartRigidbody.AddRelativeTorque(torque * Vector3.right);
             Debug.Log("Motor Power: " + _motorPower.Value * Power +
                       "  Power: " + Power +
                       "  _motorPower.Value: " + _motorPower.Value +
-                      "  _motorDamping.Value: " + _motorDamping.Value);
+                      "  _motorDamping.Value: " + _motorDamping.Value +
+                      "  relativeAngularVelocity.x: " + relativeAngularVelocity.x);
         }
     }
 }

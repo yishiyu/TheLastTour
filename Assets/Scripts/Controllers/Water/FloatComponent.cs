@@ -149,11 +149,11 @@ namespace TheLastTour.Controller.Water
         /// <summary>
         /// 获取浮力及作用点
         /// </summary>
-        /// <param name="position">浮力作用刚体位置</param>
+        /// <param name="rigidbodyPosition">浮力作用刚体位置</param>
         /// <param name="force">计算得到的浮力</param>
         /// <param name="torque">浮力产生的力矩</param>
         /// <returns>是否有浮力</returns>
-        public bool GetFloatingForce(Vector3 position, out Vector3 force, out Vector3 torque)
+        public bool GetFloatingForce(Vector3 rigidbodyPosition, out Vector3 force, out Vector3 torque)
         {
             if (_waterVolume)
             {
@@ -167,7 +167,7 @@ namespace TheLastTour.Controller.Water
                     {
                         // 力矩 T = r x F
                         force += _waterVolume.density * voxelSize.x * voxelSize.y * voxelSize.z * Vector3.up;
-                        torque += Vector3.Cross(worldVoxel - position, force) * 0.5f;
+                        torque += Vector3.Cross(worldVoxel - rigidbodyPosition, force) * 0.5f;
                     }
                 }
 
