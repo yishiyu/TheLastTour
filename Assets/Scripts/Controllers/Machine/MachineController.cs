@@ -69,8 +69,6 @@ namespace TheLastTour.Controller.Machine
     {
         public List<PartController> machineParts = new List<PartController>();
 
-        public float airResistanceCoefficient = 0.15f;
-
 
         private Rigidbody _rigidbody;
 
@@ -188,31 +186,33 @@ namespace TheLastTour.Controller.Machine
 
         private void FixedUpdate()
         {
+            // 将阻力分散到每个 Part 上计算
+
             // 空气产生的阻力
-            float speed = MachineRigidBody.velocity.magnitude;
-            float resistanceForce = speed * speed * airResistanceCoefficient;
-            Vector3 resistanceForceDirection = -MachineRigidBody.velocity.normalized;
-
-            Vector3 resistanceForcePosition = transform.position + (transform.rotation * MachineRigidBody.centerOfMass);
-
-            MachineRigidBody.AddForceAtPosition(
-                resistanceForce * resistanceForceDirection,
-                resistanceForcePosition,
-                ForceMode.Impulse
-            );
+            // float speed = MachineRigidBody.velocity.magnitude;
+            // float resistanceForce = speed * speed * airResistanceCoefficient;
+            // Vector3 resistanceForceDirection = -MachineRigidBody.velocity.normalized;
+            //
+            // Vector3 resistanceForcePosition = transform.position + (transform.rotation * MachineRigidBody.centerOfMass);
+            //
+            // MachineRigidBody.AddForceAtPosition(
+            //     resistanceForce * resistanceForceDirection,
+            //     resistanceForcePosition,
+            //     ForceMode.Impulse
+            // );
             // MachineRigidBody.AddRelativeForce(
             //     -MachineRigidBody.velocity.normalized * resistanceForce,
             //     ForceMode.Impulse);
 
-            Debug.DrawLine(
-                resistanceForcePosition,
-                resistanceForcePosition +
-                resistanceForce * resistanceForceDirection,
-                Color.yellow);
+            // Debug.DrawLine(
+            //     resistanceForcePosition,
+            //     resistanceForcePosition +
+            //     resistanceForce * resistanceForceDirection,
+            //     Color.yellow);
 
             // 空气产生的阻力力矩
             // 使用力矩模拟空气阻力可能在旋转速度过快时震,改为直接控制旋转速度
-            Vector3 angularVelocity = MachineRigidBody.angularVelocity * airResistanceCoefficient / 15;
+            // Vector3 angularVelocity = MachineRigidBody.angularVelocity * airResistanceCoefficient / 15;
             // Vector3 angularVelocity = MachineRigidBody.angularVelocity;
             // Vector3 resistanceTorque = -angularVelocity * (angularVelocity.magnitude * airResistanceCoefficient * 1000);
             //
@@ -228,6 +228,10 @@ namespace TheLastTour.Controller.Machine
             //     Color.green);
             //
             // Debug.Log("resistanceTorque: " + resistanceTorque);
+            
+            // 修正转动惯量方向
+            // 经过测试, inertiaTensorRotation 是局部坐标系,所以不需要修正
+            // MachineRigidBody.inertiaTensorRotation = transform.rotation;
         }
 
         public void UpdateSimulatorMass()
@@ -247,12 +251,13 @@ namespace TheLastTour.Controller.Machine
                 Vector3 partMassPosition = part.transform.localPosition + part.CenterOfMass;
                 mass += part.Mass;
                 massCenter += part.Mass * partMassPosition;
+                // 通过平行轴定理修正转动惯量(否则很明显的一个错误是,当只有一个方块的时候,转动惯量为 0)
                 intertiaX += part.Mass * (partMassPosition.y * partMassPosition.y +
-                                          partMassPosition.z * partMassPosition.z);
+                                          partMassPosition.z * partMassPosition.z + 0.6667f);
                 intertiaY += part.Mass * (partMassPosition.x * partMassPosition.x +
-                                          partMassPosition.z * partMassPosition.z);
+                                          partMassPosition.z * partMassPosition.z + 0.6667f);
                 intertiaZ += part.Mass * (partMassPosition.x * partMassPosition.x +
-                                          partMassPosition.y * partMassPosition.y);
+                                          partMassPosition.y * partMassPosition.y + 0.6667f);
             }
 
             MachineRigidBody.mass = mass;

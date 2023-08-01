@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using TheLastTour.Controller.Water;
 using TheLastTour.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace TheLastTour.Controller.Machine
 {
@@ -25,6 +28,11 @@ namespace TheLastTour.Controller.Machine
         public bool isCorePart = false;
         public long PartId = 0;
         public FloatComponent partFloatComponent;
+
+        // 三个方向的阻力系数
+        // 水体阻力系数倍数,水密度/空气密度 = 775
+        public Vector3 airResistance = new Vector3(0.001f, 0.001f, 0.001f);
+        public const float WaterResistanceMultiple = 775;
 
         public FloatComponent PartFloatComponent
         {
@@ -325,29 +333,94 @@ namespace TheLastTour.Controller.Machine
 
         public virtual void FixedUpdate()
         {
-            if (PartFloatComponent)
+            bool isUnderwater = false;
+
+            Rigidbody simulatorRigidbody = GetSimulatorRigidbody();
+            if (simulatorRigidbody)
             {
-                var simulatorRigidbody = GetSimulatorRigidbody();
-                if (simulatorRigidbody)
+                // 计算浮力
+                if (PartFloatComponent)
                 {
-                    if (PartFloatComponent.GetFloatingForce(
+                    {
+                        isUnderwater = PartFloatComponent.GetFloatingForce(
                             simulatorRigidbody.worldCenterOfMass,
                             out var force,
-                            out var torque))
-                    {
-                        // 力矩的效果被单独剥离到后面了,无需指定作用点位置
-                        simulatorRigidbody.AddForce(
-                            force,
-                            ForceMode.Impulse
-                        );
+                            out var torque);
+                        if (isUnderwater)
+                        {
+                            // 力矩的效果被单独剥离到后面了,无需指定作用点位置
+                            simulatorRigidbody.AddForce(
+                                force,
+                                ForceMode.Impulse
+                            );
 
-                        // 将 torque 转换为世界坐标系下的 torque
-                        simulatorRigidbody.AddTorque(
-                            torque,
-                            ForceMode.Impulse
-                        );
+                            // 将 torque 转换为世界坐标系下的 torque
+                            simulatorRigidbody.AddTorque(
+                                torque,
+                                ForceMode.Impulse
+                            );
+                        }
                     }
                 }
+
+
+                // 计算阻力
+                // 参考 Unity 刚体本身对空气阻力的处理
+                // https://forum.unity.com/threads/how-is-angular-drag-applied-to-a-rigidbody-in-unity-how-is-angular-damping-applied-in-physx.369599/
+                // 但 Unity 本身将阻力系数设定为一个常量,产生的阻力与速度成正比,而不是速度的平方
+                // 对此进行一些修正(因为飞机等运动是需要高速运动的)
+                // 阻力参考资料: https://zh.wikipedia.org/zh-cn/%E9%98%BB%E5%8A%9B%E6%96%B9%E7%A8%8B
+                // F = (1/2)p*v^2*C*A = v^2 * airResistance
+                // 
+                // 1. 需要注意,当v超过一定阈值时,产生的阻力会瞬间阻止该物体运动(现实中不会出现这种情况是因为 deltaTime 是无穷小的)
+                // 此时 v^2 * airResistance * deltaTime >= mv
+                // 此时 V = m/(deltaTime * airResistance)
+                // 
+                // 2. 另一种情况,瞬间的冲量使得力反向并变得更大,这是不合理的,而且这会导致游戏崩溃
+                // 此时 v^2 * airResistance * deltaTime >= 2mv
+                // 此时 V = 2m/( * deltaTime * airResistance)
+                // 
+                // 为此需要做一个阈值处理:该冲量不能使速度在一帧内变化为原本的20%以下
+                // 此时 F = 0.8mv/deltaTime
+                Vector3 velocity = simulatorRigidbody.GetPointVelocity(transform.position);
+                Vector3 resistance = transform.rotation * airResistance;
+                Vector3 resistanceForce = -new Vector3(
+                    Mathf.Abs(velocity.x * resistance.x) * velocity.x,
+                    Mathf.Abs(velocity.y * resistance.y) * velocity.y,
+                    Mathf.Abs(velocity.z * resistance.z) * velocity.z) * Time.deltaTime;
+
+
+                if (isUnderwater)
+                {
+                    resistanceForce *= WaterResistanceMultiple;
+                }
+
+                // // 阻力不能超过一定的阈值
+                // float maxResistance = 0.8f * simulatorRigidbody.mass * velocity.magnitude
+                //                       / Time.deltaTime;
+                // resistanceForce = Vector3.ClampMagnitude(resistanceForce, maxResistance);
+
+                // 假设阻力总是作用于零件中心
+                // 该零件也会产生力矩效果
+                // 直接粗略的将该力矩效果等同于对于旋转的阻尼
+                // (这样会导致当某个轴上只有一个方块时,该轴没有任何角速度阻尼)
+                // 但是实际的游戏中谁有会只造一个方块或者一个横条呢?(逃
+                // 为了防止这种情况,可以给 Rigidbody 的 Angular Drag 设一个较小的值
+                simulatorRigidbody.AddForceAtPosition(
+                    resistanceForce,
+                    transform.position,
+                    ForceMode.Impulse
+                );
+
+                Debug.DrawLine(transform.position, transform.position + resistanceForce, Color.red);
+                Debug.Log(
+                    "velocity: " + velocity + "\n" +
+                    "resistanceForce: " + resistanceForce
+                    // "maxResistance: " + maxResistance
+                );
+                // Debug.Log("velocity: " + velocity + "\n" +
+                //           "resistance: " + resistance + "\n" +
+                //           "resistanceForce: " + resistanceForce);
             }
         }
 

@@ -118,6 +118,7 @@ MonoBehaviour:
   isCorePart: 0
   PartId: 0
   partFloatComponent: {fileID: 4395345316371486015}
+  airResistance: {x: 0.01, y: 0.01, z: 0.01}
   joints: []
   rootJoint: {fileID: 3052477179370406850}
 --- !u!1 &1938013986050937649

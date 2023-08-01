@@ -34,11 +34,11 @@ namespace TheLastTour.Controller.Machine
         {
             get
             {
-                if (MovablePartRigidbody != null)
-                {
-                    return MovablePartRigidbody.mass;
-                }
-
+                // if (MovablePartRigidbody != null)
+                // {
+                //     return MovablePartRigidbody.mass;
+                // }
+                // Movable 独立负责自己的重力,其父级不需要控制该物体
                 return 0;
             }
         }
