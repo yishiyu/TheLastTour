@@ -86,8 +86,10 @@ namespace TheLastTour.Controller.Machine
                 Space.Self);
         }
 
-        private void FixedUpdate()
+        public override void FixedUpdate()
         {
+            
+            base.FixedUpdate();
             if (RigidBody)
             {
                 RigidBody.AddForceAtPosition(

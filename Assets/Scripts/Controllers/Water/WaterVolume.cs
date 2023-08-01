@@ -66,11 +66,11 @@ namespace TheLastTour.Controller.Water
 
         private void UpdateWaterVertices()
         {
-            _meshVerticesWorldPosition = Mesh.vertices;
-            _meshVerticesLocalPosition = new Vector3[_meshVerticesWorldPosition.Length];
-            for (int i = 0; i < _meshVerticesWorldPosition.Length; i++)
+            _meshVerticesLocalPosition = Mesh.vertices;
+            _meshVerticesWorldPosition = new Vector3[_meshVerticesLocalPosition.Length];
+            for (int i = 0; i < _meshVerticesLocalPosition.Length; i++)
             {
-                _meshVerticesLocalPosition[i] = transform.InverseTransformPoint(_meshVerticesWorldPosition[i]);
+                _meshVerticesWorldPosition[i] = transform.TransformPoint(_meshVerticesLocalPosition[i]);
             }
         }
 
@@ -88,7 +88,7 @@ namespace TheLastTour.Controller.Water
             {
                 Vector3 triangleNormal = Vector3.Cross(
                     triangleVertices[1] - triangleVertices[0],
-                    triangleVertices[2] - triangleVertices[0]);
+                    triangleVertices[2] - triangleVertices[0]).normalized;
 
                 // 保证找到的法线向上
                 if (triangleNormal.y < 0)
@@ -98,7 +98,7 @@ namespace TheLastTour.Controller.Water
 
                 // 同一个平面上两个点AB,一个法线N
                 // 根据平面方程 Ax + By + Cz + D = 0
-                // AN == BN = -D
+                // AN = BN = -D
                 // Ax*Nx + Ay*Ny + Az*Nz = Bx*Nx + By*Ny + Bz*Nz = BN
                 // Ay = (BN - Bx*Nx - Bz*Nz) / Ny
                 // 可以根据已知的法线和顶点计算出指定 WorldPosition 点向下与水面交点的高度
@@ -125,25 +125,32 @@ namespace TheLastTour.Controller.Water
             }
 
             Vector3[] triangles = new Vector3[3];
-            Vector3 distance = worldPosition - _meshVerticesWorldPosition[indexX + indexZ * columns];
+            Vector3 distance = worldPosition - _meshVerticesWorldPosition[GetIndex(indexX, indexZ)];
 
             // 更靠近左下角的点 
             if (distance.x < distance.z)
             {
-                triangles[0] = _meshVerticesLocalPosition[indexX + indexZ * columns];
-                triangles[1] = _meshVerticesLocalPosition[indexX + (indexZ + 1) * columns];
-                triangles[2] = _meshVerticesLocalPosition[indexX + 1 + indexZ * columns];
+                triangles[0] = _meshVerticesWorldPosition[GetIndex(indexX, indexZ)];
+                triangles[1] = _meshVerticesWorldPosition[GetIndex(indexX, indexZ + 1)];
+                triangles[2] = _meshVerticesWorldPosition[GetIndex(indexX + 1, indexZ)];
             }
             // 更靠近右上角的点
             else
             {
-                triangles[0] = _meshVerticesLocalPosition[indexX + 1 + (indexZ + 1) * columns];
-                triangles[1] = _meshVerticesLocalPosition[indexX + 1 + indexZ * columns];
-                triangles[2] = _meshVerticesLocalPosition[indexX + (indexZ + 1) * columns];
+                triangles[0] = _meshVerticesWorldPosition[GetIndex(indexX + 1, indexZ + 1)];
+                triangles[1] = _meshVerticesWorldPosition[GetIndex(indexX + 1, indexZ)];
+                triangles[2] = _meshVerticesWorldPosition[GetIndex(indexX, indexZ + 1)];
             }
 
 
             return triangles;
+        }
+
+        private int GetIndex(int indexX, int indexZ)
+        {
+            // 因为 column 是方格的数量
+            // 计算顶点下标时每行需要多加一个顶点
+            return indexX + indexZ * (columns + 1);
         }
     }
 }

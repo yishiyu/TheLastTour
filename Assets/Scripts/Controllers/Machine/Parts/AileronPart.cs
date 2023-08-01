@@ -43,8 +43,10 @@ namespace TheLastTour.Controller.Machine
             _aileronMeshRotation = aileronMesh.transform.localRotation;
         }
 
-        private void FixedUpdate()
+        public override void FixedUpdate()
         {
+            
+            base.FixedUpdate();
             float pitch = 0;
 
             if (_propertyAileronUp.Value != Key.None)

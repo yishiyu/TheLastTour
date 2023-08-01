@@ -15,7 +15,7 @@ namespace TheLastTour.Controller.Machine
         public override Rigidbody GetSimulatorRigidbody()
         {
             // 将自身的物理模拟托管到父级,无论是 Machine 还是 MovablePart
-            return GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
+            return transform.parent.GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
         }
 
         public override void OnAttached(ISimulator simulator)

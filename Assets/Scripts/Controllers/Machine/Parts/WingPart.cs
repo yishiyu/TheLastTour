@@ -41,8 +41,9 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        private void FixedUpdate()
+        public override void FixedUpdate()
         {
+            base.FixedUpdate();
             if (RigidBody)
             {
                 // 局部速度(局部坐标)

@@ -66,8 +66,10 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-        private void FixedUpdate()
+        public override void FixedUpdate()
         {
+            
+            base.FixedUpdate();
             float torque = _motorPower.Value * Power;
 
             MovablePartRigidbody.AddRelativeTorque(torque * Vector3.forward);

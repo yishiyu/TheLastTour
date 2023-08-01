@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - UI
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - PartJoint
   - PartMesh
   - 
-  - 
-  - 
+  - FloatComponent
+  - Water
   - 
   - 
   - 

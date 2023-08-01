@@ -43,8 +43,10 @@ namespace TheLastTour.Controller.Machine
             _stabilizerMeshRotation = stabilizerMesh.transform.localRotation;
         }
 
-        private void FixedUpdate()
+        public override void FixedUpdate()
         {
+            
+            base.FixedUpdate();
             float yaw = 0;
 
             if (_propertyStabilityUp.Value != Key.None)

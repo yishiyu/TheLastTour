@@ -16,7 +16,6 @@ namespace TheLastTour.Controller.Machine
         PreviewDisable,
     }
 
-    [RequireComponent(typeof(Collider))]
     public abstract class PartController : MonoBehaviour, ISimulator
     {
         // 可设置属性
@@ -25,6 +24,20 @@ namespace TheLastTour.Controller.Machine
         public Vector3 centerOfMass = Vector3.zero;
         public bool isCorePart = false;
         public long PartId = 0;
+        public FloatComponent partFloatComponent;
+
+        public FloatComponent PartFloatComponent
+        {
+            get
+            {
+                if (partFloatComponent == null)
+                {
+                    partFloatComponent = GetComponentInChildren<FloatComponent>();
+                }
+
+                return partFloatComponent;
+            }
+        }
 
         private Renderer _partRenderer;
 
@@ -217,13 +230,6 @@ namespace TheLastTour.Controller.Machine
             }
 
             InitProperties();
-
-            if (!_calculatedDensity)
-            {
-                _calculatedDensity = true;
-                // CalculateDensity();
-                CutIntoVoxels();
-            }
         }
 
         protected virtual void InitProperties()
@@ -317,6 +323,34 @@ namespace TheLastTour.Controller.Machine
         public abstract void RemovePart(PartController part);
         public abstract void UpdateSimulatorMass();
 
+        public virtual void FixedUpdate()
+        {
+            if (PartFloatComponent)
+            {
+                var simulatorRigidbody = GetSimulatorRigidbody();
+                if (simulatorRigidbody)
+                {
+                    if (PartFloatComponent.GetFloatingForce(
+                            simulatorRigidbody.worldCenterOfMass,
+                            out var force,
+                            out var torque))
+                    {
+                        // 力矩的效果被单独剥离到后面了,无需指定作用点位置
+                        simulatorRigidbody.AddForce(
+                            force,
+                            ForceMode.Impulse
+                        );
+
+                        // 将 torque 转换为世界坐标系下的 torque
+                        simulatorRigidbody.AddTorque(
+                            torque,
+                            ForceMode.Impulse
+                        );
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// 用于判断是否为叶子节点, 一些操作需要将某个组件及其附属组件视为一个整体
         /// 例如 MovablePart 需要将该函数重载(始终为true)
@@ -364,147 +398,6 @@ namespace TheLastTour.Controller.Machine
             for (int i = 0; i < jsonPart.partProperties.Count; i++)
             {
                 Properties[i].Deserialize(jsonPart.partProperties[i]);
-            }
-        }
-
-        // 水面浮力系统
-        private bool _calculatedDensity = false;
-        private float desity = 1f;
-        public Collider floatingCollider;
-        public MeshFilter floatingMesh;
-        public float normalizedVoxelSize = 0.5f;
-        public Vector3 voxelSize = Vector3.one;
-        private Vector3[] _voxels;
-
-        private Collider FloatingCollider
-        {
-            get
-            {
-                if (floatingCollider == null)
-                {
-                    floatingCollider = GetComponent<Collider>();
-                }
-
-                return floatingCollider;
-            }
-        }
-
-
-        private WaterVolume _waterVolume;
-
-        // mass: 该组件自身的质量
-        // Mass: 该组件及其附属组件的总质量
-        // 每个 Part 都只需要负责自身的浮力,因此用 mass 和 mesh 来计算浮力
-
-        // private void CalculateDensity()
-        // {
-        //     Mesh mesh = floatingMesh.mesh;
-        //     int[] triangles = mesh.triangles;
-        //     Vector3[] vertices = mesh.vertices;
-        //
-        //     float volume = 0f;
-        //     for (int i = 0; i < triangles.Length; i += 3)
-        //     {
-        //         // 拿着三角形的三个顶点与 Transform 中心 得到三个向量
-        //         // 用这三个向量组成的四面体估算体积
-        //         // 根据三角形法线方向判断体积正负
-        //         // 凹多面体空的部分由于负法线四面体的存在,体积会被抵消
-        //         Vector3 v1 = vertices[triangles[i + 0]];
-        //         Vector3 v2 = vertices[triangles[i + 1]];
-        //         Vector3 v3 = vertices[triangles[i + 2]];
-        //
-        //         // 以 v1 表示的顶点为交点,三个向量组成四面体
-        //         // 其中 t1 t2 从 v1 指向其他顶点, t3 从其他顶点指向 v1
-        //         Vector3 t1 = v1 - v2;
-        //         Vector3 t2 = v1 - v3;
-        //         Vector3 t3 = v1;
-        //
-        //         // 四面体体积计算公式 (底面积 * 高 / 3) = (底面向量叉乘/2)点乘第三个向量/3
-        //         volume = (Vector3.Dot(t1, Vector3.Cross(t2, t3))) / 6f;
-        //     }
-        //
-        //     desity = mass / volume;
-        // }
-
-        private void CutIntoVoxels()
-        {
-            Quaternion rotation = transform.rotation;
-            transform.rotation = Quaternion.identity;
-
-            Bounds bounds = floatingCollider.bounds;
-            voxelSize.x = bounds.size.x * normalizedVoxelSize;
-            voxelSize.y = bounds.size.y * normalizedVoxelSize;
-            voxelSize.z = bounds.size.z * normalizedVoxelSize;
-
-            int voxelCountAlongAxis = Mathf.CeilToInt(1f / normalizedVoxelSize);
-
-            _voxels = new Vector3[voxelCountAlongAxis * voxelCountAlongAxis * voxelCountAlongAxis];
-            float boundsMagnitude = bounds.size.magnitude;
-
-            for (int i = 0; i < voxelCountAlongAxis; i++)
-            {
-                for (int j = 0; j < voxelCountAlongAxis; j++)
-                {
-                    for (int k = 0; k < voxelCountAlongAxis; k++)
-                    {
-                        Vector3 voxelCenter = new Vector3(
-                            bounds.min.x + voxelSize.x * (i + 0.5f),
-                            bounds.min.y + voxelSize.y * (j + 0.5f),
-                            bounds.min.z + voxelSize.z * (k + 0.5f)
-                        );
-
-                        // 用射线检测的方法判断该点是否在碰撞体内
-                        // 首次碰到的点的法向量与射线方向一致,则说明该 voxel 在碰撞体内
-                        if (!IsVoxelInCollider(voxelCenter, boundsMagnitude))
-                        {
-                            continue;
-                        }
-
-                        _voxels[i * voxelCountAlongAxis * voxelCountAlongAxis + j * voxelCountAlongAxis + k] =
-                            voxelCenter;
-                    }
-                }
-            }
-
-            transform.rotation = rotation;
-        }
-
-        private bool IsVoxelInCollider(Vector3 voxel, float length)
-        {
-            Ray ray = new Ray(voxel, floatingCollider.transform.position - voxel);
-            if (!Physics.Raycast(ray, out var hit, length, -1))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Water"))
-            {
-                _waterVolume = other.GetComponent<WaterVolume>();
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("Water"))
-            {
-                _waterVolume = null;
-            }
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (_voxels != null)
-            {
-                foreach (var voxel in _voxels)
-                {
-                    Gizmos.DrawSphere(voxel, 0.1f);
-                }
             }
         }
     }
