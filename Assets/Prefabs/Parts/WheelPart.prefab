@@ -346,7 +346,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -407,6 +407,7 @@ MonoBehaviour:
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
   PartId: 0
+  partFloatComponent: {fileID: 0}
   joints: []
   rootJoint: {fileID: 4041644731599037103}
   attachedParts: []

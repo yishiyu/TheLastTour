@@ -155,7 +155,7 @@ namespace TheLastTour.Controller.Machine
             MovablePartRigidbody.centerOfMass = massCenter / totalMass;
             MovablePartRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ) * 10;
 
-            transform.parent.GetComponent<ISimulator>().UpdateSimulatorMass();
+            // transform.parent.GetComponent<ISimulator>().UpdateSimulatorMass();
         }
 
         public override bool IsLeafNode()
@@ -173,7 +173,7 @@ namespace TheLastTour.Controller.Machine
         {
             base.TurnOnSimulation(isOn);
 
-            MovablePartRigidbody.useGravity = false;
+            // MovablePartRigidbody.useGravity = false;
             MovablePartRigidbody.isKinematic = !isOn;
 
 
