@@ -210,7 +210,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6135531581933305244}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -242,11 +242,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partName: MotorPart
-  mass: 1
+  mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
   PartId: 0
   partFloatComponent: {fileID: 0}
+  airResistance: {x: 0.01, y: 0.01, z: 0.01}
   joints: []
   rootJoint: {fileID: 4416145709767855698}
   attachedParts: []

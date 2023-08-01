@@ -46,10 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partName: CylinderPart
-  mass: 1
+  mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
   PartId: 0
+  partFloatComponent: {fileID: 0}
+  airResistance: {x: 1, y: 1, z: 1}
   joints: []
   rootJoint: {fileID: 5672462378003777070}
 --- !u!1 &4522060020939565184

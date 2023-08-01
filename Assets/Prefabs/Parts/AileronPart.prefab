@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partName: AileronPart
-  mass: 1
+  mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
   PartId: 0

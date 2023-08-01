@@ -359,6 +359,10 @@ namespace TheLastTour.Controller.Machine
                                 torque,
                                 ForceMode.Impulse
                             );
+
+                            // Debug.Log(
+                            //     "FloatingForce: " + force +
+                            //     "\nFloatingTorque" + torque);
                         }
                     }
                 }
@@ -396,9 +400,8 @@ namespace TheLastTour.Controller.Machine
                 }
 
                 // // 阻力不能超过一定的阈值
-                // float maxResistance = 0.8f * simulatorRigidbody.mass * velocity.magnitude
-                //                       / Time.deltaTime;
-                // resistanceForce = Vector3.ClampMagnitude(resistanceForce, maxResistance);
+                float maxResistance = 0.8f * simulatorRigidbody.mass * velocity.magnitude / Time.deltaTime;
+                resistanceForce = Vector3.ClampMagnitude(resistanceForce, maxResistance);
 
                 // 假设阻力总是作用于零件中心
                 // 该零件也会产生力矩效果
@@ -412,12 +415,12 @@ namespace TheLastTour.Controller.Machine
                     ForceMode.Impulse
                 );
 
-                Debug.DrawLine(transform.position, transform.position + resistanceForce, Color.red);
-                Debug.Log(
-                    "velocity: " + velocity + "\n" +
-                    "resistanceForce: " + resistanceForce
+                // Debug.DrawLine(transform.position, transform.position + resistanceForce, Color.red);
+                // Debug.Log(
+                //     "velocity: " + velocity + "\n" +
+                //     "resistanceForce: " + resistanceForce
                     // "maxResistance: " + maxResistance
-                );
+                // );
                 // Debug.Log("velocity: " + velocity + "\n" +
                 //           "resistance: " + resistance + "\n" +
                 //           "resistanceForce: " + resistanceForce);

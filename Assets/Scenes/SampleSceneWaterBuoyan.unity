@@ -34906,6 +34906,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMachine
       objectReference: {fileID: 0}
+    - target: {fileID: 2659207433923350815, guid: 1dedc941b4bdddd4b887e0e00ace57bf, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659207433923350815, guid: 1dedc941b4bdddd4b887e0e00ace57bf, type: 3}
+      propertyPath: m_ImplicitTensor
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

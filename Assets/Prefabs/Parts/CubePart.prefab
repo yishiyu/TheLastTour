@@ -98,7 +98,7 @@ Transform:
   - {fileID: 3028304692737846564}
   - {fileID: 6354246063196647988}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4280982935770607144
 MonoBehaviour:
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partName: CubePart
-  mass: 1
+  mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
   PartId: 0

@@ -47,10 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partName: StabilizerPart
-  mass: 1
+  mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
   PartId: 0
+  partFloatComponent: {fileID: 0}
+  airResistance: {x: 0.01, y: 0.01, z: 0.01}
   joints: []
   rootJoint: {fileID: 336667589128152197}
   stabilizerMesh: {fileID: 6676559466810943597}

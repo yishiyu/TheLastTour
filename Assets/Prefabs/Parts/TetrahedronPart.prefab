@@ -413,10 +413,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partName: TetrahedronPart
-  mass: 1
+  mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
   PartId: 0
+  partFloatComponent: {fileID: 0}
+  airResistance: {x: 0.01, y: 0.01, z: 0.01}
   joints: []
   rootJoint: {fileID: 1618205764772563521}
 --- !u!1001 &1883859825433267600
