@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1252790098, guid: 448d62fcada76fd4ab5702190add98fd, type: 3}
+  m_Name: EditorStates
+  m_EditorClassIdentifier: 
+  GeneralStates:
+    LoadedProjectGUID:
+      valueInternal: 484b1fa297e8053458c034e1ccf49ea1
+    RecentlyOpenedProjectPath:
+      valueInternal: Assets\Art\Animation\Yuuri
+    RecentlyOpenedProjectGUIDsList:
+    - valueInternal: 484b1fa297e8053458c034e1ccf49ea1
+    - valueInternal: 7418946d4754b4642abef58be973f262
