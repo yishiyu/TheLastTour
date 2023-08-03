@@ -415,7 +415,7 @@ namespace TheLastTour.Controller.Machine
                     ForceMode.Impulse
                 );
 
-                // Debug.DrawLine(transform.position, transform.position + resistanceForce, Color.red);
+                Debug.DrawLine(transform.position, transform.position + resistanceForce, Color.yellow);
                 // Debug.Log(
                 //     "velocity: " + velocity + "\n" +
                 //     "resistanceForce: " + resistanceForce
