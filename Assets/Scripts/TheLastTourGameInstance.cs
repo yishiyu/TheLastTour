@@ -48,19 +48,32 @@ namespace TheLastTour
 
         private void Awake()
         {
-            DontDestroyOnLoad(this);
-
-            Debug.Log("TheLastTourGameInstance Start");
-
-            TheLastTourArchitecture.CreateArchitecture();
-
-            TheLastTourArchitecture.Instance.GetManager<IMachineManager>()
-                .SetDefaultMachinePrefab(DefaultMachinePrefab);
-
-            IPartManager partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
-            foreach (PartController part in partPrefabs)
+            if (_instance == null)
             {
-                partManager.RegisterPart(part);
+                _instance = this;
+            }
+
+
+            if (_instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                DontDestroyOnLoad(this);
+
+                Debug.Log("TheLastTourGameInstance Start");
+
+                TheLastTourArchitecture.CreateArchitecture();
+
+                TheLastTourArchitecture.Instance.GetManager<IMachineManager>()
+                    .SetDefaultMachinePrefab(DefaultMachinePrefab);
+
+                IPartManager partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
+                foreach (PartController part in partPrefabs)
+                {
+                    partManager.RegisterPart(part);
+                }
             }
         }
     }
