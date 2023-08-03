@@ -287,7 +287,7 @@ namespace TheLastTour.Controller
                     if (_partPreviewInstance == null)
                     {
                         // _partPreviewInstance = Instantiate(partPrefabs[CurrentSelectedPartIndex]);
-                        _partPreviewInstance = _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].name);
+                        _partPreviewInstance = _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].partName);
                         _partPreviewInstance.EditType = EEditType.PreviewDisable;
                     }
 
@@ -343,7 +343,7 @@ namespace TheLastTour.Controller
 
                             // PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject)
                             //     .GetComponent<PartController>();
-                            PartController part = _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].name);
+                            PartController part = _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].partName);
 
                             // 与预览零件连接的 joint
                             PartJointController joint = _partPreviewInstance.ConnectedJoint;

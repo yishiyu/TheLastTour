@@ -19,7 +19,11 @@ namespace TheLastTour.Controller.Machine
             {
                 if (_simulatorRigidbody == null)
                 {
-                    _simulatorRigidbody = transform.parent.GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
+                    if (transform.parent)
+                    {
+                        _simulatorRigidbody =
+                            transform.parent.GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
+                    }
                 }
 
                 return _simulatorRigidbody;
