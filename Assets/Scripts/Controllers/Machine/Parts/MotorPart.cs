@@ -20,10 +20,30 @@ namespace TheLastTour.Controller.Machine
             set { _power = Mathf.Clamp(value, -_maxPower, _maxPower); }
         }
 
+        private Rigidbody _simulatorRigidbody;
+
+        private Rigidbody SimulatorRigidbody
+        {
+            get
+            {
+                if (_simulatorRigidbody == null)
+                {
+                    if (transform.parent)
+                    {
+                        _simulatorRigidbody =
+                            transform.parent.GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
+                    }
+                }
+
+                return _simulatorRigidbody;
+            }
+        }
+
+        
         private PropertyValue<Key> _motorPowerUp = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _motorPowerDown = new PropertyValue<Key>(Key.None);
         private PropertyValue<float> _motorPower = new PropertyValue<float>(100);
-        private PropertyValue<float> _motorDamping = new PropertyValue<float>(100f);
+        private PropertyValue<float> _motorDamping = new PropertyValue<float>(0.2f);
 
 
         public override void OnAttached(ISimulator simulator)
@@ -70,15 +90,31 @@ namespace TheLastTour.Controller.Machine
 
             // 将世界坐标下的旋转转为局部坐标的旋转
             Vector3 relativeAngularVelocity = Quaternion.Inverse(transform.rotation) * MovablePartRigidbody.angularVelocity;
+            // 对自身施加力矩
             float torque = _motorPower.Value * Power -
-                           _motorDamping.Value * relativeAngularVelocity.x;
+                           _motorDamping.Value * relativeAngularVelocity.y;
+            
+            // float torque = _motorPower.Value * Power;
+            MovablePartRigidbody.AddRelativeTorque(torque * Vector3.up);
+            // 对父级施加力矩
+            if (SimulatorRigidbody != null)
+            {
+                SimulatorRigidbody.AddRelativeTorque(-torque * (transform.localRotation * Vector3.up));
+            }
 
-            MovablePartRigidbody.AddRelativeTorque(torque * Vector3.right);
+            //
+            // MovablePartRigidbody.AddRelativeTorque(torque * Vector3.right);
+            // Debug.Log("Motor Power: " + _motorPower.Value * Power +
+            //           "  Power: " + Power +
+            //           "  _motorPower.Value: " + _motorPower.Value +
+            //           "  _motorDamping.Value: " + _motorDamping.Value +
+            //           "  relativeAngularVelocity.x: " + relativeAngularVelocity.x);
+            
             Debug.Log("Motor Power: " + _motorPower.Value * Power +
                       "  Power: " + Power +
                       "  _motorPower.Value: " + _motorPower.Value +
-                      "  _motorDamping.Value: " + _motorDamping.Value +
-                      "  relativeAngularVelocity.x: " + relativeAngularVelocity.x);
+                      "  _motorDamping.Value: " + _motorDamping.Value+
+                      "  relativeAngularVelocity: " + relativeAngularVelocity);
         }
     }
 }

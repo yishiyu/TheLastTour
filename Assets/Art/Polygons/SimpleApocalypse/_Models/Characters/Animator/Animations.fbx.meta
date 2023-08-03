@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: d55a3dafe23105e409ee70d6605cbd49
 ModelImporter:
-  serializedVersion: 16
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
     100002: Body
@@ -182,16 +182,6 @@ ModelImporter:
     7400044: Crouch_Up
     7400046: Salute
     7400048: GrenadeThrow
-    7400050: Head_Right
-    7400052: Head_Left
-    7400054: Head_Up
-    7400056: Head_Down
-    7400058: Head_Normal
-    7400060: Body_Normal
-    7400062: Body_Up
-    7400064: Body_Down
-    7400066: Body_Left
-    7400068: Body_Right
     9500000: //RootNode
   materials:
     importMaterials: 0
@@ -202,7 +192,7 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -212,8 +202,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle
       takeName: Take 001
-      firstFrame: 2
-      lastFrame: 45
+      firstFrame: 1
+      lastFrame: 49
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -223,7 +213,7 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
@@ -238,7 +228,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk
       takeName: Take 001
-      firstFrame: 51
+      firstFrame: 52
       lastFrame: 79
       wrapMode: 0
       orientationOffsetY: 0
@@ -264,7 +254,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: Take 001
-      firstFrame: 82
+      firstFrame: 81
       lastFrame: 99
       wrapMode: 0
       orientationOffsetY: 0
@@ -273,8 +263,8 @@ ModelImporter:
       loop: 0
       loopTime: 1
       loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
@@ -284,51 +274,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Root_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt1
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt/Foot_Left_jnt1
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt/Foot_Right_jnt1
-        weight: 1
+      transformMask: []
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
@@ -787,7 +733,7 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
@@ -802,8 +748,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Crouch_Idle
       takeName: Take 001
-      firstFrame: 990
-      lastFrame: 991
+      firstFrame: 988
+      lastFrame: 1010
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -813,7 +759,7 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
@@ -839,7 +785,7 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 1
@@ -903,853 +849,269 @@ ModelImporter:
       transformMask: []
       maskType: 0
       maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Head_Right
-      takeName: Take 001
-      firstFrame: 1205
-      lastFrame: 1210
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Head_Left
-      takeName: Take 001
-      firstFrame: 1225
-      lastFrame: 1230
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Head_Up
-      takeName: Take 001
-      firstFrame: 1265
-      lastFrame: 1270
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Head_Down
-      takeName: Take 001
-      firstFrame: 1245
-      lastFrame: 1260
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Head_Normal
-      takeName: Take 001
-      firstFrame: 1285
-      lastFrame: 1291
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Root_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Body
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Prop_FireFighterPack
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt1
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Head
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt/Hand_Left
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt/Weapon_Shield
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/LowerArm_Left
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/UpperArm_Left
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/UpperArm_Left25
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/UpperArm_Right24
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt/Hand_Right
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt/Weapon_Sword
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/LowerArm_Right
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/UpperArm_Right
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/UpperArm_Right/UpperArm_Left24
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/UpperArm_Right23
-        weight: 1
-      - path: Root_jnt/Hips_jnt/LowerBody
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt/Foot_Left
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt/Foot_Left_jnt1
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/LowerLeg_Left
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/UpperLeg_Left
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt/Foot_Right
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt/Foot_Right_jnt1
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/LowerLeg_Right
-        weight: 1
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/UpperLeg_Right
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Body_Normal
-      takeName: Take 001
-      firstFrame: 1339
-      lastFrame: 1340
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Root_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt/Foot_Left_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt/Foot_Right_jnt1
-        weight: 0
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Body_Up
-      takeName: Take 001
-      firstFrame: 1330
-      lastFrame: 1331
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Root_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt/Foot_Left_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt/Foot_Right_jnt1
-        weight: 0
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Body_Down
-      takeName: Take 001
-      firstFrame: 1324
-      lastFrame: 1325
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Root_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt/Foot_Left_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt/Foot_Right_jnt1
-        weight: 0
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Body_Left
-      takeName: Take 001
-      firstFrame: 1319
-      lastFrame: 1320
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Root_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt/Foot_Left_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt/Foot_Right_jnt1
-        weight: 0
-      maskType: 0
-      maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Body_Right
-      takeName: Take 001
-      firstFrame: 1313
-      lastFrame: 1314
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Root_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt
-        weight: 1
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/Head_jnt/Hat_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Left_jnt/LowerArm_Left_jnt/Hand_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/Body_jnt/Spine_jnt/UpperArm_Right_jnt/LowerArm_Right_jnt/Hand_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Left_jnt/LowerLeg_Left_jnt/Foot_Left_jnt/Foot_Left_jnt1
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt
-        weight: 0
-      - path: Root_jnt/Hips_jnt/UpperLeg_Right_jnt/LowerLeg_Right_jnt/Foot_Right_jnt/Foot_Right_jnt1
-        weight: 0
-      maskType: 0
-      maskSource: {instanceID: 0}
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
-    importBlendShapes: 0
+    importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
+    keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 0
     normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     human:
     - boneName: Hips_jnt
       humanName: Hips
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .0152389491, y: 0, z: .00761947455}
+        length: .0190486908
+        modified: 1
     - boneName: UpperLeg_Left_jnt
       humanName: LeftUpperLeg
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -60.0000038, y: -60.0000038, z: -90}
+        max: {x: 60.0000038, y: 60.0000038, z: 50}
+        value: {x: .299617231, y: 0, z: .149808615}
+        length: .374521673
+        modified: 1
     - boneName: UpperLeg_Right_jnt
       humanName: RightUpperLeg
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -60.0000038, y: -60.0000038, z: -90}
+        max: {x: 60.0000038, y: 60.0000038, z: 50}
+        value: {x: .299617469, y: 0, z: .149808735}
+        length: .374521971
+        modified: 1
     - boneName: LowerLeg_Left_jnt
       humanName: LeftLowerLeg
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .310994893, y: 0, z: .155497447}
+        length: .388743758
+        modified: 1
     - boneName: LowerLeg_Right_jnt
       humanName: RightLowerLeg
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .310995072, y: 0, z: .155497536}
+        length: .388743997
+        modified: 1
     - boneName: Foot_Left_jnt
       humanName: LeftFoot
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: 0, y: -30.0000019, z: -50}
+        max: {x: 0, y: 30.0000019, z: 50}
+        value: {x: .122244045, y: 0, z: .0611220226}
+        length: .15280509
+        modified: 1
     - boneName: Foot_Right_jnt
       humanName: RightFoot
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: 0, y: -30.0000019, z: -50}
+        max: {x: 0, y: 30.0000019, z: 50}
+        value: {x: .122243993, y: 0, z: .0611219965}
+        length: .15280503
+        modified: 1
     - boneName: Body_jnt
       humanName: Spine
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .53625989, y: 0, z: .268129945}
+        length: .67032516
+        modified: 1
     - boneName: Spine_jnt
       humanName: Chest
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .248500764, y: 0, z: .124250382}
+        length: .31062603
+        modified: 1
     - boneName: Head_jnt
       humanName: Head
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -40, y: -40, z: -40}
+        max: {x: 40, y: 40, z: 40}
+        value: {x: .124250382, y: 0, z: .0621251911}
+        length: .155313015
+        modified: 1
     - boneName: UpperArm_Left_jnt
       humanName: LeftUpperArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -90, y: -100, z: -60.0000038}
+        max: {x: 90, y: 100, z: 100}
+        value: {x: .376950294, y: 0, z: .188475147}
+        length: .471188009
+        modified: 1
     - boneName: UpperArm_Right_jnt
       humanName: RightUpperArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -90, y: -100, z: -60.0000038}
+        max: {x: 90, y: 100, z: 100}
+        value: {x: .376951814, y: 0, z: .188475907}
+        length: .471189916
+        modified: 1
     - boneName: LowerArm_Left_jnt
       humanName: LeftLowerArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .352239877, y: 0, z: .176119938}
+        length: .440299988
+        modified: 1
     - boneName: LowerArm_Right_jnt
       humanName: RightLowerArm
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: -90, y: 0, z: -80}
+        max: {x: 90, y: 0, z: 80}
+        value: {x: .352239877, y: 0, z: .176119938}
+        length: .440299988
+        modified: 1
     - boneName: Hand_Left_jnt
       humanName: LeftHand
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: 0, y: -40, z: -80}
+        max: {x: 0, y: 40, z: 80}
+        value: {x: .176119938, y: 0, z: .0880599692}
+        length: .220149994
+        modified: 1
     - boneName: Hand_Right_jnt
       humanName: RightHand
       limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Hat_jnt
-      humanName: LeftEye
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Hat_jnt1
-      humanName: RightEye
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
+        min: {x: 0, y: -40, z: -80}
+        max: {x: 0, y: 40, z: 80}
+        value: {x: .176119938, y: 0, z: .0880599692}
+        length: .220149994
+        modified: 1
     skeleton:
-    - name: Animations(Clone)
+    - name: SimpleMilitary
       position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: .99999994}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Root_jnt
       position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: .99999994}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Hips_jnt
       position: {x: -0, y: 1.04498756, z: 0}
-      rotation: {x: -.0104445312, y: -.0388307907, z: .259533554, w: .964896619}
+      rotation: {x: 0, y: 0, z: .259743571, w: .965677559}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Body_jnt
-      position: {x: .00955589768, y: .0164783578, z: 5.01227321e-18}
-      rotation: {x: .0130837308, y: -.0227118693, z: .86620599, w: -.498999268}
+      position: {x: .00955589768, y: .0164783578, z: 0}
+      rotation: {x: -0, y: 0, z: .866503596, w: -.499170691}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Spine_jnt
       position: {x: -.67032522, y: 1.48842099e-16, z: 0}
-      rotation: {x: 0, y: -0, z: -1.66576822e-15, w: 1}
+      rotation: {x: 0, y: 0, z: -1.66576811e-15, w: .99999994}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Head_jnt
       position: {x: -.31062609, y: 6.89728473e-17, z: 0}
-      rotation: {x: 0, y: -0, z: -1.99840123e-15, w: 1}
+      rotation: {x: 0, y: 0, z: -1.66533443e-15, w: .99999994}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Hat_jnt
       position: {x: -.542270958, y: 1.20408341e-16, z: 0}
-      rotation: {x: 3.59387212e-16, y: -1.40466451e-16, z: .707106829, w: .707106829}
+      rotation: {x: 3.6899606e-16, y: -1.50483768e-16, z: .707106769, w: .707106769}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
-    - name: Hat_jnt1
-      position: {x: -.542270958, y: 1.20408341e-16, z: 0}
-      rotation: {x: 4.04521998e-16, y: -9.77849576e-17, z: .707106829, w: .707106829}
-      scale: {x: -1, y: -1, z: -1}
       transformModified: 1
     - name: UpperArm_Left_jnt
       position: {x: -.219108447, y: -.565231979, z: 0}
-      rotation: {x: 0, y: -0, z: -.707106829, w: .707106829}
+      rotation: {x: 0, y: 0, z: -.707106769, w: .707106769}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: LowerArm_Left_jnt
       position: {x: .471188009, y: -2.84217088e-16, z: 5.77040997e-17}
-      rotation: {x: 0, y: -0, z: -3.33066907e-15, w: 1}
+      rotation: {x: 0, y: 0, z: -2.44249044e-15, w: .99999994}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Hand_Left_jnt
       position: {x: .440299988, y: 0, z: 5.39208998e-17}
-      rotation: {x: 6.12323426e-17, y: 1, z: -6.12323426e-17, w: -2.28167848e-15}
+      rotation: {x: -1.76586678e-13, y: .99999994, z: -5.05321486e-16, w: -2.28370607e-15}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: UpperArm_Right_jnt
       position: {x: -.219108447, y: .565231979, z: 0}
-      rotation: {x: .707106829, y: -.707106829, z: 8.65956127e-17, w: 0}
+      rotation: {x: -.707106769, y: .707106769, z: 4.33522844e-17, w: -4.32433282e-17}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: LowerArm_Right_jnt
       position: {x: -.471189976, y: 5.68434176e-16, z: -5.77041328e-17}
-      rotation: {x: -6.62765696e-19, y: -3.58692211e-21, z: 5.02202446e-16, w: 1}
+      rotation: {x: 0, y: 0, z: 8.88178367e-16, w: .99999994}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Hand_Right_jnt
       position: {x: -.440299988, y: -8.52651264e-16, z: -5.39211976e-17}
-      rotation: {x: 6.12323426e-17, y: 1, z: -6.12323426e-17, w: 1.83758927e-15}
+      rotation: {x: 1.41059541e-13, y: .99999994, z: -9.49410643e-16, w: 1.8535586e-15}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: UpperLeg_Left_jnt
       position: {x: -.256982446, y: -1.42108544e-16, z: 0}
-      rotation: {x: .0286495741, y: .0300121363, z: .498748749, w: .865752995}
+      rotation: {x: -.000137111027, y: -8.42471636e-05, z: .499174625, w: .866501331}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: LowerLeg_Left_jnt
       position: {x: -.374521643, y: -3.5527136e-17, z: -2.71050537e-22}
-      rotation: {x: -.707590222, y: 6.44689135e-06, z: -6.14591227e-06, w: .706623018}
+      rotation: {x: -.707590163, y: 6.44689135e-06, z: -6.14591136e-06, w: .706622958}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Foot_Left_jnt
       position: {x: -.388743728, y: 1.22525682e-17, z: 7.34260656e-12}
-      rotation: {x: .506745458, y: .494267881, z: -.505197346, w: .493643671}
+      rotation: {x: .500422239, y: .50042218, z: -.499573112, w: .499581814}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: UpperLeg_Right_jnt
       position: {x: .127638385, y: -.223043367, z: 0}
-      rotation: {x: -.498678356, y: .865429282, z: .0466289222, w: -.0133334827}
+      rotation: {x: -.499185652, y: .86646986, z: .00572497677, w: -.00328412373}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: LowerLeg_Right_jnt
       position: {x: .374522001, y: 2.48689959e-16, z: -1.09874122e-12}
-      rotation: {x: -.704109967, y: -3.09605057e-05, z: 5.18196284e-05, w: .710090995}
+      rotation: {x: -.704109967, y: -3.09605057e-05, z: 5.18196321e-05, w: .710090935}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: Foot_Right_jnt
       position: {x: .388743997, y: 8.19713481e-12, z: -3.69072238e-11}
-      rotation: {x: .495834172, y: .506727397, z: -.492732584, w: .50456953}
+      rotation: {x: .501171172, y: .501196861, z: -.498828977, w: .498797327}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
-    armTwist: .541999996
+    armTwist: .5
     foreArmTwist: .5
     upperLegTwist: .5
     legTwist: .5
     armStretch: .0500000007
     legStretch: .0500000007
     feetSpacing: 0
-    rootMotionBoneName: Root_jnt
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 255377ae1700518438342ed74889e165,
+    type: 3}
   animationType: 3
   additionalBone: 1
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

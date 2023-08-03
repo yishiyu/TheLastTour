@@ -1,0 +1,729 @@
+fileFormatVersion: 2
+guid: ac9d21750cdc0c9488bf04fc3f31f0f6
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: AK47_Flash_jnt
+    100002: AK47_jnt
+    100004: Arm_Left_ctrl
+    100006: Base_ctrl
+    100008: Body_ctrl
+    100010: Body_ctrl_grp
+    100012: Body_jnt
+    100014: Character
+    100016: Contols
+    100018: Hand_Left
+    100020: Hand_Left_jnt
+    100022: Hips_ctrl
+    100024: Hips_ctrl_grp
+    100026: Hips_jnt
+    100028: LowerArm_Left_jnt
+    100030: M4_Flash_jnt
+    100032: M4_jnt
+    100034: //RootNode
+    100036: pCube1
+    100038: Pistol_Flash_jnt
+    100040: Pistol_jnt
+    100042: Rifle_Flash_jnt
+    100044: Rifle_Flash_jnt1
+    100046: Rifle_jnt
+    100048: Root_jnt
+    100050: RPG_jnt
+    100052: ShotGun_Flash_jnt
+    100054: ShotGun_jnt
+    100056: SniperRifle_jnt
+    100058: Spine_jnt
+    100060: UpperArm_Left_jnt
+    100062: UZI_Flash_jnt
+    100064: UZI_jnt
+    100066: Weapon_AK47
+    100068: Weapon_FlashBang
+    100070: Weapon_Grenade
+    100072: Weapon_M4
+    100074: Weapon_Pistol
+    100076: Weapon_Rifle
+    100078: Weapon_RPG
+    100080: Weapon_ShotGun
+    100082: Weapon_SmokeBomb
+    100084: Weapon_SniperRifle
+    100086: Weapon_UZI
+    100088: Weapons
+    100090: Weapons_Root_jnt
+    100092: AssultRifle01_Flash_jnt
+    100094: AssultRifle01_jnt
+    100096: AssultRifle02_Flash_jnt
+    100098: AssultRifle02_jnt
+    100100: SubMachineGun_Flash_jnt
+    100102: SubMachineGun_jnt
+    100104: Weapon_AssultRifle01
+    100106: Weapon_AssultRifle02
+    100108: Weapon_Shotgun
+    100110: Weapon_SubMachineGun
+    100112: Weapon_Flash_Pistol1
+    400000: AK47_Flash_jnt
+    400002: AK47_jnt
+    400004: Arm_Left_ctrl
+    400006: Base_ctrl
+    400008: Body_ctrl
+    400010: Body_ctrl_grp
+    400012: Body_jnt
+    400014: Character
+    400016: Contols
+    400018: Hand_Left
+    400020: Hand_Left_jnt
+    400022: Hips_ctrl
+    400024: Hips_ctrl_grp
+    400026: Hips_jnt
+    400028: LowerArm_Left_jnt
+    400030: M4_Flash_jnt
+    400032: M4_jnt
+    400034: //RootNode
+    400036: pCube1
+    400038: Pistol_Flash_jnt
+    400040: Pistol_jnt
+    400042: Rifle_Flash_jnt
+    400044: Rifle_Flash_jnt1
+    400046: Rifle_jnt
+    400048: Root_jnt
+    400050: RPG_jnt
+    400052: ShotGun_Flash_jnt
+    400054: ShotGun_jnt
+    400056: SniperRifle_jnt
+    400058: Spine_jnt
+    400060: UpperArm_Left_jnt
+    400062: UZI_Flash_jnt
+    400064: UZI_jnt
+    400066: Weapon_AK47
+    400068: Weapon_FlashBang
+    400070: Weapon_Grenade
+    400072: Weapon_M4
+    400074: Weapon_Pistol
+    400076: Weapon_Rifle
+    400078: Weapon_RPG
+    400080: Weapon_ShotGun
+    400082: Weapon_SmokeBomb
+    400084: Weapon_SniperRifle
+    400086: Weapon_UZI
+    400088: Weapons
+    400090: Weapons_Root_jnt
+    400092: AssultRifle01_Flash_jnt
+    400094: AssultRifle01_jnt
+    400096: AssultRifle02_Flash_jnt
+    400098: AssultRifle02_jnt
+    400100: SubMachineGun_Flash_jnt
+    400102: SubMachineGun_jnt
+    400104: Weapon_AssultRifle01
+    400106: Weapon_AssultRifle02
+    400108: Weapon_Shotgun
+    400110: Weapon_SubMachineGun
+    400112: Weapon_Flash_Pistol1
+    2300000: pCube1
+    2300002: Weapon_FlashBang
+    2300004: Weapon_Grenade
+    2300006: Weapon_SmokeBomb
+    3300000: pCube1
+    3300002: Weapon_FlashBang
+    3300004: Weapon_Grenade
+    3300006: Weapon_SmokeBomb
+    4300000: pCube1
+    4300002: Weapon_AK47
+    4300004: Weapon_M4
+    4300006: Weapon_UZI
+    4300008: Weapon_Pistol
+    4300010: Weapon_ShotGun
+    4300012: Weapon_SniperRifle
+    4300014: Weapon_Rifle
+    4300016: Weapon_FlashBang
+    4300018: Weapon_SmokeBomb
+    4300020: Weapon_Grenade
+    4300022: Weapon_RPG
+    4300024: Weapon_AssultRifle01
+    4300026: Weapon_AssultRifle02
+    4300028: Weapon_SubMachineGun
+    4300030: Weapon_Shotgun
+    4300032: Weapon_Flash_Pistol1
+    7400000: Weapon_Handgun_Shoot
+    7400002: Weapon_Handgun_Reload
+    7400004: Weapon_Auto_SingleShot
+    7400006: Weapon_Auto_FullAuto_Shoot
+    7400008: Weapon_Auto_Reload
+    7400010: Weapon_SubMachineGun_SingleShot
+    7400012: Weapon_SubMachine_FullAuto_Shoot
+    7400014: Weapon_SubMachineGun_Reload
+    7400016: Weapon_Shotgun_Shoot
+    7400018: Weapon_Shotgun_Reload
+    7400020: Weapon_Rifle_Shoot_Reload
+    7400022: Weapon_RPG_Shoot
+    7400024: Weapon_Idle
+    7400026: Weapon_Handgun_Idle
+    7400028: Weapon_Auto_Idle
+    7400030: Weapon_SubMachineGun_Idle
+    7400032: Weapon_Shotgun_Idle
+    7400034: Weapon_Rifle_Idle
+    7400036: Weapon_RPG_Idle
+    9500000: //RootNode
+    13700000: Weapon_AK47
+    13700002: Weapon_M4
+    13700004: Weapon_Pistol
+    13700006: Weapon_Rifle
+    13700008: Weapon_RPG
+    13700010: Weapon_ShotGun
+    13700012: Weapon_SniperRifle
+    13700014: Weapon_UZI
+    13700016: Weapon_AssultRifle01
+    13700018: Weapon_AssultRifle02
+    13700020: Weapon_Shotgun
+    13700022: Weapon_SubMachineGun
+    13700024: Weapon_Flash_Pistol1
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Weapon_Handgun_Shoot
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Handgun_Reload
+      takeName: Take 001
+      firstFrame: 23
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Auto_SingleShot
+      takeName: Take 001
+      firstFrame: 71
+      lastFrame: 89
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Auto_FullAuto_Shoot
+      takeName: Take 001
+      firstFrame: 92
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Auto_Reload
+      takeName: Take 001
+      firstFrame: 101
+      lastFrame: 159
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_SubMachineGun_SingleShot
+      takeName: Take 001
+      firstFrame: 161
+      lastFrame: 181
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_SubMachine_FullAuto_Shoot
+      takeName: Take 001
+      firstFrame: 181
+      lastFrame: 190
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_SubMachineGun_Reload
+      takeName: Take 001
+      firstFrame: 192
+      lastFrame: 250
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Shotgun_Shoot
+      takeName: Take 001
+      firstFrame: 251
+      lastFrame: 271
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Shotgun_Reload
+      takeName: Take 001
+      firstFrame: 272
+      lastFrame: 300
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Rifle_Shoot_Reload
+      takeName: Take 001
+      firstFrame: 301
+      lastFrame: 400
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_RPG_Shoot
+      takeName: Take 001
+      firstFrame: 401
+      lastFrame: 430
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 5
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Handgun_Idle
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 9
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Auto_Idle
+      takeName: Take 001
+      firstFrame: 71
+      lastFrame: 75
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_SubMachineGun_Idle
+      takeName: Take 001
+      firstFrame: 161
+      lastFrame: 165
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Shotgun_Idle
+      takeName: Take 001
+      firstFrame: 161
+      lastFrame: 165
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_Rifle_Idle
+      takeName: Take 001
+      firstFrame: 301
+      lastFrame: 305
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Weapon_RPG_Idle
+      takeName: Take 001
+      firstFrame: 401
+      lastFrame: 405
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 10
+    splitTangentsAcrossUV: 0
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Weapons_Root_jnt
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
