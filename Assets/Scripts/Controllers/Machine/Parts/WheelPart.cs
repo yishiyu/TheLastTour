@@ -11,19 +11,26 @@ namespace TheLastTour.Controller.Machine
     {
         public HingeJoint motorJoint;
 
-        private float _power = 0;
-        private float _maxPower = 1;
+        private Rigidbody _simulatorRigidbody;
 
-        private float Power
+        private Rigidbody SimulatorRigidbody
         {
-            get { return _power; }
-            set { _power = Mathf.Clamp(value, -_maxPower, _maxPower); }
+            get
+            {
+                if (_simulatorRigidbody == null)
+                {
+                    _simulatorRigidbody = transform.parent.GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
+                }
+
+                return _simulatorRigidbody;
+            }
         }
 
-        private PropertyValue<Key> _motorPowerUp = new PropertyValue<Key>(Key.None);
-        private PropertyValue<Key> _motorPowerDown = new PropertyValue<Key>(Key.None);
-        private PropertyValue<float> _motorPower = new PropertyValue<float>(100);
-        private PropertyValue<float> _motorDamping = new PropertyValue<float>(0.5f);
+
+        private PropertyValue<Key> _powerForward = new PropertyValue<Key>(Key.None);
+        private PropertyValue<Key> _powerBackward = new PropertyValue<Key>(Key.None);
+        private PropertyValue<float> _power = new PropertyValue<float>(100);
+        private PropertyValue<float> _damping = new PropertyValue<float>(0.5f);
 
 
         public override void OnAttached(ISimulator simulator)
@@ -38,41 +45,46 @@ namespace TheLastTour.Controller.Machine
         {
             base.InitProperties();
 
-            _motorDamping.Value = MovablePartRigidbody.angularDrag;
+            _damping.Value = MovablePartRigidbody.angularDrag;
 
-            Properties.Add(new MachineProperty("Motor Key", _motorPowerUp));
-            Properties.Add(new MachineProperty("Motor Key", _motorPowerDown));
-            Properties.Add(new MachineProperty("Motor Power", _motorPower));
-            Properties.Add(new MachineProperty("Motor Damping", _motorDamping));
+            Properties.Add(new MachineProperty("Forward Key", _powerForward));
+            Properties.Add(new MachineProperty("Backward Key", _powerBackward));
+            Properties.Add(new MachineProperty("Power", _power));
+            Properties.Add(new MachineProperty("Damping", _damping));
         }
 
-
-        private void Update()
-        {
-            if (_motorPowerUp.Value != Key.None)
-            {
-                if (Keyboard.current[_motorPowerUp.Value].wasPressedThisFrame)
-                {
-                    Power += 0.1f;
-                }
-            }
-
-            if (_motorPowerDown.Value != Key.None)
-            {
-                if (Keyboard.current[_motorPowerDown.Value].wasPressedThisFrame)
-                {
-                    Power -= 0.1f;
-                }
-            }
-        }
 
         public override void FixedUpdate()
         {
-            
             base.FixedUpdate();
-            float torque = _motorPower.Value * Power;
 
+            float torque = 0;
+            if (_powerForward.Value != Key.None)
+            {
+                if (Keyboard.current[_powerForward.Value].isPressed)
+                {
+                    torque = _power.Value;
+                }
+            }
+
+            if (_powerBackward.Value != Key.None)
+            {
+                if (Keyboard.current[_powerBackward.Value].isPressed)
+                {
+                    torque = -_power.Value;
+                }
+            }
+
+            // 对自身施加力矩
             MovablePartRigidbody.AddRelativeTorque(torque * Vector3.forward);
+            // 对父级施加力矩
+            if (SimulatorRigidbody != null)
+            {
+                SimulatorRigidbody.AddRelativeTorque(-torque * (transform.localRotation * Vector3.forward));
+            }
+            // 水平作用力由约束自动完成
+
+
             // Debug.Log("Motor Power: " + _motorPower.Value * Power +
             //           "  Power: " + Power +
             //           "  _motorPower.Value: " + _motorPower.Value +
