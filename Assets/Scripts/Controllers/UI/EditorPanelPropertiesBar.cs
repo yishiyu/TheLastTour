@@ -41,7 +41,7 @@ namespace TheLastTour.Controller.UI
 
         private void Clear()
         {
-            for (int i = 1; i < container.childCount; i++)
+            for (int i = 0; i < container.childCount; i++)
             {
                 Destroy(container.GetChild(i).gameObject);
             }

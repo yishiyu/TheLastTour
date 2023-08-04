@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6e41f8db65f3848bb579900332ddc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partName: CylinderPart
+  partName: Cylinder
   mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0

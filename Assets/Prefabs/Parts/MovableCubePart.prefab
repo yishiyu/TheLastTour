@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ffc0eea9e0c76a42ad144a2287048a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partName: MovableCubePart
+  partName: MovableCube
   mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0

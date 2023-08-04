@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2243f37a1fa3d246a46178ace391139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partName: AileronLeftPart
+  partName: Aileron(L)
   mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0

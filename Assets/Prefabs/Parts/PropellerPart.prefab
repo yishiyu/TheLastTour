@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba7eeb06c45d854980328805392aece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partName: PropellerPart
+  partName: Propeller
   mass: 1
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
