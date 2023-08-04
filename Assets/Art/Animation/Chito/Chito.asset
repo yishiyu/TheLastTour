@@ -17493,7 +17493,7 @@ MonoBehaviour:
       Speed:
         valueInternal: 1
       Loop:
-        valueInternal: 0
+        valueInternal: 1
       RootMotion:
         valueInternal: 1
       PlayFromBeginning:

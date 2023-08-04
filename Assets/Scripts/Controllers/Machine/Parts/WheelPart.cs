@@ -84,7 +84,8 @@ namespace TheLastTour.Controller.Machine
             // 对父级施加力矩
             if (SimulatorRigidbody != null)
             {
-                SimulatorRigidbody.AddRelativeTorque(-torque * (transform.localRotation * Vector3.forward));
+                // 削弱一点对父级的力矩
+                SimulatorRigidbody.AddRelativeTorque(-torque * 0.3f * (transform.localRotation * Vector3.forward));
             }
             // 水平作用力由约束自动完成
 
