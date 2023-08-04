@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GeneralStates:
     LoadedProjectGUID:
-      valueInternal: 484b1fa297e8053458c034e1ccf49ea1
+      valueInternal: 7418946d4754b4642abef58be973f262
     RecentlyOpenedProjectPath:
-      valueInternal: Assets\Art\Animation\Yuuri
+      valueInternal: Assets\Art\Animation\Chito
     RecentlyOpenedProjectGUIDsList:
-    - valueInternal: 484b1fa297e8053458c034e1ccf49ea1
     - valueInternal: 7418946d4754b4642abef58be973f262
