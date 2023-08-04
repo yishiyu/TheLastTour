@@ -228,7 +228,7 @@ namespace TheLastTour.Controller.Machine
             //     Color.green);
             //
             // Debug.Log("resistanceTorque: " + resistanceTorque);
-            
+
             // 修正转动惯量方向
             // 经过测试, inertiaTensorRotation 是局部坐标系,所以不需要修正
             // MachineRigidBody.inertiaTensorRotation = transform.rotation;
@@ -288,10 +288,36 @@ namespace TheLastTour.Controller.Machine
                 machineName = gameObject.name,
                 machineParts = new List<JsonPart>()
             };
-            foreach (var part in machineParts)
+
+            if (machineParts.Count == 0)
             {
-                jsonMachine.machineParts.Add(part.Serialize());
+                return jsonMachine;
             }
+
+            // 首先寻找根节点
+            var rootPart = machineParts[0];
+            while (rootPart.rootJoint != null &&
+                   rootPart.rootJoint.IsAttached &&
+                   rootPart.rootJoint.ConnectedJoint.Owner != null)
+            {
+                rootPart = rootPart.rootJoint.ConnectedJoint.Owner;
+            }
+
+            jsonMachine.machineParts.Add(rootPart.Serialize());
+            foreach (var joint in rootPart.joints)
+            {
+                // 获取该根节点该 Joint 下的所有 Part
+                var parts = joint.GetConnectedPartsRecursively();
+                foreach (var part in parts)
+                {
+                    jsonMachine.machineParts.Add(part.Serialize());
+                }
+            }
+
+            // foreach (var part in machineParts)
+            // {
+            //     jsonMachine.machineParts.Add(part.Serialize());
+            // }
 
             return jsonMachine;
         }

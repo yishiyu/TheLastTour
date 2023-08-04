@@ -11,10 +11,12 @@ namespace TheLastTour.Event
 
         public static SelectedPartPrefabChangedEvent SelectedPartPrefabChangedEvent =
             new SelectedPartPrefabChangedEvent();
-        
+
         public static FocusOnTargetEvent FocusOnTargetEvent = new FocusOnTargetEvent();
-        
+
         public static SelectedPartChangedEvent SelectedPartChangedEvent = new SelectedPartChangedEvent();
+        public static AllObjectivesCompletedEvent AllObjectivesCompletedEvent = new AllObjectivesCompletedEvent();
+        public static ObjectiveUpdateEvent ObjectiveUpdateEvent = new ObjectiveUpdateEvent();
     }
 
 
@@ -40,11 +42,21 @@ namespace TheLastTour.Event
     {
         public Transform Target;
     }
-    
+
     public class SelectedPartChangedEvent : GameEvent
     {
         public PartController PreviousSelectedPart;
         public PartController CurrentSelectedPart;
     }
-    
+
+    public class AllObjectivesCompletedEvent : GameEvent
+    {
+    }
+
+    public class ObjectiveUpdateEvent : GameEvent
+    {
+        public Objective Objective;
+        public string DescriptionText;
+        public bool IsComplete;
+    }
 }

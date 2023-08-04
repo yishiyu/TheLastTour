@@ -17,10 +17,31 @@ namespace TheLastTour.Controller.UI
         private GameManager _gameManager;
         private IGameStateManager _gameStateManager;
 
+        public GameObject objectiveCompleteInfo;
+        public Text objectiveCompleteText;
+
         private void Start()
         {
             _gameManager = GameManager.Instance;
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
+
+            EventBus.AddListener<ObjectiveUpdateEvent>(
+                (obj) => { StartCoroutine(OnObjectiveUpdate(obj)); }
+            );
+        }
+
+
+        private IEnumerator OnObjectiveUpdate(ObjectiveUpdateEvent obj)
+        {
+            if (obj.IsComplete)
+            {
+                objectiveCompleteInfo.SetActive(true);
+                objectiveCompleteText.text = obj.DescriptionText;
+
+                yield return new WaitForSeconds(3f);
+
+                objectiveCompleteInfo.SetActive(false);
+            }
         }
 
         #region Event Handlers

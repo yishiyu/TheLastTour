@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GeneralStates:
     LoadedProjectGUID:
-      valueInternal: 7418946d4754b4642abef58be973f262
+      valueInternal: 
     RecentlyOpenedProjectPath:
       valueInternal: Assets\Art\Animation\Chito
     RecentlyOpenedProjectGUIDsList:

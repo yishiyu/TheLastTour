@@ -160,7 +160,7 @@ namespace TheLastTour.Controller.Machine
 
         public override bool IsLeafNode()
         {
-            return true;
+            return false;
         }
 
         private void OnDrawGizmosSelected()

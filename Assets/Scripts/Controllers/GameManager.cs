@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TheLastTour.Controller.Machine;
@@ -8,6 +9,7 @@ using TheLastTour.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace TheLastTour.Controller
 {
@@ -133,10 +135,14 @@ namespace TheLastTour.Controller
 
         #endregion
 
+
+        public string nextSceneName = "Game";
+
         private IGameStateManager _gameStateManager;
         private InputActions _inputActions;
         private IMachineManager _machineManager;
         private IPartManager _partManager;
+        private IObjectiveManager _objectiveManager;
 
         #region Initialization
 
@@ -146,10 +152,13 @@ namespace TheLastTour.Controller
             _inputActions = TheLastTourArchitecture.Instance.GetUtility<IInputUtility>().GetInputActions();
             _machineManager = TheLastTourArchitecture.Instance.GetManager<IMachineManager>();
             _partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
+            _objectiveManager = TheLastTourArchitecture.Instance.GetManager<IObjectiveManager>();
 
             CurrentSelectedPartIndex = -1;
             _gameStateManager.GameState = EGameState.Edit;
             _gameStateManager.EditState = EEditState.Selecting;
+
+            EventBus.AddListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
         }
 
         #endregion
@@ -191,6 +200,20 @@ namespace TheLastTour.Controller
                 default:
                     break;
             }
+        }
+
+
+        private void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt)
+        {
+            StartCoroutine(DelayedLoadNextScene());
+        }
+
+        IEnumerator DelayedLoadNextScene()
+        {
+            yield return new WaitForSeconds(3f);
+            _gameStateManager.GameState = EGameState.Edit;
+            Debug.Log("Load next scene");
+            SceneManager.LoadScene(nextSceneName);
         }
 
         #endregion
@@ -343,7 +366,8 @@ namespace TheLastTour.Controller
 
                             // PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject)
                             //     .GetComponent<PartController>();
-                            PartController part = _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].partName);
+                            PartController part =
+                                _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].partName);
 
                             // 与预览零件连接的 joint
                             PartJointController joint = _partPreviewInstance.ConnectedJoint;
