@@ -171,6 +171,19 @@ namespace TheLastTour.Manager
 
         public void LoadMachines(string fileName)
         {
+            var corePart = GetCorePart();
+
+            Vector3 corePosition = Vector3.zero;
+            Quaternion coreRotation = Quaternion.identity;
+            if (corePart)
+            {
+                Transform coreTransform = corePart.transform;
+                corePosition = coreTransform.position;
+                coreRotation = coreTransform.rotation;
+                corePart = null;
+            }
+
+
             ClearAllMachines();
 
             if (TheLastTourArchitecture.Instance.GetUtility<IArchiveUtility>()
@@ -181,6 +194,19 @@ namespace TheLastTour.Manager
                 {
                     MachineController machine = CreateEmptyMachine();
                     machine.Deserialize(jsonMachine);
+                }
+            }
+
+            corePart = GetCorePart();
+            if (corePart)
+            {
+                Vector3 positionOffset = corePosition - corePart.transform.position;
+                Quaternion rotationOffset = coreRotation * Quaternion.Inverse(corePart.transform.rotation);
+
+                foreach (var machine in MachineList)
+                {
+                    machine.transform.position += positionOffset;
+                    machine.transform.rotation *= rotationOffset;
                 }
             }
         }
