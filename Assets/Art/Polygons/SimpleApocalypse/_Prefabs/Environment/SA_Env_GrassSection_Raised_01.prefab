@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 432374}
   - component: {fileID: 3361368}
   - component: {fileID: 2399356}
-  - component: {fileID: -4681884383003064360}
+  - component: {fileID: -6627836757338571453}
   m_Layer: 0
   m_Name: SA_Env_GrassSection_Raised_01
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-4681884383003064360
-BoxCollider:
+--- !u!64 &-6627836757338571453
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15, y: 0, z: 15.000004}
-  m_Center: {x: -7.5, y: 3.5236425, z: -7.500002}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 599adccf068d806429d8d2de90fbc0a7, type: 3}

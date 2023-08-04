@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 431050}
   - component: {fileID: 3327446}
   - component: {fileID: 2308806}
-  - component: {fileID: 4254964847898659537}
+  - component: {fileID: 1044767963550607608}
   m_Layer: 0
   m_Name: SA_Env_Pool_01
   m_TagString: Untagged
@@ -169,8 +169,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4254964847898659537
-BoxCollider:
+--- !u!64 &1044767963550607608
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -187,9 +187,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15.000005, y: 4.0945053, z: 35}
-  m_Center: {x: 7.629437, y: -1.9436171, z: 17.5}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 7250cf1f963dcc84f991aee29ba102e5, type: 3}
 --- !u!1 &147392
 GameObject:
   m_ObjectHideFlags: 0

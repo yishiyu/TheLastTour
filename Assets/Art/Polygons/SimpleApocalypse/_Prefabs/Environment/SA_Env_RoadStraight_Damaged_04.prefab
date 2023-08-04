@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 413168}
   - component: {fileID: 3303222}
   - component: {fileID: 2323414}
-  - component: {fileID: -8298349506762728964}
+  - component: {fileID: -6582959383347808197}
   m_Layer: 0
   m_Name: SA_Env_RoadStraight_Damaged_04
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-8298349506762728964
-BoxCollider:
+--- !u!64 &-6582959383347808197
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.999954, y: 2.2297516, z: 20}
-  m_Center: {x: 4.999977, y: 0.38712096, z: -10}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 4e7b61c61bf15844bb0b6e1c2877d7c3, type: 3}

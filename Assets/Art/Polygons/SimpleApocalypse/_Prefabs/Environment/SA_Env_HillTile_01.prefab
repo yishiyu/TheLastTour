@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 434736}
   - component: {fileID: 3366440}
   - component: {fileID: 2367034}
-  - component: {fileID: 6849575781240424895}
+  - component: {fileID: -3707085165960874253}
   m_Layer: 0
   m_Name: SA_Env_HillTile_01
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6849575781240424895
-BoxCollider:
+--- !u!64 &-3707085165960874253
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 14.999992, y: 4.204626, z: 15}
-  m_Center: {x: -7.500004, y: 1.7994438, z: -7.5}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: bd96b5149ad614742bf75c2ff8d8d49b, type: 3}

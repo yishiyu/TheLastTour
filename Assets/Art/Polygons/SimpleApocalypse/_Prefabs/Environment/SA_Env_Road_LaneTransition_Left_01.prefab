@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 412466}
   - component: {fileID: 3395414}
   - component: {fileID: 2385714}
-  - component: {fileID: -2518359931910764977}
+  - component: {fileID: 702668054558133250}
   m_Layer: 0
   m_Name: SA_Env_Road_LaneTransition_Left_01
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-2518359931910764977
-BoxCollider:
+--- !u!64 &702668054558133250
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9.999981, y: 0.19479579, z: 17}
-  m_Center: {x: 4.9999905, y: 0.09739789, z: -8.5}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: d6fba822f5930fc468305015594c8b29, type: 3}

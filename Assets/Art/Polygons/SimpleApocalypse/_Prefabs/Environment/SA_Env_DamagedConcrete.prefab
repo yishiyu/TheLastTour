@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 423670}
   - component: {fileID: 3390116}
   - component: {fileID: 2387778}
-  - component: {fileID: 3656036272432943838}
+  - component: {fileID: -2225234620039291887}
   m_Layer: 0
   m_Name: SA_Env_DamagedConcrete
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3656036272432943838
-BoxCollider:
+--- !u!64 &-2225234620039291887
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6.6172395, y: 0.6758055, z: 6.356295}
-  m_Center: {x: 0, y: 0.10357084, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 5a27a61256eef7c44b6503578d5bcb6b, type: 3}

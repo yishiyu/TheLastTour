@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 488602}
   - component: {fileID: 3308214}
   - component: {fileID: 2363380}
-  - component: {fileID: 1086735261962321432}
+  - component: {fileID: 2457149334623668699}
   m_Layer: 0
   m_Name: SA_Env_BeachSection_InnerCorner_01
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1086735261962321432
-BoxCollider:
+--- !u!64 &2457149334623668699
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 20.000015, y: 2.9999993, z: 20.00001}
-  m_Center: {x: 10.000008, y: -1.4999994, z: 9.999995}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 9bed7a628f1537642b2bf5312eea51e5, type: 3}

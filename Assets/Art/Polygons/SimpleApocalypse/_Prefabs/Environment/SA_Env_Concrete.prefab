@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 462012}
   - component: {fileID: 3381938}
   - component: {fileID: 2345488}
-  - component: {fileID: -3011806747978126209}
+  - component: {fileID: 5032789773402682943}
   m_Layer: 0
   m_Name: SA_Env_Concrete
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-3011806747978126209
-BoxCollider:
+--- !u!64 &5032789773402682943
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15, y: 3.330669e-15, z: 15}
-  m_Center: {x: -7.5, y: 1.6653345e-15, z: -7.5}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 76254b4a1339aa24aa6f075338cc3176, type: 3}

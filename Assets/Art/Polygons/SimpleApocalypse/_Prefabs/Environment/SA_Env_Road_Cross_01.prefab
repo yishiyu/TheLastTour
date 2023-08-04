@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 486264}
   - component: {fileID: 3342908}
   - component: {fileID: 2350450}
-  - component: {fileID: -8685419087969861475}
+  - component: {fileID: 5178406242821134698}
   m_Layer: 0
   m_Name: SA_Env_Road_Cross_01
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-8685419087969861475
-BoxCollider:
+--- !u!64 &5178406242821134698
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 20, y: 2.7206469, z: 19.999998}
-  m_Center: {x: -10, y: -0.9333265, z: -9.999999}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 1624998e2bde87248b984d1e371f53df, type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 497278}
   - component: {fileID: 3330292}
   - component: {fileID: 2311886}
-  - component: {fileID: 6890313560795397267}
+  - component: {fileID: -3820287592568601683}
   m_Layer: 0
   m_Name: SA_Env_ShipCrash_01
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6890313560795397267
-BoxCollider:
+--- !u!64 &-3820287592568601683
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 98.19318, y: 44.935806, z: 90.3533}
-  m_Center: {x: -49.09659, y: 3.3856754, z: -40.472366}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: da8a36b8bb5d51849808fa06b250f8ea, type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 437416}
   - component: {fileID: 3356312}
   - component: {fileID: 2398914}
-  - component: {fileID: -4953825966704593092}
+  - component: {fileID: -8167701337764414065}
   m_Layer: 0
   m_Name: SA_Env_Highway_Broken_01
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-4953825966704593092
-BoxCollider:
+--- !u!64 &-8167701337764414065
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7.71299, y: 4.579045, z: 21.962852}
-  m_Center: {x: -3.856472, y: 9.804491, z: -0.0000038146973}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 50e2f60b4cb03bc4697739fcbcc6f157, type: 3}

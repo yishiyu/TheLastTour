@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 494492}
   - component: {fileID: 3315236}
   - component: {fileID: 2339058}
-  - component: {fileID: -7816917689582450920}
+  - component: {fileID: 8159328281970313998}
   m_Layer: 0
   m_Name: SA_Env_DirtCircle
   m_TagString: Untagged
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-7816917689582450920
-BoxCollider:
+--- !u!64 &8159328281970313998
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,6 +102,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 45, y: 0.5118541, z: 45.00001}
-  m_Center: {x: -22.5, y: -0.24048023, z: -22.500006}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 6ab0a1c832138ac4ca054823075c4893, type: 3}
