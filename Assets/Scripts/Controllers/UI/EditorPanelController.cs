@@ -11,18 +11,21 @@ namespace TheLastTour.Controller.UI
     public class EditorPanelController : MonoBehaviour
     {
         public Button playButton;
+        public Button saveButton;
+        public Button loadButton;
 
         public Button prefabSelectButton;
         public GameObject prefabButtonGroup;
 
         private IGameStateManager _gameStateManager;
         private GameManager _gameManager;
-
+        private IMachineManager _machineManager;
 
         private void Start()
         {
-            _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _gameManager = GameManager.Instance;
+            _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
+            _machineManager = TheLastTourArchitecture.Instance.GetManager<IMachineManager>();
 
             playButton.onClick.AddListener(
                 (() => { _gameStateManager.GameState = EGameState.Play; })
@@ -37,6 +40,26 @@ namespace TheLastTour.Controller.UI
                 int index = i;
                 button.onClick.AddListener(
                     (() => { _gameManager.CurrentSelectedPartIndex = index; })
+                );
+
+                saveButton.onClick.AddListener(
+                    (() => { _machineManager?.SaveMachines("saved machines"); })
+                );
+
+                loadButton.onClick.AddListener(
+                    (() =>
+                    {
+                        if (_machineManager != null)
+                        {
+                            _machineManager.LoadMachines("saved machines");
+                            var corePart = _machineManager.GetCorePart();
+                            if (corePart)
+                            {
+                                GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
+                                EventBus.Invoke(GameEvents.FocusOnTargetEvent);
+                            }
+                        }
+                    })
                 );
             }
         }

@@ -11,17 +11,18 @@ namespace TheLastTour.Controller.UI
 {
     public class TheLastTourUIController : MonoBehaviour
     {
+        public GameObject debugInfoPanel;
         public Text debugInfoText;
+
         public GameObject editorPanel;
-
-
-        private GameManager _gameManager;
-        private IGameStateManager _gameStateManager;
 
         public GameObject objectiveCompleteInfo;
         public Text objectiveCompleteText;
 
         public GameObject compassPanel;
+
+        private GameManager _gameManager;
+        private IGameStateManager _gameStateManager;
 
         private void Start()
         {
@@ -69,10 +70,12 @@ namespace TheLastTour.Controller.UI
                 case EGameState.Edit:
                     editorPanel.SetActive(true);
                     compassPanel.SetActive(false);
+                    debugInfoPanel.SetActive(true);
                     break;
                 case EGameState.Play:
                     compassPanel.SetActive(true);
                     editorPanel.SetActive(false);
+                    debugInfoPanel.SetActive(false);
                     break;
                 case EGameState.Pause:
                     editorPanel.SetActive(false);
