@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TheLastTour.Controller.Machine;
+using TheLastTour.Event;
 using TheLastTour.Utility;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -52,6 +53,12 @@ namespace TheLastTour.Manager
         {
             Debug.Log("MachineManager Init");
 
+            EventBus.AddListener<NewSceneLoadedEvent>(OnNewSceneLoaded);
+        }
+
+        private void OnNewSceneLoaded(NewSceneLoadedEvent obj)
+        {
+            ClearAllMachines();
             MachineList.AddRange(Object.FindObjectsOfType<MachineController>());
         }
 
@@ -76,8 +83,14 @@ namespace TheLastTour.Manager
 
         public void DestroyMachine(MachineController machine)
         {
-            MachineList.Remove(machine);
-            GameObject.Destroy(machine.gameObject);
+            if (machine)
+            {
+                if (MachineList.Contains(machine))
+                {
+                    MachineList.Remove(machine);
+                }
+                GameObject.Destroy(machine.gameObject);
+            }
         }
 
         public void TurnOnSimulation(bool isOn)
@@ -131,7 +144,10 @@ namespace TheLastTour.Manager
         {
             foreach (var machine in MachineList)
             {
-                GameObject.Destroy(machine.gameObject);
+                if (machine)
+                {
+                    GameObject.Destroy(machine.gameObject);
+                }
             }
 
             MachineList.Clear();

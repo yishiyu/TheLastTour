@@ -93,19 +93,25 @@ namespace TheLastTour.Manager
 
         public void DestroyPart(PartController part)
         {
-            if (partInstanceDict.ContainsKey(part.PartId))
+            if (part)
             {
-                partInstanceDict.Remove(part.PartId);
-            }
+                if (partInstanceDict.ContainsKey(part.PartId))
+                {
+                    partInstanceDict.Remove(part.PartId);
+                }
 
-            GameObject.Destroy(part.gameObject);
+                GameObject.Destroy(part.gameObject);
+            }
         }
 
         private void InternalClearAllParts()
         {
             foreach (var part in partInstanceDict.Values)
             {
-                GameObject.Destroy(part.gameObject);
+                if (part)
+                {
+                    GameObject.Destroy(part.gameObject);
+                }
             }
 
             partInstanceDict.Clear();

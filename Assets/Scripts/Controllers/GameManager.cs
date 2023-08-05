@@ -157,8 +157,9 @@ namespace TheLastTour.Controller
             CurrentSelectedPartIndex = -1;
             _gameStateManager.GameState = EGameState.Edit;
             _gameStateManager.EditState = EEditState.Selecting;
-
-            EventBus.AddListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
+            
+            // 开启游戏,因为一些 DontDestroyOnLoad 的对象需要在游戏开始时初始化
+            EventBus.Invoke(GameEvents.NewSceneLoadedEvent);
         }
 
         #endregion
@@ -168,22 +169,26 @@ namespace TheLastTour.Controller
         private void OnEnable()
         {
             EventBus.AddListener<GameStateChangedEvent>(OnGameStateChanged);
+            EventBus.AddListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
         }
 
         private void OnDisable()
         {
             EventBus.RemoveListener<GameStateChangedEvent>(OnGameStateChanged);
+            EventBus.RemoveListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
         }
 
         private void OnGameStateChanged(GameStateChangedEvent evt)
         {
+            PartController corePart = null;
+
             switch (evt.CurrentState)
             {
                 case EGameState.Play:
-                    // TODO 保存模型
-                    TheLastTourArchitecture.Instance.GetManager<IMachineManager>().TurnOnSimulation(true);
+                    _machineManager.SaveMachines("./temp_machine.json");
+                    _machineManager.TurnOnSimulation(true);
 
-                    var corePart = _machineManager.GetCorePart();
+                    corePart = _machineManager.GetCorePart();
                     if (corePart)
                     {
                         GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
@@ -194,8 +199,17 @@ namespace TheLastTour.Controller
 
                     break;
                 case EGameState.Edit:
-                    // TODO 读取模型
-                    // TODO 暂停模型物理模拟
+                    _machineManager.LoadMachines("./temp_machine.json");
+                    _machineManager.TurnOnSimulation(false);
+
+                    corePart = _machineManager.GetCorePart();
+                    if (corePart)
+                    {
+                        GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
+                        EventBus.Invoke(GameEvents.FocusOnTargetEvent);
+                    }
+
+                    Cursor.lockState = CursorLockMode.None;
                     break;
                 default:
                     break;
@@ -275,6 +289,12 @@ namespace TheLastTour.Controller
             if (Keyboard.current.lKey.wasPressedThisFrame)
             {
                 _machineManager.LoadMachines("test");
+                var corePart = _machineManager.GetCorePart();
+                if (corePart)
+                {
+                    GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
+                    EventBus.Invoke(GameEvents.FocusOnTargetEvent);
+                }
             }
         }
 

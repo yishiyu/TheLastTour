@@ -17,6 +17,8 @@ namespace TheLastTour.Event
         public static SelectedPartChangedEvent SelectedPartChangedEvent = new SelectedPartChangedEvent();
         public static AllObjectivesCompletedEvent AllObjectivesCompletedEvent = new AllObjectivesCompletedEvent();
         public static ObjectiveUpdateEvent ObjectiveUpdateEvent = new ObjectiveUpdateEvent();
+        
+        public static NewSceneLoadedEvent NewSceneLoadedEvent = new NewSceneLoadedEvent();
     }
 
 
@@ -59,4 +61,9 @@ namespace TheLastTour.Event
         public string DescriptionText;
         public bool IsComplete;
     }
+    
+    public class NewSceneLoadedEvent : GameEvent
+    {
+    }
+    
 }

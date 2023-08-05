@@ -24,14 +24,29 @@ namespace TheLastTour.Controller.UI
         {
             _gameManager = GameManager.Instance;
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
-
-            EventBus.AddListener<ObjectiveUpdateEvent>(
-                (obj) => { StartCoroutine(OnObjectiveUpdate(obj)); }
-            );
         }
 
 
-        private IEnumerator OnObjectiveUpdate(ObjectiveUpdateEvent obj)
+        #region Event Handlers
+
+        private void OnEnable()
+        {
+            EventBus.AddListener<GameStateChangedEvent>(OnGameStateChanged);
+            EventBus.AddListener<ObjectiveUpdateEvent>(OnObjectiveUpdate);
+        }
+
+        private void OnDisable()
+        {
+            EventBus.RemoveListener<GameStateChangedEvent>(OnGameStateChanged);
+            EventBus.RemoveListener<ObjectiveUpdateEvent>(OnObjectiveUpdate);
+        }
+
+        private void OnObjectiveUpdate(ObjectiveUpdateEvent obj)
+        {
+            StartCoroutine(UpdateObjective(obj));
+        }
+
+        private IEnumerator UpdateObjective(ObjectiveUpdateEvent obj)
         {
             if (obj.IsComplete)
             {
@@ -42,18 +57,6 @@ namespace TheLastTour.Controller.UI
 
                 objectiveCompleteInfo.SetActive(false);
             }
-        }
-
-        #region Event Handlers
-
-        private void OnEnable()
-        {
-            EventBus.AddListener<GameStateChangedEvent>(OnGameStateChanged);
-        }
-
-        private void OnDisable()
-        {
-            EventBus.RemoveListener<GameStateChangedEvent>(OnGameStateChanged);
         }
 
         private void OnGameStateChanged(GameStateChangedEvent evt)
