@@ -10,7 +10,7 @@ namespace TheLastTour.Controller.UI
     {
         public RectTransform compassContainer;
         private Dictionary<Transform, CompassMarker> _compassMarkers = new Dictionary<Transform, CompassMarker>();
-        public List<GameObject> directionMarkers = new List<GameObject>();
+        public List<GameObject> markers = new List<GameObject>();
 
         public float visibilityAngle = 180f;
         public float minScale = 0.5f;
@@ -44,9 +44,9 @@ namespace TheLastTour.Controller.UI
 
         void Awake()
         {
-            foreach (var directionMarker in directionMarkers)
+            foreach (var marker in markers)
             {
-                RegisterCompassElement(directionMarker.GetComponent<CompassMarker>());
+                RegisterCompassElement(marker.GetComponent<CompassMarker>());
             }
         }
 
