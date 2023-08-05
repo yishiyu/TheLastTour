@@ -35,10 +35,10 @@ namespace TheLastTour.Controller.Objective
             }
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawCube(transform.position, ObjectiveCollider.bounds.size);
-        }
+        // private void OnDrawGizmos()
+        // {
+        //     Gizmos.color = Color.green;
+        //     Gizmos.DrawCube(transform.position, ObjectiveCollider.bounds.size);
+        // }
     }
 }
