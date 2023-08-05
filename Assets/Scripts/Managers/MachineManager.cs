@@ -74,6 +74,7 @@ namespace TheLastTour.Manager
             {
                 MachineController machine =
                     GameObject.Instantiate(_defaultMachinePrefab, Vector3.zero, Quaternion.identity);
+                machine.isRestoreFromArchive = true;
                 MachineList.Add(machine);
                 return machine;
             }
@@ -89,6 +90,7 @@ namespace TheLastTour.Manager
                 {
                     MachineList.Remove(machine);
                 }
+
                 GameObject.Destroy(machine.gameObject);
             }
         }

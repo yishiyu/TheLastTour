@@ -85,11 +85,11 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-        private bool _isRestoreFromArchive = false;
+        public bool isRestoreFromArchive = false;
 
         private void Start()
         {
-            if (!_isRestoreFromArchive)
+            if (!isRestoreFromArchive)
             {
                 machineParts.AddRange(GetComponentsInChildren<PartController>());
                 UpdateSimulatorMass();
@@ -164,22 +164,25 @@ namespace TheLastTour.Controller.Machine
 
         public void TurnOnSimulation(bool isOn)
         {
-            if (isOn)
+            if (MachineRigidBody)
             {
-                _rigidbody.useGravity = true;
-                _rigidbody.isKinematic = false;
-                foreach (var part in machineParts)
+                if (isOn)
                 {
-                    part.TurnOnSimulation(true);
+                    MachineRigidBody.useGravity = true;
+                    MachineRigidBody.isKinematic = false;
+                    foreach (var part in machineParts)
+                    {
+                        part.TurnOnSimulation(true);
+                    }
                 }
-            }
-            else
-            {
-                _rigidbody.useGravity = false;
-                _rigidbody.isKinematic = true;
-                foreach (var part in machineParts)
+                else
                 {
-                    part.TurnOnSimulation(false);
+                    MachineRigidBody.useGravity = false;
+                    MachineRigidBody.isKinematic = true;
+                    foreach (var part in machineParts)
+                    {
+                        part.TurnOnSimulation(false);
+                    }
                 }
             }
         }
@@ -275,7 +278,7 @@ namespace TheLastTour.Controller.Machine
             return this;
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             Gizmos.color = new Color(0, 1, 0, 0.5f);
             Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, math.sqrt(MachineRigidBody.mass) / 10f);
@@ -345,7 +348,7 @@ namespace TheLastTour.Controller.Machine
                 }
             }
 
-            _isRestoreFromArchive = true;
+            isRestoreFromArchive = true;
         }
     }
 
