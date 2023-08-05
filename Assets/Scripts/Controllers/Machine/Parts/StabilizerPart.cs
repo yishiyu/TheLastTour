@@ -80,7 +80,8 @@ namespace TheLastTour.Controller.Machine
                 Vector3 forceDirection = transform.rotation * controlRotation * Vector3.right;
                 // Vector3 forwardDirection = transform.rotation * controlRotation * Vector3.forward;
                 // 局部速度(局部坐标)
-                Vector3 velocity = RigidBody.GetPointVelocity(transform.position);
+                // Vector3 velocity = RigidBody.GetPointVelocity(transform.position);
+                Vector3 velocity = RigidBody.velocity;
                 float forwardSpeed = Vector3.Dot(transform.forward, velocity);
                 float normSpeed = Vector3.Dot(forceDirection, velocity);
 

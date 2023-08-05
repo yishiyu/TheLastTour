@@ -386,7 +386,8 @@ namespace TheLastTour.Controller.Machine
                 // 
                 // 为此需要做一个阈值处理:该冲量不能使速度在一帧内变化为原本的20%以下
                 // 此时 F = 0.8mv/deltaTime
-                Vector3 velocity = simulatorRigidbody.GetPointVelocity(transform.position);
+                // Vector3 velocity = simulatorRigidbody.GetPointVelocity(transform.position);
+                Vector3 velocity = simulatorRigidbody.velocity;
                 Vector3 resistance = transform.rotation * airResistance;
                 Vector3 resistanceForce = -new Vector3(
                     Mathf.Abs(velocity.x * resistance.x) * velocity.x,
