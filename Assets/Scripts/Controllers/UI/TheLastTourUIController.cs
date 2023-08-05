@@ -14,11 +14,14 @@ namespace TheLastTour.Controller.UI
         public Text debugInfoText;
         public GameObject editorPanel;
 
+
         private GameManager _gameManager;
         private IGameStateManager _gameStateManager;
 
         public GameObject objectiveCompleteInfo;
         public Text objectiveCompleteText;
+
+        public GameObject compassPanel;
 
         private void Start()
         {
@@ -65,8 +68,10 @@ namespace TheLastTour.Controller.UI
             {
                 case EGameState.Edit:
                     editorPanel.SetActive(true);
+                    compassPanel.SetActive(false);
                     break;
                 case EGameState.Play:
+                    compassPanel.SetActive(true);
                     editorPanel.SetActive(false);
                     break;
                 case EGameState.Pause:
