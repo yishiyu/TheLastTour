@@ -10,7 +10,7 @@ namespace TheLastTour.Controller.Machine
     {
         Rigidbody _rigidBody;
 
-        Rigidbody RigidBody
+        Rigidbody PartRigidBody
         {
             get
             {
@@ -45,7 +45,6 @@ namespace TheLastTour.Controller.Machine
 
         public override void FixedUpdate()
         {
-            
             base.FixedUpdate();
             float yaw = 0;
 
@@ -73,7 +72,7 @@ namespace TheLastTour.Controller.Machine
             }
 
 
-            if (RigidBody)
+            if (PartRigidBody)
             {
                 // controlRotation = transform.localRotation * controlRotation *
                 //                   Quaternion.Inverse(transform.localRotation);
@@ -81,7 +80,7 @@ namespace TheLastTour.Controller.Machine
                 // Vector3 forwardDirection = transform.rotation * controlRotation * Vector3.forward;
                 // 局部速度(局部坐标)
                 // Vector3 velocity = RigidBody.GetPointVelocity(transform.position);
-                Vector3 velocity = RigidBody.velocity;
+                Vector3 velocity = PartRigidBody.velocity;
                 float forwardSpeed = Vector3.Dot(transform.forward, velocity);
                 float normSpeed = Vector3.Dot(forceDirection, velocity);
 
@@ -89,7 +88,7 @@ namespace TheLastTour.Controller.Machine
 
                 // 允许绕 x 轴自由旋转
 
-                RigidBody.AddForceAtPosition(
+                PartRigidBody.AddForceAtPosition(
                     transform.right * stabilityForce,
                     transform.position,
                     ForceMode.Impulse);
