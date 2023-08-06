@@ -67,12 +67,15 @@ namespace TheLastTour.Controller.UI
 
                     if (marker.Value.isDirection)
                     {
-                        angle = Vector3.SignedAngle(PlayerTransform.forward,
+                        Vector3 playerForward = PlayerTransform.forward;
+                        playerForward.y = 0;
+                        angle = Vector3.SignedAngle(playerForward.normalized,
                             marker.Key.transform.localPosition.normalized, Vector3.up);
                     }
                     else
                     {
                         Vector3 directionVector = marker.Key.transform.position - PlayerTransform.position;
+                        directionVector.y = 0;
                         Vector3 targetDir = directionVector.normalized;
                         targetDir = Vector3.ProjectOnPlane(targetDir, Vector3.up);
 
