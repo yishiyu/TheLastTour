@@ -226,6 +226,9 @@ namespace TheLastTour.Manager
                     machine.transform.position += positionOffset;
                     machine.transform.rotation *= rotationOffset;
                 }
+
+                GameEvents.FocusOnTargetEvent.Target = corePart.transform;
+                EventBus.Invoke(GameEvents.FocusOnTargetEvent);
             }
         }
     }

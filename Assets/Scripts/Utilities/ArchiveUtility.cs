@@ -11,6 +11,8 @@ namespace TheLastTour.Utility
         public bool SaveToArchive(string archiveType, string archiveName, string archiveContent);
 
         public bool LoadFromArchive(string archiveType, string archiveName, out string archiveContent);
+
+        public List<string> SearchArchive(string archiveType);
     }
 
     public class DirectoryManager
@@ -81,6 +83,20 @@ namespace TheLastTour.Utility
             }
 
             return true;
+        }
+
+        public List<string> SearchArchive(string archiveType)
+        {
+            List<string> archiveList = new List<string>();
+            foreach (FileInfo fileInfo in _directoryManager.GetDirectory(archiveType).GetFiles())
+            {
+                archiveList.Add(
+                    fileInfo.Name.Substring(0,
+                        fileInfo.Name.Length - fileInfo.Extension.Length)
+                );
+            }
+
+            return archiveList;
         }
     }
 }

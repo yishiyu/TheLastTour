@@ -202,13 +202,6 @@ namespace TheLastTour.Controller
                     _machineManager.LoadMachines("./temp_machine.json");
                     _machineManager.TurnOnSimulation(false);
 
-                    corePart = _machineManager.GetCorePart();
-                    if (corePart)
-                    {
-                        GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
-                        EventBus.Invoke(GameEvents.FocusOnTargetEvent);
-                    }
-
                     Cursor.lockState = CursorLockMode.None;
                     break;
                 default:
@@ -280,22 +273,16 @@ namespace TheLastTour.Controller
             }
 
 
-            // 测试保存和读取
-            if (Keyboard.current.kKey.wasPressedThisFrame)
-            {
-                _machineManager.SaveMachines("test");
-            }
-
-            if (Keyboard.current.lKey.wasPressedThisFrame)
-            {
-                _machineManager.LoadMachines("test");
-                var corePart = _machineManager.GetCorePart();
-                if (corePart)
-                {
-                    GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
-                    EventBus.Invoke(GameEvents.FocusOnTargetEvent);
-                }
-            }
+            // // 测试保存和读取
+            // if (Keyboard.current.kKey.wasPressedThisFrame)
+            // {
+            //     _machineManager.SaveMachines("test");
+            // }
+            //
+            // if (Keyboard.current.lKey.wasPressedThisFrame)
+            // {
+            //     _machineManager.LoadMachines("test");
+            // }
         }
 
         private void UpdateEdit()
