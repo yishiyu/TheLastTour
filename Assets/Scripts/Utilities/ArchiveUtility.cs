@@ -12,6 +12,8 @@ namespace TheLastTour.Utility
 
         public bool LoadFromArchive(string archiveType, string archiveName, out string archiveContent);
 
+        public bool DeleteArchive(string archiveType, string archiveName);
+
         public List<string> SearchArchive(string archiveType);
     }
 
@@ -82,6 +84,19 @@ namespace TheLastTour.Utility
                 fileStream.Close();
             }
 
+            return true;
+        }
+
+        public bool DeleteArchive(string archiveType, string archiveName)
+        {
+            string path = Path.Combine(_directoryManager.GetDirectory(archiveType).FullName, archiveName + ".json");
+            if (!File.Exists(path))
+            {
+                Debug.LogError("ArchiveUtility: DeleteArchive: File not found: " + path);
+                return false;
+            }
+
+            File.Delete(path);
             return true;
         }
 
