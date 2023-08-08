@@ -388,11 +388,35 @@ namespace TheLastTour.Controller.Machine
                 // 此时 F = 0.8mv/deltaTime
                 // Vector3 velocity = simulatorRigidbody.GetPointVelocity(transform.position);
                 Vector3 velocity = simulatorRigidbody.velocity;
-                Vector3 resistance = transform.rotation * airResistance;
+                Vector3 localSpaceVelocity = Quaternion.Inverse(transform.rotation) * velocity;
+
+                // 已经有了该物体对三个方向的阻力系数,求对任意一个方向(速度)的阻力系数
+                // 假设物体为球体,则阻力系数与速度方向无关,只与速度大小有关,需要保证这一点
+                // 其实上面这个假设也有点问题,阻力和形状关系时很大的,但是先这么简化处理
+                // 1. 将速度线性投影到三个方向上
+                // 假设速度(1,0,0),方向沿x轴,则阻力 = (1 * airResistance.x,0,0), 阻力大小 = airResistance.x
+                // 假设速度(sqrt(0.5),sqrt(0.5),0),方向沿(1,1,0),则阻力 = (0.5*airResistance.x,0.5*airResistance.y,0), 阻力大小 = 0.25*airResistance.x + 0.25*airResistance.y
+                // 假设 airResistance.x = airResistance.y = 1
+                // 则上述两种情况造成的阻力大小不同,不满足上述条件
+                // 不过对于正方体来说,斜着的阻力确实要更小点,这种模型不符合球体,但更符合正方体
                 Vector3 resistanceForce = -new Vector3(
-                    Mathf.Abs(velocity.x * resistance.x) * velocity.x,
-                    Mathf.Abs(velocity.y * resistance.y) * velocity.y,
-                    Mathf.Abs(velocity.z * resistance.z) * velocity.z) * Time.deltaTime;
+                    Mathf.Abs(localSpaceVelocity.x * airResistance.x) * localSpaceVelocity.x,
+                    Mathf.Abs(localSpaceVelocity.y * airResistance.y) * localSpaceVelocity.y,
+                    Mathf.Abs(localSpaceVelocity.z * airResistance.z) * localSpaceVelocity.z) * Time.deltaTime;
+                resistanceForce = transform.rotation * resistanceForce;
+                // 2. 将速度平方投影到三个方向上(满足上述情况)
+                // 假设速度(1,0,0),方向沿x轴,则阻力 = (1 * airResistance.x,0,0), 阻力大小 = airResistance.x
+                // 假设速度(sqrt(0.5),sqrt(0.5),0),方向沿(1,1,0),则阻力 = (sqrt(0.5)*airResistance.x,sqrt(0.5)*airResistance.y,0), 阻力大小 = 0.5*airResistance.x + 0.5*airResistance.y
+                // 假设 airResistance.x = airResistance.y = airResistance.z = 1
+                // 则上述两种情况造成的阻力大小相同,满足上述条件
+                // Vector3 temp = new Vector3(
+                //     Mathf.Abs(localSpaceVelocity.x) * localSpaceVelocity.x,
+                //     Mathf.Abs(localSpaceVelocity.y) * localSpaceVelocity.y,
+                //     Mathf.Abs(localSpaceVelocity.z) * localSpaceVelocity.z);
+                // Vector3 resistanceForce = -new Vector3(
+                //     Mathf.Abs(velocity.x * velocity.x * resistance.x) * velocity.x,
+                //     Mathf.Abs(velocity.y * velocity.y * resistance.y) * velocity.y,
+                //     Mathf.Abs(velocity.z * velocity.z * resistance.z) * velocity.z) * Time.deltaTime;
 
 
                 if (isUnderwater)
@@ -420,7 +444,7 @@ namespace TheLastTour.Controller.Machine
                 // Debug.Log(
                 //     "velocity: " + velocity + "\n" +
                 //     "resistanceForce: " + resistanceForce
-                    // "maxResistance: " + maxResistance
+                // "maxResistance: " + maxResistance
                 // );
                 // Debug.Log("velocity: " + velocity + "\n" +
                 //           "resistance: " + resistance + "\n" +

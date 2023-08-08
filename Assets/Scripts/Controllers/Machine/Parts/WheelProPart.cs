@@ -81,11 +81,11 @@ namespace TheLastTour.Controller.Machine
         {
             wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
             Vector3 rotation = (Quaternion.Inverse(transform.rotation) * rot).eulerAngles;
-            Debug.Log("rotation: " + rotation);
+            // Debug.Log("rotation: " + rotation);
             float yaw = rotation.y - Mathf.FloorToInt((rotation.y + 90) / 180) * 180;
             // float roll = rotation.z - Mathf.FloorToInt((rotation.z + 90) / 180) * 180;
             rotation = new Vector3(rotation.x, yaw, 0);
-            Debug.Log("processed rotation: " + rotation);
+            // Debug.Log("processed rotation: " + rotation);
             // Vector3 rotation = new Vector3(rot.eulerAngles.x, 0, rot.eulerAngles.z);
 
             wheelModel.transform.position = pos;
