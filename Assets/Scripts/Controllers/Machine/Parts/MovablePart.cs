@@ -10,10 +10,9 @@ namespace TheLastTour.Controller.Machine
     /// 包括可以主动运动的轮子,传动轴轴,也包括只能被动运动的关节
     /// 其运动由自身的 Rigidbody 组件模拟,同时通过 Joint 与父级 Rigidbody 连接
     /// </summary>
-    [RequireComponent(typeof(Rigidbody))]
     public class MovablePart : PartController
     {
-        private Rigidbody _rigidbody;
+        public Rigidbody movablePartRigidbody;
 
         public List<PartController> attachedParts = new List<PartController>();
 
@@ -21,12 +20,12 @@ namespace TheLastTour.Controller.Machine
         {
             get
             {
-                if (_rigidbody == null)
+                if (movablePartRigidbody == null)
                 {
-                    _rigidbody = GetComponent<Rigidbody>();
+                    movablePartRigidbody = GetComponent<Rigidbody>();
                 }
 
-                return _rigidbody;
+                return movablePartRigidbody;
             }
         }
 
