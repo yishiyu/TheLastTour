@@ -3,6 +3,7 @@ using TheLastTour.Event;
 using TheLastTour.Manager;
 using TheLastTour.Utility;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
@@ -131,8 +132,13 @@ namespace TheLastTour.Controller
 
         private void UpdateEditCamera()
         {
+            float scrollDelta = 0;
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                scrollDelta = Mouse.current.scroll.ReadValue().y * focusZoomSensitive;
+            }
+
             // 受控输入
-            float scrollDelta = Mouse.current.scroll.ReadValue().y * focusZoomSensitive;
             float mouseXDelta = 0;
             float mouseYDelta = 0;
             float keyboardXDelta = 0;
