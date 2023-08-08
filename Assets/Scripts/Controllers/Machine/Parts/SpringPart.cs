@@ -8,6 +8,16 @@ namespace TheLastTour.Controller.Machine
 {
     public class SpringPart : MovablePart
     {
+        public LineRenderer springRenderer;
+
+        public List<Vector2> springPoints = new List<Vector2>()
+        {
+            new Vector2(0.3f, 0),
+            new Vector2(0, 0.3f),
+            new Vector2(-0.3f, 0),
+            new Vector2(0, -0.3f),
+        };
+
         // Spring base 连接在车身上
         // Spring top 作为弹簧的连接点
         public GameObject springBase;
@@ -120,6 +130,23 @@ namespace TheLastTour.Controller.Machine
 
                 // MovablePartRigidbody.angularVelocity = Vector3.zero;
                 springTop.transform.localRotation = Quaternion.identity;
+            }
+
+            if (springRenderer)
+            {
+                float sprintLength = springTop.transform.localPosition.x;
+                for (int i = 0; i < springRenderer.positionCount; i++)
+                {
+                    int index = i % springPoints.Count;
+                    Vector3 position = new Vector3(
+                        i * sprintLength / (springRenderer.positionCount - 1),
+                        springPoints[index].x,
+                        springPoints[index].y
+                    );
+
+                    position = springBase.transform.rotation * position + springBase.transform.position;
+                    springRenderer.SetPosition(i, position);
+                }
             }
         }
     }
