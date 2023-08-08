@@ -40,7 +40,10 @@ namespace TheLastTour.Controller.Machine
 
         public override void UpdateSimulatorMass()
         {
-            transform.parent.GetComponentInParent<ISimulator>().UpdateSimulatorMass();
+            if (transform.parent)
+            {
+                transform.parent.GetComponentInParent<ISimulator>()?.UpdateSimulatorMass();
+            }
         }
     }
 }

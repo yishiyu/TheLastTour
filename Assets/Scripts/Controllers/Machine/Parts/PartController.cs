@@ -246,7 +246,7 @@ namespace TheLastTour.Controller.Machine
             _massProperty.OnValueChanged += (newMass) =>
             {
                 mass = newMass;
-                // UpdateSimulatorMass();
+                UpdateSimulatorMass();
             };
 
             Properties.Add(new MachineProperty("Mass", _massProperty));
