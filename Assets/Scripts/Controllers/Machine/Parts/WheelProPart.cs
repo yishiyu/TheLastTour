@@ -48,10 +48,12 @@ namespace TheLastTour.Controller.Machine
             if (isOn)
             {
                 arrowModel.SetActive(false);
+                // wheelModel.GetComponent<Collider>().enabled = false;
             }
             else
             {
                 arrowModel.SetActive(true);
+                // wheelModel.GetComponent<Collider>().enabled = true;
             }
         }
 
@@ -81,7 +83,9 @@ namespace TheLastTour.Controller.Machine
             Vector3 rotation = (Quaternion.Inverse(transform.rotation) * rot).eulerAngles;
             Debug.Log("rotation: " + rotation);
             float yaw = rotation.y - Mathf.FloorToInt((rotation.y + 90) / 180) * 180;
-            rotation = new Vector3(rotation.x, yaw, rotation.z);
+            // float roll = rotation.z - Mathf.FloorToInt((rotation.z + 90) / 180) * 180;
+            rotation = new Vector3(rotation.x, yaw, 0);
+            Debug.Log("processed rotation: " + rotation);
             // Vector3 rotation = new Vector3(rot.eulerAngles.x, 0, rot.eulerAngles.z);
 
             wheelModel.transform.position = pos;
