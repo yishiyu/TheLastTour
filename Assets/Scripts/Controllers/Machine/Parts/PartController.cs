@@ -134,7 +134,7 @@ namespace TheLastTour.Controller.Machine
             get { return centerOfMass; }
         }
 
-        private PropertyValue<float> _massProperty = new PropertyValue<float>(1);
+        protected PropertyValue<float> _massProperty = new PropertyValue<float>(1);
 
         public List<PartJointController> joints = new List<PartJointController>();
         public PartJointController rootJoint = null;

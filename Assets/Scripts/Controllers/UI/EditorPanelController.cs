@@ -69,6 +69,13 @@ namespace TheLastTour.Controller.UI
                         Debug.Log(archive);
                         var archiveSelect = Instantiate(archiveSelectPrefab, archiveContainer);
                         archiveSelect.archiveName.text = archive;
+                        archiveSelect.loadButton.onClick.AddListener(
+                            (() =>
+                            {
+                                Debug.Log("Load " + archive);
+                                loadPanel.SetActive(false);
+                            })
+                        );
                     }
 
                     loadPanel.SetActive(true);
