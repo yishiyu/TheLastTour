@@ -21,22 +21,6 @@ namespace TheLastTour.Controller.Machine
             set { _power = Mathf.Clamp(value, 0, _maxPower); }
         }
 
-        Rigidbody _rigidBody;
-
-        Rigidbody RigidBody
-        {
-            get
-            {
-                if (_rigidBody == null)
-                {
-                    _rigidBody = GetComponentInParent<Rigidbody>();
-                }
-
-                return _rigidBody;
-            }
-        }
-
-
         readonly PropertyValue<Key> _propertyPowerUp = new PropertyValue<Key>(Key.None);
         readonly PropertyValue<Key> _propertyPowerDown = new PropertyValue<Key>(Key.None);
         readonly PropertyValue<float> _propertyMaxPower = new PropertyValue<float>(10);
@@ -90,9 +74,9 @@ namespace TheLastTour.Controller.Machine
         {
             
             base.FixedUpdate();
-            if (RigidBody)
+            if (SimulatorRigidbody)
             {
-                RigidBody.AddForceAtPosition(
+                SimulatorRigidbody.AddForceAtPosition(
                     transform.up * (Power * _propertyMaxPower.Value),
                     transform.position,
                     ForceMode.Impulse);

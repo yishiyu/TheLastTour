@@ -321,6 +321,7 @@ MonoBehaviour:
   joints: []
   rootJoint: {fileID: 3791574131724063488}
   attachedParts: []
+  movablePartRigidbody: {fileID: 3036449468769959606}
   motorJoint: {fileID: 1977359010451999529}
 --- !u!59 &1977359010451999529
 HingeJoint:

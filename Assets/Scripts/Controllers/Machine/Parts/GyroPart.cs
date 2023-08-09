@@ -6,21 +6,6 @@ namespace TheLastTour.Controller.Machine
 {
     public class GyroPart : FixedPart
     {
-        Rigidbody _rigidBody;
-
-        Rigidbody SimulatorRigidBody
-        {
-            get
-            {
-                if (_rigidBody == null)
-                {
-                    _rigidBody = GetComponentInParent<Rigidbody>();
-                }
-
-                return _rigidBody;
-            }
-        }
-
         readonly PropertyValue<float> _propertyAngleStability = new PropertyValue<float>(1f);
         readonly PropertyValue<float> _propertyAngularVelocityStability = new PropertyValue<float>(0.5f);
         readonly PropertyValue<float> _propertyAngleDeadZone = new PropertyValue<float>(10f);
@@ -51,7 +36,7 @@ namespace TheLastTour.Controller.Machine
         {
             base.FixedUpdate();
 
-            if (SimulatorRigidBody)
+            if (SimulatorRigidbody)
             {
                 // 根据角度计算力矩,力矩只与角度符号有关
                 float angle = _initRotation - transform.rotation.eulerAngles.z;
@@ -69,7 +54,7 @@ namespace TheLastTour.Controller.Machine
 
 
                 // 根据角速度修正力矩,防止出现抖动
-                float angularVelocity = transform.InverseTransformDirection(SimulatorRigidBody.angularVelocity).z;
+                float angularVelocity = transform.InverseTransformDirection(SimulatorRigidbody.angularVelocity).z;
 
                 if (Mathf.Abs(angularVelocity) < _propertyAngularVelocityDeadZone.Value)
                 {
@@ -95,7 +80,7 @@ namespace TheLastTour.Controller.Machine
                 // );
 
                 // Vector3 direction = transform.forward;
-                SimulatorRigidBody.AddRelativeTorque(
+                SimulatorRigidbody.AddRelativeTorque(
                     transform.forward * torque,
                     ForceMode.Impulse);
                 //

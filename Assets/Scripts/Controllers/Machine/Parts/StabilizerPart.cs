@@ -8,21 +8,6 @@ namespace TheLastTour.Controller.Machine
 {
     public class StabilizerPart : FixedPart
     {
-        Rigidbody _rigidBody;
-
-        Rigidbody PartRigidBody
-        {
-            get
-            {
-                if (_rigidBody == null)
-                {
-                    _rigidBody = GetComponentInParent<Rigidbody>();
-                }
-
-                return _rigidBody;
-            }
-        }
-
         public GameObject stabilizerMesh;
         private Quaternion _stabilizerMeshRotation;
 
@@ -72,7 +57,7 @@ namespace TheLastTour.Controller.Machine
             }
 
 
-            if (PartRigidBody)
+            if (SimulatorRigidbody)
             {
                 // controlRotation = transform.localRotation * controlRotation *
                 //                   Quaternion.Inverse(transform.localRotation);
@@ -80,7 +65,7 @@ namespace TheLastTour.Controller.Machine
                 // Vector3 forwardDirection = transform.rotation * controlRotation * Vector3.forward;
                 // 局部速度(局部坐标)
                 // Vector3 velocity = RigidBody.GetPointVelocity(transform.position);
-                Vector3 velocity = PartRigidBody.velocity;
+                Vector3 velocity = SimulatorRigidbody.velocity;
                 float forwardSpeed = Vector3.Dot(transform.forward, velocity);
                 float normSpeed = Vector3.Dot(forceDirection, velocity);
 
@@ -88,7 +73,7 @@ namespace TheLastTour.Controller.Machine
 
                 // 允许绕 x 轴自由旋转
 
-                PartRigidBody.AddForceAtPosition(
+                SimulatorRigidbody.AddForceAtPosition(
                     transform.right * stabilityForce,
                     transform.position,
                     ForceMode.Impulse);

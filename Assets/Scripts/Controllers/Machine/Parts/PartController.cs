@@ -29,6 +29,20 @@ namespace TheLastTour.Controller.Machine
         public long PartId = 0;
         public FloatComponent partFloatComponent;
 
+        private Rigidbody _simulatorRigidbody;
+
+        public Rigidbody SimulatorRigidbody
+        {
+            get
+            {
+                if (_simulatorRigidbody == null)
+                {
+                    _simulatorRigidbody = GetSimulatorRigidbody();
+                }
+
+                return _simulatorRigidbody;
+            }
+        }
         // 三个方向的阻力系数
         // 水体阻力系数倍数,水密度/空气密度 = 775
         public Vector3 airResistance = new Vector3(0.001f, 0.001f, 0.001f);
@@ -335,27 +349,26 @@ namespace TheLastTour.Controller.Machine
         {
             bool isUnderwater = false;
 
-            Rigidbody simulatorRigidbody = GetSimulatorRigidbody();
-            if (simulatorRigidbody)
+            if (SimulatorRigidbody)
             {
                 // 计算浮力
                 if (PartFloatComponent)
                 {
                     {
                         isUnderwater = PartFloatComponent.GetFloatingForce(
-                            simulatorRigidbody.worldCenterOfMass,
+                            SimulatorRigidbody.worldCenterOfMass,
                             out var force,
                             out var torque);
                         if (isUnderwater)
                         {
                             // 力矩的效果被单独剥离到后面了,无需指定作用点位置
-                            simulatorRigidbody.AddForce(
+                            SimulatorRigidbody.AddForce(
                                 force,
                                 ForceMode.Impulse
                             );
 
                             // 将 torque 转换为世界坐标系下的 torque
-                            simulatorRigidbody.AddTorque(
+                            SimulatorRigidbody.AddTorque(
                                 torque,
                                 ForceMode.Impulse
                             );
@@ -387,7 +400,7 @@ namespace TheLastTour.Controller.Machine
                 // 为此需要做一个阈值处理:该冲量不能使速度在一帧内变化为原本的20%以下
                 // 此时 F = 0.8mv/deltaTime
                 // Vector3 velocity = simulatorRigidbody.GetPointVelocity(transform.position);
-                Vector3 velocity = simulatorRigidbody.velocity;
+                Vector3 velocity = SimulatorRigidbody.velocity;
                 Vector3 localSpaceVelocity = Quaternion.Inverse(transform.rotation) * velocity;
 
                 // 已经有了该物体对三个方向的阻力系数,求对任意一个方向(速度)的阻力系数
@@ -425,7 +438,7 @@ namespace TheLastTour.Controller.Machine
                 }
 
                 // // 阻力不能超过一定的阈值
-                float maxResistance = 0.8f * simulatorRigidbody.mass * velocity.magnitude / Time.deltaTime;
+                float maxResistance = 0.8f * SimulatorRigidbody.mass * velocity.magnitude / Time.deltaTime;
                 resistanceForce = Vector3.ClampMagnitude(resistanceForce, maxResistance);
 
                 // 假设阻力总是作用于零件中心
@@ -434,7 +447,7 @@ namespace TheLastTour.Controller.Machine
                 // (这样会导致当某个轴上只有一个方块时,该轴没有任何角速度阻尼)
                 // 但是实际的游戏中谁有会只造一个方块或者一个横条呢?(逃
                 // 为了防止这种情况,可以给 Rigidbody 的 Angular Drag 设一个较小的值
-                simulatorRigidbody.AddForceAtPosition(
+                SimulatorRigidbody.AddForceAtPosition(
                     resistanceForce,
                     transform.position,
                     ForceMode.Impulse

@@ -84,7 +84,7 @@ namespace TheLastTour.Controller.Machine
             _propertySpringLength.OnValueChanged += (f) => { UpdateAnchors(f, true); };
             UpdateAnchors(_propertySpringLength.Value, true);
 
-            MovablePartRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            SimulatorRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         public override void AddPart(PartController part)
@@ -116,12 +116,12 @@ namespace TheLastTour.Controller.Machine
         {
             base.FixedUpdate();
 
-            if (MovablePartRigidbody && MovablePartRigidbody.isKinematic == false)
+            if (SimulatorRigidbody && SimulatorRigidbody.isKinematic == false)
             {
-                Vector3 localVelocity = transform.InverseTransformDirection(MovablePartRigidbody.velocity);
+                Vector3 localVelocity = transform.InverseTransformDirection(SimulatorRigidbody.velocity);
                 localVelocity.y = 0;
                 localVelocity.z = 0;
-                MovablePartRigidbody.velocity = transform.TransformDirection(localVelocity);
+                SimulatorRigidbody.velocity = transform.TransformDirection(localVelocity);
 
                 springTop.transform.localPosition = new Vector3(
                     springTop.transform.localPosition.x,

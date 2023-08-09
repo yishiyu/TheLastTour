@@ -9,26 +9,6 @@ namespace TheLastTour.Controller.Machine
 {
     public class WheelProPart : FixedPart
     {
-        private Rigidbody _simulatorRigidbody;
-
-        private Rigidbody SimulatorRigidbody
-        {
-            get
-            {
-                if (_simulatorRigidbody == null)
-                {
-                    if (transform.parent)
-                    {
-                        _simulatorRigidbody =
-                            transform.parent.GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
-                    }
-                }
-
-                return _simulatorRigidbody;
-            }
-        }
-
-
         private PropertyValue<Key> _powerForward = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _powerBackward = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _turnLeft = new PropertyValue<Key>(Key.None);

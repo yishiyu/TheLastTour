@@ -8,21 +8,6 @@ namespace TheLastTour.Controller.Machine
 {
     public class AileronPart : FixedPart
     {
-        Rigidbody _rigidBody;
-
-        Rigidbody RigidBody
-        {
-            get
-            {
-                if (_rigidBody == null)
-                {
-                    _rigidBody = GetComponentInParent<Rigidbody>();
-                }
-
-                return _rigidBody;
-            }
-        }
-
         public GameObject aileronMesh;
         private Quaternion _aileronMeshRotation;
 
@@ -74,17 +59,17 @@ namespace TheLastTour.Controller.Machine
             }
 
 
-            if (RigidBody)
+            if (SimulatorRigidbody)
             {
                 // 局部速度(局部坐标)
                 float speed = Vector3.Dot(transform.forward,
-                    RigidBody.GetPointVelocity(transform.position));
+                    SimulatorRigidbody.GetPointVelocity(transform.position));
 
                 float aileronForce = speed * speed * _propertyBaseLiftCoefficient.Value * (1 - math.sin(pitch)) / 100;
 
                 // 允许绕 x 轴自由旋转
 
-                RigidBody.AddForceAtPosition(
+                SimulatorRigidbody.AddForceAtPosition(
                     transform.up * aileronForce,
                     transform.position,
                     ForceMode.Impulse);

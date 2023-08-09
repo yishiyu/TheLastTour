@@ -13,22 +13,6 @@ namespace TheLastTour.Controller.Machine
 {
     public class WingPart : FixedPart
     {
-        Rigidbody _simulatorRigidBody;
-
-        Rigidbody SimulatorRigidBody
-        {
-            get
-            {
-                if (_simulatorRigidBody == null)
-                {
-                    _simulatorRigidBody = GetComponentInParent<Rigidbody>();
-                }
-
-                return _simulatorRigidBody;
-            }
-        }
-
-
         readonly PropertyValue<float> _propertyLiftRatio = new PropertyValue<float>(1);
 
 
@@ -44,14 +28,14 @@ namespace TheLastTour.Controller.Machine
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            if (SimulatorRigidBody)
+            if (SimulatorRigidbody)
             {
                 // 局部速度(局部坐标)
                 float speed = Vector3.Dot(transform.forward,
-                    SimulatorRigidBody.GetPointVelocity(transform.position));
+                    SimulatorRigidbody.GetPointVelocity(transform.position));
                 float lightForce = speed * speed * _propertyLiftRatio.Value / 100;
 
-                SimulatorRigidBody.AddForceAtPosition(
+                SimulatorRigidbody.AddForceAtPosition(
                     lightForce * transform.up,
                     transform.position,
                     ForceMode.Impulse);

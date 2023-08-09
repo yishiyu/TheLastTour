@@ -20,26 +20,6 @@ namespace TheLastTour.Controller.Machine
             set { _power = Mathf.Clamp(value, -_maxPower, _maxPower); }
         }
 
-        private Rigidbody _simulatorRigidbody;
-
-        private Rigidbody SimulatorRigidbody
-        {
-            get
-            {
-                if (_simulatorRigidbody == null)
-                {
-                    if (transform.parent)
-                    {
-                        _simulatorRigidbody =
-                            transform.parent.GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
-                    }
-                }
-
-                return _simulatorRigidbody;
-            }
-        }
-
-        
         private PropertyValue<Key> _motorPowerUp = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _motorPowerDown = new PropertyValue<Key>(Key.None);
         private PropertyValue<float> _motorPower = new PropertyValue<float>(100);
@@ -89,17 +69,18 @@ namespace TheLastTour.Controller.Machine
             base.FixedUpdate();
 
             // 将世界坐标下的旋转转为局部坐标的旋转
-            Vector3 relativeAngularVelocity = Quaternion.Inverse(transform.rotation) * MovablePartRigidbody.angularVelocity;
+            Vector3 relativeAngularVelocity =
+                Quaternion.Inverse(transform.rotation) * SimulatorRigidbody.angularVelocity;
             // 对自身施加力矩
             float torque = _motorPower.Value * Power -
                            _motorDamping.Value * relativeAngularVelocity.y;
-            
+
             // float torque = _motorPower.Value * Power;
-            MovablePartRigidbody.AddRelativeTorque(torque * Vector3.up);
+            SimulatorRigidbody.AddRelativeTorque(torque * Vector3.up);
             // 对父级施加力矩
-            if (SimulatorRigidbody != null)
+            if (ParentRigidbody)
             {
-                SimulatorRigidbody.AddRelativeTorque(-torque * (transform.localRotation * Vector3.up));
+                ParentRigidbody.AddRelativeTorque(-torque * (transform.localRotation * Vector3.up));
             }
 
             //
@@ -109,11 +90,11 @@ namespace TheLastTour.Controller.Machine
             //           "  _motorPower.Value: " + _motorPower.Value +
             //           "  _motorDamping.Value: " + _motorDamping.Value +
             //           "  relativeAngularVelocity.x: " + relativeAngularVelocity.x);
-            
+
             Debug.Log("Motor Power: " + _motorPower.Value * Power +
                       "  Power: " + Power +
                       "  _motorPower.Value: " + _motorPower.Value +
-                      "  _motorDamping.Value: " + _motorDamping.Value+
+                      "  _motorDamping.Value: " + _motorDamping.Value +
                       "  relativeAngularVelocity: " + relativeAngularVelocity);
         }
     }

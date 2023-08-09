@@ -12,22 +12,26 @@ namespace TheLastTour.Controller.Machine
     /// </summary>
     public class MovablePart : PartController
     {
-        public Rigidbody movablePartRigidbody;
-
         public List<PartController> attachedParts = new List<PartController>();
 
-        public Rigidbody MovablePartRigidbody
+        public Rigidbody movablePartRigidbody;
+
+
+        private Rigidbody _parentRigidbody;
+
+        public Rigidbody ParentRigidbody
         {
             get
             {
-                if (movablePartRigidbody == null)
+                if (_parentRigidbody == null && transform.parent != null)
                 {
-                    movablePartRigidbody = GetComponent<Rigidbody>();
+                    _parentRigidbody = transform.parent.GetComponentInParent<ISimulator>().GetSimulatorRigidbody();
                 }
 
-                return movablePartRigidbody;
+                return _parentRigidbody;
             }
         }
+
 
         public override float Mass
         {
@@ -46,9 +50,9 @@ namespace TheLastTour.Controller.Machine
         {
             get
             {
-                if (MovablePartRigidbody != null)
+                if (SimulatorRigidbody != null)
                 {
-                    return MovablePartRigidbody.centerOfMass;
+                    return SimulatorRigidbody.centerOfMass;
                 }
 
                 return Vector3.zero;
@@ -58,7 +62,12 @@ namespace TheLastTour.Controller.Machine
 
         public override Rigidbody GetSimulatorRigidbody()
         {
-            return MovablePartRigidbody;
+            if (movablePartRigidbody)
+            {
+                return movablePartRigidbody;
+            }
+
+            return GetComponent<Rigidbody>();
         }
 
         public override void OnAttached(ISimulator simulator)
@@ -133,9 +142,11 @@ namespace TheLastTour.Controller.Machine
         {
             float totalMass = mass;
             Vector3 massCenter = centerOfMass;
-            float intertiaX = mass * (centerOfMass.y * centerOfMass.y + centerOfMass.z * centerOfMass.z);
-            float intertiaY = mass * (centerOfMass.x * centerOfMass.x + centerOfMass.z * centerOfMass.z);
-            float intertiaZ = mass * (centerOfMass.x * centerOfMass.x + centerOfMass.y * centerOfMass.y);
+            // 正方体本身有 0.667 的惯性惯量
+            // 用平行轴定理计算质心相对于自身的惯性惯量
+            float intertiaX = mass * (centerOfMass.y * centerOfMass.y + centerOfMass.z * centerOfMass.z + 0.667f);
+            float intertiaY = mass * (centerOfMass.x * centerOfMass.x + centerOfMass.z * centerOfMass.z + 0.667f);
+            float intertiaZ = mass * (centerOfMass.x * centerOfMass.x + centerOfMass.y * centerOfMass.y + 0.667f);
             foreach (var part in attachedParts)
             {
                 // part 的质心相对于自身的偏移
@@ -143,16 +154,16 @@ namespace TheLastTour.Controller.Machine
                 totalMass += part.Mass;
                 massCenter += part.Mass * partMassPosition;
                 intertiaX += part.Mass * (partMassPosition.y * partMassPosition.y +
-                                          partMassPosition.z * partMassPosition.z);
+                                          partMassPosition.z * partMassPosition.z + 0.6667f);
                 intertiaY += part.Mass * (partMassPosition.x * partMassPosition.x +
-                                          partMassPosition.z * partMassPosition.z);
+                                          partMassPosition.z * partMassPosition.z + 0.6667f);
                 intertiaZ += part.Mass * (partMassPosition.x * partMassPosition.x +
-                                          partMassPosition.y * partMassPosition.y);
+                                          partMassPosition.y * partMassPosition.y + 0.6667f);
             }
 
-            MovablePartRigidbody.mass = totalMass;
-            MovablePartRigidbody.centerOfMass = massCenter / totalMass;
-            MovablePartRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ) * 10;
+            SimulatorRigidbody.mass = totalMass;
+            SimulatorRigidbody.centerOfMass = massCenter / totalMass;
+            SimulatorRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ) * 10;
 
             // transform.parent.GetComponent<ISimulator>().UpdateSimulatorMass();
         }
@@ -165,7 +176,7 @@ namespace TheLastTour.Controller.Machine
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0, 1, 0, 0.5f);
-            Gizmos.DrawSphere(MovablePartRigidbody.worldCenterOfMass, MovablePartRigidbody.mass / 10f);
+            Gizmos.DrawSphere(SimulatorRigidbody.worldCenterOfMass, SimulatorRigidbody.mass / 10f);
         }
 
         public override void TurnOnSimulation(bool isOn)
@@ -173,7 +184,7 @@ namespace TheLastTour.Controller.Machine
             base.TurnOnSimulation(isOn);
 
             // MovablePartRigidbody.useGravity = false;
-            MovablePartRigidbody.isKinematic = !isOn;
+            SimulatorRigidbody.isKinematic = !isOn;
 
 
             foreach (var part in attachedParts)

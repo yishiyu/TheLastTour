@@ -11,21 +11,6 @@ namespace TheLastTour.Controller.Machine
     {
         public ParticleSystem visualEffect;
 
-        Rigidbody _simulatorRigidBody;
-
-        Rigidbody SimulatorRigidBody
-        {
-            get
-            {
-                if (_simulatorRigidBody == null)
-                {
-                    _simulatorRigidBody = GetComponentInParent<Rigidbody>();
-                }
-
-                return _simulatorRigidBody;
-            }
-        }
-
         readonly PropertyValue<float> _propertyPower = new PropertyValue<float>(1000);
         readonly PropertyValue<float> _propertyFuel = new PropertyValue<float>(3);
         readonly PropertyValue<Key> _propertyTrigger = new PropertyValue<Key>(Key.None);
@@ -58,7 +43,7 @@ namespace TheLastTour.Controller.Machine
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            if (_isTriggered && SimulatorRigidBody)
+            if (_isTriggered && SimulatorRigidbody)
             {
                 _propertyFuel.Value -= Time.fixedDeltaTime;
                 if (_propertyFuel.Value <= 0)
@@ -71,7 +56,7 @@ namespace TheLastTour.Controller.Machine
 
                 Vector3 force = _propertyPower.Value * transform.up;
 
-                SimulatorRigidBody.AddForceAtPosition(
+                SimulatorRigidbody.AddForceAtPosition(
                     force,
                     transform.position,
                     ForceMode.Impulse);
