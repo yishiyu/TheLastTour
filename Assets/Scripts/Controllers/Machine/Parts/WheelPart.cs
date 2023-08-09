@@ -10,11 +10,26 @@ namespace TheLastTour.Controller.Machine
     public class WheelPart : MovablePart
     {
         public HingeJoint motorJoint;
+        public GameObject arrowModel;
 
         private PropertyValue<Key> _powerForward = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _powerBackward = new PropertyValue<Key>(Key.None);
         private PropertyValue<float> _power = new PropertyValue<float>(100);
         private PropertyValue<float> _damping = new PropertyValue<float>(0.5f);
+
+        public override void TurnOnSimulation(bool isOn)
+        {
+            base.TurnOnSimulation(isOn);
+
+            if (isOn)
+            {
+                arrowModel.SetActive(false);
+            }
+            else
+            {
+                arrowModel.SetActive(true);
+            }
+        }
 
 
         public override void OnAttached(ISimulator simulator)
