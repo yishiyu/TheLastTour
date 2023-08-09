@@ -5,6 +5,7 @@ using TheLastTour.Controller.Water;
 using TheLastTour.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -52,7 +53,7 @@ namespace TheLastTour.Controller.Machine
 
         // x,-x, y, -y, z,-z
         // 六个方向的阻力是否启用(如果被挡住了则不起作用)(局部坐标系)
-        public bool[] isResistanceEnable = new bool[6] { true, true, true, true, true, true };
+        public bool[] isResistanceEnabled = new bool[6] { true, true, true, true, true, true };
 
         public FloatComponent PartFloatComponent
         {
@@ -326,6 +327,27 @@ namespace TheLastTour.Controller.Machine
             {
                 joint.TurnOnJointCollision(!isOn);
             }
+
+            // 计算阻力遮蔽
+            Transform partTransform = transform;
+            Vector3[] targetDirections = new Vector3[6]
+            {
+                partTransform.right,
+                -partTransform.right,
+                partTransform.up,
+                -partTransform.up,
+                partTransform.forward,
+                -partTransform.forward
+            };
+            for (int i = 0; i < 6; i++)
+            {
+                Ray ray = new Ray(transform.position, targetDirections[i]);
+                if (Physics.Raycast(ray, out RaycastHit hit, 0.5f, LayerMask.GetMask("Part")))
+                {
+                    // 该方向碰到了其他 Part,则该方向的阻力无效
+                    isResistanceEnabled[i] = false;
+                }
+            }
         }
 
         public void TurnOnJointCollision(bool isOn)
@@ -428,16 +450,16 @@ namespace TheLastTour.Controller.Machine
                 for (int i = 0; i < 6; i += 2)
                 {
                     // 以 x 轴为例
-                    // 禁止产生 x 轴正方向的阻力
-                    if (!isResistanceEnable[i])
-                    {
-                        airResistanceValue[i / 2] = Mathf.Min(airResistanceValue[i / 2], 0);
-                    }
-
-                    // 禁止产生 x 轴负方向的阻力
-                    if (!isResistanceEnable[i + 1])
+                    // 禁止产生 x 轴正方向面产生阻力
+                    if (!isResistanceEnabled[i])
                     {
                         airResistanceValue[i / 2] = Mathf.Max(airResistanceValue[i / 2], 0);
+                    }
+
+                    // 禁止产生 x 轴负方向面产生阻力
+                    if (!isResistanceEnabled[i + 1])
+                    {
+                        airResistanceValue[i / 2] = Mathf.Min(airResistanceValue[i / 2], 0);
                     }
                 }
 
