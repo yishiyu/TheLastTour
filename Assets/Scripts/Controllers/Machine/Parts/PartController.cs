@@ -61,18 +61,18 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-        private Renderer _partRenderer;
+        public Renderer partRenderer;
 
         public Renderer PartRenderer
         {
             get
             {
-                if (_partRenderer == null)
+                if (partRenderer == null)
                 {
-                    _partRenderer = GetComponentInChildren<Renderer>();
+                    partRenderer = GetComponentInChildren<Renderer>();
                 }
 
-                return _partRenderer;
+                return partRenderer;
             }
         }
 

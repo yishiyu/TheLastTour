@@ -52,6 +52,7 @@ MonoBehaviour:
   PartId: 0
   partFloatComponent: {fileID: 0}
   airResistance: {x: 1, y: 1, z: 1}
+  partRenderer: {fileID: 0}
   joints: []
   rootJoint: {fileID: 5672462378003777070}
 --- !u!1 &4522060020939565184
@@ -184,7 +185,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79714df0a27b87e488c584b0acb8f786, type: 2}
+  - {fileID: 2100000, guid: 31cbef0dd561a0d42830922833a94b2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

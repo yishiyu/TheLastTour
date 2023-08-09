@@ -134,7 +134,7 @@ namespace TheLastTour.Controller.Water
             }
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if (_voxels != null)
             {

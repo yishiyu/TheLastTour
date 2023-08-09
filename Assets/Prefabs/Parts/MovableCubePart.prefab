@@ -146,9 +146,11 @@ MonoBehaviour:
   PartId: 0
   partFloatComponent: {fileID: 0}
   airResistance: {x: 0.01, y: 0.01, z: 0.01}
+  partRenderer: {fileID: 0}
   joints: []
   rootJoint: {fileID: 3052477179370406850}
   attachedParts: []
+  movablePartRigidbody: {fileID: 0}
 --- !u!1 &1938013986050937649
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +285,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79714df0a27b87e488c584b0acb8f786, type: 2}
+  - {fileID: 2100000, guid: 31cbef0dd561a0d42830922833a94b2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
