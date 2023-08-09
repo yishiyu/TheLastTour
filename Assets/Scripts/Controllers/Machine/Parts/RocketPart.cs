@@ -55,11 +55,15 @@ namespace TheLastTour.Controller.Machine
                 }
 
                 Vector3 force = _propertyPower.Value * transform.up;
+                Vector3 torque = Vector3.Cross(transform.up, force);
 
-                SimulatorRigidbody.AddForceAtPosition(
-                    force,
-                    transform.position,
-                    ForceMode.Impulse);
+                SimulatorRigidbody.AddForce(force, ForceMode.Impulse);
+                SimulatorRigidbody.AddTorque(torque, ForceMode.Impulse);
+
+                // SimulatorRigidbody.AddForceAtPosition(
+                //     force,
+                //     transform.position,
+                //     ForceMode.Impulse);
             }
         }
     }

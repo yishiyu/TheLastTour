@@ -31,14 +31,20 @@ namespace TheLastTour.Controller.Machine
             if (SimulatorRigidbody)
             {
                 // 局部速度(局部坐标)
-                float speed = Vector3.Dot(transform.forward,
-                    SimulatorRigidbody.GetPointVelocity(transform.position));
-                float lightForce = speed * speed * _propertyLiftRatio.Value / 100;
+                float speed = Vector3.Dot(SimulatorRigidbody.GetPointVelocity(transform.position), transform.forward);
+                float lightForce = speed * _propertyLiftRatio.Value / 100;
 
-                SimulatorRigidbody.AddForceAtPosition(
-                    lightForce * transform.up,
-                    transform.position,
+                Vector3 force = lightForce * transform.up;
+                Vector3 torque = Vector3.Cross(transform.up, force);
+
+                SimulatorRigidbody.AddForce(
+                    force,
                     ForceMode.Impulse);
+
+                // SimulatorRigidbody.AddTorque(
+                //     torque,
+                //     ForceMode.Impulse);
+
                 // RigidBody.AddRelativeForce(
                 //     lightForce * transform.up,
                 //     transform.localPosition,

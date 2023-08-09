@@ -30,7 +30,6 @@ namespace TheLastTour.Controller.Machine
 
         public override void FixedUpdate()
         {
-            
             base.FixedUpdate();
             float pitch = 0;
 
@@ -62,25 +61,41 @@ namespace TheLastTour.Controller.Machine
             if (SimulatorRigidbody)
             {
                 // 局部速度(局部坐标)
-                float speed = Vector3.Dot(transform.forward,
-                    SimulatorRigidbody.GetPointVelocity(transform.position));
+                // float speed = Vector3.Dot(transform.forward,
+                //     SimulatorRigidbody.GetPointVelocity(transform.position));
 
-                float aileronForce = speed * speed * _propertyBaseLiftCoefficient.Value * (1 - math.sin(pitch)) / 100;
+                // float aileronForce = speed * speed * _propertyBaseLiftCoefficient.Value * (1 - math.sin(pitch)) / 100;
+                float aileronForce = _propertyBaseLiftCoefficient.Value * math.sin(pitch);
 
-                // 允许绕 x 轴自由旋转
 
-                SimulatorRigidbody.AddForceAtPosition(
-                    transform.up * aileronForce,
-                    transform.position,
-                    ForceMode.Impulse);
+                {
+                    // SimulatorRigidbody.AddForceAtPosition(
+                    //     transform.up * aileronForce,
+                    //     transform.position,
+                    //     ForceMode.Impulse);
+                }
+
+                {
+                    // 全局坐标力和力矩
+                    Vector3 force = transform.up * aileronForce;
+                    Vector3 torque = Vector3.Cross(
+                        (transform.position - SimulatorRigidbody.worldCenterOfMass),
+                        force
+                    );
+
+
+                    // 应用力
+                    SimulatorRigidbody.AddForce(force, ForceMode.Impulse);
+                    SimulatorRigidbody.AddTorque(torque, ForceMode.Impulse);
+                }
 
 
                 Debug.DrawLine(transform.position,
-                    transform.position +  transform.up * 10,
+                    transform.position + transform.up * 10,
                     Color.red);
 
                 Debug.DrawLine(transform.position,
-                    transform.position + aileronForce  * transform.up,
+                    transform.position + aileronForce * transform.up,
                     Color.blue);
             }
         }

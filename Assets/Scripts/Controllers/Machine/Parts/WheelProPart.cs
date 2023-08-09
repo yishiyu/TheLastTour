@@ -77,13 +77,13 @@ namespace TheLastTour.Controller.Machine
         {
             base.FixedUpdate();
 
-            float torque = 0;
+            float torqueValue = 0;
             float steerAngle = 0;
             if (_powerForward.Value != Key.None)
             {
                 if (Keyboard.current[_powerForward.Value].isPressed)
                 {
-                    torque = _power.Value;
+                    torqueValue = _power.Value;
                 }
             }
 
@@ -91,7 +91,7 @@ namespace TheLastTour.Controller.Machine
             {
                 if (Keyboard.current[_powerBackward.Value].isPressed)
                 {
-                    torque = -_power.Value;
+                    torqueValue = -_power.Value;
                 }
             }
 
@@ -112,12 +112,14 @@ namespace TheLastTour.Controller.Machine
             }
 
             // 对自身和父级施加力矩
-            wheelCollider.motorTorque = torque;
+            wheelCollider.motorTorque = torqueValue;
             wheelCollider.steerAngle = steerAngle;
+
+            Vector3 torque = torqueValue * transform.forward;
+
             if (SimulatorRigidbody != null)
             {
-                // 削弱一点对父级的力矩
-                SimulatorRigidbody.AddRelativeTorque(-torque * 0.8f * (transform.localRotation * Vector3.forward));
+                SimulatorRigidbody.AddTorque(torque);
             }
 
             UpdateWheelMeshPosition();

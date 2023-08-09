@@ -72,14 +72,19 @@ namespace TheLastTour.Controller.Machine
 
         public override void FixedUpdate()
         {
-            
             base.FixedUpdate();
             if (SimulatorRigidbody)
             {
-                SimulatorRigidbody.AddForceAtPosition(
-                    transform.up * (Power * _propertyMaxPower.Value),
-                    transform.position,
-                    ForceMode.Impulse);
+                Vector3 force = transform.up * (Power * _propertyMaxPower.Value);
+                Vector3 torque = Vector3.Cross(transform.position - SimulatorRigidbody.worldCenterOfMass, force);
+
+                SimulatorRigidbody.AddForce(force, ForceMode.Impulse);
+                SimulatorRigidbody.AddTorque(torque, ForceMode.Impulse);
+                // SimulatorRigidbody.AddForceAtPosition(
+                //     transform.up * (Power * _propertyMaxPower.Value),
+                //     transform.position,
+                //     ForceMode.Impulse);
+
                 Debug.DrawLine(transform.position,
                     transform.position + transform.up * (Power * _propertyMaxPower.Value), Color.black);
             }

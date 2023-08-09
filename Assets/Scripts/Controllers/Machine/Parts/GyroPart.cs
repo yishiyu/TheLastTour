@@ -66,24 +66,13 @@ namespace TheLastTour.Controller.Machine
                 }
 
 
-                // Debug.DrawLine(transform.position, transform.position - transform.forward * angularVelocity,
-                //     Color.red);
-                // Debug.DrawLine(transform.position, transform.position + transform.forward * angle, Color.blue);
-
                 float torque = angle * _propertyAngleStability.Value -
                                angularVelocity * _propertyAngularVelocityStability.Value;
 
-                // Debug.Log(
-                //     "angle:" + angle + "\n" +
-                //     "angularVelocity:" + angularVelocity + "\n" +
-                //     "torque:" + torque
-                // );
-
-                // Vector3 direction = transform.forward;
-                SimulatorRigidbody.AddRelativeTorque(
+                SimulatorRigidbody.AddTorque(
                     transform.forward * torque,
                     ForceMode.Impulse);
-                //
+
                 Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.red);
                 Debug.DrawLine(transform.position, transform.position + transform.forward * torque, Color.blue);
             }

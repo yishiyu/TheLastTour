@@ -291,7 +291,7 @@ namespace TheLastTour.Controller.Machine
 
             MachineRigidBody.mass = mass;
             MachineRigidBody.centerOfMass = massCenter / mass;
-            MachineRigidBody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ) * 5;
+            MachineRigidBody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ);
         }
 
         public Rigidbody GetSimulatorRigidbody()

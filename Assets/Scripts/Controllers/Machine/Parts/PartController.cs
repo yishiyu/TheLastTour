@@ -493,11 +493,17 @@ namespace TheLastTour.Controller.Machine
                 // (这样会导致当某个轴上只有一个方块时,该轴没有任何角速度阻尼)
                 // 但是实际的游戏中谁有会只造一个方块或者一个横条呢?(逃
                 // 为了防止这种情况,可以给 Rigidbody 的 Angular Drag 设一个较小的值
-                SimulatorRigidbody.AddForceAtPosition(
-                    resistanceForce,
-                    transform.position,
-                    ForceMode.Impulse
-                );
+                
+                Vector3 torque = Vector3.Cross(transform.position - SimulatorRigidbody.worldCenterOfMass, resistanceForce);
+                
+                SimulatorRigidbody.AddForce(resistanceForce, ForceMode.Impulse);
+                SimulatorRigidbody.AddTorque(torque, ForceMode.Impulse);
+
+                // SimulatorRigidbody.AddForceAtPosition(
+                //     resistanceForce,
+                //     transform.position,
+                //     ForceMode.Impulse
+                // );
 
                 Debug.DrawLine(transform.position, transform.position + resistanceForce, Color.yellow);
                 // Debug.Log(

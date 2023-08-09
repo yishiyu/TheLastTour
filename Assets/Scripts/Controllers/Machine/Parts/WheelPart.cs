@@ -57,12 +57,12 @@ namespace TheLastTour.Controller.Machine
         {
             base.FixedUpdate();
 
-            float torque = 0;
+            float torqueValue = 0;
             if (_powerForward.Value != Key.None)
             {
                 if (Keyboard.current[_powerForward.Value].isPressed)
                 {
-                    torque = _power.Value;
+                    torqueValue = _power.Value;
                 }
             }
 
@@ -70,17 +70,18 @@ namespace TheLastTour.Controller.Machine
             {
                 if (Keyboard.current[_powerBackward.Value].isPressed)
                 {
-                    torque = -_power.Value;
+                    torqueValue = -_power.Value;
                 }
             }
 
+            Vector3 torque = torqueValue * transform.forward;
+
             // 对自身施加力矩
-            SimulatorRigidbody.AddRelativeTorque(torque * Vector3.forward);
+            SimulatorRigidbody.AddTorque(torque);
             // 对父级施加力矩
             if (ParentRigidbody != null)
             {
-                // 削弱一点对父级的力矩
-                ParentRigidbody.AddRelativeTorque(-torque * 0.3f * (transform.localRotation * Vector3.forward));
+                ParentRigidbody.AddTorque(-torque);
             }
             // 水平作用力由约束自动完成
 

@@ -163,7 +163,7 @@ namespace TheLastTour.Controller.Machine
 
             SimulatorRigidbody.mass = totalMass;
             SimulatorRigidbody.centerOfMass = massCenter / totalMass;
-            SimulatorRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ) * 10;
+            SimulatorRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ);
 
             // transform.parent.GetComponent<ISimulator>().UpdateSimulatorMass();
         }

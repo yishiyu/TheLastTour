@@ -65,18 +65,26 @@ namespace TheLastTour.Controller.Machine
                 // Vector3 forwardDirection = transform.rotation * controlRotation * Vector3.forward;
                 // 局部速度(局部坐标)
                 // Vector3 velocity = RigidBody.GetPointVelocity(transform.position);
-                Vector3 velocity = SimulatorRigidbody.velocity;
-                float forwardSpeed = Vector3.Dot(transform.forward, velocity);
+                Vector3 velocity = SimulatorRigidbody.GetPointVelocity(transform.position);
+                // float forwardSpeed = Vector3.Dot(transform.forward, velocity);
                 float normSpeed = Vector3.Dot(forceDirection, velocity);
 
-                float stabilityForce = -forwardSpeed * normSpeed * _propertyStability.Value / 100;
+                // float stabilityForce = -forwardSpeed * normSpeed * _propertyStability.Value / 100;
+                float stabilityForce = normSpeed * _propertyStability.Value / 100;
 
-                // 允许绕 x 轴自由旋转
+                Vector3 force = transform.right * stabilityForce;
+                Vector3 length =
+                    Vector3.Dot((transform.position - SimulatorRigidbody.worldCenterOfMass), transform.forward) *
+                    transform.forward;
+                Vector3 torque = Vector3.Cross(length, force);
 
-                SimulatorRigidbody.AddForceAtPosition(
-                    transform.right * stabilityForce,
-                    transform.position,
-                    ForceMode.Impulse);
+                SimulatorRigidbody.AddForce(force, ForceMode.Impulse);
+                SimulatorRigidbody.AddTorque(torque, ForceMode.Impulse);
+
+                // SimulatorRigidbody.AddForceAtPosition(
+                //     transform.right * stabilityForce,
+                //     transform.position,
+                //     ForceMode.Impulse);
 
                 // 局部速度(局部坐标)
                 // float velocity = -Vector3.Dot(forwardDirection,
