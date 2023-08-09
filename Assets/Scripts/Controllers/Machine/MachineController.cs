@@ -87,6 +87,12 @@ namespace TheLastTour.Controller.Machine
 
         public bool isRestoreFromArchive = false;
 
+        // 最高速度
+        // 加这个的原因是通过 impulse 来做阻力,在速度过大的时候会不稳定
+        public float maxSpeed = 100f;
+        public float maxAngularSpeed = 5f;
+
+
         private void Start()
         {
             if (!isRestoreFromArchive)
@@ -174,6 +180,9 @@ namespace TheLastTour.Controller.Machine
                     {
                         part.TurnOnSimulation(true);
                     }
+
+                    MachineRigidBody.maxLinearVelocity = maxSpeed;
+                    MachineRigidBody.maxAngularVelocity = maxAngularSpeed;
                 }
                 else
                 {
@@ -189,6 +198,23 @@ namespace TheLastTour.Controller.Machine
 
         private void FixedUpdate()
         {
+            // // 获取合力在速度方向上的投影
+            // Vector3 force = MachineRigidBody.GetAccumulatedForce();
+            // float speedDirectionForce = Vector3.Dot(force, MachineRigidBody.velocity.normalized);
+            //
+            // // 根据最大速度计算加速度衰减,并产生反方向的力抵消加速效果
+            // float decayRate = MachineRigidBody.velocity.magnitude / maxSpeed;
+            // if (speedDirectionForce > 0)
+            // {
+            //     speedDirectionForce *= decayRate;
+            // }
+            //
+            // MachineRigidBody.AddForce(-speedDirectionForce * MachineRigidBody.velocity.normalized);
+            //
+            //
+            // Debug.Log("speed:" + MachineRigidBody.velocity.magnitude +
+            //           "angular speed:" + MachineRigidBody.angularVelocity.magnitude);
+
             // 将阻力分散到每个 Part 上计算
 
             // 空气产生的阻力
@@ -265,7 +291,7 @@ namespace TheLastTour.Controller.Machine
 
             MachineRigidBody.mass = mass;
             MachineRigidBody.centerOfMass = massCenter / mass;
-            MachineRigidBody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ);
+            MachineRigidBody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ) * 5;
         }
 
         public Rigidbody GetSimulatorRigidbody()

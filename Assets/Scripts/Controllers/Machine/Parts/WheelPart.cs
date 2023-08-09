@@ -85,7 +85,7 @@ namespace TheLastTour.Controller.Machine
             // 水平作用力由约束自动完成
 
 
-            Debug.Log("torque: " + torque);
+            // Debug.Log("torque: " + torque);
         }
     }
 }

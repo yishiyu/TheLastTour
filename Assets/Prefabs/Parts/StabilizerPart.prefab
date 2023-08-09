@@ -87,6 +87,7 @@ MonoBehaviour:
   PartId: 0
   partFloatComponent: {fileID: 0}
   airResistance: {x: 0.01, y: 0.01, z: 0.01}
+  isResistanceEnabled: 000000000000
   partRenderer: {fileID: 7152764906837612848}
   joints: []
   rootJoint: {fileID: 336667589128152197}
