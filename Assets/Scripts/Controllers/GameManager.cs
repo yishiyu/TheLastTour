@@ -157,7 +157,7 @@ namespace TheLastTour.Controller
             CurrentSelectedPartIndex = -1;
             _gameStateManager.GameState = EGameState.Edit;
             _gameStateManager.EditState = EEditState.Selecting;
-            
+
             // 开启游戏,因为一些 DontDestroyOnLoad 的对象需要在游戏开始时初始化
             EventBus.Invoke(GameEvents.NewSceneLoadedEvent);
         }
@@ -196,7 +196,8 @@ namespace TheLastTour.Controller
                     }
 
                     Cursor.lockState = CursorLockMode.Locked;
-                    
+                    Time.timeScale = 1;
+
                     // 恢复选中物体的高亮
                     if (selectedPart != null)
                     {
@@ -210,6 +211,13 @@ namespace TheLastTour.Controller
                     _machineManager.TurnOnSimulation(false);
 
                     Cursor.lockState = CursorLockMode.None;
+                    Time.timeScale = 1;
+                    break;
+
+                case EGameState.Pause:
+
+                    Cursor.lockState = CursorLockMode.None;
+                    Time.timeScale = 0f;
                     break;
                 default:
                     break;
@@ -276,6 +284,25 @@ namespace TheLastTour.Controller
                 {
                     _partPreviewInstance.IterRotateAngleZ();
                     _partPreviewInstance.TurnOnJointCollision(false);
+                }
+            }
+
+            if (Keyboard.current.pKey.wasPressedThisFrame)
+            {
+                switch (_gameStateManager.GameState)
+                {
+                    case EGameState.Edit:
+                        _gameStateManager.GameState = EGameState.Pause;
+                        break;
+                    case EGameState.Play:
+                        _gameStateManager.GameState = EGameState.Pause;
+                        break;
+                    case EGameState.Pause:
+                        _gameStateManager.ChaneToPreviousState();
+                        break;
+
+                    case EGameState.GameOver:
+                        break;
                 }
             }
 

@@ -26,12 +26,24 @@ namespace TheLastTour.Manager
         public EGameState GameState { get; set; }
 
         public EEditState EditState { get; set; }
+
+        public void ChaneToPreviousState();
+        
+        public bool DebugMode { get; set; }
     }
 
     public class GameStateManager : IGameStateManager
     {
         // 游戏状态
         private EGameState _gameState;
+        private EGameState _previousGameState;
+
+        public void ChaneToPreviousState()
+        {
+            ((IGameStateManager)this).GameState = _previousGameState;
+        }
+
+        public bool DebugMode { get; set; }
 
         EGameState IGameStateManager.GameState
         {
@@ -40,6 +52,7 @@ namespace TheLastTour.Manager
             {
                 if (_gameState != value)
                 {
+                    _previousGameState = _gameState;
                     GameEvents.GameStateChangedEvent.PreviousState = _gameState;
                     GameEvents.GameStateChangedEvent.CurrentState = value;
                     _gameState = value;

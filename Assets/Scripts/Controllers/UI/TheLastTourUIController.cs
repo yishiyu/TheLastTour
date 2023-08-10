@@ -20,6 +20,8 @@ namespace TheLastTour.Controller.UI
         public Text objectiveCompleteText;
 
         public GameObject compassPanel;
+        
+        public GameObject pausePanel;
 
         private GameManager _gameManager;
         private IGameStateManager _gameStateManager;
@@ -68,20 +70,28 @@ namespace TheLastTour.Controller.UI
             switch (evt.CurrentState)
             {
                 case EGameState.Edit:
-                    editorPanel.SetActive(true);
                     compassPanel.SetActive(false);
+                    editorPanel.SetActive(true);
                     debugInfoPanel.SetActive(true);
+                    pausePanel.SetActive(false);
                     break;
                 case EGameState.Play:
                     compassPanel.SetActive(true);
                     editorPanel.SetActive(false);
                     debugInfoPanel.SetActive(false);
+                    pausePanel.SetActive(false);
                     break;
                 case EGameState.Pause:
+                    compassPanel.SetActive(false);
                     editorPanel.SetActive(false);
+                    debugInfoPanel.SetActive(false);
+                    pausePanel.SetActive(true);
                     break;
                 case EGameState.GameOver:
+                    compassPanel.SetActive(false);
                     editorPanel.SetActive(false);
+                    debugInfoPanel.SetActive(false);
+                    pausePanel.SetActive(false);
                     break;
             }
         }
