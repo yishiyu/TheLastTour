@@ -70,7 +70,7 @@ namespace TheLastTour.Controller.Machine
                 float normSpeed = Vector3.Dot(forceDirection, velocity);
 
                 // float stabilityForce = -forwardSpeed * normSpeed * _propertyStability.Value / 100;
-                float stabilityForce = normSpeed * _propertyStability.Value / 100;
+                float stabilityForce = -normSpeed * _propertyStability.Value / 100;
 
                 Vector3 force = transform.right * stabilityForce;
                 Vector3 length =
