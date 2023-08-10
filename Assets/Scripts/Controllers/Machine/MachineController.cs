@@ -275,9 +275,15 @@ namespace TheLastTour.Controller.Machine
             float intertiaX = 0;
             float intertiaY = 0;
             float intertiaZ = 0;
+            
+            Quaternion inversedRotation = Quaternion.Inverse(MachineRigidBody.rotation);
             foreach (var part in machineParts)
             {
-                Vector3 partMassPosition = part.transform.localPosition + part.CenterOfMass;
+                // Vector3 partMassPosition = MachineRigidBody.transform.InverseTransformPoint(part.transform.TransformPoint(part.centerOfMass));
+                // 手动算坐标，否则会受到 Rigidbody scale 的影响
+                Vector3 partMassPosition = part.transform.position + part.transform.rotation * part.CenterOfMass;
+                partMassPosition = inversedRotation * (partMassPosition - MachineRigidBody.position);
+
                 mass += part.Mass;
                 massCenter += part.Mass * partMassPosition;
                 // 通过平行轴定理修正转动惯量(否则很明显的一个错误是,当只有一个方块的时候,转动惯量为 0)

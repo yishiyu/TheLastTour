@@ -147,10 +147,20 @@ namespace TheLastTour.Controller.Machine
             float intertiaX = mass * (centerOfMass.y * centerOfMass.y + centerOfMass.z * centerOfMass.z + 0.667f);
             float intertiaY = mass * (centerOfMass.x * centerOfMass.x + centerOfMass.z * centerOfMass.z + 0.667f);
             float intertiaZ = mass * (centerOfMass.x * centerOfMass.x + centerOfMass.y * centerOfMass.y + 0.667f);
+
+            Quaternion inversedRotation = Quaternion.Inverse(SimulatorRigidbody.rotation);
             foreach (var part in attachedParts)
             {
                 // part 的质心相对于自身的偏移
-                Vector3 partMassPosition = part.transform.localPosition + part.CenterOfMass;
+                // 手动算坐标，否则会受到 Rigidbody scale 的影响
+                // There are three similar methods on transform: TransformPoint, TransformDirection, and TransformVector. The difference comes down to which aspects of the transform are used or not used when performing the transform:
+                //
+                // TransformPoint 6: position, rotation, and scale
+                // TransformDirection 5: rotation only
+                // TransformVector 6: rotation and scale only
+                // Vector3 partMassPosition = SimulatorRigidbody.transform.InverseTransformPoint(part.transform.TransformPoint(part.centerOfMass));
+                Vector3 partMassPosition = part.transform.position + part.transform.rotation * part.CenterOfMass;
+                partMassPosition = inversedRotation * (partMassPosition - SimulatorRigidbody.position);
                 totalMass += part.Mass;
                 massCenter += part.Mass * partMassPosition;
                 intertiaX += part.Mass * (partMassPosition.y * partMassPosition.y +

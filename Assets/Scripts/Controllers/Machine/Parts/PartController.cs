@@ -378,7 +378,7 @@ namespace TheLastTour.Controller.Machine
         {
             bool isUnderwater = false;
             // 计算浮力
-            if (PartFloatComponent && PartFloatComponent)
+            if (SimulatorRigidbody && PartFloatComponent)
             {
                 {
                     isUnderwater = PartFloatComponent.GetFloatingForce(
