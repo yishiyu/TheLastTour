@@ -168,9 +168,15 @@ namespace TheLastTour.Manager
 
         public void SaveMachines(string fileName)
         {
-            // string path = Path.Combine(Directory)
-
-
+            var corePart = GetCorePart();
+            Vector3 corePosition = Vector3.zero;
+            Quaternion coreRotation = Quaternion.identity;
+            if (corePart)
+            {
+                corePosition = corePart.transform.position;
+                coreRotation = corePart.transform.rotation;
+            }
+            
             JsonMachines jsonMachines = new JsonMachines
             {
                 archiveName = fileName,
@@ -180,7 +186,7 @@ namespace TheLastTour.Manager
 
             foreach (var machine in MachineList)
             {
-                jsonMachines.machines.Add(machine.Serialize());
+                jsonMachines.machines.Add(machine.Serialize(corePosition, coreRotation));
             }
 
             TheLastTourArchitecture.Instance.GetUtility<IArchiveUtility>()
@@ -190,15 +196,12 @@ namespace TheLastTour.Manager
         public void LoadMachines(string fileName)
         {
             var corePart = GetCorePart();
-
             Vector3 corePosition = Vector3.zero;
             Quaternion coreRotation = Quaternion.identity;
             if (corePart)
             {
-                Transform coreTransform = corePart.transform;
-                corePosition = coreTransform.position;
-                coreRotation = coreTransform.rotation;
-                corePart = null;
+                corePosition = corePart.transform.position;
+                coreRotation = corePart.transform.rotation;
             }
 
 
@@ -211,22 +214,13 @@ namespace TheLastTour.Manager
                 foreach (var jsonMachine in jsonMachines.machines)
                 {
                     MachineController machine = CreateEmptyMachine();
-                    machine.Deserialize(jsonMachine);
+                    machine.Deserialize(jsonMachine, corePosition, coreRotation);
                 }
             }
 
             corePart = GetCorePart();
             if (corePart)
             {
-                Vector3 positionOffset = corePosition - corePart.transform.position;
-                Quaternion rotationOffset = coreRotation * Quaternion.Inverse(corePart.transform.rotation);
-
-                foreach (var machine in MachineList)
-                {
-                    machine.transform.position += positionOffset;
-                    machine.transform.rotation *= rotationOffset;
-                }
-
                 GameEvents.FocusOnTargetEvent.Target = corePart.transform;
                 EventBus.Invoke(GameEvents.FocusOnTargetEvent);
             }

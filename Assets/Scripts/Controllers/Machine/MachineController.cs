@@ -138,6 +138,10 @@ namespace TheLastTour.Controller.Machine
             // TheLastTourArchitecture.Instance.GetManager<IMachineManager>().DestroyMachine(this);
             // 因为已经将该 Part 与自身起始方块断开了,所以不需要销毁自身,销毁该方块即可
             GameObject.Destroy(part.gameObject);
+            if (machineParts.Count == 0)
+            {
+                TheLastTourArchitecture.Instance.GetManager<IMachineManager>().DestroyMachine(this);
+            }
         }
 
         public MachineController DetachJoint(PartJointController joint)
@@ -275,7 +279,7 @@ namespace TheLastTour.Controller.Machine
             float intertiaX = 0;
             float intertiaY = 0;
             float intertiaZ = 0;
-            
+
             Quaternion inversedRotation = Quaternion.Inverse(MachineRigidBody.rotation);
             foreach (var part in machineParts)
             {
@@ -316,19 +320,8 @@ namespace TheLastTour.Controller.Machine
             Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, math.sqrt(MachineRigidBody.mass) / 10f);
         }
 
-        public JsonMachine Serialize()
+        public JsonMachine Serialize(Vector3 corePartPosition, Quaternion corePartRotation)
         {
-            JsonMachine jsonMachine = new JsonMachine
-            {
-                machineName = gameObject.name,
-                machineParts = new List<JsonPart>()
-            };
-
-            if (machineParts.Count == 0)
-            {
-                return jsonMachine;
-            }
-
             // 首先寻找根节点
             var rootPart = machineParts[0];
             while (rootPart.rootJoint != null &&
@@ -337,6 +330,23 @@ namespace TheLastTour.Controller.Machine
             {
                 rootPart = rootPart.rootJoint.ConnectedJoint.Owner;
             }
+
+
+            JsonMachine jsonMachine = new JsonMachine
+            {
+                // (新建机器的时候,会将根节点的位置设为原点)
+                relativePosition = rootPart.transform.position - corePartPosition,
+                relativeRotation = rootPart.transform.rotation * Quaternion.Inverse(corePartRotation),
+                machineName = gameObject.name,
+                machineParts = new List<JsonPart>()
+            };
+
+
+            if (machineParts.Count == 0)
+            {
+                return jsonMachine;
+            }
+
 
             jsonMachine.machineParts.Add(rootPart.Serialize());
             foreach (var joint in rootPart.joints)
@@ -357,7 +367,7 @@ namespace TheLastTour.Controller.Machine
             return jsonMachine;
         }
 
-        public void Deserialize(JsonMachine jsonMachine)
+        public void Deserialize(JsonMachine jsonMachine, Vector3 corePartPosition, Quaternion corePartRotation)
         {
             IPartManager partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
 
@@ -380,6 +390,9 @@ namespace TheLastTour.Controller.Machine
                 }
             }
 
+            transform.position = corePartPosition + jsonMachine.relativePosition;
+            transform.rotation = corePartRotation * jsonMachine.relativeRotation;
+
             isRestoreFromArchive = true;
         }
     }
@@ -387,6 +400,8 @@ namespace TheLastTour.Controller.Machine
     [Serializable]
     public struct JsonMachine
     {
+        public Vector3 relativePosition;
+        public Quaternion relativeRotation;
         public string machineName;
         public List<JsonPart> machineParts;
     }
