@@ -33,6 +33,14 @@ namespace TheLastTour.Controller
 
         #region CameraConfig
 
+        // 开启游戏后,目标速度跟随
+        // maxFollowAngularDecayRate ==> 每秒钟,最大衰减掉的角度
+        public bool rotateToVelocity = true;
+        public float maxFollowAngularDecayRate = 0.8f;
+        public float maxFollowSpeed = 3f;
+        private Vector3 _previousPosition = Vector3.zero;
+
+
         // 偏移值为真实焦点位置相对目标在世界坐标系中的偏移
         public Transform focusTarget = null;
         public Vector3 focusOffset = Vector3.zero;
@@ -108,6 +116,7 @@ namespace TheLastTour.Controller
             focusTarget = evt.Target;
             focusOffset = Vector3.zero;
             focusDistanceTarget = 10f;
+            _previousPosition = evt.Target.position;
         }
 
         #endregion
@@ -226,6 +235,35 @@ namespace TheLastTour.Controller
             focusAngleYTarget = (focusAngleYTarget + mouseXDelta) % 360;
             focusDistanceTarget =
                 Mathf.Clamp(focusDistanceTarget - scrollDelta, focusDistanceMin, focusDistanceMax);
+
+            if (rotateToVelocity)
+            {
+                Vector3 movementDelta = focusTarget.position - _previousPosition;
+                movementDelta.y = 0;
+                _previousPosition = focusTarget.position;
+
+                if (movementDelta.magnitude > 0.15f)
+                {
+                    // 速度反方向
+                    Vector3 inversedMovementDirection =
+                        Quaternion.LookRotation(movementDelta.normalized).eulerAngles;
+                    // Quaternion.FromToRotation(Vector3.zero, movementDelta.normalized).eulerAngles;
+
+
+                    // 计算当前角度衰减率
+                    float decayRate = Mathf.Clamp01(movementDelta.magnitude / maxFollowSpeed);
+                    decayRate *= maxFollowAngularDecayRate * Time.deltaTime;
+
+                    // focusAngleXTarget += (inversedMovementDirection.x - focusAngleXTarget) * decayRate;
+                    focusAngleYTarget =
+                        Mathf.LerpAngle(focusAngleYTarget, inversedMovementDirection.y, decayRate);
+                    // focusAngleYTarget += (inversedMovementDirection.y - focusAngleYTarget) * decayRate;
+
+                    // Debug.Log("inversedMovementDirection: " + inversedMovementDirection);
+                    Debug.Log(inversedMovementDirection.y + " " + focusAngleYTarget);
+                    // Debug.Log("speed: " + movementDelta.magnitude);
+                }
+            }
 
 
             // 平滑变换

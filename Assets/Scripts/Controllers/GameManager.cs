@@ -196,6 +196,13 @@ namespace TheLastTour.Controller
                     }
 
                     Cursor.lockState = CursorLockMode.Locked;
+                    
+                    // 恢复选中物体的高亮
+                    if (selectedPart != null)
+                    {
+                        SelectedPart.EditType = EEditType.Default;
+                        SelectedPart = null;
+                    }
 
                     break;
                 case EGameState.Edit:
