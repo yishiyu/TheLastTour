@@ -16,6 +16,7 @@ namespace TheLastTour.Controller.Machine
         {
             base.OnAttached(simulator);
             hingePartJoint.connectedBody = simulator.GetSimulatorRigidbody();
+            hingePartJoint.enableCollision = true;
         }
 
         public override void AddPart(PartController part)

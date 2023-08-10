@@ -61,6 +61,7 @@ namespace TheLastTour.Controller.Machine
             base.OnAttached(simulator);
             springJoint.connectedBody = simulator.GetSimulatorRigidbody();
             springJoint.autoConfigureConnectedAnchor = false;
+            springJoint.enableCollision = true;
 
             // 取中点作为平衡点
             springTop.transform.position = _springDirection * _propertySpringLength.Value;

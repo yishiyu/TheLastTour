@@ -28,6 +28,7 @@ namespace TheLastTour.Controller.Machine
             base.OnAttached(simulator);
 
             motorJoint.connectedBody = simulator.GetSimulatorRigidbody();
+            motorJoint.enableCollision = true;
 
             _rotationBase = transform.localRotation.eulerAngles;
         }

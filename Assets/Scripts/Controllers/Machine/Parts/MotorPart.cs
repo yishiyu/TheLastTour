@@ -31,6 +31,7 @@ namespace TheLastTour.Controller.Machine
             base.OnAttached(simulator);
 
             motorJoint.connectedBody = simulator.GetSimulatorRigidbody();
+            motorJoint.enableCollision = true;
         }
 
 
