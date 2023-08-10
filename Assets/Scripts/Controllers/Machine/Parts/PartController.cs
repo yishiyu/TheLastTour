@@ -372,7 +372,7 @@ namespace TheLastTour.Controller.Machine
         public abstract void AddPart(PartController part);
         public abstract void RemovePart(PartController part);
         public abstract void UpdateSimulatorMass();
-
+        public abstract ISimulator DetachJoint(PartJointController joint);
 
         public bool UpdateFloatingForce()
         {

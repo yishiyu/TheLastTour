@@ -61,6 +61,19 @@ namespace TheLastTour.Controller.Machine
         /// 对于 Movable Part,更新自身质量,同时触发所在上层 Simulator 更新质量
         /// </summary>
         public void UpdateSimulatorMass();
+
+        /// <summary>
+        /// 从 Joint 处断开连接
+        /// </summary>
+        /// <param name="joint"></param>
+        /// <returns></returns>
+        public ISimulator DetachJoint(PartJointController joint);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isOn"></param>
+        public void TurnOnSimulation(bool isOn);
     }
 
 
@@ -144,7 +157,7 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-        public MachineController DetachJoint(PartJointController joint)
+        public ISimulator DetachJoint(PartJointController joint)
         {
             if (joint != null && joint.IsAttached)
             {

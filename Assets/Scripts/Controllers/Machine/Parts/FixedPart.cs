@@ -45,5 +45,19 @@ namespace TheLastTour.Controller.Machine
                 transform.parent.GetComponentInParent<ISimulator>()?.UpdateSimulatorMass();
             }
         }
+
+        public override ISimulator DetachJoint(PartJointController joint)
+        {
+            if (transform.parent)
+            {
+                ISimulator simulator = transform.parent.GetComponentInParent<ISimulator>();
+                if (simulator != null)
+                {
+                    return simulator.DetachJoint(joint);
+                }
+            }
+
+            return null;
+        }
     }
 }

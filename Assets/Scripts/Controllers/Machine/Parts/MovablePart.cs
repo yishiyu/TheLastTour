@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TheLastTour.Manager;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace TheLastTour.Controller.Machine
@@ -110,7 +111,7 @@ namespace TheLastTour.Controller.Machine
             UpdateSimulatorMass();
         }
 
-        private MachineController DetachJoint(PartJointController joint)
+        public override ISimulator DetachJoint(PartJointController joint)
         {
             if (joint != null && joint.IsAttached)
             {
@@ -186,7 +187,7 @@ namespace TheLastTour.Controller.Machine
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0, 1, 0, 0.5f);
-            Gizmos.DrawSphere(SimulatorRigidbody.worldCenterOfMass, SimulatorRigidbody.mass / 10f);
+            Gizmos.DrawSphere(SimulatorRigidbody.worldCenterOfMass, math.sqrt(SimulatorRigidbody.mass) / 10f);
         }
 
         public override void TurnOnSimulation(bool isOn)
