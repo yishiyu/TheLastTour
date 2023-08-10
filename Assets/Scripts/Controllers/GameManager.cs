@@ -185,15 +185,18 @@ namespace TheLastTour.Controller
             switch (evt.CurrentState)
             {
                 case EGameState.Play:
-                    _machineManager.SaveMachines("./temp_machine.json");
-                    _machineManager.TurnOnSimulation(true);
-
-                    corePart = _machineManager.GetCorePart();
-                    if (corePart)
+                    if (evt.PreviousState == EGameState.Edit)
                     {
-                        GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
-                        EventBus.Invoke(GameEvents.FocusOnTargetEvent);
+                        _machineManager.SaveMachines("./temp_machine.json");
+                        _machineManager.TurnOnSimulation(true);
+                        corePart = _machineManager.GetCorePart();
+                        if (corePart)
+                        {
+                            GameEvents.FocusOnTargetEvent.Target = _machineManager.GetCorePart().transform;
+                            EventBus.Invoke(GameEvents.FocusOnTargetEvent);
+                        }
                     }
+
 
                     Cursor.lockState = CursorLockMode.Locked;
                     Time.timeScale = 1;
@@ -207,8 +210,12 @@ namespace TheLastTour.Controller
 
                     break;
                 case EGameState.Edit:
-                    _machineManager.LoadMachines("./temp_machine.json");
-                    _machineManager.TurnOnSimulation(false);
+                    if (evt.PreviousState == EGameState.Play)
+                    {
+                        _machineManager.LoadMachines("./temp_machine.json");
+                        _machineManager.TurnOnSimulation(false);
+                    }
+
 
                     Cursor.lockState = CursorLockMode.None;
                     Time.timeScale = 1;

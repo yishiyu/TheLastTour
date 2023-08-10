@@ -32,6 +32,13 @@ namespace TheLastTour.Controller.Machine
 
         private Rigidbody _simulatorRigidbody;
 
+        public IGameStateManager gameStateManager;
+
+        public bool IsDrawGizmos
+        {
+            get { return (gameStateManager != null && gameStateManager.DebugMode); }
+        }
+
         public Rigidbody SimulatorRigidbody
         {
             get
@@ -180,6 +187,11 @@ namespace TheLastTour.Controller.Machine
         public float RotateAngleZ { get; set; } = 0f;
 
         public int RootJointId { get; private set; } = -1;
+
+        public virtual void Start()
+        {
+            gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
+        }
 
         public void SetRootJoint(int id)
         {
@@ -493,9 +505,10 @@ namespace TheLastTour.Controller.Machine
                 // (这样会导致当某个轴上只有一个方块时,该轴没有任何角速度阻尼)
                 // 但是实际的游戏中谁有会只造一个方块或者一个横条呢?(逃
                 // 为了防止这种情况,可以给 Rigidbody 的 Angular Drag 设一个较小的值
-                
-                Vector3 torque = Vector3.Cross(transform.position - SimulatorRigidbody.worldCenterOfMass, resistanceForce);
-                
+
+                Vector3 torque = Vector3.Cross(transform.position - SimulatorRigidbody.worldCenterOfMass,
+                    resistanceForce);
+
                 SimulatorRigidbody.AddForce(resistanceForce, ForceMode.Impulse);
                 SimulatorRigidbody.AddTorque(torque, ForceMode.Impulse);
 

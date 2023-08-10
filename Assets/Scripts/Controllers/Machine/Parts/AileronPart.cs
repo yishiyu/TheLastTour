@@ -90,13 +90,16 @@ namespace TheLastTour.Controller.Machine
                 }
 
 
-                Debug.DrawLine(transform.position,
-                    transform.position + transform.up * 10,
-                    Color.red);
+                if (IsDrawGizmos)
+                {
+                    // Debug.DrawLine(transform.position,
+                    //     transform.position + transform.up * 10,
+                    //     Color.red);
 
-                Debug.DrawLine(transform.position,
-                    transform.position + aileronForce * transform.up,
-                    Color.blue);
+                    Debug.DrawLine(transform.position,
+                        transform.position + aileronForce * transform.up,
+                        Color.blue);
+                }
             }
         }
     }

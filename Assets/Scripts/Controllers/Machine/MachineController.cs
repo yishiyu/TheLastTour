@@ -68,7 +68,7 @@ namespace TheLastTour.Controller.Machine
         /// <param name="joint"></param>
         /// <returns></returns>
         public ISimulator DetachJoint(PartJointController joint);
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -105,9 +105,12 @@ namespace TheLastTour.Controller.Machine
         public float maxSpeed = 100f;
         public float maxAngularSpeed = 5f;
 
+        private IGameStateManager _gameStateManager;
 
         private void Start()
         {
+            _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
+
             if (!isRestoreFromArchive)
             {
                 machineParts.AddRange(GetComponentsInChildren<PartController>());
@@ -329,8 +332,11 @@ namespace TheLastTour.Controller.Machine
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = new Color(0, 1, 0, 0.5f);
-            Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, math.sqrt(MachineRigidBody.mass) / 10f);
+            if (_gameStateManager != null && _gameStateManager.DebugMode)
+            {
+                Gizmos.color = new Color(0, 1, 0, 0.5f);
+                Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, math.sqrt(MachineRigidBody.mass) / 10f);
+            }
         }
 
         public JsonMachine Serialize(Vector3 corePartPosition, Quaternion corePartRotation)

@@ -92,11 +92,11 @@ namespace TheLastTour.Controller.Machine
             //           "  _motorDamping.Value: " + _motorDamping.Value +
             //           "  relativeAngularVelocity.x: " + relativeAngularVelocity.x);
 
-            Debug.Log("Motor Power: " + _motorPower.Value * Power +
-                      "  Power: " + Power +
-                      "  _motorPower.Value: " + _motorPower.Value +
-                      "  _motorDamping.Value: " + _motorDamping.Value +
-                      "  relativeAngularVelocity: " + relativeAngularVelocity);
+            // Debug.Log("Motor Power: " + _motorPower.Value * Power +
+            //           "  Power: " + Power +
+            //           "  _motorPower.Value: " + _motorPower.Value +
+            //           "  _motorDamping.Value: " + _motorDamping.Value +
+            //           "  relativeAngularVelocity: " + relativeAngularVelocity);
         }
     }
 }

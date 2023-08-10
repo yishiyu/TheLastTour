@@ -73,8 +73,11 @@ namespace TheLastTour.Controller.Machine
                     transform.forward * torque,
                     ForceMode.Impulse);
 
-                Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.red);
-                Debug.DrawLine(transform.position, transform.position + transform.forward * torque, Color.blue);
+                if (IsDrawGizmos)
+                {
+                    // Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.red);
+                    Debug.DrawLine(transform.position, transform.position + transform.forward * torque, Color.red);
+                }
             }
         }
     }

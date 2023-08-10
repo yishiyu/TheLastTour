@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TheLastTour.Manager;
@@ -184,10 +185,13 @@ namespace TheLastTour.Controller.Machine
             return false;
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
-            Gizmos.color = new Color(0, 1, 0, 0.5f);
-            Gizmos.DrawSphere(SimulatorRigidbody.worldCenterOfMass, math.sqrt(SimulatorRigidbody.mass) / 10f);
+            if (IsDrawGizmos)
+            {
+                Gizmos.color = new Color(0, 1, 0, 0.5f);
+                Gizmos.DrawSphere(SimulatorRigidbody.worldCenterOfMass, math.sqrt(SimulatorRigidbody.mass) / 10f);
+            }
         }
 
         public override void TurnOnSimulation(bool isOn)
