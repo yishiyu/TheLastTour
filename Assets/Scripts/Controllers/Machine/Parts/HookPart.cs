@@ -46,6 +46,10 @@ namespace TheLastTour.Controller.Machine
                     hookBase.transform.right * _propertyHookStrength.Value,
                     ForceMode.Force
                 );
+                
+                hookJoint.angularXMotion = ConfigurableJointMotion.Free;
+                hookJoint.angularYMotion = ConfigurableJointMotion.Free;
+                hookJoint.angularZMotion = ConfigurableJointMotion.Free;
             }
         }
 
@@ -84,6 +88,10 @@ namespace TheLastTour.Controller.Machine
             };
 
             _hookState = HookState.Ready;
+            
+            hookJoint.angularXMotion = ConfigurableJointMotion.Locked;
+            hookJoint.angularYMotion = ConfigurableJointMotion.Locked;
+            hookJoint.angularZMotion = ConfigurableJointMotion.Locked;
             yield return null;
         }
 
@@ -119,9 +127,9 @@ namespace TheLastTour.Controller.Machine
             hookJoint.xMotion = ConfigurableJointMotion.Limited;
             hookJoint.yMotion = ConfigurableJointMotion.Limited;
             hookJoint.zMotion = ConfigurableJointMotion.Limited;
-            // hookJoint.angularXMotion = ConfigurableJointMotion.Locked;
-            // hookJoint.angularYMotion = ConfigurableJointMotion.Locked;
-            // hookJoint.angularZMotion = ConfigurableJointMotion.Locked;
+            hookJoint.angularXMotion = ConfigurableJointMotion.Locked;
+            hookJoint.angularYMotion = ConfigurableJointMotion.Locked;
+            hookJoint.angularZMotion = ConfigurableJointMotion.Locked;
             hookJoint.linearLimit = new SoftJointLimit()
             {
                 limit = _hookMinLength,

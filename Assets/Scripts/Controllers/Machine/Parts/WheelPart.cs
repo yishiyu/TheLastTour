@@ -82,7 +82,8 @@ namespace TheLastTour.Controller.Machine
             // 对父级施加力矩
             if (ParentRigidbody != null)
             {
-                ParentRigidbody.AddTorque(-torque);
+                // 减少对父级力矩
+                ParentRigidbody.AddTorque(-torque * 0.2f);
             }
             // 水平作用力由约束自动完成
 
