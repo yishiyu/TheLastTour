@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6200260155155213859}
   m_Layer: 0
   m_Name: EmptyMachine
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &6200260155155213859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,4 +73,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machineParts: []
-  airResistanceCoefficient: 0.15
+  isRestoreFromArchive: 0
+  maxSpeed: 100
+  maxAngularSpeed: 100

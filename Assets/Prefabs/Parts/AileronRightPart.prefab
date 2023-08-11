@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2738116813751217780}
   m_Layer: 7
   m_Name: Joint_01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 5524622751553607192}
   m_Layer: 6
   m_Name: AileronRightPart
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 2984506087796605076}
   m_Layer: 6
   m_Name: Joints
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PartRenderer
       objectReference: {fileID: 0}
+    - target: {fileID: 4084347726151810130, guid: daa95fcc8a598be4e9e648f7bd2bb937, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -312,6 +316,10 @@ PrefabInstance:
     - target: {fileID: 3411975472486385612, guid: b3af82739e093e841a7d7e18f2a63862, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411975472486385612, guid: b3af82739e093e841a7d7e18f2a63862, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -428,6 +436,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ee2c303f6943a9c4a8dcf370de96892a, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ee2c303f6943a9c4a8dcf370de96892a, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4869988937370524780}
   m_Layer: 6
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4795050497001386033}
   m_Layer: 6
   m_Name: StabilizerPart
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 336667589128152197}
   m_Layer: 7
   m_Name: Joint_01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 2990197725229345268}
   m_Layer: 6
   m_Name: Joints
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,6 +258,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PartRenderer
       objectReference: {fileID: 0}
+    - target: {fileID: 4084347726151810130, guid: daa95fcc8a598be4e9e648f7bd2bb937, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -337,6 +341,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9fca7b095476c8b4fbe4282b83d5409a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -388,6 +396,10 @@ PrefabInstance:
     - target: {fileID: 9593129792389895, guid: 6488573ae422ecc4eb044c4d4ae685ae, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9593129792389895, guid: 6488573ae422ecc4eb044c4d4ae685ae, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4287288076361010030, guid: 6488573ae422ecc4eb044c4d4ae685ae, type: 3}
       propertyPath: m_RootOrder

@@ -37,6 +37,7 @@ namespace TheLastTour.Controller.Machine
             {
                 _hookState = HookState.Launched;
                 hook.Release();
+                hookJoint.enableCollision = true;
                 hookJoint.linearLimit = new SoftJointLimit()
                 {
                     limit = _propertyHookLength.Value,
@@ -65,6 +66,7 @@ namespace TheLastTour.Controller.Machine
         public IEnumerator DoRetract()
         {
             _hookState = HookState.Retracting;
+            hookJoint.enableCollision = false;
 
             // Do Retraction
             float distance = Vector3.Distance(hookBase.transform.position, hookTop.transform.position);

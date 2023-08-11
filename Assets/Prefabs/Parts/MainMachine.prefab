@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 617526457513461930}
   - component: {fileID: 2659207433923350815}
   - component: {fileID: 3841758413216995138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainMachine
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -55,12 +55,12 @@ Rigidbody:
     serializedVersion: 2
     m_Bits: 0
   m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitTensor: 0
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &3841758413216995138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +74,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   machineParts: []
+  isRestoreFromArchive: 0
+  maxSpeed: 100
+  maxAngularSpeed: 100
 --- !u!1001 &8840970358529824870
 PrefabInstance:
   m_ObjectHideFlags: 0

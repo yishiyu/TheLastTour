@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3181990766743851327}
   m_Layer: 7
   m_Name: Joint_01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 1972697022304645383}
   m_Layer: 7
   m_Name: Joint_02
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7289360203499395397}
   m_Layer: 0
   m_Name: FX_FlameThrower
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4979,7 +4979,7 @@ GameObject:
   - component: {fileID: 908912090749019436}
   m_Layer: 6
   m_Name: RocketPart
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5022,6 +5022,7 @@ MonoBehaviour:
   PartId: 0
   partFloatComponent: {fileID: 0}
   airResistance: {x: 0.001, y: 0.001, z: 0.001}
+  isResistanceEnabled: 010101010101
   partRenderer: {fileID: 5682662210019897887}
   joints: []
   rootJoint: {fileID: 3181990766743851327}
@@ -5037,7 +5038,7 @@ GameObject:
   - component: {fileID: 1126001480312860777}
   m_Layer: 7
   m_Name: Joints
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5074,6 +5075,10 @@ PrefabInstance:
     - target: {fileID: 123924, guid: b4a7f000104c5094f8fbcc357261fb80, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 123924, guid: b4a7f000104c5094f8fbcc357261fb80, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 419820, guid: b4a7f000104c5094f8fbcc357261fb80, type: 3}
       propertyPath: m_RootOrder
@@ -5226,6 +5231,10 @@ PrefabInstance:
     - target: {fileID: 4084347726151810130, guid: daa95fcc8a598be4e9e648f7bd2bb937, type: 3}
       propertyPath: m_Name
       value: PartRenderer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084347726151810130, guid: daa95fcc8a598be4e9e648f7bd2bb937, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

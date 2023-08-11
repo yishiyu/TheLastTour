@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 133954329596724300}
   m_Layer: 6
   m_Name: Joints
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 3996109715553692579}
   m_Layer: 6
   m_Name: CubeMesh
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 860937256896952788}
   m_Layer: 7
   m_Name: Joint_03
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 1355498936123967203}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 680113252817488102}
   m_Layer: 6
   m_Name: GyroPart
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,6 +371,7 @@ MonoBehaviour:
   PartId: 0
   partFloatComponent: {fileID: 0}
   airResistance: {x: 0.001, y: 0.001, z: 0.001}
+  isResistanceEnabled: 010101010101
   partRenderer: {fileID: 8457049840978423562}
   joints: []
   rootJoint: {fileID: 3550833529533667232}
@@ -387,7 +388,7 @@ GameObject:
   - component: {fileID: 6812281487768695427}
   m_Layer: 7
   m_Name: Joint_02
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -453,7 +454,7 @@ GameObject:
   - component: {fileID: 6300054171745160975}
   m_Layer: 7
   m_Name: Joint_05
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -519,7 +520,7 @@ GameObject:
   - component: {fileID: 3550833529533667232}
   m_Layer: 7
   m_Name: Joint_06
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -585,7 +586,7 @@ GameObject:
   - component: {fileID: 4789294240569392325}
   m_Layer: 7
   m_Name: Joint_01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -651,7 +652,7 @@ GameObject:
   - component: {fileID: 5674618700754397260}
   m_Layer: 7
   m_Name: Joint_04
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -772,6 +773,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PartRenderer
       objectReference: {fileID: 0}
+    - target: {fileID: 4084347726151810130, guid: daa95fcc8a598be4e9e648f7bd2bb937, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -802,6 +807,10 @@ PrefabInstance:
     - target: {fileID: 195338, guid: 5bc6895e116f2214c84dc0f873a26f26, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 195338, guid: 5bc6895e116f2214c84dc0f873a26f26, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 467710, guid: 5bc6895e116f2214c84dc0f873a26f26, type: 3}
       propertyPath: m_RootOrder

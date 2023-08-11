@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 908912090749019436, guid: 7a301180a98828a44b9cf55c3eaed5ae, type: 3}
   - {fileID: 6896987189609531333, guid: 8e2884f6609582b428bd81251eb3f44c, type: 3}
   - {fileID: 5067955684645031634, guid: 3aeb5a8a1bd0b764ba6691429eb78945, type: 3}
+  - {fileID: 4079887107270572533, guid: 31af6562561911646aaa8a407d64e88a, type: 3}
   selectedPart: {fileID: 0}
   mouseOverPart: {fileID: 0}
   nextSceneName: Game
