@@ -32,14 +32,14 @@ namespace TheLastTour.Controller.Machine
         private readonly PropertyValue<float> _propertySpringLength = new PropertyValue<float>(0.3f);
         private readonly PropertyValue<float> _propertySpringMultiplier = new PropertyValue<float>(2f);
 
-        private void UpdateAnchors(float sprintLength, bool updateSpringTop = false)
+        private void UpdateSpring(float springLength, bool updateSpringTop = false)
         {
             // Spring Top Anchor 位置
             springJoint.anchor =
-                -_springDirection * sprintLength / 2 / springTop.transform.localScale.x;
+                -_springDirection * springLength / 2 / springTop.transform.localScale.x;
             if (updateSpringTop)
             {
-                springTop.transform.localPosition = _springDirection * sprintLength;
+                springTop.transform.localPosition = _springDirection * springLength;
             }
 
             if (springJoint.connectedBody == null)
@@ -50,7 +50,7 @@ namespace TheLastTour.Controller.Machine
             // 本体 Anchor 位置
             // 局部坐标 => 世界坐标 => 本体局部坐标
             Vector3 position =
-                (_springDirection * sprintLength / 2) +
+                (_springDirection * springLength / 2) +
                 springBase.transform.localPosition;
             position = transform.TransformPoint(position);
             springJoint.connectedAnchor = springJoint.connectedBody.transform.InverseTransformPoint(position);
@@ -65,7 +65,7 @@ namespace TheLastTour.Controller.Machine
 
             // 取中点作为平衡点
             springTop.transform.position = _springDirection * _propertySpringLength.Value;
-            UpdateAnchors(_propertySpringLength.Value, true);
+            UpdateSpring(_propertySpringLength.Value, true);
         }
 
 
@@ -82,8 +82,8 @@ namespace TheLastTour.Controller.Machine
             springJoint.minDistance = 0;
             springJoint.maxDistance = 0;
 
-            _propertySpringLength.OnValueChanged += (f) => { UpdateAnchors(f, true); };
-            UpdateAnchors(_propertySpringLength.Value, true);
+            _propertySpringLength.OnValueChanged += (f) => { UpdateSpring(f, true); };
+            UpdateSpring(_propertySpringLength.Value, true);
 
             SimulatorRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
@@ -103,11 +103,11 @@ namespace TheLastTour.Controller.Machine
             {
                 if (Keyboard.current[_propertyTrigger.Value].wasPressedThisFrame)
                 {
-                    UpdateAnchors(_propertySpringLength.Value * _propertySpringMultiplier.Value);
+                    UpdateSpring(_propertySpringLength.Value * _propertySpringMultiplier.Value);
                 }
                 else if (Keyboard.current[_propertyTrigger.Value].wasReleasedThisFrame)
                 {
-                    UpdateAnchors(_propertySpringLength.Value);
+                    UpdateSpring(_propertySpringLength.Value);
                 }
             }
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - UI
   - Water
+  - Hookable
   layers:
   - Default
   - TransparentFX
