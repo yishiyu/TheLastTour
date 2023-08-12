@@ -31,6 +31,13 @@ namespace TheLastTour.Controller.Machine
         /// </summary>
         /// <param name="simulator"></param>
         void OnAttached(ISimulator simulator);
+        
+        
+        /// <summary>
+        /// 该 Simulator 从主物体上分离,更新自身的信息
+        /// 不一定是自己被分离,也可能是上级被分离
+        /// </summary>
+        void OnDetached();
 
         /// <summary>
         /// 将一个新的 Part 添加到自身,包括挂载 Transform 和更新质量
@@ -124,6 +131,11 @@ namespace TheLastTour.Controller.Machine
             Debug.LogError("MachineController.OnAttached() is not implemented");
         }
 
+        public void OnDetached()
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddPart(PartController part)
         {
             machineParts.Add(part);
@@ -172,6 +184,7 @@ namespace TheLastTour.Controller.Machine
                 foreach (var part in parts)
                 {
                     machineParts.Remove(part);
+                    part.Detach();
                     machine.machineParts.Add(part);
 
                     part.transform.SetParent(machine.transform);

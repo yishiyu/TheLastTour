@@ -50,6 +50,7 @@ namespace TheLastTour.Controller.Machine
 
                 return _simulatorRigidbody;
             }
+            set { _simulatorRigidbody = value; }
         }
 
         // 三个方向的阻力系数
@@ -380,7 +381,18 @@ namespace TheLastTour.Controller.Machine
             return transform.parent.GetComponent<ISimulator>().GetOwnerMachine();
         }
 
-        public abstract void OnAttached(ISimulator simulator);
+        public virtual void OnAttached(ISimulator simulator)
+        {
+            // 清空缓存
+            SimulatorRigidbody = null;
+        }
+
+        public virtual void OnDetached()
+        {
+            // 清空缓存
+            SimulatorRigidbody = null;
+        }
+
         public abstract void AddPart(PartController part);
         public abstract void RemovePart(PartController part);
         public abstract void UpdateSimulatorMass();

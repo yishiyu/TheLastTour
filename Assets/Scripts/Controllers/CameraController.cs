@@ -260,7 +260,7 @@ namespace TheLastTour.Controller
                     // focusAngleYTarget += (inversedMovementDirection.y - focusAngleYTarget) * decayRate;
 
                     // Debug.Log("inversedMovementDirection: " + inversedMovementDirection);
-                    Debug.Log(inversedMovementDirection.y + " " + focusAngleYTarget);
+                    // Debug.Log(inversedMovementDirection.y + " " + focusAngleYTarget);
                     // Debug.Log("speed: " + movementDelta.magnitude);
                 }
             }

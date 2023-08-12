@@ -124,6 +124,7 @@ namespace TheLastTour.Controller.Machine
                 foreach (var part in parts)
                 {
                     attachedParts.Remove(part);
+                    part.OnDetached();
                     machine.machineParts.Add(part);
 
                     part.transform.SetParent(machine.transform);

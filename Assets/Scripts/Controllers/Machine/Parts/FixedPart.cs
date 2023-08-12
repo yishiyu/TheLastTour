@@ -25,7 +25,7 @@ namespace TheLastTour.Controller.Machine
 
         public override void OnAttached(ISimulator simulator)
         {
-            Debug.Log("FixedPart OnAttached");
+            // Debug.Log("FixedPart OnAttached");
         }
 
         public override void AddPart(PartController part)
