@@ -16,6 +16,8 @@ namespace TheLastTour.Controller.UI
         public Button restartButton;
         public Button exitButton;
 
+        // 音量设置
+        public Slider masterVolumeSlider;
 
         private IGameStateManager _gameStateManager;
 
@@ -38,6 +40,13 @@ namespace TheLastTour.Controller.UI
 
             exitButton.onClick.AddListener(
                 () => { _gameStateManager.ExitGame(); }
+            );
+
+            masterVolumeSlider.maxValue = 1;
+            masterVolumeSlider.minValue = 0;
+            masterVolumeSlider.value = AudioListener.volume;
+            masterVolumeSlider.onValueChanged.AddListener(
+                (value) => { AudioListener.volume = value; }
             );
         }
     }

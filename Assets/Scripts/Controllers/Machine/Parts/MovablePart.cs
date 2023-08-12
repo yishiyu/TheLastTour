@@ -72,11 +72,6 @@ namespace TheLastTour.Controller.Machine
             return GetComponent<Rigidbody>();
         }
 
-        public override void OnAttached(ISimulator simulator)
-        {
-            Debug.Log("MovablePart OnAttached");
-        }
-
         public override void AddPart(PartController part)
         {
             attachedParts.Add(part);

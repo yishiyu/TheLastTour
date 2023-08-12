@@ -9,6 +9,9 @@ namespace TheLastTour.Controller.Machine
 {
     public class MotorPart : MovablePart
     {
+        public AudioSource audioSource;
+        public AudioClip motorAudio;
+
         public HingeJoint motorJoint;
 
         private float _power = 0;
@@ -43,6 +46,9 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Motor Key", _motorPowerDown));
             Properties.Add(new MachineProperty("Motor Power", _motorPower));
             Properties.Add(new MachineProperty("Motor Damping", _motorDamping));
+
+            audioSource.clip = motorAudio;
+            audioSource.loop = true;
         }
 
 
@@ -53,6 +59,7 @@ namespace TheLastTour.Controller.Machine
                 if (Keyboard.current[_motorPowerUp.Value].wasPressedThisFrame)
                 {
                     Power += 0.1f;
+                    audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * 0.5f, 0, 1);
                 }
             }
 
@@ -61,6 +68,22 @@ namespace TheLastTour.Controller.Machine
                 if (Keyboard.current[_motorPowerDown.Value].wasPressedThisFrame)
                 {
                     Power -= 0.1f;
+                    audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * 0.5f, 0, 1);
+                }
+            }
+
+            if (Mathf.Abs(Power) > 0.01f)
+            {
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+            }
+            else
+            {
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
                 }
             }
         }

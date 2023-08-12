@@ -23,11 +23,6 @@ namespace TheLastTour.Controller.Machine
             return null;
         }
 
-        public override void OnAttached(ISimulator simulator)
-        {
-            // Debug.Log("FixedPart OnAttached");
-        }
-
         public override void AddPart(PartController part)
         {
             transform.parent.GetComponentInParent<ISimulator>().AddPart(part);
