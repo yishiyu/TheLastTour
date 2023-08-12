@@ -9,6 +9,11 @@ namespace TheLastTour.Controller.Machine
 {
     public class WheelProPart : FixedPart
     {
+        public AudioSource audioSource;
+        public AudioClip audioClip;
+        private float _currentAudioVolume = 0;
+        private float _maxAudioVolume = 0.5f;
+
         private PropertyValue<Key> _powerForward = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _powerBackward = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _turnLeft = new PropertyValue<Key>(Key.None);
@@ -55,6 +60,17 @@ namespace TheLastTour.Controller.Machine
 
             _massProperty.OnValueChanged += (f => { wheelCollider.mass = f; });
             _damping.OnValueChanged += (f => { wheelCollider.wheelDampingRate = f; });
+
+
+            _maxAudioVolume = Mathf.Clamp(_power.Value / 8000, 0, 0.1f);
+            _power.OnValueChanged += (f) => { _maxAudioVolume = Mathf.Clamp(f / 8000, 0, 0.05f); };
+
+
+            audioSource.clip = audioClip;
+            audioSource.loop = true;
+            audioSource.volume = 0;
+
+            audioSource.Play();
         }
 
         public void UpdateWheelMeshPosition()
@@ -109,6 +125,23 @@ namespace TheLastTour.Controller.Machine
                 {
                     steerAngle = -_turnAngle.Value;
                 }
+            }
+
+
+            if (torqueValue > 0.1f)
+            {
+                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, _maxAudioVolume, 0.1f);
+                audioSource.volume = _currentAudioVolume;
+            }
+            else if (torqueValue < -0.1f)
+            {
+                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, _maxAudioVolume, 0.1f);
+                audioSource.volume = _currentAudioVolume;
+            }
+            else
+            {
+                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, 0f, 0.1f);
+                audioSource.volume = _currentAudioVolume;
             }
 
             // 对自身和父级施加力矩
