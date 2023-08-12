@@ -9,6 +9,8 @@ namespace TheLastTour.Controller.Machine
 {
     public class RocketPart : FixedPart
     {
+        public AudioSource audioSource;
+        public AudioClip audioClip;
         public ParticleSystem visualEffect;
 
         readonly PropertyValue<float> _propertyPower = new PropertyValue<float>(1000);
@@ -25,6 +27,9 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Power", _propertyPower));
             Properties.Add(new MachineProperty("Fuel", _propertyFuel));
             Properties.Add(new MachineProperty("Trigger", _propertyTrigger));
+            
+            audioSource.clip = audioClip;
+            audioSource.loop = true;
         }
 
         private void Update()
@@ -36,6 +41,8 @@ namespace TheLastTour.Controller.Machine
                     _isTriggered = true;
                     // 播放特效
                     visualEffect.Play();
+                    // 播放音效
+                    audioSource.Play();
                 }
             }
         }
@@ -51,6 +58,7 @@ namespace TheLastTour.Controller.Machine
                     _propertyFuel.Value = 0;
                     _isTriggered = false;
                     visualEffect.Stop();
+                    audioSource.Stop();
                     return;
                 }
 
