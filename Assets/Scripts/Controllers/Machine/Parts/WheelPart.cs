@@ -9,6 +9,11 @@ namespace TheLastTour.Controller.Machine
 {
     public class WheelPart : MovablePart
     {
+        public AudioSource audioSource;
+        public AudioClip audioClip;
+        private float _currentAudioVolume = 0;
+        private float _maxAudioVolume = 0.5f;
+
         public HingeJoint motorJoint;
         public GameObject arrowModel;
 
@@ -16,6 +21,7 @@ namespace TheLastTour.Controller.Machine
         private PropertyValue<Key> _powerBackward = new PropertyValue<Key>(Key.None);
         private PropertyValue<float> _power = new PropertyValue<float>(100);
         private PropertyValue<float> _damping = new PropertyValue<float>(0.5f);
+
 
         public override void TurnOnSimulation(bool isOn)
         {
@@ -51,6 +57,16 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Backward Key", _powerBackward));
             Properties.Add(new MachineProperty("Power", _power));
             Properties.Add(new MachineProperty("Damping", _damping));
+
+            _maxAudioVolume = Mathf.Clamp(_power.Value / 8000, 0, 0.1f);
+            _power.OnValueChanged += (f) => { _maxAudioVolume = Mathf.Clamp(f / 8000, 0, 0.05f); };
+
+
+            audioSource.clip = audioClip;
+            audioSource.loop = true;
+            audioSource.volume = 0;
+
+            audioSource.Play();
         }
 
 
@@ -74,6 +90,23 @@ namespace TheLastTour.Controller.Machine
                     torqueValue = -_power.Value;
                 }
             }
+
+            if (torqueValue > 0.1f)
+            {
+                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, _maxAudioVolume, 0.1f);
+                audioSource.volume = _currentAudioVolume;
+            }
+            else if (torqueValue < -0.1f)
+            {
+                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, _maxAudioVolume, 0.1f);
+                audioSource.volume = _currentAudioVolume;
+            }
+            else
+            {
+                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, 0f, 0.1f);
+                audioSource.volume = _currentAudioVolume;
+            }
+
 
             Vector3 torque = torqueValue * transform.forward;
 
