@@ -8,6 +8,11 @@ namespace TheLastTour.Controller.Machine
 {
     public class HookPart : MovablePart
     {
+        public AudioSource audioSource;
+        public AudioClip launchAudio;
+        public AudioClip retractingAudio;
+        public AudioClip retractedAudio;
+
         public LineRenderer springRenderer;
         public GameObject hookBase;
         public GameObject hookTop;
@@ -36,6 +41,13 @@ namespace TheLastTour.Controller.Machine
             if (_hookState == HookState.Ready)
             {
                 _hookState = HookState.Launched;
+
+                // 播放音效
+                audioSource.clip = launchAudio;
+                audioSource.loop = false;
+                audioSource.volume = 1f;
+                audioSource.Play();
+
                 hook.IsEnabled = true;
                 hookJoint.enableCollision = true;
                 hookJoint.linearLimit = new SoftJointLimit()
@@ -66,6 +78,10 @@ namespace TheLastTour.Controller.Machine
         public IEnumerator DoRetract()
         {
             _hookState = HookState.Retracting;
+            audioSource.clip = retractingAudio;
+            audioSource.loop = true;
+            audioSource.volume = 0.8f;
+            audioSource.Play();
 
             // 没勾到东西,收回的时候取消勾到东西的碰撞
             if (!hook.IsHooked)
@@ -101,6 +117,15 @@ namespace TheLastTour.Controller.Machine
             hookJoint.angularXMotion = ConfigurableJointMotion.Locked;
             hookJoint.angularYMotion = ConfigurableJointMotion.Locked;
             hookJoint.angularZMotion = ConfigurableJointMotion.Locked;
+            // 停止音效
+            audioSource.Stop();
+
+            // 钩子收回音效
+            audioSource.clip = retractedAudio;
+            audioSource.loop = false;
+            audioSource.volume = 0.3f;
+            audioSource.Play();
+
             yield return null;
         }
 
