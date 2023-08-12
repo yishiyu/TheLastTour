@@ -61,6 +61,7 @@ MonoBehaviour:
   partRenderer: {fileID: 8887914022073616165}
   joints: []
   rootJoint: {fileID: 6468567101812352131}
+  explosionAudio: {fileID: 8300000, guid: 5ff823f546b52574a931e1d9b44290a6, type: 3}
   explosionFX: {fileID: 8208061159085717462}
   bombMesh: {fileID: 8895647222563865092}
 --- !u!65 &2876554277925000922

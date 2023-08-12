@@ -7,6 +7,7 @@ namespace TheLastTour.Controller.Machine
 {
     public class BombPart : FixedPart
     {
+        public AudioClip explosionAudio;
         public ParticleSystem explosionFX;
         public GameObject bombMesh;
 
@@ -47,6 +48,10 @@ namespace TheLastTour.Controller.Machine
                 }
             }
 
+            // 播放音效
+            AudioSource.PlayClipAtPoint(explosionAudio, transform.position);
+            float audioTime = explosionAudio.length;
+            
             explosionFX.Play();
             Debug.Log("Explosion!");
 
