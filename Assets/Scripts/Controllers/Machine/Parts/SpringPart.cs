@@ -8,6 +8,10 @@ namespace TheLastTour.Controller.Machine
 {
     public class SpringPart : MovablePart
     {
+        public AudioSource audioSource;
+        public AudioClip audioClip;
+        
+        
         public LineRenderer springRenderer;
 
         public List<Vector2> springPoints = new List<Vector2>()
@@ -86,6 +90,9 @@ namespace TheLastTour.Controller.Machine
             UpdateSpring(_propertySpringLength.Value, true);
 
             SimulatorRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            
+            audioSource.clip = audioClip;
+            audioSource.loop = false;
         }
 
         public override void AddPart(PartController part)
@@ -103,6 +110,7 @@ namespace TheLastTour.Controller.Machine
             {
                 if (Keyboard.current[_propertyTrigger.Value].wasPressedThisFrame)
                 {
+                    audioSource.Play();
                     UpdateSpring(_propertySpringLength.Value * _propertySpringMultiplier.Value);
                 }
                 else if (Keyboard.current[_propertyTrigger.Value].wasReleasedThisFrame)

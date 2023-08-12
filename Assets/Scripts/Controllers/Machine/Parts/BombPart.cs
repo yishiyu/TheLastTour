@@ -11,6 +11,8 @@ namespace TheLastTour.Controller.Machine
         public ParticleSystem explosionFX;
         public GameObject bombMesh;
 
+        private bool _isExploded = false;
+
         private readonly PropertyValue<float> _propertyExplosionImpulse = new PropertyValue<float>(1000f);
         private readonly PropertyValue<float> _propertyExplosionRadius = new PropertyValue<float>(10f);
 
@@ -24,7 +26,7 @@ namespace TheLastTour.Controller.Machine
 
         private IEnumerator Explode()
         {
-            bombMesh.GetComponent<Renderer>().enabled = false;
+            bombMesh.SetActive(false);
 
             // 对周围刚体施加冲击力
             Collider[] colliders = Physics.OverlapSphere(
@@ -51,7 +53,7 @@ namespace TheLastTour.Controller.Machine
             // 播放音效
             AudioSource.PlayClipAtPoint(explosionAudio, transform.position);
             float audioTime = explosionAudio.length;
-            
+
             explosionFX.Play();
             Debug.Log("Explosion!");
 
@@ -62,8 +64,15 @@ namespace TheLastTour.Controller.Machine
 
         private void OnTriggerEnter(Collider other)
         {
+            if (_isExploded)
+            {
+                return;
+            }
+
             if (!other.CompareTag("Player"))
             {
+                _isExploded = true;
+                RemovePart(this);
                 StartCoroutine(Explode());
             }
         }
