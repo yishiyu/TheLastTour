@@ -10,7 +10,18 @@ namespace TheLastTour.Controller.Machine
         public GameObject hookedGameObject;
         public FixedJoint fixedJoint;
 
-        public bool isHooked = false;
+        public bool IsHooked
+        {
+            get { return hookedGameObject != null; }
+        }
+
+        private bool _isEnabled = false;
+
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set { _isEnabled = value; }
+        }
 
 
         public void Release()
@@ -21,8 +32,6 @@ namespace TheLastTour.Controller.Machine
                 fixedJoint = null;
                 hookedGameObject = null;
             }
-
-            isHooked = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -30,14 +39,17 @@ namespace TheLastTour.Controller.Machine
             if (other.CompareTag("Hookable"))
             {
                 var rb = other.attachedRigidbody;
-                if (!isHooked && rb)
+                if (_isEnabled && rb)
                 {
-                    isHooked = true;
+                    Release();
+
                     hookedGameObject = other.gameObject;
                     fixedJoint = hookedGameObject.AddComponent<FixedJoint>();
                     fixedJoint.connectedBody = hookRigidbody;
                     fixedJoint.connectedAnchor = Vector3.zero;
                     fixedJoint.autoConfigureConnectedAnchor = true;
+
+                    _isEnabled = false;
                 }
             }
         }

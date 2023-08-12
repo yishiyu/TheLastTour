@@ -294,7 +294,7 @@ namespace TheLastTour.Controller
                 }
             }
 
-            if (Keyboard.current.pKey.wasPressedThisFrame)
+            if (Keyboard.current.pKey.wasPressedThisFrame || Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 switch (_gameStateManager.GameState)
                 {

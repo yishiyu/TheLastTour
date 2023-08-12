@@ -36,7 +36,7 @@ namespace TheLastTour.Controller.Machine
             if (_hookState == HookState.Ready)
             {
                 _hookState = HookState.Launched;
-                hook.Release();
+                hook.IsEnabled = true;
                 hookJoint.enableCollision = true;
                 hookJoint.linearLimit = new SoftJointLimit()
                 {
@@ -47,7 +47,7 @@ namespace TheLastTour.Controller.Machine
                     hookBase.transform.right * _propertyHookStrength.Value,
                     ForceMode.Force
                 );
-                
+
                 hookJoint.angularXMotion = ConfigurableJointMotion.Free;
                 hookJoint.angularYMotion = ConfigurableJointMotion.Free;
                 hookJoint.angularZMotion = ConfigurableJointMotion.Free;
@@ -66,6 +66,13 @@ namespace TheLastTour.Controller.Machine
         public IEnumerator DoRetract()
         {
             _hookState = HookState.Retracting;
+
+            // 没勾到东西,收回的时候取消勾到东西的碰撞
+            if (!hook.IsHooked)
+            {
+                hook.IsEnabled = false;
+            }
+
             hookJoint.enableCollision = false;
 
             // Do Retraction
@@ -90,7 +97,7 @@ namespace TheLastTour.Controller.Machine
             };
 
             _hookState = HookState.Ready;
-            
+
             hookJoint.angularXMotion = ConfigurableJointMotion.Locked;
             hookJoint.angularYMotion = ConfigurableJointMotion.Locked;
             hookJoint.angularZMotion = ConfigurableJointMotion.Locked;
@@ -137,7 +144,6 @@ namespace TheLastTour.Controller.Machine
                 limit = _hookMinLength,
             };
         }
-
 
 
         private void Update()

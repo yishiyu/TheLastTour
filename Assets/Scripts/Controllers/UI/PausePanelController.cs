@@ -13,6 +13,9 @@ namespace TheLastTour.Controller.UI
         // Settings
         public Toggle showDebugToggle;
 
+        public Button restartButton;
+        public Button exitButton;
+
 
         private IGameStateManager _gameStateManager;
 
@@ -27,6 +30,14 @@ namespace TheLastTour.Controller.UI
             showDebugToggle.isOn = _gameStateManager.DebugMode;
             showDebugToggle.onValueChanged.AddListener(
                 (value) => { TheLastTourArchitecture.Instance.GetManager<IGameStateManager>().DebugMode = value; }
+            );
+
+            restartButton.onClick.AddListener(
+                () => { _gameStateManager.RestartGame(); }
+            );
+
+            exitButton.onClick.AddListener(
+                () => { _gameStateManager.ExitGame(); }
             );
         }
     }

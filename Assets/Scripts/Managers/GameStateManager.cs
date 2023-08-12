@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TheLastTour.Controller.Machine;
 using TheLastTour.Event;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TheLastTour.Manager
 {
@@ -28,8 +29,12 @@ namespace TheLastTour.Manager
         public EEditState EditState { get; set; }
 
         public void ChaneToPreviousState();
-        
+
         public bool DebugMode { get; set; }
+
+        public void RestartGame();
+
+        public void ExitGame();
     }
 
     public class GameStateManager : IGameStateManager
@@ -44,6 +49,22 @@ namespace TheLastTour.Manager
         }
 
         public bool DebugMode { get; set; }
+
+        public void RestartGame()
+        {
+            // 重启关卡
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void ExitGame()
+        {
+            // 退出游戏
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
 
         EGameState IGameStateManager.GameState
         {
