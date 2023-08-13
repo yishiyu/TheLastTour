@@ -13,12 +13,11 @@ namespace TheLastTour.Controller.UI
     {
         public GameObject debugInfoPanel;
         public Text debugInfoText;
-
         public GameObject editorPanel;
-
         public GameObject compassPanel;
-        
         public GameObject pausePanel;
+        public GameObject introPanel;
+
 
         private GameManager _gameManager;
         private IGameStateManager _gameStateManager;
@@ -41,7 +40,7 @@ namespace TheLastTour.Controller.UI
         {
             EventBus.RemoveListener<GameStateChangedEvent>(OnGameStateChanged);
         }
-        
+
 
         private void OnGameStateChanged(GameStateChangedEvent evt)
         {

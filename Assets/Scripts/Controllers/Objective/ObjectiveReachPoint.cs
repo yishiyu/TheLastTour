@@ -9,7 +9,6 @@ namespace TheLastTour.Controller.Objective
     [RequireComponent(typeof(Collider))]
     public class ObjectiveReachPoint : Manager.Objective
     {
-        public string reachPointDescription = "Reach Point";
         Collider _collider;
 
         Collider ObjectiveCollider
@@ -31,7 +30,7 @@ namespace TheLastTour.Controller.Objective
             if (!isComplete && collider.gameObject.CompareTag("Player"))
             {
                 CompleteObjective();
-                UpdateObjective("Arrive at " + reachPointDescription);
+                UpdateObjective("Destination Arrived");
             }
         }
     }
