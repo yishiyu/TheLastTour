@@ -34,7 +34,7 @@ namespace TheLastTour.Controller.Machine
 
         public IGameStateManager gameStateManager;
 
-        public bool IsDrawGizmos
+        public bool DrawDebugShapes
         {
             get { return (gameStateManager != null && gameStateManager.DebugMode); }
         }
@@ -530,7 +530,7 @@ namespace TheLastTour.Controller.Machine
                 //     ForceMode.Impulse
                 // );
 
-                if (IsDrawGizmos)
+                if (DrawDebugShapes)
                 {
                     Debug.DrawLine(transform.position, transform.position + resistanceForce, Color.yellow);
                 }

@@ -90,7 +90,7 @@ namespace TheLastTour.Controller.Machine
                 }
 
 
-                if (IsDrawGizmos)
+                if (DrawDebugShapes)
                 {
                     // Debug.DrawLine(transform.position,
                     //     transform.position + transform.up * 10,

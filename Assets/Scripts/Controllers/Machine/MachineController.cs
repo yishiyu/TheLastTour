@@ -31,8 +31,8 @@ namespace TheLastTour.Controller.Machine
         /// </summary>
         /// <param name="simulator"></param>
         void OnAttached(ISimulator simulator);
-        
-        
+
+
         /// <summary>
         /// 该 Simulator 从主物体上分离,更新自身的信息
         /// 不一定是自己被分离,也可能是上级被分离
@@ -81,6 +81,8 @@ namespace TheLastTour.Controller.Machine
         /// </summary>
         /// <param name="isOn"></param>
         public void TurnOnSimulation(bool isOn);
+
+        public bool DrawDebugShapes { get; }
     }
 
 
@@ -229,6 +231,11 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
+        public bool DrawDebugShapes
+        {
+            get { return _gameStateManager != null && _gameStateManager.DebugMode; }
+        }
+
         private void FixedUpdate()
         {
             // // 获取合力在速度方向上的投影
@@ -343,9 +350,30 @@ namespace TheLastTour.Controller.Machine
             return this;
         }
 
+
+        public virtual void Update()
+        {
+            if (DrawDebugShapes)
+            {
+                // 绘制质心
+                // DebugExtension.DebugWireSphere(
+                //     MachineRigidBody.worldCenterOfMass,
+                //     Color.green,
+                //     math.sqrt(MachineRigidBody.mass) / 10f,
+                //     0.1f,
+                //     false
+                // );
+                Popcron.Gizmos.Sphere(
+                    MachineRigidBody.worldCenterOfMass,
+                    math.sqrt(MachineRigidBody.mass) / 10f,
+                    Color.green
+                );
+            }
+        }
+
         private void OnDrawGizmos()
         {
-            if (_gameStateManager != null && _gameStateManager.DebugMode)
+            if (DrawDebugShapes)
             {
                 Gizmos.color = new Color(0, 1, 0, 0.5f);
                 Gizmos.DrawSphere(MachineRigidBody.worldCenterOfMass, math.sqrt(MachineRigidBody.mass) / 10f);

@@ -51,7 +51,7 @@ namespace TheLastTour.Controller.Machine
                 //     ForceMode.Impulse
                 // );
 
-                if (IsDrawGizmos)
+                if (DrawDebugShapes)
                 {
                     // Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.red);
                     Debug.DrawLine(transform.position, transform.position + transform.up * lightForce, Color.blue);

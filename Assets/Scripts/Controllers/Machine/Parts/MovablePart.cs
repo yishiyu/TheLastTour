@@ -183,7 +183,7 @@ namespace TheLastTour.Controller.Machine
 
         private void OnDrawGizmos()
         {
-            if (IsDrawGizmos)
+            if (DrawDebugShapes)
             {
                 Gizmos.color = new Color(0, 1, 0, 0.5f);
                 Gizmos.DrawSphere(SimulatorRigidbody.worldCenterOfMass, math.sqrt(SimulatorRigidbody.mass) / 10f);

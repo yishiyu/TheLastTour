@@ -116,7 +116,7 @@ namespace TheLastTour.Controller.Machine
                 //     Color.cyan
                 // );
 
-                if (IsDrawGizmos)
+                if (DrawDebugShapes)
                 {
                     // Debug.DrawLine(transform.position,
                     //     transform.position + transform.right * 10,

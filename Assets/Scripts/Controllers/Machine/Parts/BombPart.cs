@@ -79,7 +79,7 @@ namespace TheLastTour.Controller.Machine
 
         private void OnDrawGizmos()
         {
-            if (IsDrawGizmos)
+            if (DrawDebugShapes)
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(transform.position, _propertyExplosionRadius.Value);
