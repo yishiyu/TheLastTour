@@ -171,7 +171,7 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        private void Update()
+        public override void Update()
         {
             if (_propertyTrigger.Value != Key.None)
             {

@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc91b77e5fee4fd4d9e0bae5f56fd566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveUIContainer: {fileID: 0}
+  objectiveUIContainer: {fileID: 5083293406742853601}
   objectiveContainer: {fileID: 5328023829588695220}
   objectivePrefab: {fileID: 6421509356453564232, guid: a3899903aea64604ba26e8a428509144, type: 3}
   objectiveCompleteInfo: {fileID: 7717567747208208952}
@@ -2231,7 +2231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000031471252}
+  m_AnchoredPosition: {x: 0, y: 0.000019788742}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2518525875393490867

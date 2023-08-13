@@ -40,7 +40,7 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Max Power", _propertyMaxPower));
         }
 
-        private void Update()
+        public override void Update()
         {
             if (_gameStateManager == null || _gameStateManager.GameState != EGameState.Play)
             {
@@ -87,8 +87,14 @@ namespace TheLastTour.Controller.Machine
 
                 if (DrawDebugShapes)
                 {
-                    Debug.DrawLine(transform.position,
-                        transform.position + transform.up * (Power * _propertyMaxPower.Value), Color.blue);
+                    // Debug.DrawLine(transform.position,
+                    //     transform.position + transform.up * (Power * _propertyMaxPower.Value), Color.blue);
+
+                    Popcron.Gizmos.Line(
+                        transform.position,
+                        transform.position + transform.up * (Power * _propertyMaxPower.Value),
+                        Color.blue
+                    );
                 }
             }
         }

@@ -44,7 +44,7 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        private void Update()
+        public override void Update()
         {
             if (_motorTurnLeft.Value != Key.None)
             {

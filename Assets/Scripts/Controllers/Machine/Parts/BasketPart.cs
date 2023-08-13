@@ -20,7 +20,7 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Release", _propertyRelease));
         }
 
-        private void Update()
+        public override void Update()
         {
             if (_propertyRelease.Value != Key.None)
             {

@@ -32,7 +32,7 @@ namespace TheLastTour.Controller.Machine
             audioSource.loop = true;
         }
 
-        private void Update()
+        public override void Update()
         {
             if (_propertyTrigger.Value != Key.None && !_isTriggered)
             {

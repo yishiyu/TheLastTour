@@ -52,7 +52,7 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        private void Update()
+        public override void Update()
         {
             if (_motorPowerUp.Value != Key.None)
             {

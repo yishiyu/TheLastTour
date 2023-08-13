@@ -121,7 +121,11 @@ namespace TheLastTour.Controller.Machine
                     // Debug.DrawLine(transform.position,
                     //     transform.position + transform.right * 10,
                     //     Color.red);
-                    Debug.DrawLine(transform.position,
+                    // Debug.DrawLine(transform.position,
+                    //     transform.position + stabilityForce * transform.right,
+                    //     Color.blue);
+                    Popcron.Gizmos.Line(
+                        transform.position,
                         transform.position + stabilityForce * transform.right,
                         Color.blue);
                 }

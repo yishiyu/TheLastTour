@@ -62,7 +62,11 @@ namespace TheLastTour.Controller.UI
                     objectiveUIContainer.SetActive(false);
                     break;
                 case EGameState.Play:
-                    objectiveUIContainer.SetActive(true);
+                    if (_objectiveUIControllers.Count > 0)
+                    {
+                        objectiveUIContainer.SetActive(true);
+                    }
+
                     break;
             }
         }

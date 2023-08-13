@@ -44,7 +44,7 @@ namespace TheLastTour.Controller.Machine
                 balloonJoint.connectedBody.transform.InverseTransformPoint(basePosition.position);
         }
 
-        private void Update()
+        public override void Update()
         {
             lineRenderer.SetPosition(0, basePosition.position);
             lineRenderer.SetPosition(1, topPosition.position);

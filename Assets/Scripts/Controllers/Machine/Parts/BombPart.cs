@@ -77,6 +77,18 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
+        public override void Update()
+        {
+            if (DrawDebugShapes)
+            {
+                Popcron.Gizmos.Sphere(
+                    transform.position,
+                    _propertyExplosionRadius.Value,
+                    Color.red
+                );
+            }
+        }
+
         private void OnDrawGizmos()
         {
             if (DrawDebugShapes)

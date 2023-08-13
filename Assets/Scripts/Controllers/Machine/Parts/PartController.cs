@@ -533,6 +533,7 @@ namespace TheLastTour.Controller.Machine
                 if (DrawDebugShapes)
                 {
                     Debug.DrawLine(transform.position, transform.position + resistanceForce, Color.yellow);
+                    Popcron.Gizmos.Line(transform.position, transform.position + resistanceForce, Color.yellow);
                 }
                 // Debug.Log(
                 //     "velocity: " + velocity + "\n" +

@@ -181,6 +181,20 @@ namespace TheLastTour.Controller.Machine
             return false;
         }
 
+
+        public virtual void Update()
+        {
+            if (DrawDebugShapes)
+            {
+                Popcron.Gizmos.Sphere(
+                    SimulatorRigidbody.worldCenterOfMass,
+                    math.sqrt(SimulatorRigidbody.mass) / 10f,
+                    Color.green
+                );
+            }
+        }
+
+
         private void OnDrawGizmos()
         {
             if (DrawDebugShapes)

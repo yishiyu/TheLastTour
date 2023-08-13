@@ -76,7 +76,9 @@ namespace TheLastTour.Controller.Machine
                 if (DrawDebugShapes)
                 {
                     // Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.red);
-                    Debug.DrawLine(transform.position, transform.position + transform.forward * torque, Color.red);
+                    // Debug.DrawLine(transform.position, transform.position + transform.forward * torque, Color.red);
+
+                    Popcron.Gizmos.Line(transform.position, transform.position + transform.forward * torque, Color.red);
                 }
             }
         }
