@@ -34,11 +34,5 @@ namespace TheLastTour.Controller.Objective
                 UpdateObjective("Arrive at " + reachPointDescription);
             }
         }
-
-        // private void OnDrawGizmos()
-        // {
-        //     Gizmos.color = Color.green;
-        //     Gizmos.DrawCube(transform.position, ObjectiveCollider.bounds.size);
-        // }
     }
 }

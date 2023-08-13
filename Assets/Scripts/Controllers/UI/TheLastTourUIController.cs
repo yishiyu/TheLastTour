@@ -16,9 +16,6 @@ namespace TheLastTour.Controller.UI
 
         public GameObject editorPanel;
 
-        public GameObject objectiveCompleteInfo;
-        public Text objectiveCompleteText;
-
         public GameObject compassPanel;
         
         public GameObject pausePanel;
@@ -38,32 +35,13 @@ namespace TheLastTour.Controller.UI
         private void OnEnable()
         {
             EventBus.AddListener<GameStateChangedEvent>(OnGameStateChanged);
-            EventBus.AddListener<ObjectiveUpdateEvent>(OnObjectiveUpdate);
         }
 
         private void OnDisable()
         {
             EventBus.RemoveListener<GameStateChangedEvent>(OnGameStateChanged);
-            EventBus.RemoveListener<ObjectiveUpdateEvent>(OnObjectiveUpdate);
         }
-
-        private void OnObjectiveUpdate(ObjectiveUpdateEvent obj)
-        {
-            StartCoroutine(UpdateObjective(obj));
-        }
-
-        private IEnumerator UpdateObjective(ObjectiveUpdateEvent obj)
-        {
-            if (obj.IsComplete)
-            {
-                objectiveCompleteInfo.SetActive(true);
-                objectiveCompleteText.text = obj.DescriptionText;
-
-                yield return new WaitForSeconds(3f);
-
-                objectiveCompleteInfo.SetActive(false);
-            }
-        }
+        
 
         private void OnGameStateChanged(GameStateChangedEvent evt)
         {
