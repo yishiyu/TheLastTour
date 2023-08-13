@@ -13,7 +13,7 @@ namespace TheLastTour.Controller.Machine
 
         private bool _isExploded = false;
 
-        private readonly PropertyValue<float> _propertyExplosionImpulse = new PropertyValue<float>(1000f);
+        private readonly PropertyValue<float> _propertyExplosionImpulse = new PropertyValue<float>(50f);
         private readonly PropertyValue<float> _propertyExplosionRadius = new PropertyValue<float>(10f);
 
         protected override void InitProperties()
@@ -45,7 +45,9 @@ namespace TheLastTour.Controller.Machine
                         rb.AddExplosionForce(
                             _propertyExplosionImpulse.Value,
                             transform.position,
-                            _propertyExplosionRadius.Value);
+                            _propertyExplosionRadius.Value,
+                            0f,
+                            ForceMode.Impulse);
                     }
                 }
             }
@@ -59,7 +61,7 @@ namespace TheLastTour.Controller.Machine
 
             float remainTime = explosionFX.main.duration + explosionFX.main.startLifetime.constantMax;
             yield return new WaitForSeconds(remainTime);
-            RemovePart(this);
+            RemovePart(this, true);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -72,7 +74,7 @@ namespace TheLastTour.Controller.Machine
             if (!other.CompareTag("Player"))
             {
                 _isExploded = true;
-                RemovePart(this);
+                RemovePart(this, false);
                 StartCoroutine(Explode());
             }
         }

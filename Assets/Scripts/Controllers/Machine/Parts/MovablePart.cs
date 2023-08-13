@@ -80,11 +80,11 @@ namespace TheLastTour.Controller.Machine
             UpdateSimulatorMass();
         }
 
-        public override void RemovePart(PartController part)
+        public override void RemovePart(PartController part, bool destroyPart)
         {
             if (part == this)
             {
-                transform.parent.GetComponent<ISimulator>().RemovePart(part);
+                transform.parent.GetComponent<ISimulator>().RemovePart(part, destroyPart);
             }
 
             if (!attachedParts.Contains(part) || part.isCorePart)
@@ -103,7 +103,17 @@ namespace TheLastTour.Controller.Machine
 
             // 运行到这里,part 一定不是 Movable Part 自身
             // 故不需要销毁自身及所在 Machine,但是需要销毁传入的 Part
-            Destroy(part.gameObject);
+            
+            if (destroyPart)
+            {
+                partManager.DestroyPart(part);
+            }
+            else
+            {
+                var machine = TheLastTourArchitecture.Instance.GetManager<IMachineManager>().CreateEmptyMachine();
+                machine.AddPart(part);
+            }
+            
             UpdateSimulatorMass();
         }
 

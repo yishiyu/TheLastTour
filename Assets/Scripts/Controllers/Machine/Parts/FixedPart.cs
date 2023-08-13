@@ -28,9 +28,9 @@ namespace TheLastTour.Controller.Machine
             transform.parent.GetComponentInParent<ISimulator>().AddPart(part);
         }
 
-        public override void RemovePart(PartController part)
+        public override void RemovePart(PartController part, bool destroyPart)
         {
-            transform.parent.GetComponentInParent<ISimulator>().RemovePart(part);
+            transform.parent.GetComponentInParent<ISimulator>().RemovePart(part, destroyPart);
         }
 
         public override void UpdateSimulatorMass()

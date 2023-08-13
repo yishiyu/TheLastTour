@@ -525,7 +525,7 @@ namespace TheLastTour.Controller
                     {
                         if (selectedPart != null)
                         {
-                            selectedPart.RemovePart(selectedPart);
+                            selectedPart.RemovePart(selectedPart, true);
                         }
                     }
 

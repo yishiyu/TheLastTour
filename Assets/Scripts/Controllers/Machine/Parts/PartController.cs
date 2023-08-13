@@ -33,6 +33,7 @@ namespace TheLastTour.Controller.Machine
         private Rigidbody _simulatorRigidbody;
 
         public IGameStateManager gameStateManager;
+        public IPartManager partManager;
 
         public bool DrawDebugShapes
         {
@@ -192,6 +193,7 @@ namespace TheLastTour.Controller.Machine
         public virtual void Start()
         {
             gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
+            partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
         }
 
         public void SetRootJoint(int id)
@@ -394,7 +396,7 @@ namespace TheLastTour.Controller.Machine
         }
 
         public abstract void AddPart(PartController part);
-        public abstract void RemovePart(PartController part);
+        public abstract void RemovePart(PartController part, bool destroyPart);
         public abstract void UpdateSimulatorMass();
         public abstract ISimulator DetachJoint(PartJointController joint);
 

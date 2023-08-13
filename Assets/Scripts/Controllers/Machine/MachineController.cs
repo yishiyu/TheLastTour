@@ -59,7 +59,8 @@ namespace TheLastTour.Controller.Machine
         /// 对于 Movable Part,如果 Part 是自身,则向上转发,保持参数不变; 否则先断开自身与该 Part 与父级的连接,然后尝试将所有与 Part 连接的物体分离出去(成为独立的Machine)
         /// </summary>
         /// <param name="part">被移除的对象,只有是该 Simulator 自身或直接子节点才有效(通常是自身调用并将自身作为参数)</param>
-        public void RemovePart(PartController part);
+        /// <param name="destroyPart">是否销毁该Part</param>
+        public void RemovePart(PartController part, bool destroyPart = true);
 
         /// <summary>
         /// 更新 Simulator 的质量
@@ -90,7 +91,8 @@ namespace TheLastTour.Controller.Machine
     public class MachineController : MonoBehaviour, ISimulator
     {
         public List<PartController> machineParts = new List<PartController>();
-
+        
+        private IPartManager _partManager;
 
         private Rigidbody _rigidbody;
 
@@ -119,6 +121,7 @@ namespace TheLastTour.Controller.Machine
         private void Start()
         {
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
+            _partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
 
             if (!isRestoreFromArchive)
             {
@@ -146,7 +149,7 @@ namespace TheLastTour.Controller.Machine
             UpdateSimulatorMass();
         }
 
-        public void RemovePart(PartController part)
+        public void RemovePart(PartController part, bool destroyPart)
         {
             if (!machineParts.Contains(part) || part.isCorePart)
             {
@@ -167,7 +170,16 @@ namespace TheLastTour.Controller.Machine
             // 除了该被删除的传入 Part,该 Machine 已无任何 Part,销毁该 Machine
             // TheLastTourArchitecture.Instance.GetManager<IMachineManager>().DestroyMachine(this);
             // 因为已经将该 Part 与自身起始方块断开了,所以不需要销毁自身,销毁该方块即可
-            GameObject.Destroy(part.gameObject);
+            if (destroyPart)
+            {
+                _partManager.DestroyPart(part);
+            }
+            else
+            {
+                var machine = TheLastTourArchitecture.Instance.GetManager<IMachineManager>().CreateEmptyMachine();
+                machine.AddPart(part);
+            }
+
             if (machineParts.Count == 0)
             {
                 TheLastTourArchitecture.Instance.GetManager<IMachineManager>().DestroyMachine(this);
