@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isComplete: 0
+  descriptionText: Objective
   reachPointDescription: Reach Point
 --- !u!1001 &7789817243005685380
 PrefabInstance:
