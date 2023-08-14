@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4887658020522487932}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -51,11 +51,9 @@ MonoBehaviour:
   - {fileID: 5524622751553607192, guid: 2e5b8e3f8bf2dff4f870d64a49bff044, type: 3}
   - {fileID: 4601356604617124916, guid: 8cdc6b2922573ad4090e8b8d6dabfb11, type: 3}
   - {fileID: 680113252817488102, guid: ca0ce616c5b3afe41971a0f5b31025f6, type: 3}
-  - {fileID: 120078987571985454, guid: 1b0d5281221512e418a4540a14570f01, type: 3}
   - {fileID: 8015061699965554791, guid: 35f3ae7974eb6cd4199301f7f7a69fce, type: 3}
   - {fileID: 6999000673217102812, guid: fe9e93669c3c39d42bb1c9d2ec910f5b, type: 3}
   - {fileID: 4795050497001386033, guid: 7f2e97f22012d534998c31511dddd6fd, type: 3}
-  - {fileID: 6870194825993676812, guid: 01a9ca5593855b642ae1a7ae4e5c40e5, type: 3}
   - {fileID: 3388522538754211421, guid: 1ab43179143b8e249a303453d28b872b, type: 3}
   - {fileID: 787666506526866625, guid: 648983eb7fcb08b488802f44ba4d03d9, type: 3}
   - {fileID: 787666506526866625, guid: 0c75787621dd9b048855bfae3328e8f8, type: 3}
@@ -69,3 +67,5 @@ MonoBehaviour:
   - {fileID: 253748742658785639, guid: 01d9153ef9f8fa84090302cee29bad5a, type: 3}
   - {fileID: 5067955684645031634, guid: 3aeb5a8a1bd0b764ba6691429eb78945, type: 3}
   - {fileID: 4079887107270572533, guid: 31af6562561911646aaa8a407d64e88a, type: 3}
+  - {fileID: 5296865708224458949, guid: 1b0d5281221512e418a4540a14570f01, type: 3}
+  - {fileID: 532567629231539735, guid: 01a9ca5593855b642ae1a7ae4e5c40e5, type: 3}

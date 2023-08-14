@@ -13997,6 +13997,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6951598487700343955, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6958790552958350196, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -21218,7 +21222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: nextSceneName
-      value: LevelScene_01
+      value: LevelScene_02
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.size
@@ -21235,11 +21239,11 @@ PrefabInstance:
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 6870194825993676812, guid: 01a9ca5593855b642ae1a7ae4e5c40e5, type: 3}
+      objectReference: {fileID: 5296865708224458949, guid: 1b0d5281221512e418a4540a14570f01, type: 3}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 253748742658785639, guid: 01d9153ef9f8fa84090302cee29bad5a, type: 3}
+      objectReference: {fileID: 6870194825993676812, guid: 01a9ca5593855b642ae1a7ae4e5c40e5, type: 3}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[5]
       value: 

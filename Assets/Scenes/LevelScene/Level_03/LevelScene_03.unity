@@ -12801,7 +12801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1724195525072213699, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0001373291
+      value: -0.000057846308
       objectReference: {fileID: 0}
     - target: {fileID: 1817520067936886537, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -12951,10 +12951,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3698810781652471506, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
-      propertyPath: m_Text
-      value: "\u524D\u9762\u53D1\u73B0\u4E86\u4E00\u4E2A\u5C0F\u9547,\u4F46\u662F\u6865\u65AD\u4E86..."
-      objectReference: {fileID: 0}
     - target: {fileID: 4024531746633745595, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -12978,10 +12974,6 @@ PrefabInstance:
     - target: {fileID: 4024531746633745595, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4622404751204908021, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
-      propertyPath: m_Text
-      value: "\u6C14\u7403\u53EF\u4EE5\u63D0\u4F9B\u5782\u76F4\u65B9\u5411\u7684\u5347\u529B,\n\u6216\u8BB8\u53EF\u4EE5\u7528\u6C14\u7403\u4E00\u53E3\u6C14\u51B2\u8FC7\u53BB"
       objectReference: {fileID: 0}
     - target: {fileID: 5391722895388926881, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchorMax.x
@@ -13059,18 +13051,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7428867226762946022, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
-      propertyPath: m_Text
-      value: "\u6309ESC\u952E\u6682\u505C\n\u52FE\u9009\"ShowDebug\"\u53EF\u4EE5\u663E\u793A\u91CD\u5FC3\u7B49\u4FE1\u606F"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7498358875370575618, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
-      propertyPath: canvasGroups.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7498358875370575618, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
-      propertyPath: canvasGroups.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7510821580294337327, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13087,10 +13067,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7570310334124601958, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ba89d88e1a0d90b4ba617f5c2cd1e2ca, type: 3}
     - target: {fileID: 7692613649525417429, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -13228,10 +13204,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 605910733331834814, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
-    - {fileID: 845232648307129275, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
-    - {fileID: 8626932695453813396, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
@@ -22556,7 +22529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: nextSceneName
-      value: LevelScene_03
+      value: LevelScene_01
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.size
