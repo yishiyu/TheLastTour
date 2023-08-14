@@ -22560,7 +22560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[1]
@@ -22573,7 +22573,7 @@ PrefabInstance:
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[3]
       value: 
-      objectReference: {fileID: 120078987571985454, guid: 1b0d5281221512e418a4540a14570f01, type: 3}
+      objectReference: {fileID: 5296865708224458949, guid: 1b0d5281221512e418a4540a14570f01, type: 3}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[4]
       value: 
@@ -22581,7 +22581,7 @@ PrefabInstance:
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 6999000673217102812, guid: fe9e93669c3c39d42bb1c9d2ec910f5b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[6]
       value: 

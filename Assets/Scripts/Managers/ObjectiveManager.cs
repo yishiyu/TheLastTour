@@ -21,6 +21,11 @@ namespace TheLastTour.Manager
             UpdateObjective(descriptionText);
         }
 
+        private void OnDestroy()
+        {
+            OnObjectiveCompleted?.Invoke(this);
+        }
+
         public bool CompleteObjective()
         {
             OnObjectiveCompleted?.Invoke(this);
@@ -72,6 +77,7 @@ namespace TheLastTour.Manager
         void OnDestroy()
         {
             Objective.OnObjectiveCreated -= RegisterObjective;
+            Objective.OnObjectiveCompleted -= UnregisterObjective;
         }
 
         public void RegisterObjective(Objective objective)
