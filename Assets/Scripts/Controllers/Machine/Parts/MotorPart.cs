@@ -52,23 +52,22 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        public override void Update()
+        public void UpdateInput()
         {
+            _power = 0;
             if (_motorPowerUp.Value != Key.None)
             {
-                if (Keyboard.current[_motorPowerUp.Value].wasPressedThisFrame)
+                if (Keyboard.current[_motorPowerUp.Value].isPressed)
                 {
-                    Power += 0.1f;
-                    audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * 0.5f, 0, 1);
+                    Power += 1f;
                 }
             }
 
             if (_motorPowerDown.Value != Key.None)
             {
-                if (Keyboard.current[_motorPowerDown.Value].wasPressedThisFrame)
+                if (Keyboard.current[_motorPowerDown.Value].isPressed)
                 {
-                    Power -= 0.1f;
-                    audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * 0.5f, 0, 1);
+                    Power -= 1f;
                 }
             }
 
@@ -78,6 +77,8 @@ namespace TheLastTour.Controller.Machine
                 {
                     audioSource.Play();
                 }
+
+                audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * 0.5f, 0, 1);
             }
             else
             {
@@ -86,11 +87,15 @@ namespace TheLastTour.Controller.Machine
                     audioSource.Stop();
                 }
             }
+
+            // Debug.Log("Motor Power: " + _power);
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
+
+            UpdateInput();
 
             // 将世界坐标下的旋转转为局部坐标的旋转
             Vector3 relativeAngularVelocity =
