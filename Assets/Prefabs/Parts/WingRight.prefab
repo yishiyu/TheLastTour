@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13872a92cf05ba45bb058e4d1bf20b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: 1e85677e4ff9f994fa831a1abf5cd775, type: 3}
   displayName: "\u673A\u7FFC(\u53F3)"
   partName: Wing(R)
   mass: 10

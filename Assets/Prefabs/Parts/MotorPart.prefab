@@ -313,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8906e01bd6aa394080a9b09c9bf4e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: 0b07f91ed0004314ca8f3c8be5cf80c2, type: 3}
   displayName: "\u7535\u673A"
   partName: Motor
   mass: 2

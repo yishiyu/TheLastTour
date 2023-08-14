@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2243f37a1fa3d246a46178ace391139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: dc2a405342112f84cb6bd3f463174371, type: 3}
   displayName: "\u526F\u7FFC(\u53F3)"
   partName: Aileron(R)
   mass: 10

@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed6b9707f8d0884e84489109a4c5690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: 53a7c337678bd0346ba3f8f39902928b, type: 3}
   displayName: "\u94A9\u5B50"
   partName: Hook
   mass: 1

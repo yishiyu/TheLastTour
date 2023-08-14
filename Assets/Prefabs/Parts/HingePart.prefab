@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca8907c59abc2a4db387cec10583de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: a9ff5ce2660778a4fa550b7771e3e8d7, type: 3}
   displayName: "\u5408\u9875"
   partName: Hinge
   mass: 1

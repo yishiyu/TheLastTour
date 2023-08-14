@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3990f01a1ef0e9a43a7c0656873945d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: 0b07f91ed0004314ca8f3c8be5cf80c2, type: 3}
   displayName: "\u6B65\u8FDB\u7535\u673A"
   partName: StepperMoter
   mass: 2

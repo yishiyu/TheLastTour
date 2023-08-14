@@ -90,6 +90,7 @@ namespace TheLastTour.Controller.UI
             {
                 var button = Instantiate(prefabSelectButton, prefabButtonGroup.transform);
                 button.GetComponentInChildren<Text>().text = _gameManager.partPrefabs[i].displayName;
+                button.GetComponentInChildren<Image>().sprite = _gameManager.partPrefabs[i].thumbnail;
 
                 int index = i;
                 button.onClick.AddListener(

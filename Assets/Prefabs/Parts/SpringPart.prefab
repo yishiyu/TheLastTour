@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26819bb5a116ca488b5dd29a072eed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: e77696b5a7b098049b1173df5376a7e1, type: 3}
   displayName: "\u5F39\u7C27"
   partName: Spring
   mass: 0.1

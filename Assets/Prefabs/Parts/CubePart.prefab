@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6e41f8db65f3848bb579900332ddc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: 0b6d9827523efae4babbb4c0b2ea1317, type: 3}
   displayName: "\u65B9\u5757"
   partName: Cube
   mass: 1

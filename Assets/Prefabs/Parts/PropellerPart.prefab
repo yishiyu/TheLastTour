@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba7eeb06c45d854980328805392aece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thumbnail: {fileID: 21300000, guid: 6bcf3dfcedc6a64469cdbe9288ad59cb, type: 3}
   displayName: "\u87BA\u65CB\u6868"
   partName: Propeller
   mass: 1
