@@ -42,7 +42,9 @@ namespace TheLastTour.Controller.UI
 
         private void Update()
         {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (Keyboard.current.anyKey.wasPressedThisFrame ||
+                Mouse.current.leftButton.wasPressedThisFrame ||
+                Mouse.current.rightButton.wasPressedThisFrame)
             {
                 StopAllCoroutines();
                 gameObject.SetActive(false);

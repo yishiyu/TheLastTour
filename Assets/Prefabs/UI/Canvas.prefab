@@ -8963,7 +8963,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6309\u7A7A\u683C\u952E\u8DF3\u8FC7..."
+  m_Text: "\u6309\u4EFB\u610F\u952E\u8DF3\u8FC7..."
 --- !u!1001 &231753018906234400
 PrefabInstance:
   m_ObjectHideFlags: 0

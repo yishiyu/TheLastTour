@@ -16,10 +16,10 @@ namespace TheLastTour.Controller.Machine
 
         public List<Vector2> springPoints = new List<Vector2>()
         {
-            new Vector2(0.3f, 0),
-            new Vector2(0, 0.3f),
-            new Vector2(-0.3f, 0),
-            new Vector2(0, -0.3f),
+            new Vector2(0.2f, 0),
+            new Vector2(0, 0.2f),
+            new Vector2(-0.2f, 0),
+            new Vector2(0, -0.2f),
         };
 
         // Spring base 连接在车身上
