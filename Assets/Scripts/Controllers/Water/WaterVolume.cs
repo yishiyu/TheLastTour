@@ -75,9 +75,9 @@ namespace TheLastTour.Controller.Water
         }
 
 
-        public bool IsPointUnderWater(Vector3 worldPosition)
+        public float DepthUnderWater(Vector3 worldPosition)
         {
-            return GetWaterLevel(worldPosition) > worldPosition.y;
+            return Mathf.Clamp(GetWaterLevel(worldPosition) - worldPosition.y, 0, 100f);
         }
 
         public float GetWaterLevel(Vector3 worldPosition)
