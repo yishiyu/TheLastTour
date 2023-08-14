@@ -24,7 +24,7 @@ namespace TheLastTour.Controller.Machine
     {
         public Sprite thumbnail;
         public string displayName = "Part";
-        
+
         // 可设置属性
         public string partName = "Part";
         public float mass = 10;
@@ -167,7 +167,8 @@ namespace TheLastTour.Controller.Machine
             get { return centerOfMass; }
         }
 
-        protected PropertyValue<float> _massProperty = new PropertyValue<float>(1);
+        protected PropertyValue<float> _propertyMass = new PropertyValue<float>(1);
+        protected PropertyValue<Key> _propertyDetachTrigger = new PropertyValue<Key>(Key.None);
 
         public List<PartJointController> joints = new List<PartJointController>();
         public PartJointController rootJoint = null;
@@ -281,14 +282,15 @@ namespace TheLastTour.Controller.Machine
 
         protected virtual void InitProperties()
         {
-            _massProperty.Value = mass;
-            _massProperty.OnValueChanged += (newMass) =>
+            _propertyMass.Value = mass;
+            _propertyMass.OnValueChanged += (newMass) =>
             {
                 mass = newMass;
                 UpdateSimulatorMass();
             };
 
-            Properties.Add(new MachineProperty("Mass", _massProperty));
+            Properties.Add(new MachineProperty("Mass", _propertyMass));
+            Properties.Add(new MachineProperty("DetachTrigger", _propertyDetachTrigger));
         }
 
         /// <summary>
@@ -548,6 +550,17 @@ namespace TheLastTour.Controller.Machine
                 // Debug.Log("velocity: " + velocity + "\n" +
                 //           "resistance: " + resistance + "\n" +
                 //           "resistanceForce: " + resistanceForce);
+            }
+        }
+
+        public virtual void Update()
+        {
+            if (_propertyDetachTrigger.Value != Key.None)
+            {
+                if (Keyboard.current[_propertyDetachTrigger.Value].wasPressedThisFrame)
+                {
+                    DetachJoint(rootJoint);
+                }
             }
         }
 

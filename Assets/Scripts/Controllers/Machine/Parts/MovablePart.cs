@@ -192,8 +192,9 @@ namespace TheLastTour.Controller.Machine
         }
 
 
-        public virtual void Update()
+        public override void Update()
         {
+            base.Update();
             if (DrawDebugShapes)
             {
                 Popcron.Gizmos.Sphere(

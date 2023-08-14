@@ -55,10 +55,10 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Turn Angle", _turnAngle));
             Properties.Add(new MachineProperty("Damping", _damping));
 
-            wheelCollider.mass = _massProperty.Value;
+            wheelCollider.mass = _propertyMass.Value;
             wheelCollider.wheelDampingRate = _damping.Value;
 
-            _massProperty.OnValueChanged += (f => { wheelCollider.mass = f; });
+            _propertyMass.OnValueChanged += (f => { wheelCollider.mass = f; });
             _damping.OnValueChanged += (f => { wheelCollider.wheelDampingRate = f; });
 
 

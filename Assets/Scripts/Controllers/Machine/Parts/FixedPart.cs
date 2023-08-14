@@ -55,8 +55,9 @@ namespace TheLastTour.Controller.Machine
             return null;
         }
 
-        public virtual void Update()
+        public override void Update()
         {
+            base.Update();
         }
     }
 }

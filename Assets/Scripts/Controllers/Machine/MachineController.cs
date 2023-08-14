@@ -190,6 +190,11 @@ namespace TheLastTour.Controller.Machine
         {
             if (joint != null && joint.IsAttached)
             {
+                if (joint == joint.Owner.rootJoint)
+                {
+                    joint = joint.ConnectedJoint;
+                }
+                
                 // 递归搜索所有与该 Joint 相连的 Part
                 List<PartController> parts = joint.GetConnectedPartsRecursively();
                 MachineController machine =
