@@ -22,7 +22,7 @@ namespace TheLastTour.Controller.UI
         public Transform archiveContainer;
         public ArchiveSelectController archiveSelectPrefab;
 
-        public Button prefabSelectButton;
+        public GameObject prefabSelectButton;
         public GameObject prefabButtonGroup;
 
         private IGameStateManager _gameStateManager;
@@ -93,7 +93,7 @@ namespace TheLastTour.Controller.UI
                 button.GetComponentInChildren<Image>().sprite = _gameManager.partPrefabs[i].thumbnail;
 
                 int index = i;
-                button.onClick.AddListener(
+                button.GetComponentInChildren<Button>().onClick.AddListener(
                     (() => { _gameManager.CurrentSelectedPartIndex = index; })
                 );
             }
