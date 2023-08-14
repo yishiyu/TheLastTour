@@ -84,6 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26819bb5a116ca488b5dd29a072eed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u5F39\u7C27"
   partName: Spring
   mass: 0.1
   centerOfMass: {x: 0, y: 0, z: 0}

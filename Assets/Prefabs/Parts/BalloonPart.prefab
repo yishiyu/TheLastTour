@@ -551,6 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38bf764a505d6a844b7b867dec0d81bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u6C14\u7403"
   partName: Balloon
   mass: 1
   centerOfMass: {x: 0, y: 0, z: 0}

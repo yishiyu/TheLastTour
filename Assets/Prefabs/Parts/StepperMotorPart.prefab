@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3990f01a1ef0e9a43a7c0656873945d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u6B65\u8FDB\u7535\u673A"
   partName: StepperMoter
   mass: 2
   centerOfMass: {x: 0, y: 0, z: 0}

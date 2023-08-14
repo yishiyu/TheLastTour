@@ -23,6 +23,7 @@ namespace TheLastTour.Controller.Machine
     public abstract class PartController : MonoBehaviour, ISimulator
     {
         // 可设置属性
+        public string displayName = "Part";
         public string partName = "Part";
         public float mass = 10;
         public Vector3 centerOfMass = Vector3.zero;

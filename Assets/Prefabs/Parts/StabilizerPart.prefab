@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2d85b24f225214aa89c733207fccf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u5C3E\u7FFC"
   partName: Stabilizer
   mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}

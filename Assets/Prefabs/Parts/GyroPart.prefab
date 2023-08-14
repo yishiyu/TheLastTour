@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a7f2f84c3e6b2439a40a3055eea994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u5E73\u8861\u4EEA"
   partName: Gyro
   mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}

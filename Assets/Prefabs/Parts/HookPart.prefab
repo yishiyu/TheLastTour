@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed6b9707f8d0884e84489109a4c5690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u94A9\u5B50"
   partName: Hook
   mass: 1
   centerOfMass: {x: 0, y: 0, z: 0}

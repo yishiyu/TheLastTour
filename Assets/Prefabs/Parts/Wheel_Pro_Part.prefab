@@ -866,6 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d479f86464f4d428180cc1f35e45af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u8D5B\u8F66\u8F6E\u5B50"
   partName: WheelPro
   mass: 5
   centerOfMass: {x: 0, y: 0, z: 0}

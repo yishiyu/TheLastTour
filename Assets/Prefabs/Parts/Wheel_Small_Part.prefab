@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f18e03936c54bc746a7e40fa499e4722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u5C0F\u8F6E\u5B50"
   partName: SmallWheel
   mass: 1
   centerOfMass: {x: 0, y: 0, z: 0}

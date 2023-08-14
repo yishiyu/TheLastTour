@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace TheLastTour.Controller.UI
@@ -35,6 +37,16 @@ namespace TheLastTour.Controller.UI
             }
 
             StartCoroutine(ShowIntroduction());
+        }
+
+
+        private void Update()
+        {
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                StopAllCoroutines();
+                gameObject.SetActive(false);
+            }
         }
     }
 }

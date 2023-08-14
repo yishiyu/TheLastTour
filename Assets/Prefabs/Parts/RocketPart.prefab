@@ -5016,6 +5016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e48378e84e6d74b862529c35a96041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: "\u706B\u7BAD"
   partName: Rocket
   mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
