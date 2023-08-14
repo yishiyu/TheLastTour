@@ -10,8 +10,8 @@ namespace TheLastTour.Controller.Machine
     {
         public AudioSource audioSource;
         public AudioClip audioClip;
-        
-        
+
+
         public LineRenderer springRenderer;
 
         public List<Vector2> springPoints = new List<Vector2>()
@@ -83,14 +83,17 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Spring Multiplier", _propertySpringMultiplier));
 
             springJoint.spring = _propertySpringStrength.Value;
+            springJoint.damper = 0.8f;
             springJoint.minDistance = 0;
             springJoint.maxDistance = 0;
+
+            _propertySpringStrength.OnValueChanged += (f) => { springJoint.spring = f; };
 
             _propertySpringLength.OnValueChanged += (f) => { UpdateSpring(f, true); };
             UpdateSpring(_propertySpringLength.Value, true);
 
             SimulatorRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            
+
             audioSource.clip = audioClip;
             audioSource.loop = false;
         }
@@ -132,10 +135,10 @@ namespace TheLastTour.Controller.Machine
                 localVelocity.z = 0;
                 SimulatorRigidbody.velocity = transform.TransformDirection(localVelocity);
 
-                springTop.transform.localPosition = new Vector3(
-                    springTop.transform.localPosition.x,
-                    0, 0
-                );
+                // springTop.transform.localPosition = new Vector3(
+                //     springTop.transform.localPosition.x,
+                //     0, 0
+                // );
 
                 // MovablePartRigidbody.angularVelocity = Vector3.zero;
                 springTop.transform.localRotation = Quaternion.identity;
