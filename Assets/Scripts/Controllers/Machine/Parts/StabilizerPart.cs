@@ -78,7 +78,7 @@ namespace TheLastTour.Controller.Machine
                     transform.forward;
                 Vector3 torque = Vector3.Cross(length, force);
 
-                SimulatorRigidbody.AddForce(force, ForceMode.Impulse);
+                // SimulatorRigidbody.AddForce(force, ForceMode.Impulse);
                 SimulatorRigidbody.AddTorque(torque, ForceMode.Impulse);
 
                 // SimulatorRigidbody.AddForceAtPosition(
