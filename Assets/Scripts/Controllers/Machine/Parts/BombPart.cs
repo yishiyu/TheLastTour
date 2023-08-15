@@ -40,6 +40,11 @@ namespace TheLastTour.Controller.Machine
                 if (col.transform.parent != null)
                 {
                     Rigidbody rb = col.transform.parent.GetComponent<ISimulator>()?.GetSimulatorRigidbody();
+                    if (rb == null)
+                    {
+                        rb = col.transform.parent.GetComponent<Rigidbody>();
+                    }
+
                     if (rb != null && rb != SimulatorRigidbody)
                     {
                         rb.AddExplosionForce(
