@@ -98,7 +98,7 @@ namespace TheLastTour.Controller.Machine
             // 拆分该 Part 的所有连接,分别形成多个 Machine
             foreach (var joint in part.joints)
             {
-                DetachJoint(joint);
+                DetachJoint(joint, false);
             }
 
             // 运行到这里,part 一定不是 Movable Part 自身
@@ -117,7 +117,7 @@ namespace TheLastTour.Controller.Machine
             UpdateSimulatorMass();
         }
 
-        public override ISimulator DetachJoint(PartJointController joint)
+        public override ISimulator DetachJoint(PartJointController joint, bool simulate)
         {
             if (joint != null && joint.IsAttached)
             {
@@ -140,6 +140,12 @@ namespace TheLastTour.Controller.Machine
 
                 UpdateSimulatorMass();
                 machine.UpdateSimulatorMass();
+                
+                if (simulate)
+                {
+                    machine.TurnOnSimulation(true);
+                }
+                
                 return machine;
             }
 

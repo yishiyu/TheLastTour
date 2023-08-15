@@ -408,7 +408,7 @@ namespace TheLastTour.Controller.Machine
         public abstract void AddPart(PartController part);
         public abstract void RemovePart(PartController part, bool destroyPart);
         public abstract void UpdateSimulatorMass();
-        public abstract ISimulator DetachJoint(PartJointController joint);
+        public abstract ISimulator DetachJoint(PartJointController joint, bool simulate);
 
         public bool UpdateFloatingForce()
         {
@@ -569,7 +569,7 @@ namespace TheLastTour.Controller.Machine
             {
                 if (Keyboard.current[_propertyDetachTrigger.Value].wasPressedThisFrame)
                 {
-                    DetachJoint(rootJoint);
+                    DetachJoint(rootJoint, true);
                 }
             }
         }

@@ -27,7 +27,7 @@ namespace TheLastTour.Controller.Machine
                 if (Keyboard.current[_propertyRelease.Value].wasPressedThisFrame)
                 {
                     // 释放载荷并开启其物理模拟
-                    DetachJoint(detachJoint)?.TurnOnSimulation(true);
+                    DetachJoint(detachJoint, false)?.TurnOnSimulation(true);
                 }
             }
         }

@@ -74,8 +74,9 @@ namespace TheLastTour.Controller.Machine
         /// 从 Joint 处断开连接
         /// </summary>
         /// <param name="joint"></param>
+        /// <param name="simulate"></param>
         /// <returns></returns>
-        public ISimulator DetachJoint(PartJointController joint);
+        public ISimulator DetachJoint(PartJointController joint, bool simulate = false);
 
         /// <summary>
         /// 
@@ -91,7 +92,7 @@ namespace TheLastTour.Controller.Machine
     public class MachineController : MonoBehaviour, ISimulator
     {
         public List<PartController> machineParts = new List<PartController>();
-        
+
         private IPartManager _partManager;
 
         private Rigidbody _rigidbody;
@@ -163,7 +164,7 @@ namespace TheLastTour.Controller.Machine
             // 拆分该 Part 的所有连接,分别形成多个 Machine
             foreach (var joint in part.joints)
             {
-                DetachJoint(joint);
+                DetachJoint(joint, false);
             }
 
 
@@ -186,7 +187,7 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-        public ISimulator DetachJoint(PartJointController joint)
+        public ISimulator DetachJoint(PartJointController joint, bool simulate)
         {
             if (joint != null && joint.IsAttached)
             {
@@ -194,7 +195,7 @@ namespace TheLastTour.Controller.Machine
                 {
                     joint = joint.ConnectedJoint;
                 }
-                
+
                 // 递归搜索所有与该 Joint 相连的 Part
                 List<PartController> parts = joint.GetConnectedPartsRecursively();
                 MachineController machine =
@@ -214,6 +215,11 @@ namespace TheLastTour.Controller.Machine
 
                 UpdateSimulatorMass();
                 machine.UpdateSimulatorMass();
+                if (simulate)
+                {
+                    machine.TurnOnSimulation(true);
+                }
+                
                 return machine;
             }
 
