@@ -43,6 +43,11 @@ namespace TheLastTour.Controller.Machine
             get { return (gameStateManager != null && gameStateManager.DebugMode); }
         }
 
+        public bool IsPlaying
+        {
+            get { return (gameStateManager != null && gameStateManager.GameState == EGameState.Play); }
+        }
+
         public Rigidbody SimulatorRigidbody
         {
             get
@@ -555,6 +560,11 @@ namespace TheLastTour.Controller.Machine
 
         public virtual void Update()
         {
+            if (!IsPlaying)
+            {
+                return;
+            }
+
             if (_propertyDetachTrigger.Value != Key.None)
             {
                 if (Keyboard.current[_propertyDetachTrigger.Value].wasPressedThisFrame)
