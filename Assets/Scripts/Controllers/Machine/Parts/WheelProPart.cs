@@ -18,13 +18,24 @@ namespace TheLastTour.Controller.Machine
         private PropertyValue<Key> _powerBackward = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _turnLeft = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _turnRight = new PropertyValue<Key>(Key.None);
-        private PropertyValue<float> _power = new PropertyValue<float>(100);
-        private PropertyValue<float> _turnAngle = new PropertyValue<float>(10);
+        private PropertyValue<float> _power = new PropertyValue<float>(60);
+        private PropertyValue<float> _turnAngle = new PropertyValue<float>(13);
         private PropertyValue<float> _damping = new PropertyValue<float>(0.5f);
+
+        private float currentAngle = 0;
 
         public WheelCollider wheelCollider;
         public GameObject wheelModel;
-        public GameObject arrowModel;
+        // public GameObject arrowModel;
+
+        // public override void OnAttached(ISimulator simulator)
+        // {
+        //     base.OnAttached(simulator);
+        //
+        //     // arrowModel.
+        //     arrowModel.transform.rotation = simulator.GetSimulatorRigidbody().rotation;
+        // }
+
 
         public override void TurnOnSimulation(bool isOn)
         {
@@ -32,12 +43,12 @@ namespace TheLastTour.Controller.Machine
 
             if (isOn)
             {
-                arrowModel.SetActive(false);
+                // arrowModel.SetActive(false);
                 // wheelModel.GetComponent<Collider>().enabled = false;
             }
             else
             {
-                arrowModel.SetActive(true);
+                // arrowModel.SetActive(true);
                 // wheelModel.GetComponent<Collider>().enabled = true;
             }
         }
@@ -144,16 +155,18 @@ namespace TheLastTour.Controller.Machine
                 audioSource.volume = _currentAudioVolume;
             }
 
+            currentAngle = Mathf.Lerp(currentAngle, steerAngle, 0.1f);
+
             // 对自身和父级施加力矩
             wheelCollider.motorTorque = torqueValue;
-            wheelCollider.steerAngle = steerAngle;
+            wheelCollider.steerAngle = currentAngle;
 
             Vector3 torque = torqueValue * transform.forward;
 
-            if (SimulatorRigidbody != null)
-            {
-                SimulatorRigidbody.AddTorque(torque);
-            }
+            // if (SimulatorRigidbody != null)
+            // {
+            //     SimulatorRigidbody.AddTorque(torque);
+            // }
 
             UpdateWheelMeshPosition();
 

@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 5334680797188332858}
   - component: {fileID: 6635399961087484324}
   - component: {fileID: 6049894173425529624}
+  - component: {fileID: 8675457937034714713}
   m_Layer: 6
   m_Name: SR_Veh_DerbyCar_Wheel_RR
   m_TagString: Player
@@ -201,7 +202,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 939709613769943265}
   m_Father: {fileID: 25893419188289690}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -272,11 +274,34 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: e4d9d541ab8309241bb357184843bb47, type: 3}
+--- !u!136 &8675457937034714713
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218446194507351573}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.55
+  m_Height: 1
+  m_Direction: 0
+  m_Center: {x: 0.15846553, y: 0, z: 0.000006198883}
 --- !u!1 &2466675233911524082
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,25 +345,25 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.6
   m_SuspensionSpring:
-    spring: 3000
-    damper: 1000
+    spring: 500
+    damper: 300
     targetPosition: 0
-  m_SuspensionDistance: 0.15
+  m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
-  m_Mass: 2
+  m_Mass: 3
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 3
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 4
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -378,7 +403,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 25893419188289690}
+  m_Father: {fileID: 4859739471737450528}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &1082662892132144933
@@ -844,7 +869,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3972308963059529620}
-  - {fileID: 939709613769943265}
   - {fileID: 5024207808080681504}
   - {fileID: 4859739471737450528}
   - {fileID: 7735993933620954003}
@@ -883,7 +907,6 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: ff89099d49f4dfb46981d1be1b34544d, type: 3}
   wheelCollider: {fileID: 3494745774830161788}
   wheelModel: {fileID: 1218446194507351573}
-  arrowModel: {fileID: 7268660259027114447}
 --- !u!82 &6467814179314052359
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1077,7 +1100,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1423756585142350, guid: 1a55c08bb94fc6942a5ff49ed112239a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1423756585142350, guid: 1a55c08bb94fc6942a5ff49ed112239a, type: 3}
       propertyPath: m_TagString
@@ -1139,10 +1162,5 @@ PrefabInstance:
 --- !u!4 &7265700836967129737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4096173700903688, guid: 1a55c08bb94fc6942a5ff49ed112239a, type: 3}
-  m_PrefabInstance: {fileID: 7267254095752089985}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7268660259027114447 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1423756585142350, guid: 1a55c08bb94fc6942a5ff49ed112239a, type: 3}
   m_PrefabInstance: {fileID: 7267254095752089985}
   m_PrefabAsset: {fileID: 0}

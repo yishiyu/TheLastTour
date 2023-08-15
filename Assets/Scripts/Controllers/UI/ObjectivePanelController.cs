@@ -102,7 +102,7 @@ namespace TheLastTour.Controller.UI
                 if (_objectiveUIControllers.ContainsKey(obj.ObjectiveObj))
                 {
                     ObjectiveUIController controller = _objectiveUIControllers[obj.ObjectiveObj];
-                    _objectiveUIControllers.Remove(obj.ObjectiveObj);
+                    // _objectiveUIControllers.Remove(obj.ObjectiveObj);
                     controller.UpdateObjective(obj.ObjectiveObj.descriptionText);
                 }
                 else
