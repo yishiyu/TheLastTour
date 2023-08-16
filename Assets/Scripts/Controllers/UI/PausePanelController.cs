@@ -1,13 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TheLastTour.Manager;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace TheLastTour.Controller.UI
 {
     public class PausePanelController : MonoBehaviour
     {
+        public GameObject controlPanel;
+        public Button controlPanelButton;
+
+
         public Button closeButton;
 
         // Settings
@@ -48,6 +54,35 @@ namespace TheLastTour.Controller.UI
             masterVolumeSlider.onValueChanged.AddListener(
                 (value) => { AudioListener.volume = value; }
             );
+
+            controlPanelButton.onClick.AddListener(
+                () =>
+                {
+                    if (controlPanel != null)
+                    {
+                        controlPanel.SetActive(true);
+                    }
+                }
+            );
+        }
+
+        private void OnDisable()
+        {
+            if (controlPanel != null && controlPanel.activeInHierarchy)
+            {
+                controlPanel.SetActive(false);
+            }
+        }
+
+        private void Update()
+        {
+            if (Mouse.current.leftButton.isPressed)
+            {
+                if (controlPanel != null && controlPanel.activeInHierarchy)
+                {
+                    controlPanel.SetActive(false);
+                }
+            }
         }
     }
 }
