@@ -22821,7 +22821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: nextSceneName
-      value: LevelScene_05
+      value: LevelScene_06
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.size
