@@ -315,7 +315,7 @@ namespace TheLastTour.Controller
                     }
                 }
             }
-            
+
             // 编辑移动控制
             {
                 if (Keyboard.current.leftCtrlKey.isPressed)
@@ -563,6 +563,7 @@ namespace TheLastTour.Controller
                         if (selectedPart != null)
                         {
                             selectedPart.RemovePart(selectedPart, true);
+                            SelectedPart = null;
                         }
                     }
 
