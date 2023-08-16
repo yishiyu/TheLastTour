@@ -84,11 +84,7 @@ namespace TheLastTour.Controller.UI
         {
             if (debugInfoText)
             {
-                debugInfoText.text = "~: 清除预选零件\n" +
-                                     "tab: 删除选中零件\n" +
-                                     "r: 旋转预选零件\n" +
-                                     "f: 切换连接点\n" +
-                                     "GameMode: " + _gameStateManager.GameState + "\n" +
+                debugInfoText.text = "GameMode: " + _gameStateManager.GameState + "\n" +
                                      "EditMode: " + _gameStateManager.EditState + "\n" +
                                      "SelectedPartIndex: " + _gameManager.CurrentSelectedPartIndex + "\n";
 
