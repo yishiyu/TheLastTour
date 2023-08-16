@@ -30,7 +30,7 @@ namespace TheLastTour.Controller.Objective
             if (!isComplete && collider.gameObject.CompareTag("Player"))
             {
                 CompleteObjective();
-                UpdateObjective("Destination Arrived");
+                UpdateObjective("到达目标点任务完成");
             }
         }
     }

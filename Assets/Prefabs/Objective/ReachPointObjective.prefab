@@ -33,7 +33,7 @@ Transform:
   - {fileID: 7789817243006108364}
   - {fileID: 8657561007693240681}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2616659056981362201
 BoxCollider:
@@ -69,8 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isComplete: 0
-  descriptionText: Objective
-  reachPointDescription: Reach Point
+  descriptionText: "\u5230\u8FBE\u76EE\u6807\u70B9"
 --- !u!1001 &7789817243005685380
 PrefabInstance:
   m_ObjectHideFlags: 0

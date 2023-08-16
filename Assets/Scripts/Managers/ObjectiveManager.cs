@@ -28,8 +28,9 @@ namespace TheLastTour.Manager
 
         public bool CompleteObjective()
         {
-            OnObjectiveCompleted?.Invoke(this);
             isComplete = true;
+            UpdateObjective(descriptionText);
+            OnObjectiveCompleted?.Invoke(this);
             return true;
         }
 

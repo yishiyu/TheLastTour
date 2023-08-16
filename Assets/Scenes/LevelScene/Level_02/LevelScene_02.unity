@@ -25170,7 +25170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2234168996174150005, guid: 0784b88bf13438348869bc8eb908ce69, type: 3}
       propertyPath: descriptionText
-      value: Reach the destination
+      value: "\u5230\u8FBE\u76EE\u6807\u70B9"
       objectReference: {fileID: 0}
     - target: {fileID: 2234168996174150005, guid: 0784b88bf13438348869bc8eb908ce69, type: 3}
       propertyPath: reachPointDescription

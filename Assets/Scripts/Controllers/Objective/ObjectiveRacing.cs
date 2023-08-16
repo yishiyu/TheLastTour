@@ -23,7 +23,7 @@ namespace TheLastTour.Controller.Objective
 
             if (arrivedCheckPointCount == checkPointList.Count)
             {
-                descriptionText = "You are the winner!";
+                descriptionText = "任务完成!";
                 CompleteObjective();
             }
         }
@@ -52,7 +52,7 @@ namespace TheLastTour.Controller.Objective
                 if (timeLimit < 0)
                 {
                     timeLimit = 0;
-                    descriptionText = "Time is up!";
+                    descriptionText = "时间耗尽!";
                     UpdateObjective(descriptionText);
 
                     foreach (var checkPoint in checkPointList)
@@ -64,7 +64,7 @@ namespace TheLastTour.Controller.Objective
                     return;
                 }
 
-                descriptionText = "Time Left: " + timeLimit;
+                descriptionText = "时间剩余: " + timeLimit;
                 UpdateObjective(descriptionText);
             }
         }

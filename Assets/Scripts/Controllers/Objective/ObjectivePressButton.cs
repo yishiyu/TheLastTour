@@ -47,21 +47,21 @@ namespace TheLastTour.Controller.Objective
             }
         }
 
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (isPressed)
-            {
-                isPressed = false;
-                foreach (var interactObject in interactObjects)
-                {
-                    interactObject.OnReleaseButton();
-                }
-
-                StopAllCoroutines();
-                StartCoroutine(UpdateButtonMesh());
-            }
-        }
+        //
+        // private void OnTriggerExit(Collider other)
+        // {
+        //     if (isPressed)
+        //     {
+        //         isPressed = false;
+        //         foreach (var interactObject in interactObjects)
+        //         {
+        //             interactObject.OnReleaseButton();
+        //         }
+        //
+        //         StopAllCoroutines();
+        //         StartCoroutine(UpdateButtonMesh());
+        //     }
+        // }
 
         IEnumerator UpdateButtonMesh()
         {
@@ -84,6 +84,9 @@ namespace TheLastTour.Controller.Objective
                 Debug.Log("Button Mesh Position: " + buttonMesh.transform.localPosition);
                 yield return null;
             }
+
+            descriptionText = "按下按钮任务完成!";
+            CompleteObjective();
         }
     }
 }
