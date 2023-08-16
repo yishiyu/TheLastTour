@@ -250,50 +250,7 @@ namespace TheLastTour.Controller
 
         public void Update()
         {
-            UpdateDebugAction();
-
-            switch (_gameStateManager.GameState)
-            {
-                case EGameState.Edit:
-                    UpdateEdit();
-                    break;
-                case EGameState.Play:
-                    UpdatePlay();
-                    break;
-                case EGameState.Pause:
-                    break;
-                case EGameState.GameOver:
-                    break;
-            }
-        }
-
-        private void UpdateDebugAction()
-        {
-            // 选择零件 空
-            if (Keyboard.current.backquoteKey.wasPressedThisFrame)
-            {
-                CurrentSelectedPartIndex = -1;
-            }
-
-            // 修改零件根 joint
-            if (Keyboard.current.fKey.wasPressedThisFrame)
-            {
-                if (_partPreviewInstance)
-                {
-                    _partPreviewInstance.IterRootJoint();
-                    _partPreviewInstance.TurnOnJointCollision(false);
-                }
-            }
-
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-            {
-                if (_partPreviewInstance)
-                {
-                    _partPreviewInstance.IterRotateAngleZ();
-                    _partPreviewInstance.TurnOnJointCollision(false);
-                }
-            }
-
+            // 暂停菜单
             if (Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 switch (_gameStateManager.GameState)
@@ -313,67 +270,101 @@ namespace TheLastTour.Controller
                 }
             }
 
-            if (Keyboard.current.leftCtrlKey.isPressed)
+            switch (_gameStateManager.GameState)
             {
-                if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-                {
-                    _machineManager.MoveAllMachines(new Vector3(0, 0, 0.1f), Quaternion.identity);
-                }
-
-                if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-                {
-                    _machineManager.MoveAllMachines(new Vector3(0, 0, -0.1f), Quaternion.identity);
-                }
-
-                if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-                {
-                    _machineManager.MoveAllMachines(new Vector3(-0.1f, 0, 0), Quaternion.identity);
-                }
-
-                if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-                {
-                    _machineManager.MoveAllMachines(new Vector3(0.1f, 0, 0), Quaternion.identity);
-                }
+                case EGameState.Edit:
+                    UpdateEdit();
+                    break;
+                case EGameState.Play:
+                    UpdatePlay();
+                    break;
+                case EGameState.Pause:
+                    break;
+                case EGameState.GameOver:
+                    break;
             }
-
-            if (Keyboard.current.leftShiftKey.isPressed)
-            {
-                if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-                {
-                    _machineManager.MoveAllMachines(new Vector3(0, 0.1f, 0), Quaternion.identity);
-                }
-
-                if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-                {
-                    _machineManager.MoveAllMachines(new Vector3(0, -0.1f, 0), Quaternion.identity);
-                }
-
-                if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
-                {
-                    _machineManager.MoveAllMachines(new Vector3(0, 0, 0), Quaternion.Euler(0, 5, 0));
-                }
-
-                if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
-                {
-                    _machineManager.MoveAllMachines(new Vector3(0, 0, 0), Quaternion.Euler(0, -5, 0));
-                }
-            }
-
-
-            // // 测试保存和读取
-            // if (Keyboard.current.kKey.wasPressedThisFrame)
-            // {
-            //     _machineManager.SaveMachines("test");
-            // }
-            //
-            // if (Keyboard.current.lKey.wasPressedThisFrame)
-            // {
-            //     _machineManager.LoadMachines("test");
-            // }
         }
+
 
         private void UpdateEdit()
         {
+            // 编辑预设控制
+            {
+                // 选择零件 空
+                if (Keyboard.current.backquoteKey.wasPressedThisFrame)
+                {
+                    CurrentSelectedPartIndex = -1;
+                }
+
+                // 修改零件根 joint
+                if (Keyboard.current.fKey.wasPressedThisFrame)
+                {
+                    if (_partPreviewInstance)
+                    {
+                        _partPreviewInstance.IterRootJoint();
+                        _partPreviewInstance.TurnOnJointCollision(false);
+                    }
+                }
+
+                if (Keyboard.current.rKey.wasPressedThisFrame)
+                {
+                    if (_partPreviewInstance)
+                    {
+                        _partPreviewInstance.IterRotateAngleZ();
+                        _partPreviewInstance.TurnOnJointCollision(false);
+                    }
+                }
+            }
+            
+            // 编辑移动控制
+            {
+                if (Keyboard.current.leftCtrlKey.isPressed)
+                {
+                    if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+                    {
+                        _machineManager.MoveAllMachines(new Vector3(0, 0, 0.1f), Quaternion.identity);
+                    }
+
+                    if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+                    {
+                        _machineManager.MoveAllMachines(new Vector3(0, 0, -0.1f), Quaternion.identity);
+                    }
+
+                    if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+                    {
+                        _machineManager.MoveAllMachines(new Vector3(-0.1f, 0, 0), Quaternion.identity);
+                    }
+
+                    if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+                    {
+                        _machineManager.MoveAllMachines(new Vector3(0.1f, 0, 0), Quaternion.identity);
+                    }
+                }
+
+                if (Keyboard.current.leftShiftKey.isPressed)
+                {
+                    if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+                    {
+                        _machineManager.MoveAllMachines(new Vector3(0, 0.1f, 0), Quaternion.identity);
+                    }
+
+                    if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+                    {
+                        _machineManager.MoveAllMachines(new Vector3(0, -0.1f, 0), Quaternion.identity);
+                    }
+
+                    if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+                    {
+                        _machineManager.MoveAllMachines(new Vector3(0, 0, 0), Quaternion.Euler(0, 5, 0));
+                    }
+
+                    if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+                    {
+                        _machineManager.MoveAllMachines(new Vector3(0, 0, 0), Quaternion.Euler(0, -5, 0));
+                    }
+                }
+            }
+
             // 操作 UI 时停止编辑
             if (Mouse.current.leftButton.isPressed && EventSystem.current.IsPointerOverGameObject())
             {
