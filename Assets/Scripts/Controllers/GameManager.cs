@@ -313,6 +313,52 @@ namespace TheLastTour.Controller
                 }
             }
 
+            if (Keyboard.current.leftCtrlKey.isPressed)
+            {
+                if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+                {
+                    _machineManager.MoveAllMachines(new Vector3(0, 0, 0.1f), Quaternion.identity);
+                }
+
+                if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+                {
+                    _machineManager.MoveAllMachines(new Vector3(0, 0, -0.1f), Quaternion.identity);
+                }
+
+                if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+                {
+                    _machineManager.MoveAllMachines(new Vector3(-0.1f, 0, 0), Quaternion.identity);
+                }
+
+                if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+                {
+                    _machineManager.MoveAllMachines(new Vector3(0.1f, 0, 0), Quaternion.identity);
+                }
+            }
+
+            if (Keyboard.current.leftShiftKey.isPressed)
+            {
+                if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+                {
+                    _machineManager.MoveAllMachines(new Vector3(0, 0.1f, 0), Quaternion.identity);
+                }
+
+                if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+                {
+                    _machineManager.MoveAllMachines(new Vector3(0, -0.1f, 0), Quaternion.identity);
+                }
+
+                if (Keyboard.current.leftArrowKey.wasPressedThisFrame)
+                {
+                    _machineManager.MoveAllMachines(new Vector3(0, 0, 0), Quaternion.Euler(0, 5, 0));
+                }
+
+                if (Keyboard.current.rightArrowKey.wasPressedThisFrame)
+                {
+                    _machineManager.MoveAllMachines(new Vector3(0, 0, 0), Quaternion.Euler(0, -5, 0));
+                }
+            }
+
 
             // // 测试保存和读取
             // if (Keyboard.current.kKey.wasPressedThisFrame)

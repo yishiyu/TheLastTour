@@ -41,6 +41,8 @@ namespace TheLastTour.Manager
         public void LoadMachines(string fileName);
 
         public void ClearAllMachines();
+
+        public void MoveAllMachines(Vector3 offset, Quaternion deltaRotation);
     }
 
     public class MachineManager : IMachineManager
@@ -72,8 +74,18 @@ namespace TheLastTour.Manager
         {
             if (_defaultMachinePrefab)
             {
+                Vector3 corePosition = Vector3.zero;
+                Quaternion coreRotation = Quaternion.identity;
+                
+                var core = GetCorePart();
+                if (core != null)
+                {
+                    corePosition = core.transform.position;
+                    coreRotation = core.transform.rotation;
+                }
+                
                 MachineController machine =
-                    GameObject.Instantiate(_defaultMachinePrefab, Vector3.zero, Quaternion.identity);
+                    GameObject.Instantiate(_defaultMachinePrefab, corePosition, coreRotation);
                 machine.isRestoreFromArchive = true;
                 MachineList.Add(machine);
                 return machine;
@@ -162,6 +174,15 @@ namespace TheLastTour.Manager
             if (MachineList.Count > 0)
             {
                 InternalClearAllMachines();
+            }
+        }
+
+        public void MoveAllMachines(Vector3 offset, Quaternion deltaRotation)
+        {
+            foreach (var machine in MachineList)
+            {
+                machine.transform.position += offset;
+                machine.transform.localRotation *= deltaRotation;
             }
         }
 

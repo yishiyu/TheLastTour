@@ -204,7 +204,6 @@ namespace TheLastTour.Controller.Machine
                 foreach (var part in parts)
                 {
                     machineParts.Remove(part);
-                    part.Detach();
                     machine.machineParts.Add(part);
 
                     part.transform.SetParent(machine.transform);
@@ -219,7 +218,7 @@ namespace TheLastTour.Controller.Machine
                 {
                     machine.TurnOnSimulation(true);
                 }
-                
+
                 return machine;
             }
 
@@ -418,8 +417,8 @@ namespace TheLastTour.Controller.Machine
             JsonMachine jsonMachine = new JsonMachine
             {
                 // (新建机器的时候,会将根节点的位置设为原点)
-                relativePosition = rootPart.transform.position - corePartPosition,
-                relativeRotation = rootPart.transform.rotation * Quaternion.Inverse(corePartRotation),
+                relativePosition = rootPart.transform.localPosition,
+                relativeRotation = rootPart.transform.localRotation,
                 machineName = gameObject.name,
                 machineParts = new List<JsonPart>()
             };
@@ -432,6 +431,7 @@ namespace TheLastTour.Controller.Machine
 
 
             jsonMachine.machineParts.Add(rootPart.Serialize());
+            
             foreach (var joint in rootPart.joints)
             {
                 // 获取该根节点该 Joint 下的所有 Part
@@ -469,12 +469,14 @@ namespace TheLastTour.Controller.Machine
                     else
                     {
                         AddPart(part);
+                        part.transform.localPosition = jsonMachine.relativePosition;
+                        part.transform.localRotation = jsonMachine.relativeRotation;
                     }
                 }
             }
 
-            transform.position = corePartPosition + jsonMachine.relativePosition;
-            transform.rotation = corePartRotation * jsonMachine.relativeRotation;
+            transform.position = corePartPosition;
+            transform.rotation = corePartRotation;
 
             isRestoreFromArchive = true;
         }
