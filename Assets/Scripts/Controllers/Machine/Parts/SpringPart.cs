@@ -8,6 +8,7 @@ namespace TheLastTour.Controller.Machine
 {
     public class SpringPart : MovablePart
     {
+        public float audioVolume = 0.1f;
         public AudioSource audioSource;
         public AudioClip audioClip;
 
@@ -94,6 +95,7 @@ namespace TheLastTour.Controller.Machine
 
             SimulatorRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 
+            audioSource.volume = audioVolume;
             audioSource.clip = audioClip;
             audioSource.loop = false;
         }

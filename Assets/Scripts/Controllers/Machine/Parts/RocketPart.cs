@@ -9,6 +9,7 @@ namespace TheLastTour.Controller.Machine
 {
     public class RocketPart : FixedPart
     {
+        public float audioVolume = 0.3f;
         public AudioSource audioSource;
         public AudioClip audioClip;
         public ParticleSystem visualEffect;
@@ -28,6 +29,7 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Fuel", _propertyFuel));
             Properties.Add(new MachineProperty("Trigger", _propertyTrigger));
             
+            audioSource.volume = audioVolume;
             audioSource.clip = audioClip;
             audioSource.loop = true;
         }

@@ -9,6 +9,7 @@ namespace TheLastTour.Controller.Machine
 {
     public class WheelProPart : FixedPart
     {
+        public float audioVolume = 0.3f;
         public AudioSource audioSource;
         public AudioClip audioClip;
         private float _currentAudioVolume = 0;
@@ -25,6 +26,7 @@ namespace TheLastTour.Controller.Machine
         private float currentAngle = 0;
 
         public WheelCollider wheelCollider;
+
         public GameObject wheelModel;
         // public GameObject arrowModel;
 
@@ -73,8 +75,8 @@ namespace TheLastTour.Controller.Machine
             _damping.OnValueChanged += (f => { wheelCollider.wheelDampingRate = f; });
 
 
-            _maxAudioVolume = Mathf.Clamp(_power.Value / 8000, 0, 0.1f);
-            _power.OnValueChanged += (f) => { _maxAudioVolume = Mathf.Clamp(f / 8000, 0, 0.05f); };
+            _maxAudioVolume = Mathf.Clamp(_power.Value * audioVolume / 100, 0, 1);
+            _power.OnValueChanged += (f) => { _maxAudioVolume = Mathf.Clamp(_power.Value * audioVolume / 100, 0, 1); };
 
 
             audioSource.clip = audioClip;
@@ -141,12 +143,12 @@ namespace TheLastTour.Controller.Machine
 
             if (torqueValue > 0.1f)
             {
-                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, _maxAudioVolume, 0.1f);
+                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, _maxAudioVolume, 0.03f);
                 audioSource.volume = _currentAudioVolume;
             }
             else if (torqueValue < -0.1f)
             {
-                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, _maxAudioVolume, 0.1f);
+                _currentAudioVolume = Mathf.Lerp(_currentAudioVolume, _maxAudioVolume, 0.03f);
                 audioSource.volume = _currentAudioVolume;
             }
             else

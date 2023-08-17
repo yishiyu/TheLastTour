@@ -12,6 +12,10 @@ namespace TheLastTour.Controller.Machine
 {
     public class PropellerPart : FixedPart
     {
+        public float audioVolume = 0.3f;
+        public AudioClip propellerSound;
+        public AudioSource propellerAudioSource;
+
         float _power = 0;
         float _maxPower = 1;
 
@@ -38,6 +42,12 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Power Up", _propertyPowerUp));
             Properties.Add(new MachineProperty("Power Down", _propertyPowerDown));
             Properties.Add(new MachineProperty("Max Power", _propertyMaxPower));
+
+
+            propellerAudioSource.clip = propellerSound;
+            propellerAudioSource.volume = 0;
+            propellerAudioSource.loop = true;
+            propellerAudioSource.Play();
         }
 
         public override void Update()
@@ -68,6 +78,8 @@ namespace TheLastTour.Controller.Machine
                 0,
                 300 * Power * _propertyMaxPower.Value * Time.deltaTime,
                 Space.Self);
+
+            propellerAudioSource.volume = Mathf.Lerp(propellerAudioSource.volume, Power * audioVolume, 0.1f);
         }
 
         public override void FixedUpdate()

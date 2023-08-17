@@ -7,7 +7,10 @@ namespace TheLastTour.Controller.Machine
 {
     public class BombPart : FixedPart
     {
+        public float audioVolume = 0.3f;
         public AudioClip explosionAudio;
+        public AudioSource audioSource;
+
         public ParticleSystem explosionFX;
         public GameObject bombMesh;
 
@@ -22,6 +25,11 @@ namespace TheLastTour.Controller.Machine
 
             Properties.Add(new MachineProperty("Impulse", _propertyExplosionImpulse));
             Properties.Add(new MachineProperty("Radius", _propertyExplosionRadius));
+
+            audioSource.volume = audioVolume;
+            audioSource.clip = explosionAudio;
+            audioSource.loop = false;
+            audioSource.Stop();
         }
 
         private IEnumerator Explode()
@@ -58,7 +66,7 @@ namespace TheLastTour.Controller.Machine
             }
 
             // 播放音效
-            AudioSource.PlayClipAtPoint(explosionAudio, transform.position);
+            audioSource.Play();
             float audioTime = explosionAudio.length;
 
             explosionFX.Play();

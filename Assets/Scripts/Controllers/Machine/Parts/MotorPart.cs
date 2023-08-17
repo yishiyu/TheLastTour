@@ -9,6 +9,7 @@ namespace TheLastTour.Controller.Machine
 {
     public class MotorPart : MovablePart
     {
+        public float audioVolume = 0.3f;
         public AudioSource audioSource;
         public AudioClip motorAudio;
 
@@ -78,7 +79,7 @@ namespace TheLastTour.Controller.Machine
                     audioSource.Play();
                 }
 
-                audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * 0.2f, 0, 1);
+                audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * audioVolume, 0, 1);
             }
             else
             {

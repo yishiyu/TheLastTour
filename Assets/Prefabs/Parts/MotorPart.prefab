@@ -121,7 +121,7 @@ MonoBehaviour:
   mass: 2
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
-  PartId: 0
+  partId: 0
   partFloatComponent: {fileID: 0}
   airResistance: {x: 0.01, y: 0.01, z: 0.01}
   isResistanceEnabled: 010101010101
@@ -130,6 +130,7 @@ MonoBehaviour:
   rootJoint: {fileID: 7584668265025263745}
   attachedParts: []
   movablePartRigidbody: {fileID: 6444662372653412174}
+  audioVolume: 0.1
   audioSource: {fileID: 1950581282375631713}
   motorAudio: {fileID: 8300000, guid: c502041826854664683f9914f63427b0, type: 3}
   motorJoint: {fileID: 762268869153920822}
