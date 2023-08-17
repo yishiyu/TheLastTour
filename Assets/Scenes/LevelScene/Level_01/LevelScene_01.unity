@@ -21382,6 +21382,10 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 3229223888817355857}
+    - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: nextSceneName
       value: LevelScene_02
       objectReference: {fileID: 0}
@@ -22998,3 +23002,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
+--- !u!82 &3229223888817355857 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2772342986520085704, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
+  m_PrefabInstance: {fileID: 3229223888817355856}
+  m_PrefabAsset: {fileID: 0}

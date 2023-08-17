@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8694581250472620478
 MonoBehaviour:
@@ -68,3 +68,5 @@ MonoBehaviour:
   selectedPart: {fileID: 0}
   mouseOverPart: {fileID: 0}
   nextSceneName: Game
+  audioSource: {fileID: 0}
+  bgmClip: {fileID: 8300000, guid: 98baec781d46fe8439cf133cc4f807ce, type: 3}

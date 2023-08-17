@@ -3849,6 +3849,11 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 2679836739668819835, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
   m_PrefabInstance: {fileID: 304479974}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &304479977 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2772342986520085704, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
+  m_PrefabInstance: {fileID: 304479974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &305590315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22552,6 +22557,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 304479977}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: nextSceneName
       value: LevelScene_06
