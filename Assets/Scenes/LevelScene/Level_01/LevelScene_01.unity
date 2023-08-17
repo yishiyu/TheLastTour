@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.63432837, g: 0.63432837, b: 0.63432837, a: 1}
   m_AmbientGroundColor: {r: 0.63432837, g: 0.63432837, b: 0.63432837, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 1
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
   m_HaloStrength: 0.5
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 2f1774f2093b89d4f96414828d38da50, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 69bcae88cb098fc4d952dfe9ac7e1f19, type: 2}
 --- !u!196 &5
 NavMeshSettings:
@@ -13922,7 +13922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2242092244465919821, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 380
       objectReference: {fileID: 0}
     - target: {fileID: 2242092244465919821, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -13930,7 +13930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2242092244465919821, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 9.999964
       objectReference: {fileID: 0}
     - target: {fileID: 2242092244465919821, guid: e22699bdaa310b2498dc10175eff005b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -19176,7 +19176,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.9529412, g: 0.9372549, b: 0.8784314, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
