@@ -10,7 +10,7 @@ namespace TheLastTour.Controller.Water
     [RequireComponent(typeof(WaterWaves))]
     public class WaterVolume : MonoBehaviour
     {
-        public int density = 1;
+        public float density = 1;
         public int rows = 5;
         public int columns = 5;
         public float meshScale = 1f;

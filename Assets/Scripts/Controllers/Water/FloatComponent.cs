@@ -167,9 +167,9 @@ namespace TheLastTour.Controller.Water
                     if (underWaterDepth > 0.01f)
                     {
                         // 力矩 T = r x F
-                        var tempForce = -(underWaterDepth * _waterVolume.density
-                                                          * voxelSize.x * voxelSize.y * voxelSize.z *
-                                                          Physics.gravity);
+                        var tempForce = -(_waterVolume.density
+                                          * voxelSize.x * voxelSize.y * voxelSize.z *
+                                          Physics.gravity);
                         force += tempForce;
                         torque += Vector3.Cross(worldVoxel - rigidbodyPosition, tempForce);
                     }

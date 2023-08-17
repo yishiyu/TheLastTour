@@ -78,14 +78,14 @@ namespace TheLastTour.Manager
                 PartController part = GameObject.Instantiate(partPrefabDict[partName]);
                 if (partId < 0 || partInstanceDict.ContainsKey(partId))
                 {
-                    part.PartId = GenerateUniqueId();
+                    part.partId = GenerateUniqueId();
                 }
                 else
                 {
-                    part.PartId = partId;
+                    part.partId = partId;
                 }
 
-                partInstanceDict.Add(part.PartId, part);
+                partInstanceDict.Add(part.partId, part);
 
                 return part;
             }
@@ -97,9 +97,9 @@ namespace TheLastTour.Manager
         {
             if (part)
             {
-                if (partInstanceDict.ContainsKey(part.PartId))
+                if (partInstanceDict.ContainsKey(part.partId))
                 {
-                    partInstanceDict.Remove(part.PartId);
+                    partInstanceDict.Remove(part.partId);
                 }
 
                 GameObject.Destroy(part.gameObject);
@@ -134,7 +134,7 @@ namespace TheLastTour.Manager
         {
             foreach (var part in parts)
             {
-                partInstanceDict.Add(part.PartId, part);
+                partInstanceDict.Add(part.partId, part);
             }
         }
     }

@@ -22,7 +22,7 @@ namespace TheLastTour.Command
         public RemovePartCommand(
             PartController part)
         {
-            partId = part.PartId;
+            partId = part.partId;
 
 
             _partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();

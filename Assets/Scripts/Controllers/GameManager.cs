@@ -492,7 +492,7 @@ namespace TheLastTour.Controller
                             AddPartCommand addPartCommand = new AddPartCommand(
                                 _partPreviewInstance.partName,
                                 joint.JointIdInPart, _partPreviewInstance.RotateAngleZ,
-                                joint.Owner.PartId, joint.JointIdInPart);
+                                joint.Owner.partId, joint.JointIdInPart);
 
                             // 移除预览零件
                             _partPreviewInstance.Detach();

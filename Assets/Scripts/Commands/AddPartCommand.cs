@@ -40,7 +40,7 @@ namespace TheLastTour.Command
         {
             // 创建零件并保存 ID
             PartController part = _partManager.CreatePart(_partName, _partId);
-            _partId = part.PartId;
+            _partId = part.partId;
 
             // 设置零件的位置和旋转
             part.SetRootJoint(_rootJointId);

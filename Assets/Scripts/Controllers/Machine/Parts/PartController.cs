@@ -30,7 +30,7 @@ namespace TheLastTour.Controller.Machine
         public float mass = 10;
         public Vector3 centerOfMass = Vector3.zero;
         public bool isCorePart = false;
-        public long PartId = 0;
+        public long partId = 0;
         public FloatComponent partFloatComponent;
 
         private Rigidbody _simulatorRigidbody;
@@ -64,9 +64,10 @@ namespace TheLastTour.Controller.Machine
 
         // 三个方向的阻力系数
         // 水体阻力系数倍数,水密度/空气密度 = 775
+        // 但是设得太大会导致水中移动过于困难
         public Vector3 airResistance = new Vector3(0.001f, 0.001f, 0.001f);
 
-        public const float WaterResistanceMultiple = 775;
+        private const float WaterResistanceMultiple = 775;
 
         // x,-x, y, -y, z,-z
         // 六个方向的阻力是否启用(如果被挡住了则不起作用)(局部坐标系)
@@ -600,13 +601,13 @@ namespace TheLastTour.Controller.Machine
                 rotateAngleZ = RotateAngleZ,
                 rootJointId = RootJointId,
                 isCorePart = isCorePart,
-                partId = PartId,
+                partId = partId,
                 attachedJointId = (rootJoint == null || rootJoint.ConnectedJoint == null)
                     ? -1
                     : rootJoint.ConnectedJoint.JointIdInPart,
                 attachedPartId = (rootJoint == null || rootJoint.ConnectedJoint == null)
                     ? -1
-                    : rootJoint.ConnectedJoint.Owner.PartId,
+                    : rootJoint.ConnectedJoint.Owner.partId,
                 partProperties = new List<JsonMachineProperty>()
             };
 
