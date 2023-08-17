@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TheLastTour.Event;
@@ -124,6 +125,18 @@ namespace TheLastTour.Controller.Machine
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
 
+            UpdateSimulatorMass();
+            if (isRestoreFromArchive)
+            {
+                // 各种原因都找遍了,在存档加载完更新了,添加 Part 更新了
+                // 甚至 Unity 编辑器中 Inspector 中的 Mass 都是对的,但是在运行时,Mass就是不对
+                StartCoroutine(DelayUpdateMass());
+            }
+        }
+
+        IEnumerator DelayUpdateMass()
+        {
+            yield return new WaitForSeconds(1f);
             UpdateSimulatorMass();
         }
 
