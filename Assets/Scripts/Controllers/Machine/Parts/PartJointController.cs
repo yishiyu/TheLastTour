@@ -92,7 +92,7 @@ namespace TheLastTour.Controller.Machine
             }
         }
 
-        public List<PartController> GetConnectedPartsRecursively()
+        public List<PartController> GetConnectedPartsRecursively(bool onlyStem = true)
         {
             HashSet<PartController> connectedParts = new HashSet<PartController>();
 
@@ -112,15 +112,20 @@ namespace TheLastTour.Controller.Machine
                 PartController part = temp.First();
                 temp.Remove(part);
 
-                if (!part.IsLeafNode())
+                foreach (PartJointController joint in part.joints)
                 {
-                    foreach (PartJointController joint in part.joints)
+                    if (joint.ConnectedJoint != null && !connectedParts.Contains(joint.ConnectedJoint.Owner))
                     {
-                        if (joint.ConnectedJoint != null && !connectedParts.Contains(joint.ConnectedJoint.Owner))
+                        connectedParts.Add(joint.ConnectedJoint.Owner);
+
+                        // only stem 时只记录主干(不包括MovablePart)
+                        // 此时将叶子节点加到connectedParts 中,但不记录其他连接在该Part上的其他零件
+                        if (onlyStem && joint.ConnectedJoint.Owner.IsLeafNode())
                         {
-                            connectedParts.Add(joint.ConnectedJoint.Owner);
-                            temp.Add(joint.ConnectedJoint.Owner);
+                            continue;
                         }
+
+                        temp.Add(joint.ConnectedJoint.Owner);
                     }
                 }
             }

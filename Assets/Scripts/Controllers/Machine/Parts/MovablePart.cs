@@ -122,7 +122,7 @@ namespace TheLastTour.Controller.Machine
             if (joint != null && joint.IsAttached)
             {
                 // 递归搜索所有与该 Joint 相连的 Part
-                List<PartController> parts = joint.GetConnectedPartsRecursively();
+                List<PartController> parts = joint.GetConnectedPartsRecursively(true);
                 MachineController machine =
                     TheLastTourArchitecture.Instance.GetManager<IMachineManager>().CreateEmptyMachine();
 
@@ -194,7 +194,7 @@ namespace TheLastTour.Controller.Machine
 
         public override bool IsLeafNode()
         {
-            return false;
+            return true;
         }
 
 

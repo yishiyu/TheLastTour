@@ -82,7 +82,7 @@ namespace TheLastTour.Manager
                     {
                         if (joint.IsAttached)
                         {
-                            partManager.LoadExistingParts(joint.GetConnectedPartsRecursively());
+                            partManager.LoadExistingParts(joint.GetConnectedPartsRecursively(false));
                         }
                     }
 

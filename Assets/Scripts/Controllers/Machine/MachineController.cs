@@ -193,7 +193,7 @@ namespace TheLastTour.Controller.Machine
                 }
 
                 // 递归搜索所有与该 Joint 相连的 Part
-                List<PartController> parts = joint.GetConnectedPartsRecursively();
+                List<PartController> parts = joint.GetConnectedPartsRecursively(true);
                 MachineController machine =
                     TheLastTourArchitecture.Instance.GetManager<IMachineManager>().CreateEmptyMachine();
 
@@ -431,7 +431,7 @@ namespace TheLastTour.Controller.Machine
             foreach (var joint in rootPart.joints)
             {
                 // 获取该根节点该 Joint 下的所有 Part
-                var parts = joint.GetConnectedPartsRecursively();
+                var parts = joint.GetConnectedPartsRecursively(false);
                 foreach (var part in parts)
                 {
                     jsonMachine.machineParts.Add(part.Serialize());
