@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6355950066389364095}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2659207433923350815
 Rigidbody:
@@ -73,7 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b41145a8095526409f615095db53232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  machineParts: []
+  machineParts:
+  - {fileID: 5001848548320638034}
   isRestoreFromArchive: 0
   maxSpeed: 100
   maxAngularSpeed: 100
@@ -142,6 +143,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cdc6b2922573ad4090e8b8d6dabfb11, type: 3}
+--- !u!114 &5001848548320638034 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4601356604617124916, guid: 8cdc6b2922573ad4090e8b8d6dabfb11, type: 3}
+  m_PrefabInstance: {fileID: 8840970358529824870}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d6e41f8db65f3848bb579900332ddc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6355950066389364095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2487589377428927769, guid: 8cdc6b2922573ad4090e8b8d6dabfb11, type: 3}

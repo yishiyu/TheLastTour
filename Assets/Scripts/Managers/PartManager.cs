@@ -19,6 +19,8 @@ namespace TheLastTour.Manager
         public void DestroyPart(PartController part);
 
         public void ClearAllParts();
+
+        public void LoadExistingParts(List<PartController> parts);
     }
 
 
@@ -125,6 +127,14 @@ namespace TheLastTour.Manager
             if (partInstanceDict.Count > 0)
             {
                 InternalClearAllParts();
+            }
+        }
+
+        public void LoadExistingParts(List<PartController> parts)
+        {
+            foreach (var part in parts)
+            {
+                partInstanceDict.Add(part.PartId, part);
             }
         }
     }

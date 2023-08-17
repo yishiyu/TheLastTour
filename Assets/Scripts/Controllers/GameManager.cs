@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TheLastTour.Command;
 using TheLastTour.Controller.Machine;
 using TheLastTour.Event;
 using TheLastTour.Manager;
@@ -365,6 +366,24 @@ namespace TheLastTour.Controller
                 }
             }
 
+            // 撤销重做
+            {
+                if (Keyboard.current.leftAltKey.isPressed)
+                {
+                    if (Keyboard.current.zKey.wasPressedThisFrame)
+                    {
+                        TheLastTourArchitecture.Instance.ExecuteUndo();
+                        Debug.Log("Undo");
+                    }
+
+                    if (Keyboard.current.yKey.wasPressedThisFrame)
+                    {
+                        TheLastTourArchitecture.Instance.ExecuteRedo();
+                        Debug.Log("Redo");
+                    }
+                }
+            }
+
             // 操作 UI 时停止编辑
             if (Mouse.current.leftButton.isPressed && EventSystem.current.IsPointerOverGameObject())
             {
@@ -451,21 +470,35 @@ namespace TheLastTour.Controller
 
                             // PartController part = Instantiate(partPrefabs[CurrentSelectedPartIndex].gameObject)
                             //     .GetComponent<PartController>();
-                            PartController part =
-                                _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].partName);
+                            // PartController part =
+                            //     _partManager.CreatePart(partPrefabs[CurrentSelectedPartIndex].partName);
+                            //
+                            // // 与预览零件连接的 joint
+                            // PartJointController joint = _partPreviewInstance.ConnectedJoint;
+                            // part.SetRootJoint(_partPreviewInstance.RootJointId);
+                            // part.RotateAngleZ = _partPreviewInstance.RotateAngleZ;
+                            //
+                            // // 暂时移除预览零件
+                            // _partPreviewInstance.Detach();
+                            // _partPreviewInstance.EditType = EEditType.PreviewDisable;
+                            //
+                            // // 将零件连接到 joint, 禁止多重连接, 连接到 joint 所在机器
+                            // part.Attach(joint, true, true);
+                            // part.partName = partPrefabs[CurrentSelectedPartIndex].partName;
 
                             // 与预览零件连接的 joint
                             PartJointController joint = _partPreviewInstance.ConnectedJoint;
-                            part.SetRootJoint(_partPreviewInstance.RootJointId);
-                            part.RotateAngleZ = _partPreviewInstance.RotateAngleZ;
 
-                            // 暂时移除预览零件
+                            AddPartCommand addPartCommand = new AddPartCommand(
+                                _partPreviewInstance.partName,
+                                joint.JointIdInPart, _partPreviewInstance.RotateAngleZ,
+                                joint.Owner.PartId, joint.JointIdInPart);
+
+                            // 移除预览零件
                             _partPreviewInstance.Detach();
                             _partPreviewInstance.EditType = EEditType.PreviewDisable;
 
-                            // 将零件连接到 joint, 禁止多重连接, 连接到 joint 所在机器
-                            part.Attach(joint, true, true);
-                            part.partName = partPrefabs[CurrentSelectedPartIndex].partName;
+                            TheLastTourArchitecture.Instance.ExecuteCommand(addPartCommand);
                         }
                     }
 

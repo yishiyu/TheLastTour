@@ -62,6 +62,33 @@ namespace TheLastTour.Manager
         {
             ClearAllMachines();
             MachineList.AddRange(Object.FindObjectsOfType<MachineController>());
+
+            var partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
+
+            // 加载已经存在的 Part
+            foreach (var machine in MachineList)
+            {
+                if (machine.machineParts.Count > 0)
+                {
+                    var rootPart = machine.machineParts[0];
+                    while (rootPart.rootJoint != null &&
+                           rootPart.rootJoint.IsAttached &&
+                           rootPart.rootJoint.ConnectedJoint.Owner != null)
+                    {
+                        rootPart = rootPart.rootJoint.ConnectedJoint.Owner;
+                    }
+
+                    foreach (var joint in rootPart.joints)
+                    {
+                        if (joint.IsAttached)
+                        {
+                            partManager.LoadExistingParts(joint.GetConnectedPartsRecursively());
+                        }
+                    }
+
+                    partManager.LoadExistingParts(new List<PartController>() { rootPart });
+                }
+            }
         }
 
 
@@ -76,14 +103,14 @@ namespace TheLastTour.Manager
             {
                 Vector3 corePosition = Vector3.zero;
                 Quaternion coreRotation = Quaternion.identity;
-                
+
                 var core = GetCorePart();
                 if (core != null)
                 {
                     corePosition = core.transform.position;
                     coreRotation = core.transform.rotation;
                 }
-                
+
                 MachineController machine =
                     GameObject.Instantiate(_defaultMachinePrefab, corePosition, coreRotation);
                 machine.isRestoreFromArchive = true;
@@ -197,7 +224,7 @@ namespace TheLastTour.Manager
                 corePosition = corePart.transform.position;
                 coreRotation = corePart.transform.rotation;
             }
-            
+
             JsonMachines jsonMachines = new JsonMachines
             {
                 archiveName = fileName,

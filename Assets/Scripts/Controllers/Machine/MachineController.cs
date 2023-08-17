@@ -124,11 +124,7 @@ namespace TheLastTour.Controller.Machine
             _gameStateManager = TheLastTourArchitecture.Instance.GetManager<IGameStateManager>();
             _partManager = TheLastTourArchitecture.Instance.GetManager<IPartManager>();
 
-            if (!isRestoreFromArchive)
-            {
-                machineParts.AddRange(GetComponentsInChildren<PartController>());
-                UpdateSimulatorMass();
-            }
+            UpdateSimulatorMass();
         }
 
 
