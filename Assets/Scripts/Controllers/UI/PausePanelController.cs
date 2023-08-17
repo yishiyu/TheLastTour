@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TheLastTour.Manager;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ namespace TheLastTour.Controller.UI
         public GameObject controlPanel;
         public Button controlPanelButton;
 
+        public GameObject levelsPanel;
+        public Button levelsPanelButton;
 
         public Button closeButton;
 
@@ -64,6 +67,16 @@ namespace TheLastTour.Controller.UI
                     }
                 }
             );
+
+            levelsPanelButton.onClick.AddListener(
+                () =>
+                {
+                    if (levelsPanel != null)
+                    {
+                        levelsPanel.SetActive(true);
+                    }
+                }
+            );
         }
 
         private void OnDisable()
@@ -71,6 +84,11 @@ namespace TheLastTour.Controller.UI
             if (controlPanel != null && controlPanel.activeInHierarchy)
             {
                 controlPanel.SetActive(false);
+            }
+
+            if (levelsPanel != null && levelsPanel.activeInHierarchy)
+            {
+                levelsPanel.SetActive(false);
             }
         }
 
@@ -81,6 +99,14 @@ namespace TheLastTour.Controller.UI
                 if (controlPanel != null && controlPanel.activeInHierarchy)
                 {
                     controlPanel.SetActive(false);
+                }
+
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    if (levelsPanel != null && levelsPanel.activeInHierarchy)
+                    {
+                        levelsPanel.SetActive(false);
+                    }
                 }
             }
         }
