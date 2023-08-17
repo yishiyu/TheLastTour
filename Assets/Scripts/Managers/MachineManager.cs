@@ -263,6 +263,7 @@ namespace TheLastTour.Manager
                 {
                     MachineController machine = CreateEmptyMachine();
                     machine.Deserialize(jsonMachine, corePosition, coreRotation);
+                    machine.UpdateSimulatorMass();
                 }
             }
 

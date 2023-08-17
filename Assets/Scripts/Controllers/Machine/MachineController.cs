@@ -223,6 +223,8 @@ namespace TheLastTour.Controller.Machine
 
         public void TurnOnSimulation(bool isOn)
         {
+            UpdateSimulatorMass();
+
             if (MachineRigidBody)
             {
                 if (isOn)
@@ -427,7 +429,7 @@ namespace TheLastTour.Controller.Machine
 
 
             jsonMachine.machineParts.Add(rootPart.Serialize());
-            
+
             foreach (var joint in rootPart.joints)
             {
                 // 获取该根节点该 Joint 下的所有 Part
