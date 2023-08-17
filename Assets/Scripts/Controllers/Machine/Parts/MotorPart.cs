@@ -78,7 +78,7 @@ namespace TheLastTour.Controller.Machine
                     audioSource.Play();
                 }
 
-                audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * 0.5f, 0, 1);
+                audioSource.volume = Mathf.Clamp(Mathf.Abs(Power) * 0.2f, 0, 1);
             }
             else
             {

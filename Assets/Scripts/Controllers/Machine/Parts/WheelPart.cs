@@ -9,6 +9,7 @@ namespace TheLastTour.Controller.Machine
 {
     public class WheelPart : MovablePart
     {
+        public float audioVolume = 0.3f;
         public AudioSource audioSource;
         public AudioClip audioClip;
         private float _currentAudioVolume = 0;
@@ -58,8 +59,8 @@ namespace TheLastTour.Controller.Machine
             Properties.Add(new MachineProperty("Power", _power));
             Properties.Add(new MachineProperty("Damping", _damping));
 
-            _maxAudioVolume = Mathf.Clamp(_power.Value / 8000, 0, 0.1f);
-            _power.OnValueChanged += (f) => { _maxAudioVolume = Mathf.Clamp(f / 8000, 0, 0.05f); };
+            _maxAudioVolume = Mathf.Clamp(_power.Value / 8000, 0, audioVolume);
+            _power.OnValueChanged += (f) => { _maxAudioVolume = Mathf.Clamp(f / 8000, 0, audioVolume); };
 
 
             audioSource.clip = audioClip;
