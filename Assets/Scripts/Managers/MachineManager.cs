@@ -36,9 +36,9 @@ namespace TheLastTour.Manager
 
         public PartController GetCorePart();
 
-        public void SaveMachines(string fileName);
+        public void SaveMachines(string fileName, string path = "Machines");
 
-        public void LoadMachines(string fileName);
+        public void LoadMachines(string fileName, string path = "Machines");
 
         public void ClearAllMachines();
 
@@ -214,7 +214,7 @@ namespace TheLastTour.Manager
         }
 
 
-        public void SaveMachines(string fileName)
+        public void SaveMachines(string fileName, string path = "Machines")
         {
             var corePart = GetCorePart();
             Vector3 corePosition = Vector3.zero;
@@ -238,10 +238,10 @@ namespace TheLastTour.Manager
             }
 
             TheLastTourArchitecture.Instance.GetUtility<IArchiveUtility>()
-                .SaveToArchive("Machines", fileName, JsonUtility.ToJson(jsonMachines));
+                .SaveToArchive(path, fileName, JsonUtility.ToJson(jsonMachines));
         }
 
-        public void LoadMachines(string fileName)
+        public void LoadMachines(string fileName, string path = "Machines")
         {
             var corePart = GetCorePart();
             Vector3 corePosition = Vector3.zero;
@@ -256,7 +256,7 @@ namespace TheLastTour.Manager
             ClearAllMachines();
 
             if (TheLastTourArchitecture.Instance.GetUtility<IArchiveUtility>()
-                .LoadFromArchive("Machines", fileName, out var jsonData))
+                .LoadFromArchive(path, fileName, out var jsonData))
             {
                 var jsonMachines = JsonUtility.FromJson<JsonMachines>(jsonData);
                 foreach (var jsonMachine in jsonMachines.machines)

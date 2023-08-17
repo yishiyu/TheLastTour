@@ -595,7 +595,11 @@ namespace TheLastTour.Controller
                     {
                         if (selectedPart != null)
                         {
-                            selectedPart.RemovePart(selectedPart, true);
+                            // selectedPart.RemovePart(selectedPart, true);
+
+                            RemovePartCommand removePartCommand = new RemovePartCommand(selectedPart);
+                            TheLastTourArchitecture.Instance.ExecuteCommand(removePartCommand);
+
                             SelectedPart = null;
                         }
                     }

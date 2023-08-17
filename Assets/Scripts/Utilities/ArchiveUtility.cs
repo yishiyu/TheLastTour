@@ -15,6 +15,8 @@ namespace TheLastTour.Utility
         public bool DeleteArchive(string archiveType, string archiveName);
 
         public List<string> SearchArchive(string archiveType);
+
+        public string GetTempArchivePath();
     }
 
     public class DirectoryManager
@@ -112,6 +114,21 @@ namespace TheLastTour.Utility
             }
 
             return archiveList;
+        }
+
+        public string GetTempArchivePath()
+        {
+            return "Temp";
+        }
+
+        ~ArchiveUtility()
+        {
+            // 清空临时文件夹
+            DirectoryInfo path = _directoryManager.GetDirectory(GetTempArchivePath());
+            if (path.Exists)
+            {
+                path.Delete(true);
+            }
         }
     }
 }

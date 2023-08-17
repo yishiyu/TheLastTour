@@ -36,7 +36,7 @@ namespace TheLastTour.Manager
             // 使用时间生成唯一ID,防止同一秒生成多个ID
             var date = System.DateTime.Now;
             var id = long.Parse(date.ToString("yyyyMMddHHmmss")) * 100 + _uniqueSuffix;
-            _uniqueSuffix++;
+            _uniqueSuffix = (_uniqueSuffix + 1) % 100;
 
             return id;
         }
