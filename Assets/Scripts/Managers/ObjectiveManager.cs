@@ -8,6 +8,10 @@ namespace TheLastTour.Manager
 {
     public class Objective : MonoBehaviour
     {
+        public AudioSource audioSource;
+        public AudioClip objectiveCompleteSound;
+        public float objectiveCompleteSoundVolume = 0.3f;
+
         public static event Action<Objective> OnObjectiveCreated;
         public static event Action<Objective> OnObjectiveCompleted;
 
@@ -31,6 +35,15 @@ namespace TheLastTour.Manager
             isComplete = true;
             UpdateObjective(descriptionText);
             OnObjectiveCompleted?.Invoke(this);
+            // 播放音效
+            if (objectiveCompleteSound != null && audioSource != null)
+            {
+                audioSource.clip = objectiveCompleteSound;
+                audioSource.volume = objectiveCompleteSoundVolume;
+                audioSource.loop = false;
+                audioSource.Play();
+            }
+
             return true;
         }
 

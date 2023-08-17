@@ -69,6 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76bc6a18654e27f439a65904fade8a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  objectiveCompleteSound: {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
+  objectiveCompleteSoundVolume: 0.3
   isComplete: 0
   descriptionText: "\u6309\u4E0B\u6309\u94AE\u542F\u52A8\u673A\u5173"
   interactObjects: []

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7097000372863610663}
   - component: {fileID: 8999020740245767158}
   m_Layer: 0
-  m_Name: ObjectiveButtonGate
+  m_Name: ButtonGate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
