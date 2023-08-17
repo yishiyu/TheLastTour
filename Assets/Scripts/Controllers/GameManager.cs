@@ -372,12 +372,26 @@ namespace TheLastTour.Controller
                 {
                     if (Keyboard.current.zKey.wasPressedThisFrame)
                     {
+                        if (_partPreviewInstance)
+                        {
+                            // 移除预览零件
+                            _partPreviewInstance.Detach();
+                            _partPreviewInstance.EditType = EEditType.PreviewDisable;
+                        }
+
                         TheLastTourArchitecture.Instance.ExecuteUndo();
                         Debug.Log("Undo");
                     }
 
                     if (Keyboard.current.yKey.wasPressedThisFrame)
                     {
+                        if (_partPreviewInstance)
+                        {
+                            // 移除预览零件
+                            _partPreviewInstance.Detach();
+                            _partPreviewInstance.EditType = EEditType.PreviewDisable;
+                        }
+
                         TheLastTourArchitecture.Instance.ExecuteRedo();
                         Debug.Log("Redo");
                     }

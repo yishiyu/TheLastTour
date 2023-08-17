@@ -94,7 +94,7 @@ namespace TheLastTour.Manager
         }
 
         public void DestroyPart(PartController part)
-        {
+        {   
             if (part)
             {
                 if (partInstanceDict.ContainsKey(part.partId))
