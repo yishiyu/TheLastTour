@@ -21,6 +21,7 @@ namespace TheLastTour
             RegisterManager<IMachineManager>(new MachineManager());
             RegisterManager<IPartManager>(new PartManager());
             RegisterManager<IObjectiveManager>(new ObjectiveManager());
+            RegisterManager<IAudioManager>(new AudioManager());
         }
     }
 

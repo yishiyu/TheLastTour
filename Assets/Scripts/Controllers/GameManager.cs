@@ -145,7 +145,7 @@ namespace TheLastTour.Controller
         private IPartManager _partManager;
         private IObjectiveManager _objectiveManager;
 
-        public AudioSource audioSource;
+        private IAudioManager _audioManager;
         public AudioClip bgmClip;
 
         #region Initialization
@@ -165,9 +165,8 @@ namespace TheLastTour.Controller
             // 开启游戏,因为一些 DontDestroyOnLoad 的对象需要在游戏开始时初始化
             EventBus.Invoke(GameEvents.NewSceneLoadedEvent);
 
-            audioSource.clip = bgmClip;
-            audioSource.loop = true;
-            audioSource.Play();
+            _audioManager = TheLastTourArchitecture.Instance.GetManager<IAudioManager>();
+            _audioManager.PlayMusic(bgmClip, 0.2f, true);
         }
 
         #endregion

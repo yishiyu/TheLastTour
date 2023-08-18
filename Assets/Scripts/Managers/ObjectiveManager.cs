@@ -8,7 +8,6 @@ namespace TheLastTour.Manager
 {
     public class Objective : MonoBehaviour
     {
-        public AudioSource audioSource;
         public AudioClip objectiveCompleteSound;
         public float objectiveCompleteSoundVolume = 0.3f;
 
@@ -19,8 +18,13 @@ namespace TheLastTour.Manager
 
         public string descriptionText = "Objective";
 
+
+        private IAudioManager _audioManager;
+
         public virtual void Start()
         {
+            _audioManager = TheLastTourArchitecture.Instance.GetManager<IAudioManager>();
+
             OnObjectiveCreated?.Invoke(this);
             UpdateObjective(descriptionText);
         }
@@ -36,12 +40,9 @@ namespace TheLastTour.Manager
             UpdateObjective(descriptionText);
             OnObjectiveCompleted?.Invoke(this);
             // 播放音效
-            if (objectiveCompleteSound != null && audioSource != null)
+            if (objectiveCompleteSound != null)
             {
-                audioSource.clip = objectiveCompleteSound;
-                audioSource.volume = objectiveCompleteSoundVolume;
-                audioSource.loop = false;
-                audioSource.Play();
+                _audioManager.PlaySound(objectiveCompleteSound, objectiveCompleteSoundVolume, false);
             }
 
             return true;
