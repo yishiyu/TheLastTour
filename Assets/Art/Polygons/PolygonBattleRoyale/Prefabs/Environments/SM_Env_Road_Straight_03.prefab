@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4096113206274040}
   - component: {fileID: 33699808140710456}
   - component: {fileID: 23912957633030386}
+  - component: {fileID: 429620306972683541}
   m_Layer: 0
   m_Name: SM_Env_Road_Straight_03_Dirt
   m_TagString: Untagged
@@ -166,6 +167,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &429620306972683541
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577366654258910}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300004, guid: 4aabb9e51cdaa424b9df2d25cceb672a, type: 3}
 --- !u!1 &1783273460656096
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +200,7 @@ GameObject:
   - component: {fileID: 4561451306695836}
   - component: {fileID: 33414272126185988}
   - component: {fileID: 23668960550742182}
-  - component: {fileID: -7169182957235696856}
+  - component: {fileID: 277449091666689115}
   m_Layer: 0
   m_Name: SM_Env_Road_Straight_03
   m_TagString: Untagged
@@ -252,7 +275,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-7169182957235696856
+--- !u!64 &277449091666689115
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

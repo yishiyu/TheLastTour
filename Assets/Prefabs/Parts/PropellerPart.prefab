@@ -329,6 +329,7 @@ MonoBehaviour:
   partRenderer: {fileID: 4939705714205692996}
   joints: []
   rootJoint: {fileID: 3184974920616417111}
+  audioVolume: 0.1
   propellerSound: {fileID: 8300000, guid: b049660b860c8334a852b54855bce599, type: 3}
   propellerAudioSource: {fileID: 2049285917067170038}
   propellerMesh: {fileID: 2958250104843141757}
