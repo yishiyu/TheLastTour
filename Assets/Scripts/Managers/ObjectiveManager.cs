@@ -106,6 +106,7 @@ namespace TheLastTour.Manager
             if (ObjectiveCompleted)
             {
                 EventBus.Invoke(GameEvents.AllObjectivesCompletedEvent);
+                TheLastTourArchitecture.Instance.GetManager<IGameStateManager>().GameState = EGameState.GameOver;
             }
         }
     }

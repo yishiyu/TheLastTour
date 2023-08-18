@@ -248,6 +248,11 @@ namespace TheLastTour.Controller
                     Cursor.lockState = CursorLockMode.None;
                     Time.timeScale = 0f;
                     break;
+
+                case EGameState.GameOver:
+                    Cursor.lockState = CursorLockMode.None;
+                    Time.timeScale = 1;
+                    break;
                 default:
                     break;
             }
