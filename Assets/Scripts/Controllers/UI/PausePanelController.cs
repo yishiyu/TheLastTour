@@ -27,6 +27,10 @@ namespace TheLastTour.Controller.UI
 
         // 音量设置
         public Slider masterVolumeSlider;
+        public Slider musicVolumeSlider;
+        public Slider soundVolumeSlider;
+
+        private IAudioManager _audioManager;
 
         private IGameStateManager _gameStateManager;
 
@@ -51,12 +55,29 @@ namespace TheLastTour.Controller.UI
                 () => { _gameStateManager.ExitGame(); }
             );
 
+            _audioManager = TheLastTourArchitecture.Instance.GetManager<IAudioManager>();
+
             masterVolumeSlider.maxValue = 1;
             masterVolumeSlider.minValue = 0;
             masterVolumeSlider.value = AudioListener.volume;
             masterVolumeSlider.onValueChanged.AddListener(
-                (value) => { AudioListener.volume = value; }
+                (value) => { _audioManager.GlobalVolume = value; }
             );
+
+            musicVolumeSlider.maxValue = 1;
+            musicVolumeSlider.minValue = 0;
+            musicVolumeSlider.value = _audioManager.MusicVolume;
+            musicVolumeSlider.onValueChanged.AddListener(
+                (value) => { _audioManager.MusicVolume = value; }
+            );
+
+            soundVolumeSlider.maxValue = 1;
+            soundVolumeSlider.minValue = 0;
+            soundVolumeSlider.value = _audioManager.SoundVolume;
+            soundVolumeSlider.onValueChanged.AddListener(
+                (value) => { _audioManager.SoundVolume = value; }
+            );
+
 
             controlPanelButton.onClick.AddListener(
                 () =>

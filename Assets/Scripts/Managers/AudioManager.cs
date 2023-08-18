@@ -67,27 +67,41 @@ namespace TheLastTour.Manager
             set { AudioListener.volume = value; }
         }
 
-        private float _musicVolume = 1;
+        // 当前音乐和音乐普适音量
+        private float _musicVolume = 0.3f;
+        private float _currentMusicVolume = 0.2f;
 
         public float MusicVolume
         {
             get { return _musicVolume; }
-            set { _musicVolume = Mathf.Clamp01(value); }
+            set
+            {
+                _musicVolume = Mathf.Clamp01(value);
+                MusicSource.volume = Mathf.Clamp01(_currentMusicVolume * _musicVolume);
+            }
         }
 
         private float _soundVolume = 1;
+        private float _currentSoundVolume = 0.2f;
 
         public float SoundVolume
         {
             get { return _soundVolume; }
-            set { _soundVolume = Mathf.Clamp01(value); }
+            set
+            {
+                _soundVolume = Mathf.Clamp01(value);
+                SoundSource.volume = Mathf.Clamp01(_currentSoundVolume * _soundVolume);
+            }
         }
 
 
         public AudioSource PlaySound(AudioClip clip, float volume = 1, bool loop = false)
         {
+            // 设置当前音量,并触发一次音量调整
+            _currentSoundVolume = volume;
+            SoundVolume = SoundVolume;
+
             SoundSource.clip = clip;
-            SoundSource.volume = Mathf.Clamp01(volume * SoundVolume);
             SoundSource.loop = loop;
             SoundSource.Play();
 
@@ -96,8 +110,11 @@ namespace TheLastTour.Manager
 
         public AudioSource PlayMusic(AudioClip clip, float volume = 1, bool loop = true)
         {
+            // 设置当前音量,并触发一次音量调整
+            _currentMusicVolume = volume;
+            MusicVolume = MusicVolume;
+
             MusicSource.clip = clip;
-            MusicSource.volume = Mathf.Clamp01(volume * MusicVolume);
             MusicSource.loop = loop;
             MusicSource.Play();
 
