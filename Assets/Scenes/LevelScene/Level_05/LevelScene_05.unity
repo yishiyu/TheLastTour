@@ -22741,6 +22741,14 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
+      propertyPath: bgmClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c676a30d88e5eb24bb4bce251b169103, type: 3}
+    - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
+      propertyPath: bgmVolume
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 0}

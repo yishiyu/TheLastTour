@@ -147,6 +147,7 @@ namespace TheLastTour.Controller
 
         private IAudioManager _audioManager;
         public AudioClip bgmClip;
+        public float bgmVolume = 0.15f;
 
         #region Initialization
 
@@ -166,7 +167,7 @@ namespace TheLastTour.Controller
             EventBus.Invoke(GameEvents.NewSceneLoadedEvent);
 
             _audioManager = TheLastTourArchitecture.Instance.GetManager<IAudioManager>();
-            _audioManager.PlayMusic(bgmClip, 0.1f, true);
+            _audioManager.PlayMusic(bgmClip, 0.07f, true);
         }
 
         #endregion

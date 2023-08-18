@@ -28,7 +28,7 @@ namespace TheLastTour.Controller.Machine
         protected override void InitProperties()
         {
             base.InitProperties();
-
+            
             Properties.Add(new MachineProperty("Power", _propertyPower));
         }
 
@@ -46,6 +46,9 @@ namespace TheLastTour.Controller.Machine
 
         public override void Update()
         {
+            // 气球放飞有点小问题, 先不要这个功能了
+            // base.Update();
+
             lineRenderer.SetPosition(0, basePosition.position);
             lineRenderer.SetPosition(1, topPosition.position);
         }

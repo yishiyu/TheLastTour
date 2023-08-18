@@ -18567,16 +18567,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
   m_PrefabInstance: {fileID: 604115442}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &604115444 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2679836739668819835, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
-  m_PrefabInstance: {fileID: 604115442}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &604115445 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2772342986520085704, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
-  m_PrefabInstance: {fileID: 604115442}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &605906155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61476,7 +61466,7 @@ PrefabInstance:
     - target: {fileID: 2234168996174150005, guid: 0784b88bf13438348869bc8eb908ce69, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 604115444}
+      objectReference: {fileID: 0}
     - target: {fileID: 2234168996174150005, guid: 0784b88bf13438348869bc8eb908ce69, type: 3}
       propertyPath: descriptionText
       value: "\u5230\u8FBE\u76EE\u6807\u70B9"
@@ -63346,9 +63336,13 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
+      propertyPath: bgmClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2ccc1e118c8f01244a2004f4fb36463f, type: 3}
+    - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 604115445}
+      objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: nextSceneName
       value: LevelScene_05

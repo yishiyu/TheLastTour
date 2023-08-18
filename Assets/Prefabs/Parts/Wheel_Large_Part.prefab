@@ -527,7 +527,7 @@ MonoBehaviour:
   rootJoint: {fileID: 4041644731599037103}
   attachedParts: []
   movablePartRigidbody: {fileID: 4044829100352214618}
-  audioVolume: 3
+  audioVolume: 0.06
   audioSource: {fileID: 8062344879157628988}
   audioClip: {fileID: 8300000, guid: 5c224246aabdf2147b24b920563d9f85, type: 3}
   motorJoint: {fileID: 1681545287657869242}
