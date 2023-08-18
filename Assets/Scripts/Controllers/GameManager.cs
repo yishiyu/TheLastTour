@@ -168,6 +168,13 @@ namespace TheLastTour.Controller
 
             _audioManager = TheLastTourArchitecture.Instance.GetManager<IAudioManager>();
             _audioManager.PlayMusic(bgmClip, 0.07f, true);
+
+            var corePart = _machineManager.GetCorePart();
+            if (corePart)
+            {
+                GameEvents.FocusOnTargetEvent.Target = corePart.transform;
+                EventBus.Invoke(GameEvents.FocusOnTargetEvent);
+            }
         }
 
         #endregion
