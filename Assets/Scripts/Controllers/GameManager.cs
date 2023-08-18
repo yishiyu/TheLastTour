@@ -169,6 +169,13 @@ namespace TheLastTour.Controller
             _audioManager = TheLastTourArchitecture.Instance.GetManager<IAudioManager>();
             _audioManager.PlayMusic(bgmClip, 0.07f, true);
 
+            // 防卡死
+            StartCoroutine(DelayFocus());
+        }
+
+        public IEnumerator DelayFocus()
+        {
+            yield return new WaitForSeconds(1f);
             var corePart = _machineManager.GetCorePart();
             if (corePart)
             {
