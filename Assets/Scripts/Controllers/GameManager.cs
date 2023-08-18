@@ -166,7 +166,7 @@ namespace TheLastTour.Controller
             EventBus.Invoke(GameEvents.NewSceneLoadedEvent);
 
             _audioManager = TheLastTourArchitecture.Instance.GetManager<IAudioManager>();
-            _audioManager.PlayMusic(bgmClip, 0.2f, true);
+            _audioManager.PlayMusic(bgmClip, 0.1f, true);
         }
 
         #endregion

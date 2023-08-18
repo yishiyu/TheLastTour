@@ -41,7 +41,7 @@ namespace TheLastTour.Controller.Objective
             if (_playerRigidbody == null) return;
 
             float speed = _playerRigidbody.velocity.magnitude;
-            descriptionText = "达到目标速度: " + speed + "/" + targetSpeed;
+            descriptionText = "达到目标速度: " + speed.ToString("F2") + "/" + targetSpeed.ToString("F2");
             UpdateObjective(descriptionText);
 
             if (speed >= targetSpeed)

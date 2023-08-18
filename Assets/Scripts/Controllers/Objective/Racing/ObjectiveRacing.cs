@@ -64,7 +64,7 @@ namespace TheLastTour.Controller.Objective
                     return;
                 }
 
-                descriptionText = "时间剩余: " + timeLimit;
+                descriptionText = "时间剩余: " + timeLimit.ToString("F2");
                 UpdateObjective(descriptionText);
             }
         }

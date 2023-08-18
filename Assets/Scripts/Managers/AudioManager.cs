@@ -68,7 +68,7 @@ namespace TheLastTour.Manager
         }
 
         // 当前音乐和音乐普适音量
-        private float _musicVolume = 0.3f;
+        private float _musicVolume = 1f;
         private float _currentMusicVolume = 0.2f;
 
         public float MusicVolume
