@@ -2400,31 +2400,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.08700944
+      value: 28.550232
       objectReference: {fileID: 0}
     - target: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.5427237
+      value: 3.564803
       objectReference: {fileID: 0}
     - target: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.469646
+      value: 35.46022
       objectReference: {fileID: 0}
     - target: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9994371
+      value: -0.9884614
       objectReference: {fileID: 0}
     - target: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.031801388
+      value: -0.12972933
       objectReference: {fileID: 0}
     - target: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.010684781
+      value: 0.07752527
       objectReference: {fileID: 0}
     - target: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00034867678
+      value: -0.010206109
       objectReference: {fileID: 0}
     - target: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2454,16 +2454,6 @@ PrefabInstance:
 --- !u!4 &226464860 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1646711165657853577, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
-  m_PrefabInstance: {fileID: 226464859}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &226464861 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2679836739668819835, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
-  m_PrefabInstance: {fileID: 226464859}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &226464862 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2772342986520085704, guid: ef5695578f393364b946fd4f6b4c5117, type: 3}
   m_PrefabInstance: {fileID: 226464859}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &234223691
@@ -23691,7 +23681,7 @@ PrefabInstance:
     - target: {fileID: 2234168996174150005, guid: 0784b88bf13438348869bc8eb908ce69, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 226464861}
+      objectReference: {fileID: 0}
     - target: {fileID: 2234168996174150005, guid: 0784b88bf13438348869bc8eb908ce69, type: 3}
       propertyPath: descriptionText
       value: "\u5230\u8FBE\u76EE\u6807\u70B9"
@@ -24568,7 +24558,7 @@ PrefabInstance:
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 226464862}
+      objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: nextSceneName
       value: LevelScene_03
