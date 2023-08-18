@@ -185,6 +185,7 @@ namespace TheLastTour.Controller.Machine
                                           partMassPosition.y * partMassPosition.y + 0.6667f);
             }
 
+            totalMass = Mathf.Max(totalMass, 0.001f);
             SimulatorRigidbody.mass = totalMass;
             SimulatorRigidbody.centerOfMass = massCenter / totalMass;
             SimulatorRigidbody.inertiaTensor = new Vector3(intertiaX, intertiaY, intertiaZ);
