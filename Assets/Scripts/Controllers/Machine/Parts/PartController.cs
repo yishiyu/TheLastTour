@@ -457,7 +457,8 @@ namespace TheLastTour.Controller.Machine
                 // 对此进行一些修正(因为飞机等运动是需要高速运动的)
                 // 阻力参考资料: https://zh.wikipedia.org/zh-cn/%E9%98%BB%E5%8A%9B%E6%96%B9%E7%A8%8B
                 // F = (1/2)p*v^2*C*A = v^2 * airResistance
-                Vector3 velocity = SimulatorRigidbody.velocity;
+                // Vector3 velocity = SimulatorRigidbody.velocity;
+                Vector3 velocity = SimulatorRigidbody.GetPointVelocity(transform.position);
                 Vector3 localSpaceVelocity = Quaternion.Inverse(transform.rotation) * velocity;
 
                 // 已经有了该物体对三个方向的阻力系数,求对任意一个方向(速度)的阻力系数

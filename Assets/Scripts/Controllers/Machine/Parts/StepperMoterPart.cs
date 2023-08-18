@@ -10,6 +10,7 @@ namespace TheLastTour.Controller.Machine
     public class StepperMotorPart : MovablePart
     {
         public HingeJoint motorJoint;
+        public Transform motorMeshTransform;
 
         private float _currentAngle = 0;
         private float _maxAngle = 90f;
@@ -21,6 +22,14 @@ namespace TheLastTour.Controller.Machine
         private PropertyValue<Key> _motorTurnLeft = new PropertyValue<Key>(Key.None);
         private PropertyValue<Key> _motorTurnRight = new PropertyValue<Key>(Key.None);
         private PropertyValue<float> _motorStep = new PropertyValue<float>(10f);
+        
+        public override void AddPart(PartController part)
+        {
+            attachedParts.Add(part);
+            part.transform.parent = motorMeshTransform;
+            part.OnAttached(this);
+            UpdateSimulatorMass();
+        }
 
 
         public override void OnAttached(ISimulator simulator)
@@ -30,7 +39,7 @@ namespace TheLastTour.Controller.Machine
             motorJoint.connectedBody = simulator.GetSimulatorRigidbody();
             motorJoint.enableCollision = true;
 
-            _rotationBase = transform.localRotation.eulerAngles;
+            _rotationBase = motorMeshTransform.localRotation.eulerAngles;
         }
 
 
@@ -67,7 +76,7 @@ namespace TheLastTour.Controller.Machine
         {
             base.FixedUpdate();
 
-            transform.localRotation = Quaternion.Euler(
+            motorMeshTransform.localRotation = Quaternion.Euler(
                 _rotationBase.x,
                 _rotationBase.y + _currentAngle,
                 _rotationBase.z
