@@ -1,18 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TheLastTour.Event;
+using TheLastTour.Manager;
 using UnityEngine;
 
-public class ObjectiveRotateInWater : MonoBehaviour
+namespace TheLastTour.Controller.Objective
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ObjectiveRotateInWater : Manager.Objective
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // private float _playerRotationY;
+        // private Transform _playerTransform;
+        //
+        //
+        // private void OnEnable()
+        // {
+        //     EventBus.AddListener<GameStateChangedEvent>(OnGameStateChanged);
+        // }
+        //
+        // private void OnDisable()
+        // {
+        //     EventBus.RemoveListener<GameStateChangedEvent>(OnGameStateChanged);
+        // }
+        //
+        // private void OnGameStateChanged(GameStateChangedEvent evt)
+        // {
+        //     if (evt.CurrentState == EGameState.Play && evt.PreviousState == EGameState.Edit)
+        //     {
+        //         // 开始模拟
+        //         
+        //     }
+        // }
     }
 }

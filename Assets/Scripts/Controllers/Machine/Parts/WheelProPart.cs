@@ -9,7 +9,7 @@ namespace TheLastTour.Controller.Machine
 {
     public class WheelProPart : FixedPart
     {
-        public float audioVolume = 0.3f;
+        public float audioVolume = 0.1f;
         public AudioSource audioSource;
         public AudioClip audioClip;
         private float _currentAudioVolume = 0;
@@ -73,12 +73,9 @@ namespace TheLastTour.Controller.Machine
 
             _propertyMass.OnValueChanged += (f => { wheelCollider.mass = f; });
             _damping.OnValueChanged += (f => { wheelCollider.wheelDampingRate = f; });
-
-
-            _maxAudioVolume = Mathf.Clamp(_power.Value * audioVolume / 100, 0, 1);
-            _power.OnValueChanged += (f) => { _maxAudioVolume = Mathf.Clamp(_power.Value * audioVolume / 100, 0, 1); };
-
-
+            
+            _maxAudioVolume = Mathf.Clamp01(audioVolume);
+            
             audioSource.clip = audioClip;
             audioSource.loop = true;
             audioSource.volume = 0;

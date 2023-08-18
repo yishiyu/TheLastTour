@@ -345,8 +345,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.6
   m_SuspensionSpring:
-    spring: 400
-    damper: 100
+    spring: 1000
+    damper: 300
     targetPosition: 0
   m_SuspensionDistance: 0.5
   m_ForceAppPointDistance: 0
@@ -893,16 +893,17 @@ MonoBehaviour:
   thumbnail: {fileID: 21300000, guid: eea33194eeb857949b2449828d90680a, type: 3}
   displayName: "\u8D5B\u8F66\u8F6E\u5B50"
   partName: WheelPro
-  mass: 5
+  mass: 10
   centerOfMass: {x: 0, y: 0, z: 0}
   isCorePart: 0
-  PartId: 0
+  partId: 0
   partFloatComponent: {fileID: 0}
   airResistance: {x: 0.001, y: 0.001, z: 0.001}
   isResistanceEnabled: 000000000000
   partRenderer: {fileID: 1789465984098585713}
   joints: []
   rootJoint: {fileID: 8840844790566269028}
+  audioVolume: 0.1
   audioSource: {fileID: 6467814179314052359}
   audioClip: {fileID: 8300000, guid: ff89099d49f4dfb46981d1be1b34544d, type: 3}
   wheelCollider: {fileID: 3494745774830161788}
