@@ -63349,7 +63349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.size
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[1]
@@ -63366,23 +63366,23 @@ PrefabInstance:
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[4]
       value: 
-      objectReference: {fileID: 1923606287103999790, guid: 7e5ee4adcb10a3846963993bf830f68f, type: 3}
+      objectReference: {fileID: 4280161116734798273, guid: 0626220afa36b114ba13719a424aff46, type: 3}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 6999000673217102812, guid: fe9e93669c3c39d42bb1c9d2ec910f5b, type: 3}
+      objectReference: {fileID: 4079887107270572533, guid: 31af6562561911646aaa8a407d64e88a, type: 3}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[6]
       value: 
-      objectReference: {fileID: 4280161116734798273, guid: 0626220afa36b114ba13719a424aff46, type: 3}
+      objectReference: {fileID: 6896987189609531333, guid: 8e2884f6609582b428bd81251eb3f44c, type: 3}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[7]
       value: 
-      objectReference: {fileID: 4079887107270572533, guid: 31af6562561911646aaa8a407d64e88a, type: 3}
+      objectReference: {fileID: 3271447924676123246, guid: 163f2a2707c2d2d49b5226217095282c, type: 3}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[8]
       value: 
-      objectReference: {fileID: 6896987189609531333, guid: 8e2884f6609582b428bd81251eb3f44c, type: 3}
+      objectReference: {fileID: 3271447924676123246, guid: 163f2a2707c2d2d49b5226217095282c, type: 3}
     - target: {fileID: 8694581250472620478, guid: c41ebf7b0837abc47b55a196be1682b2, type: 3}
       propertyPath: partPrefabs.Array.data[9]
       value: 
